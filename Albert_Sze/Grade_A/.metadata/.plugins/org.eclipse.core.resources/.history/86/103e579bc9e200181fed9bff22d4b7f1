@@ -1,0 +1,50 @@
+
+public class Graduate {
+	private String under_major1;
+	private String under_major2;
+	private String under_minor;
+	private String major;
+	
+	public String getUnder_major1() {
+		return under_major1;
+	}
+	public void setUnder_major1(String under_major1) {
+		this.under_major1 = under_major1;
+	}
+	public String getUnder_major2() {
+		return under_major2;
+	}
+	public void setUnder_major2(String under_major2) {
+		this.under_major2 = under_major2;
+	}
+	public String getUnder_minor() {
+		return under_minor;
+	}
+	public void setUnder_minor(String under_minor) {
+		this.under_minor = under_minor;
+	}
+	public String getMajor() {
+		return major;
+	}
+	public void setMajor(String major) {
+		this.major = major;
+	}
+	
+	public Graduate() {
+		super();
+		this.under_major1 ="None";
+		this.under_major2 ="None";
+		this.under_minor ="None";
+		this.major ="None";
+	}
+
+	public Graduate(String fname,String lname,String sid,String email,int grade) {
+		super(fname,lname,sid,email,grade);
+		this.under_major1 ="None";
+		this.under_major2 ="None";
+		this.under_minor ="None";
+		this.major ="None";		
+	}
+	
+	
+}

@@ -1,0 +1,121 @@
+import java.util.ArrayList;
+import java.util.*; 
+
+public class Course {
+	private String coursename;
+	private int[] dates;
+	private Time[] classtime;
+	private Date[] classduration;
+	private ArrayList<Assistant> TA;
+	private ArrayList<Assistant> CA;
+	private ArrayList<Lab> labsections;
+	private Hashtable<String, GradeBreakDown> undergradcw;
+	private Hashtable<String, GradeBreakDown> gradcw;
+	private Hashtable<String, Double> graderanges:
+
+	public String getCoursename() {
+		return coursename;
+	}
+
+	public void setCoursename(String coursename) {
+		this.coursename = coursename;
+	}
+
+	public int[] getDates() {
+		return dates;
+	}
+
+	public void setDates(int[] dates) {
+		this.dates = dates;
+	}
+
+	public Time[] getClasstime() {
+		return classtime;
+	}
+
+	public void setClasstime(Time[] classtime) {
+		this.classtime = classtime;
+	}
+
+	public Date[] getClassduration() {
+		return classduration;
+	}
+
+	public void setClassduration(Date[] classduration) {
+		this.classduration = classduration;
+	}
+
+	public ArrayList<Assistant> getTA() {
+		return TA;
+	}
+
+	public void setTA(ArrayList<Assistant> tA) {
+		TA = tA;
+	}
+
+	public ArrayList<Assistant> getCA() {
+		return CA;
+	}
+
+	public void setCA(ArrayList<Assistant> cA) {
+		CA = cA;
+	}
+
+	public ArrayList<Lab> getLabsections() {
+		return labsections;
+	}
+
+	public void setLabsections(ArrayList<Lab> labsections) {
+		this.labsections = labsections;
+	}
+
+	public Hashtable<String, GradeBreakDown> getUndergradcw() {
+		return undergradcw;
+	}
+
+	public void setUndergradcw(Hashtable<String, GradeBreakDown> undergradcw) {
+		this.undergradcw = undergradcw;
+	}
+
+	public Hashtable<String, GradeBreakDown> getGradcw() {
+		return gradcw;
+	}
+
+	public void setGradcw(Hashtable<String, GradeBreakDown> gradcw) {
+		this.gradcw = gradcw;
+	}
+
+	public Hashtable<String, Double> getGraderanges() {
+		return graderanges;
+	}
+
+	public void setGraderanges(Hashtable<String, Double> graderanges) {
+		this.graderanges = graderanges;
+	}
+
+	public Course () {
+		this.coursename = "None";
+		this.dates = new int[7];
+		this.classtime = new Time[2];
+		this.classduration = new Date[2];
+		this.TA = new ArrayList<Assistant>(1);
+		this.CA = new ArrayList<Assistant>(1);
+		this.labsections = new ArrayList<Lab>(1);
+		this.undergradcw = new Hashtable();
+		this.gradcw = new Hashtable();
+		this.graderanges = new Hashtable(5);
+	}
+	
+	public Course (String coursename) {
+		this.coursename = coursename;
+		this.dates = new int[7];
+		this.classtime = new Time[2];
+		this.classduration = new Date[2];
+		this.TA = new ArrayList<Assistant>(1);
+		this.CA = new ArrayList<Assistant>(1);
+		this.labsections = new ArrayList<Lab>(1);
+		this.undergradcw = new Hashtable();
+		this.gradcw = new Hashtable();
+		this.graderanges = new Hashtable(5);
+	}	
+}

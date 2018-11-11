@@ -1,0 +1,59 @@
+import java.util.ArrayList;
+
+public class Lab {
+	private String Section;
+	private int[] dates;
+	private Time[] classtime;
+	private Assistant TA;
+	private Assistant CA;
+	private ArrayList<Student> Students;
+	
+	public String getSection() {
+		return Section;
+	}
+	public void setSection(String section) {
+		Section = section;
+	}
+	public int[] getDates() {
+		return dates;
+	}
+	public void setDates(int[] dates) {
+		this.dates = dates;
+	}
+	public Time[] getClasstime() {
+		return classtime;
+	}
+	public void setClasstime(Time[] classtime) {
+		this.classtime = classtime;
+	}
+	public Assistant getTA() {
+		return TA;
+	}
+	public void setTA(Assistant tA) {
+		TA = tA;
+	}
+	public Assistant getCA() {
+		return CA;
+	}
+	public void setCA(Assistant cA) {
+		CA = cA;
+	}
+	public ArrayList<Student> getStudents() {
+		return Students;
+	}
+	public void setStudents(ArrayList<Student> students) {
+		Students = students;
+	}
+	
+	public Lab() {
+		this.Section = "None";
+		this.dates = new int[7];
+		this.classtime = new Time[2];
+		this.TA = new Assistant();
+		this.TA = new Assistant();
+		this.Students = new ArrayList<Student>(1);
+	}
+	
+	
+	
+}

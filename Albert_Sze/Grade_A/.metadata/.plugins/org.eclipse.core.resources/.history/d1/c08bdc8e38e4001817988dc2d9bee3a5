@@ -1,0 +1,69 @@
+import java.util.ArrayList;
+
+public class Student {
+	private String fname;
+	private String lname;
+	private String sid;
+	private String email;
+	private int grade;
+	private ArrayList<Assignment> coursework;
+	
+	public Student() {
+		this.fname = "None";
+		this.lname = "None";
+		this.sid = "None";
+		this.email =  "None";
+		this.grade = 0;
+	}
+	
+	public Student(String fname,String lname,String sid,String email,int grade) {
+		this.fname = fname;
+		this.lname = lname;
+		this.sid = sid;
+		this.email =  email;
+		this.grade = grade;
+		
+	}
+	
+	public int getGrade() {
+		return grade;
+	}
+
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
+	public String getLname() {
+		return lname;
+	}
+
+	public void setLname(String lname) {
+		this.lname = lname;
+	}
+
+	public String getSid() {
+		return sid;
+	}
+
+	public void setSid(String sid) {
+		this.sid = sid;
+	}	
+}
+
+
