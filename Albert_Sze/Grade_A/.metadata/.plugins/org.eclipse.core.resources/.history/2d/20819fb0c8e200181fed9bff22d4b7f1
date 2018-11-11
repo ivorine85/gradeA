@@ -1,0 +1,57 @@
+
+public class Undergrad extends Student {
+	private String year;
+	private String major1;
+	private String major2;
+	private String minor;
+	
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
+	}
+	public String getMajor1() {
+		return major1;
+	}
+	public void setMajor1(String major1) {
+		this.major1 = major1;
+	}
+	public String getMajor2() {
+		return major2;
+	}
+	public void setMajor2(String major2) {
+		this.major2 = major2;
+	}
+	public String getMinor() {
+		return minor;
+	}
+	public void setMinor(String minor) {
+		this.minor = minor;
+	}
+	
+	private Undergrad() {
+		Super();
+		this.year = "None";
+		this.major1 = "None";
+		this.major2 = "None";
+		this.minor = "None";
+	}
+	
+	private Undergrad(fname,lname,sid,email) {
+		Super(fname,lname,sid,email);
+		this.year = "None";
+		this.major1 = "None";
+		this.major2 = "None";
+		this.minor = "None";
+	}
+	
+	private Undergrad(fname,lname,sid,email,year,major1,major2,minor) {
+		Super(fname,lname,sid,email);
+		this.year = year;
+		this.major1 = major1;
+		this.major2 = major2;
+		this.minor = minor;
+	}
+
+}

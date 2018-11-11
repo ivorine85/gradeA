@@ -1,0 +1,47 @@
+
+public class Assignment {
+	private int ptslost;
+	private int totalpts;
+	private double percent;
+	private int weight;
+	
+	public int getPtslost() {
+		return ptslost;
+	}
+	public void setPtslost(int ptslost) {
+		this.ptslost = ptslost;
+	}
+	public int getTotalpts() {
+		return totalpts;
+	}
+	public void setTotalpts(int totalpts) {
+		this.totalpts = totalpts;
+	}
+	public double getPercent() {
+		return percent;
+	}
+	public void setPercent(double percent) {
+		this.percent = percent;
+	}	
+	public int getWeight() {
+		return weight;
+	}
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
+	
+	public Assignment () {
+		this.ptslost = 0;
+		this.totalpts = 0;
+		this.percent = 0;
+		this.weight = 0;	
+	}
+	
+	public Assignment (int ptslost, int totalpts, int weight) {
+		this.ptslost = 0;
+		this.totalpts = 0;
+		this.percent = (totalpts-ptslost)/(double)(totalpts);
+		this.weight = 0;	
+	}
+
+}

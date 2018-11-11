@@ -1,0 +1,32 @@
+
+public class HW extends Assignment{
+	private static double hwgradebd;
+	private double indhwpercent;
+
+	public static double gethwgradebd() {
+		return hwgradebd;
+	}
+
+	public static void sethwgradebd(double hwgradebd) {
+		HW.hwgradebd = hwgradebd;
+	}
+	
+	public double getindhwpercent() {
+		return indhwpercent;
+	}
+
+	public void setindhwpercent(double indhwpercent) {
+		this.indhwpercent = indhwpercent;
+	}
+
+	public HW() {
+		super();
+		this.indhwpercent = 0.0;
+	}
+	
+	public HW(int ptslost, int totalpts, int weight,double indhwpercent) {
+		super(ptslost,totalpts,weight);
+		this.indhwpercent = indhwpercent;
+	}
+
+}

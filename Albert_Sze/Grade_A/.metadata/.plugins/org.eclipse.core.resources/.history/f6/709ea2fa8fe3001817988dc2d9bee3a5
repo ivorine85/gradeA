@@ -1,0 +1,32 @@
+
+public class Exams extends Assignment{
+	private static double examgradebd;
+	private double indexampercent;
+
+	public static double getExamgradebd() {
+		return examgradebd;
+	}
+
+	public static void setExamgradebd(double examgradebd) {
+		Exams.examgradebd = examgradebd;
+	}
+
+	public double getIndexampercent() {
+		return indexampercent;
+	}
+
+	public void setIndexampercent(double indexampercent) {
+		this.indexampercent = indexampercent;
+	}
+
+	public Exams() {
+		super();
+		this.indexampercent = 0.0;
+	}
+	
+	public Exams(int ptslost, int totalpts, int weight,double indexampercent) {
+		super(ptslost,totalpts,weight);
+		this.indexampercent = indexampercent;
+	}
+
+}

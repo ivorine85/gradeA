@@ -1,0 +1,28 @@
+
+public class GradeBreakDown {
+	private String assigntype;
+	private double assignpercent;
+	
+	public String getAssigntype() {
+		return assigntype;
+	}
+	public void setAssigntype(String assigntype) {
+		this.assigntype = assigntype;
+	}
+	public double getAssignpercent() {
+		return assignpercent;
+	}
+	public void setAssignpercent(double assignpercent) {
+		this.assignpercent = assignpercent;
+	}
+	
+	public GradeBreakDown() {
+		this.assigntype = "None";
+		this.assignpercent = 0.0;
+	}
+
+	public GradeBreakDown(String assigntype, double assignpercent) {
+		this.assigntype = assigntype;
+		this.assignpercent = assignpercent;
+	}
+}

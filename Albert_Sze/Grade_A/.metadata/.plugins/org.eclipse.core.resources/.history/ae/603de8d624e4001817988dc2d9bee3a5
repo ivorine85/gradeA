@@ -1,0 +1,14 @@
+import java.util.ArrayList;
+
+abstract class Adjustments extends Calculations{
+	protected  <E> ArrayList additem(ArrayList<E> array_list, E item) {
+		array_list.add(item);
+		return array_list;		
+	}
+	
+	protected <E> ArrayList deleteitem(ArrayList<E> array_list, int index) {
+		array_list.remove(index);
+		return array_list;
+	}
+
+}
