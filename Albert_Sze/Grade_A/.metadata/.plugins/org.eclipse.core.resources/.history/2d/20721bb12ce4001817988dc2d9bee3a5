@@ -1,0 +1,65 @@
+import java.util.ArrayList;
+
+public class Profile {
+	private String username;
+	private String password;
+	private ArrayList<Course> courses;
+	private String securityanswers[];
+	private String securityquestions[];
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public ArrayList<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(ArrayList<Course> courses) {
+		this.courses = courses;
+	}
+
+	public String[] getSecurityanswers() {
+		return securityanswers;
+	}
+
+	public void setSecurityanswers(String[] securityanswers) {
+		this.securityanswers = securityanswers;
+	}
+
+	public String[] getSecurityquestions() {
+		return securityquestions;
+	}
+
+	public void setSecurityquestions(String[] securityquestions) {
+		this.securityquestions = securityquestions;
+	}
+
+	public Profile() {
+		this.username = "None";
+		this.password = "None";
+		
+		this.securityanswers = new String[3];
+		this.securityquestions = new String[3];
+	}
+	
+	public Profile(String username, String password, String[] answers, String[] questions) {
+		this.username = username;
+		this.password = password;
+		
+		this.securityanswers = answers;
+		this.securityquestions = questions;
+	}
+}

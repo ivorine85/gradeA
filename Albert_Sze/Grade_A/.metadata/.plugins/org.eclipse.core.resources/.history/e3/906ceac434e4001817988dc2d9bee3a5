@@ -1,0 +1,17 @@
+import java.util.ArrayList;
+import java.util.*; 
+
+public class Course {
+	private String coursename;
+	private int[] dates;
+	private Time[] classtime;
+	private Date[] classduration;
+	private ArrayList<Assistant> TA;
+	private ArrayList<Assistant> CA;
+	private ArrayList<Lab> labsections;
+	private Hashtable<String, GradeBreakDown> assignments;
+	
+	
+	
+
+}

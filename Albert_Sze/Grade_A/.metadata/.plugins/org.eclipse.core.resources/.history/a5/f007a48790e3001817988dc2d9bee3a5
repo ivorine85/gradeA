@@ -1,0 +1,8 @@
+
+public class Project {
+	private int report;
+	private int presentation;
+	private int technical;
+	
+	
+}

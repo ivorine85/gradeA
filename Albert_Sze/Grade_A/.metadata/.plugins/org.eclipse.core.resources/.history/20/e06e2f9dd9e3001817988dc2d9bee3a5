@@ -1,0 +1,15 @@
+
+public class Profile {
+	private String username;
+	private String passowrd;
+	private ArrayList<Course> courses;
+	private String securityanswers[];
+	
+	public Profile() {
+		this.username = "None";
+		this.password = "None";
+		
+		this.securityanswers = new String[3];
+	}
+
+}

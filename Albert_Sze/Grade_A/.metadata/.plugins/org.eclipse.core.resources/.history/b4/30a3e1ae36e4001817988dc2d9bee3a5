@@ -1,0 +1,28 @@
+import java.util.ArrayList;
+import java.util.*; 
+
+public class Course {
+	private String coursename;
+	private int[] dates;
+	private Time[] classtime;
+	private Date[] classduration;
+	private ArrayList<Assistant> TA;
+	private ArrayList<Assistant> CA;
+	private ArrayList<Lab> labsections;
+	private Hashtable<String, GradeBreakDown> assignments;
+	
+	
+	public Course () {
+		this.coursename = "None";
+		this.dates = new int[7];
+		this.classtime = new Time[2];
+		this.classduration = new Date[2];
+		this.TA = new ArrayList<Assistant>[1];
+		this.CA = new ArrayList<Assistant>[1];
+		
+	}
+	
+	
+	
+
+}
