@@ -1,0 +1,13 @@
+
+public class Testing extends Adjustments{
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Student albert = new Graduate();
+		System.out.println(albert.getMajor());
+		
+		
+		
+	}
+
+}

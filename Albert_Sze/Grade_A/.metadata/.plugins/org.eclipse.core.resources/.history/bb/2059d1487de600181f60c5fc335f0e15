@@ -1,0 +1,17 @@
+import java.util.ArrayList;
+import java.util.*; 
+
+public class Testing extends Adjustments{
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ArrayList<Profile> profileList = new ArrayList<Profile> (1);
+		
+		profileList.add(Createuser());
+		
+		
+		
+		
+	}
+
+}
