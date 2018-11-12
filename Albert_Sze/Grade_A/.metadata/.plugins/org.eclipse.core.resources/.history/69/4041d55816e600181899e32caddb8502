@@ -1,0 +1,11 @@
+
+public class Testing extends Adjustments{
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Student albert = new Student();
+		System.out.println(albert.getFname());
+
+	}
+
+}
