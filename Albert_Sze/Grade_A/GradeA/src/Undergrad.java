@@ -30,15 +30,15 @@ public class Undergrad extends Student {
 		this.minor = "None";
 	}
 	
-	public Undergrad(String name,String sid,String major,int year, String email,String labsection, int grade) {
-		super(name,sid,major,year,email,grade);
+	public Undergrad(String name,String sid,String major,String studentType,int year, String email,String labsection, int grade) {
+		super(name,sid,major,studentType,year,email,grade);
 		this.major1 = "None";
 		this.major2 = "None";
 		this.minor = "None";
 	}
 	
-	public Undergrad(String name,String sid,String major,int year, String email,String labsection, int grade,String major1,String major2,String minor) {
-		super(name,sid,major,year,email,grade);
+	public Undergrad(String name,String sid,String major,String studentType,int year, String email,String labsection, int grade,String major1,String major2,String minor) {
+		super(name,sid,major,studentType,year,email,grade);
 		this.major1 = major1;
 		this.major2 = major2;
 		this.minor = minor;
