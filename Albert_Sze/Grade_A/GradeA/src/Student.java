@@ -1,37 +1,59 @@
 import java.util.ArrayList;
 
 public class Student {
-	private String fname;
-	private String lname;
+	//private String fname;
+	//private String lname;
+	private String name; // new
 	private String sid;
+	private String major;
 	private int year;
 	private String email;
-	private String labSection;
+	//private String labSection;
 	private int grade;
 	private ArrayList<Assignment> courseWork;
 	
 	public Student() {
-		this.fname = "None";
-		this.lname = "None";
+		//this.fname = "None";
+		//this.lname = "None";
+		this.name = "None";
 		this.sid = "None";
+		this.major = "None";
 		this.year = 0;
 		this.email =  "None";
-		this.labSection =  "None";
+		//this.labSection =  "None";
 		this.grade = 0;
 		this.courseWork = new ArrayList<Assignment>(1);
 	}
 	
-	public Student(String fname,String lname,String sid,int year,String email,String labSection,int grade) {
-		this.fname = fname;
-		this.lname = lname;
+	public Student(String name,String sid,String major,int year,String email,int grade) {
+		//this.fname = fname;
+		//this.lname = lname;
+		this.name = name;
 		this.sid = sid;
+		this.major = major;
 		this.year = year;
 		this.email =  email;
-		this.labSection =  labSection;
+		//this.labSection =  labSection;
 		this.grade = grade;
 		this.courseWork = new ArrayList<Assignment>(1);
 	}
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getMajor() {
+		return major;
+	}
+
+	public void setMajor(String major) {
+		this.major = major;
+	}
+
 	public int getGrade() {
 		return grade;
 	}
@@ -48,29 +70,29 @@ public class Student {
 		this.email = email;
 	}
 
-	public String getLabSection() {
-		return labSection;
-	}
+	//public String getLabSection() {
+	//	return labSection;
+	//}
 
-	public void setLabSection(String labSection) {
-		this.labSection = labSection;
-	}
+	//public void setLabSection(String labSection) {
+	//	this.labSection = labSection;
+	//}
 
-	public String getFname() {
-		return fname;
-	}
+	//public String getFname() {
+	//	return fname;
+	//}
 
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
+	//public void setFname(String fname) {
+	//	this.fname = fname;
+	//}
 
-	public String getLname() {
-		return lname;
-	}
+	//public String getLname() {
+	//	return lname;
+	//}
 
-	public void setLname(String lname) {
-		this.lname = lname;
-	}
+	//public void setLname(String lname) {
+	//	this.lname = lname;
+	//}
 
 	public String getSid() {
 		return sid;
