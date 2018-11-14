@@ -6,6 +6,7 @@ public class Student {
 	private String name; // new
 	private String sid;
 	private String major;
+	private String studentType;
 	private int year;
 	private String email;
 	//private String labSection;
@@ -18,6 +19,7 @@ public class Student {
 		this.name = "None";
 		this.sid = "None";
 		this.major = "None";
+		this.studentType = "None";
 		this.year = 0;
 		this.email =  "None";
 		//this.labSection =  "None";
@@ -25,12 +27,13 @@ public class Student {
 		this.courseWork = new ArrayList<Assignment>(1);
 	}
 	
-	public Student(String name,String sid,String major,int year,String email,int grade) {
+	public Student(String name,String sid,String major,String studentType, int year,String email,int grade) {
 		//this.fname = fname;
 		//this.lname = lname;
 		this.name = name;
 		this.sid = sid;
 		this.major = major;
+		this.studentType = studentType;
 		this.year = year;
 		this.email =  email;
 		//this.labSection =  labSection;
@@ -52,6 +55,14 @@ public class Student {
 
 	public void setMajor(String major) {
 		this.major = major;
+	}
+
+	public String getStudentType() {
+		return studentType;
+	}
+
+	public void setStudentType(String studentType) {
+		this.studentType = studentType;
 	}
 
 	public int getGrade() {
@@ -119,5 +130,3 @@ public class Student {
 	}
 	
 }
-
-
