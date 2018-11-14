@@ -45,16 +45,16 @@ public class Graduate extends Student {
 		this.major ="None";
 	}
 
-	public Graduate(String fname,String lname,String sid,int year,String email,String labsection, int grade) {
-		super(fname,lname,sid,year,email,labsection,grade);
+	public Graduate(String name,String sid,String major,int year,String email,int grade) {
+		super(name,sid,major,year,email,grade);
 		this.underMajor1 ="None";
 		this.underMajor2 ="None";
 		this.underMinor ="None";
 		this.major ="None";		
 	}
 	
-	public Graduate(String fname,String lname,String sid,int year,String email,String labsection, int grade,String major1,String major2,String minor,String major) {
-		super(fname,lname,sid,year,email,labsection,grade);
+	public Graduate(String name,String sid,String major,int year,String email,int grade,String major1,String major2,String minor) {
+		super(name,sid,major,year,email,grade);
 		this.underMajor1 = major1;
 		this.underMajor2 = major2;
 		this.underMinor = minor;

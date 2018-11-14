@@ -3,7 +3,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 abstract class Adjustments extends Calculations{
-	protected  <E> ArrayList<E> Additem(ArrayList<E> array_list, E item) {
+	protected static  <E> ArrayList<E> Additem(ArrayList<E> array_list, E item) {
 		array_list.add(item);
 		return array_list;		
 	}
@@ -13,7 +13,7 @@ abstract class Adjustments extends Calculations{
 		return array_list;
 	}
 	
-	protected Profile Createuser() {
+	protected static Profile Createuser() {
 		boolean valid = false;
 		String username;
 		String password;
@@ -74,18 +74,18 @@ abstract class Adjustments extends Calculations{
 			}
 			System.out.print("Select question: ");
 			action = scan.next();
-			questions[i-1] = questionset[Integer.parseInt(action)];
+			questions[i-1] = questionset[Integer.parseInt(action)-1];
 			System.out.print("Enter answer: ");
 			action = scan.next();
 			answers[i-1] = action;
 		}
-		scan.close();
+		//scan.close();
 		
 		Profile userprofile = new Profile(username, password, answers, questions);
 		return userprofile;
 	}
 	
-	protected boolean Checklogin(Profile profile, String password) {
+	protected static boolean Checklogin(Profile profile, String password) {
 		if (password.equals(profile.getPassword())){
 			return true;
 		}
@@ -94,7 +94,7 @@ abstract class Adjustments extends Calculations{
 		}
 	}
 	
-	protected Profile Forgetpassword(Profile profile) {
+	protected static Profile Forgetpassword(Profile profile) {
 		boolean valid = true;
 		String password;
 		String answer = "null";
@@ -106,7 +106,7 @@ abstract class Adjustments extends Calculations{
 			System.out.print("Answer: ");
 			answer = scan.next();
 			
-			if (answer.toLowerCase().equals(profile.getSecurityAnswers()[i].toLowerCase())) {
+			if (!answer.toLowerCase().equals(profile.getSecurityAnswers()[i].toLowerCase())) {
 				valid = false;
 			}
 		}
@@ -132,7 +132,8 @@ abstract class Adjustments extends Calculations{
 			}while(!valid);
 		}
 		
-		scan.close();
+		//scan.close();
 		return profile;
 	}
+	
 }
