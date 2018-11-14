@@ -56,9 +56,9 @@ public class Assignment {
 	
 	public Assignment (String type, int ptsLost, int totalPts, int weight) {
 		this.type = type;
-		this.ptsLost = 0;
-		this.totalPts = 0;
+		this.ptsLost = ptsLost;
+		this.totalPts = totalPts;
 		this.percent = (totalPts-ptsLost)/(double)(totalPts);
-		this.weight = 0;	
+		this.weight = weight;	
 	}
 }
