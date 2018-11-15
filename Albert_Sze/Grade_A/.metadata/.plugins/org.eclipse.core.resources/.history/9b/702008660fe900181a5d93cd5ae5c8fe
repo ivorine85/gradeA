@@ -5,7 +5,7 @@ public class Student {
 	//private String lname;
 	private String name; // new
 	private String sid;
-	//private String major;
+	private String major;
 	private String studentType;
 	private int year;
 	private String email;
@@ -18,7 +18,7 @@ public class Student {
 		//this.lname = "None";
 		this.name = "None";
 		this.sid = "None";
-		//this.major = "None";
+		this.major = "None";
 		this.studentType = "None";
 		this.year = 0;
 		this.email =  "None";
@@ -32,7 +32,7 @@ public class Student {
 		//this.lname = lname;
 		this.name = name;
 		this.sid = sid;
-		//this.major = major;
+		this.major = major;
 		this.studentType = studentType;
 		this.year = year;
 		this.email =  email;
@@ -49,13 +49,13 @@ public class Student {
 		this.name = name;
 	}
 
-	//public String getMajor() {
-	//	return major;
-	//}
+	public String getMajor() {
+		return major;
+	}
 
-	//public void setMajor(String major) {
-	//	this.major = major;
-	//}
+	public void setMajor(String major) {
+		this.major = major;
+	}
 
 	public String getStudentType() {
 		return studentType;
