@@ -74,8 +74,6 @@ public class Testing extends Adjustments{
 		    //System.out.println(st); 
 		  	x.add(st);
 		  x.set(0, x.get(0).substring(3));
-		  x.set(2, x.get(2).substring(3));
-		  x.set(3, x.get(3).substring(1));
 		  System.out.println(x.size());
 		  for (int i = 0; i < x.size(); i++) {
 			  System.out.println(x.get(i));

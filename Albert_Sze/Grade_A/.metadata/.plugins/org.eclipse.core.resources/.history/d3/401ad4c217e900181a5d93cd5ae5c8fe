@@ -65,7 +65,7 @@ public class Testing extends Adjustments{
 		profileList.get(0).setCourses(<Course> Additem(profileList.get(0).getCourses(), new Course("Awesome Class")));
 */
 		ArrayList<String> x = new ArrayList<String>(1);
-		File file = new File("C:\\Users\\alber\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Excel_template_3.csv"); 
+		File file = new File("\\Excel_template_3.csv"); 
 		  
 		  BufferedReader br = new BufferedReader(new FileReader(file)); 
 		  
