@@ -64,24 +64,15 @@ public class Testing extends Adjustments{
 // adding new course
 		profileList.get(0).setCourses(<Course> Additem(profileList.get(0).getCourses(), new Course("Awesome Class")));
 */
-		ArrayList<String> x = new ArrayList<String>(1);
+		int x = 1;
 		File file = new File("C:\\Users\\alber\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Excel_template_3.csv"); 
 		  
 		  BufferedReader br = new BufferedReader(new FileReader(file)); 
 		  
-		  String st;
-		  while ((st = br.readLine()) != null) 
-		    //System.out.println(st); 
-		  	x.add(st);
-		  x.set(0, x.get(0).substring(3));
-		  x.set(2, x.get(2).substring(3));
-		  x.set(3, x.get(3).substring(1));
-		  System.out.println(x.size());
-		  for (int i = 0; i < x.size(); i++) {
-			  System.out.println(x.get(i));
-			  System.out.println("");
-		  }
-		  
+		  String st; 
+		  while ((st = br.readLine()) != null and x != 0) 
+		    System.out.println(st); 
+		  	x = 0;
 	}
 
 }
