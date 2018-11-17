@@ -1,8 +1,0 @@
-
-public class Profile {
-	private String username;
-	private String passowrd;
-	private ArrayList<Course> courses;
-	
-
-}

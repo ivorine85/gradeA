@@ -1,0 +1,72 @@
+
+public class Project extends Assignment {
+	private int ptsLostReport;
+	private int ptsLostPresentation;
+	private int ptsLostTechnical;
+	private int ptsLostSurvery;
+	private double percent;
+	private int totalPts;
+
+	public int getPtsLostReport() {
+		return ptsLostReport;
+	}
+
+	public void setPtsLostReport(int ptsLostReport) {
+		this.ptsLostReport = ptsLostReport;
+	}
+
+	public int getPtsLostPresentation() {
+		return ptsLostPresentation;
+	}
+
+	public void setPtsLostPresentation(int ptsLostPresentation) {
+		this.ptsLostPresentation = ptsLostPresentation;
+	}
+
+	public int getPtsLostTechnical() {
+		return ptsLostTechnical;
+	}
+
+	public void setPtsLostTechnical(int ptsLostTechnical) {
+		this.ptsLostTechnical = ptsLostTechnical;
+	}
+	
+	public int getPtsLostSurvery() {
+		return ptsLostSurvery;
+	}
+
+	public void setPtsLostSurvery(int ptsLostSurvery) {
+		this.ptsLostSurvery = ptsLostSurvery;
+	}
+
+	public double getPercent() {
+		return percent;
+	}
+
+	public void setPercent(int percent) {
+		this.percent = percent;
+	}
+
+	public int getTotalPts() {
+		return totalPts;
+	}
+
+	public void setTotalPts(int totalPts) {
+		this.totalPts = totalPts;
+	}
+
+	public Project() {
+		this.ptsLostReport = 0;
+		this.ptsLostPresentation = 0;
+		this.ptsLostTechnical = 0;
+		this.ptsLostSurvey = 0;
+		this.totalPts = 0;
+		this.percent = 0.0;
+	}
+	
+	public Project(int ptsLostReport, int ptsLostPresentation, int ptsLostTechnical,int ptsLostSurvery, int totalPts) {
+		this.ptsLostReport = ptsLostReport;
+		this.ptsLostPresentation = ptsLostPresentation;
+		this.ptsLostTechnical = ptsLostTechnical;
+	}
+}

@@ -1,0 +1,117 @@
+import java.io.*; 
+import java.util.*; 
+
+public class Testing extends Adjustments{
+
+	public static void main(String[] args) throws Exception {
+		/*
+		// Load list of profiles
+		//if (profileList
+		Scanner scan_test = new Scanner(System.in).useLocale(Locale.US);  // Reading from System.in
+		String answer = "null";
+		String answer2 = "null";
+		String action = "null";
+		boolean valid = false;
+		ArrayList<Profile> profileList = new ArrayList<Profile> (1);
+		ArrayList<String> usernameList = new ArrayList<String> (1);
+
+// Login Page
+		System.out.println("Select Option");
+		for (int i=0; i<usernameList.size();i++) {
+			System.out.print((i+1) + ". ");
+			System.out.println(usernameList.get(i));
+		}
+		System.out.print((usernameList.size()+1) + ". ");
+		System.out.println("Create new user");
+		System.out.print("choose: ");
+		answer = scan_test.next();
+		// If on login page won't need for GUI
+		if (Integer.parseInt(answer) == (usernameList.size()+1)) {
+			action = "newuser";
+		} 
+		
+	//Create a new user
+		if (action == "newuser") {
+			//go to create new user page
+			profileList.add(Createuser());
+			usernameList.add(profileList.get(profileList.size()-1).getUsername());			
+		}
+		
+		System.out.println(" ");
+		System.out.println("Select Option");
+		for (int i=0; i<usernameList.size();i++) {
+			System.out.print((i+1) + ". ");
+			System.out.println(usernameList.get(i));
+		}
+		System.out.print((usernameList.size()+1) + ". ");
+		System.out.println("Create new user");
+		System.out.print("choose: ");
+		answer = scan_test.next();
+		
+	// Authentication of password for username
+		if (Integer.parseInt(answer) != usernameList.size()+1) {
+			System.out.println(usernameList.get(Integer.parseInt(answer)-1));
+			System.out.print("Enter Password: ");
+			answer2 = scan_test.next();
+			valid = Checklogin(profileList.get(Integer.parseInt(answer)-1),answer2);
+		}
+		
+		System.out.println(valid);
+		
+	// forgot password action
+		profileList.set(0, Forgetpassword(profileList.get(0)));
+		
+// adding new course
+		profileList.get(0).setCourses(<Course> Additem(profileList.get(0).getCourses(), new Course("Awesome Class")));
+*/
+		Hashtable<String, GradeBreakDown> yup = new Hashtable();
+		ArrayList<String> assignmentCat = new ArrayList<String>(0);
+		ArrayList<GradeBreakDown> courseBreakDown = new ArrayList<GradeBreakDown>(0); 
+		ArrayList<String> csvData = new ArrayList<String>(1);
+		int tempNumAssign;
+		File file = new File("C:\\Users\\alber\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Excel_template_3.csv");
+		
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		
+		String st;
+		while ((st = br.readLine()) != null) {
+			//System.out.println(st);
+			csvData.add(st);
+		}
+		
+		csvData.set(0, csvData.get(0).substring(3));
+		csvData.set(2, csvData.get(2).substring(3));
+		csvData.set(3, csvData.get(3).substring(1));	 
+/*		for (int i = 0; i < csvData.size(); i++) {
+ 			System.out.println(csvData.get(i));
+			System.out.println("");
+		}
+*/
+		
+		String[] assignments = csvData.get(0).split(",,");
+		String[] assignmentDetails = csvData.get(2).split(",");
+
+		for (int i = 0; i < assignments.length;i++) {
+			if (!assignmentCat.contains(assignments[i].substring(0, assignments[i].indexOf("_")))) {
+				yup.put(assignments[i].substring(0, assignments[i].indexOf("_")), new GradeBreakDown(assignments[i].substring(0, assignments[i].indexOf("_")),0.0,0,0,0.0,1));
+				//courseBreakDown.add(new GradeBreakDown(assignments[i].substring(0, assignments[i].indexOf("_")),0.0,0,0,0.0,1));
+				//assignmentCat.add(assignments[i].substring(0, assignments[i].indexOf("_")));
+			}
+			else {
+				tempNumAssign = yup.get(assignments[i].substring(0, assignments[i].indexOf("_"))).getNumAssign();
+				System.out.println(tempNumAssign);
+				yup.get(assignments[i].substring(0, assignments[i].indexOf("_"))).setNumAssign(tempNumAssign+1);;
+			}
+		}
+/*		for (int i = 0; i < assignmentCat.size();i++) {
+			System.out.println(yup.get(assignmentCat.get(i)));
+		}
+*/
+		for (Map.Entry<String, GradeBreakDown> entry : yup.entrySet()) {
+		    System.out.println(entry.getValue().getAssignType() + ": " + entry.getValue().getNumAssign());
+			//List<String> list = entry.getValue();
+		    // Do things with the list
+		}
+	}
+
+}
