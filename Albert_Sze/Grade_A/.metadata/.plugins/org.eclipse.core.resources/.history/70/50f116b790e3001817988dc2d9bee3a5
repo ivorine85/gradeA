@@ -1,8 +1,0 @@
-
-public class Project extends Assignment {
-	private int ptslostreport;
-	private int ptslostpresentation;
-	private int ptslosttechnical;
-	
-	
-}

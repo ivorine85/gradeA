@@ -1,9 +1,0 @@
-
-public class Assignment {
-	private int ptslost;
-	private int totalpts;
-	private int assignweight;
-	
-	
-
-}
