@@ -1,3 +1,4 @@
+package Entity;
 
 public class Graduate extends Student {
 	private String underMajor1;
@@ -46,7 +47,7 @@ public class Graduate extends Student {
 	}
 
 	public Graduate(String name,String sid,String studentType,int year,String email,int grade) {
-		super(name,sid,studentType,year,email,grade);
+//		super(name,sid,studentType,year,email,grade);
 		this.underMajor1 ="None";
 		this.underMajor2 ="None";
 		this.underMinor ="None";
@@ -54,7 +55,7 @@ public class Graduate extends Student {
 	}
 	
 	public Graduate(String name,String sid,String studentType,int year,String email,int grade,String major1,String major2,String minor) {
-		super(name,sid,studentType,year,email,grade);
+//		super(name,sid,studentType,year,email,grade);
 		this.underMajor1 = major1;
 		this.underMajor2 = major2;
 		this.underMinor = minor;

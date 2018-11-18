@@ -1,5 +1,6 @@
+package Entity;
 
-public class Assistant {
+public class Assistant{
 	private String name;
 	private String email;
 	
