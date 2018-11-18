@@ -1,17 +1,33 @@
+package Entity;
+
+import Entity.Assistant;
+
+import java.time.Duration;
 import java.util.ArrayList;
-import java.util.*; 
+import java.util.*;
+import java.sql.*;
 
 public class Course {
+	private int courseId;
 	private String courseName;
 	private int[] dates;
 	private Time[] classTime;
-	private Date[] classDuration;
+	private java.sql.Date[] classDuration;
 	private ArrayList<Assistant> teachAssist;
+
+	public int getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
+	}
+
 	private ArrayList<Assistant> courseAssist;
 	private ArrayList<Lab> labSections;
-	private Hashtable<String, GradeBreakDown> underGradCW;
-	private Hashtable<String, GradeBreakDown> gradCW;
-	private Hashtable<String, Double> gradeRanges;
+	private HashMap<String, GradeBreakDown> underGradCW;
+	private HashMap<String, GradeBreakDown> gradCW;
+	private HashMap<String, Double> gradeRanges;
 
 	public String getCourseName() {
 		return courseName;
@@ -37,11 +53,11 @@ public class Course {
 		this.classTime = classTime;
 	}
 
-	public Date[] getClassDuration() {
+	public java.sql.Date[] getClassDuration() {
 		return classDuration;
 	}
 
-	public void setClassDuration(Date[] classDuration) {
+	public void setClassDuration(java.sql.Date[] classDuration) {
 		this.classDuration = classDuration;
 	}
 
@@ -69,27 +85,27 @@ public class Course {
 		this.labSections = labSections;
 	}
 
-	public Hashtable<String, GradeBreakDown> getUnderGradCW() {
+	public HashMap<String, GradeBreakDown> getUnderGradCW() {
 		return underGradCW;
 	}
 
-	public void setUnderGradCW(Hashtable<String, GradeBreakDown> underGradCW) {
+	public void setUnderGradCW(HashMap<String, GradeBreakDown> underGradCW) {
 		this.underGradCW = underGradCW;
 	}
 
-	public Hashtable<String, GradeBreakDown> getGradCW() {
+	public HashMap<String, GradeBreakDown> getGradCW() {
 		return gradCW;
 	}
 
-	public void setGradCW(Hashtable<String, GradeBreakDown> gradCW) {
+	public void setGradCW(HashMap<String, GradeBreakDown> gradCW) {
 		this.gradCW = gradCW;
 	}
 
-	public Hashtable<String, Double> getGradeRanges() {
+	public HashMap<String, Double> getGradeRanges() {
 		return gradeRanges;
 	}
 
-	public void setGradeRanges(Hashtable<String, Double> gradeRanges) {
+	public void setGradeRanges(HashMap<String, Double> gradeRanges) {
 		this.gradeRanges = gradeRanges;
 	}
 
@@ -97,25 +113,37 @@ public class Course {
 		this.courseName = "None";
 		this.dates = new int[7];
 		this.classTime = new Time[2];
-		this.classDuration = new Date[2];
+		this.classDuration = new java.sql.Date[2];
 		this.teachAssist = new ArrayList<Assistant>(1);
 		this.courseAssist = new ArrayList<Assistant>(1);
 		this.labSections = new ArrayList<Lab>(1);
-		this.underGradCW = new Hashtable();
-		this.gradCW = new Hashtable();
-		this.gradeRanges = new Hashtable(5);
+		this.underGradCW = new HashMap();
+		this.gradCW = new HashMap();
+		this.gradeRanges = new HashMap(5);
 	}
 	
 	public Course (String courseName) {
 		this.courseName = courseName;
 		this.dates = new int[7];
 		this.classTime = new Time[2];
-		this.classDuration = new Date[2];
+		this.classDuration = new java.sql.Date[2];
 		this.teachAssist = new ArrayList<Assistant>(1);
 		this.courseAssist = new ArrayList<Assistant>(1);
 		this.labSections = new ArrayList<Lab>(1);
-		this.underGradCW = new Hashtable();
-		this.gradCW = new Hashtable();
-		this.gradeRanges = new Hashtable(5);
-	}	
+		this.underGradCW = new HashMap();
+		this.gradCW = new HashMap();
+		this.gradeRanges = new HashMap(5);
+	}
+
+	public Course(int cid, String cname, Time startTime,Time endTime,java.sql.Date startDate,java.sql.Date endDate){
+		courseId = cid;
+		courseName = cname;
+		classTime = new Time[2];
+		classTime[0] = startTime;
+		classTime[1] = endTime;
+		classDuration = new java.sql.Date[2];
+		classDuration[0] = startDate;
+		classDuration[1] = endDate;
+
+	}
 }

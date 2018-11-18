@@ -1,3 +1,4 @@
+package Entity;
 
 abstract class Calculations {
 	protected double Calcaverage(double average, double assignment, int numitems) {
