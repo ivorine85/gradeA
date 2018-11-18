@@ -1,3 +1,7 @@
+package Entity;
+
+import Entity.Course;
+
 import java.util.ArrayList;
 
 public class Profile {
