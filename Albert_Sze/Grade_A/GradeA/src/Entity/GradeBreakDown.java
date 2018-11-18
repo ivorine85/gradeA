@@ -1,3 +1,4 @@
+package Entity;
 
 public class GradeBreakDown {
 	private String assignType;

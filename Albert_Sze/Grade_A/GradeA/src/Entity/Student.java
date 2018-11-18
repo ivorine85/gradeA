@@ -1,46 +1,49 @@
+package Entity;
+
+import Entity.Assignment;
+
 import java.util.ArrayList;
 
 public class Student {
-	//private String fname;
-	//private String lname;
 	private String name; // new
 	private String sid;
-	//private String major;
 	private String studentType;
+	private String pohtoPath;
 	private int year;
 	private String email;
 	//private String labSection;
 	private double grade;
+
+	public String getPohtoPath() {
+		return pohtoPath;
+	}
+
+	public void setPohtoPath(String pohtoPath) {
+		this.pohtoPath = pohtoPath;
+	}
+
 	private ArrayList<Assignment> courseWork;
 	
 	public Student() {
-		//this.fname = "None";
-		//this.lname = "None";
 		this.name = "None";
 		this.sid = "None";
-		//this.major = "None";
 		this.studentType = "None";
 		this.year = 0;
 		this.email =  "None";
-		//this.labSection =  "None";
 		this.grade = 0.0;
 		this.courseWork = new ArrayList<Assignment>(1);
 	}
-	
-	public Student(String name,String sid,String studentType, int year,String email,double grade) {
-		//this.fname = fname;
-		//this.lname = lname;
-		this.name = name;
+
+	public Student(String sid,String sname,String studentType,String photoPath,String email,int year) {
+		this.name = sname;
 		this.sid = sid;
-		//this.major = major;
 		this.studentType = studentType;
 		this.year = year;
 		this.email =  email;
-		//this.labSection =  labSection;
-		this.grade = grade;
 		this.courseWork = new ArrayList<Assignment>(1);
+		this.pohtoPath = photoPath;
 	}
-	
+
 	public String getName() {
 		return name;
 	}

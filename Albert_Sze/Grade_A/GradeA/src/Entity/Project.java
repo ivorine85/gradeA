@@ -1,3 +1,6 @@
+package Entity;
+
+import Entity.Assignment;
 
 public class Project extends Assignment {
 	private int ptsLostReport;
