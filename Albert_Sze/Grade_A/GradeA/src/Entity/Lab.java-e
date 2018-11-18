@@ -1,3 +1,10 @@
+package Entity;
+
+import Entity.Assistant;
+import Entity.Student;
+
+
+import java.sql.Time;
 import java.util.ArrayList;
 
 public class Lab {

@@ -1,3 +1,5 @@
+import Entity.*;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -25,7 +27,7 @@ public class ImportCSV extends Adjustments {
 		double percent;
 		Student tempStudent;
 		//Need to change file directory if you are going to run this code
-		File file = new File("C:\\Users\\Albert Sze\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Github\\gradeA\\Albert_Sze\\Grade_A (1)\\GradeA\\src\\Excel_template_3.csv");
+		File file = new File("C:\\Users\\Albert Sze\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Entity.Project\\Github\\gradeA\\Albert_Sze\\Grade_A (1)\\GradeA\\src\\Excel_template_3.csv");
 		
 		studentList.put("undergrad", new ArrayList<Student>(0));
 		studentList.put("grad", new ArrayList<Student>(0));		
@@ -104,7 +106,7 @@ public class ImportCSV extends Adjustments {
 			year = tempStudentDetail[3];
 			type = tempStudentDetail[4];
 			labSection = tempStudentDetail[5];
-			studentList.get(type.toLowerCase()).add(new Student(studentName,sid,type,Integer.parseInt(year),studentEmail,0));
+//			studentList.get(type.toLowerCase()).add(new Student(studentName,sid,type,Integer.parseInt(year),studentEmail,0));
 			tempIndex = studentList.get(type.toLowerCase()).size()-1;
 			
 			for (int j = 0; j < assignments.length; j++) {
@@ -115,7 +117,7 @@ public class ImportCSV extends Adjustments {
 					j += 3;
 				}
 				else {
-					studentList.get(type.toLowerCase()).get(tempIndex).getCourseWork().add(new Assignment (assignType,  Integer.parseInt(tempStudentDetail[j*2+6]), Integer.parseInt(assignmentDetails[j*2]), 0));
+					studentList.get(type.toLowerCase()).get(tempIndex).getCourseWork().add(new Assignment(assignType,  Integer.parseInt(tempStudentDetail[j*2+6]), Integer.parseInt(assignmentDetails[j*2]), 0));
 					percent = (Double.parseDouble(assignmentDetails[j*2+1].substring(0, assignmentDetails[j*2+1].indexOf("%"))))/100.0;
 				}
 				tempNumAssign = studentList.get(type.toLowerCase()).get(tempIndex).getCourseWork().size();
