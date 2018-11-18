@@ -19,13 +19,14 @@ public class ImportCSV extends Adjustments {
 		String type;
 		String labSection;
 		int tempNumAssign;
+		int tempNum;
 		int numCategories;
 		int tempIndex;
 		double score;
 		double percent;
 		Student tempStudent;
 		//Need to change file directory if you are going to run this code
-		File file = new File("C:\\Users\\Albert Sze\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Github\\gradeA\\Albert_Sze\\Grade_A (1)\\GradeA\\src\\Excel_template_3.csv");
+		File file = new File("C:\\Users\\alber\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Github\\gradeA\\Albert_Sze\\Grade_A\\GradeA\\src\\Excel_template_3.csv");
 		
 		studentList.put("undergrad", new ArrayList<Student>(0));
 		studentList.put("grad", new ArrayList<Student>(0));		
@@ -38,12 +39,16 @@ public class ImportCSV extends Adjustments {
 			csvData.add(st);
 		}
 		// split the first two  3 rows
-		csvData.set(0, csvData.get(0).substring(6));
-		csvData.set(2, csvData.get(2).substring(6));
-		//csvData.set(3, csvData.get(3).substring(1));
-		for (int i = 0; i < csvData.size(); i++) {
- 			System.out.println(csvData.get(i));
+		if (csvData.get(0).substring(csvData.get(0).length()-1).equals(",")) {
+			csvData.set(0, csvData.get(0).substring(6,csvData.get(0).length()-1));
 		}
+		else{
+			csvData.set(0, csvData.get(0).substring(6));
+		}
+		csvData.set(2, csvData.get(2).substring(6));
+		//for (int i = 0; i < csvData.size(); i++) {
+ 		//	System.out.println(csvData.get(i));
+		//}
 		System.out.println("");
 		// split the rows by comma delimiters.
 		String[] assignments = csvData.get(0).split(",,");
@@ -82,20 +87,7 @@ public class ImportCSV extends Adjustments {
 			}
 		}
 		numCategories = courseBreakDown.size();
-		
-		for (Map.Entry<String, ArrayList<GradeBreakDown>> entry : assignmentBreakDown.entrySet()) {
-			System.out.print(entry.getKey() + ": ");
-			courseBreakDown.get(entry.getKey()).setUndergradAssignPercent(100.0/numCategories);
-			courseBreakDown.get(entry.getKey()).setGradAssignPercent(100.0/numCategories);
-			System.out.println(courseBreakDown.get(entry.getKey()).getGradAssignPercent());
-			for (int i = 0; i < entry.getValue().size();i++) {
-				System.out.print(entry.getValue().get(i).getAssignType() + i + ": ");
-				System.out.print(entry.getValue().get(i).getGradAssignPercent()+"    ");
-				System.out.println(entry.getValue().get(i).getTotalPoints());
-			}
-			System.out.println(" ");
-		}
-		
+				
 		for (int i = 4;i < csvData.size() ; i++) {
 			String[] tempStudentDetail = csvData.get(i).split(",");
 			studentName = tempStudentDetail[0];
@@ -109,6 +101,7 @@ public class ImportCSV extends Adjustments {
 			
 			for (int j = 0; j < assignments.length; j++) {
 				assignType = assignments[j].substring(0, assignments[j].indexOf("_"));
+				tempNum = Integer.parseInt(assignments[j].substring(assignments[j].lastIndexOf("_")+1))-1;
 				if (assignType.toLowerCase().equals("project")) {
 					studentList.get(type.toLowerCase()).get(tempIndex).getCourseWork().add(new Project(assignType, Integer.parseInt(tempStudentDetail[j*2+6]), Integer.parseInt(tempStudentDetail[(j+1)*2+6]), Integer.parseInt(tempStudentDetail[(j+2)*2+6]),Integer.parseInt(tempStudentDetail[(j+3)*2+6]), (Integer.parseInt(assignmentDetails[(j)*2])+Integer.parseInt(assignmentDetails[(j+1)*2])+Integer.parseInt(assignmentDetails[(j+2)*2])+Integer.parseInt(assignmentDetails[(j+3)*2]))));
 					percent = (Double.parseDouble(assignmentDetails[j*2+1].substring(0, assignmentDetails[j*2+1].indexOf("%")))+Double.parseDouble(assignmentDetails[(j+1)*2+1].substring(0, assignmentDetails[(j+1)*2+1].indexOf("%")))+Double.parseDouble(assignmentDetails[(j+2)*2+1].substring(0, assignmentDetails[(j+2)*2+1].indexOf("%")))+Double.parseDouble(assignmentDetails[(j+3)*2+1].substring(0, assignmentDetails[(j+3)*2+1].indexOf("%"))))/100.0;
@@ -121,6 +114,7 @@ public class ImportCSV extends Adjustments {
 				tempNumAssign = studentList.get(type.toLowerCase()).get(tempIndex).getCourseWork().size();
 				score = studentList.get(type.toLowerCase()).get(tempIndex).getCourseWork().get(tempNumAssign-1).getPercent();
 				tempStudentGrades.put(assignType, Calcfinalgrade(tempStudentGrades.get(assignType), score, percent));
+				assignmentBreakDown.get(assignType).get(tempNum).setAverage(Calcaverage(assignmentBreakDown.get(assignType).get(tempNum).getAverage(), score, i-4));;
 			}
 			
 			for (Map.Entry<String, Double> entry : tempStudentGrades.entrySet()) {
@@ -136,7 +130,21 @@ public class ImportCSV extends Adjustments {
 			
 		}
 		
-		for (Map.Entry<String, ArrayList<Student>> entry : studentList.entrySet()) {
+		for (Map.Entry<String, ArrayList<GradeBreakDown>> entry : assignmentBreakDown.entrySet()) {
+			System.out.print(entry.getKey() + ": ");
+			courseBreakDown.get(entry.getKey()).setUndergradAssignPercent(100.0/numCategories);
+			courseBreakDown.get(entry.getKey()).setGradAssignPercent(100.0/numCategories);
+			System.out.println(courseBreakDown.get(entry.getKey()).getGradAssignPercent());
+			for (int i = 0; i < entry.getValue().size();i++) {
+				System.out.print(entry.getValue().get(i).getAssignType() + (i+1) + ": ");
+				//System.out.print(entry.getValue().get(i).getGradAssignPercent()+"    ");
+				//System.out.println(entry.getValue().get(i).getTotalPoints());
+				System.out.println(entry.getValue().get(i).getAverage());
+			}
+			System.out.println(" ");
+		}
+		
+/*		for (Map.Entry<String, ArrayList<Student>> entry : studentList.entrySet()) {
 			System.out.print(entry.getKey() + ": ");
 			System.out.println(entry.getValue().size());
 			for (int i = 0; i < entry.getValue().size(); i++) {
@@ -149,6 +157,7 @@ public class ImportCSV extends Adjustments {
 				System.out.println("");
 			}
 		}
+*/
 
 	}
 
