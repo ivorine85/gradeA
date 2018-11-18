@@ -1,6 +1,6 @@
 
 abstract class Calculations {
-	protected double Calcaverage(double average, double assignment, int numitems) {
+	protected static double Calcaverage(double average, double assignment, int numitems) {
 		return (((average*numitems)+assignment)/(double)(numitems+1));
 	}
 	
