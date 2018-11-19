@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map; 
 import Entity.Adjustments;
 import Entity.GradeBreakDown;
-import Entity.Project;
+//import Entity.Project;
 import Entity.Assignment;
 import Entity.Student;
 import Entity.Course;
@@ -30,7 +30,7 @@ public class ImportCSV extends Adjustments {
 		double score;																			// score of assignment 
 		double percent;																			// percent assignment holds 
 		//Need to change file directory if you are going to run this code
-		File file = new File("C:\\Users\\Albert Sze\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Github\\gradeA\\Albert_Sze\\Grade_A (1)\\GradeA\\src\\Excel_template_3.csv");			
+		File file = new File("C:\\Users\\alber\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Github\\gradeA\\Albert_Sze\\Grade_A\\GradeA\\src\\Excel_template_3.csv");			
 		
 /*********************************** for the purpose of this example ***********************************/
 		Course newCourse = new Course ("CS591");												// Generate new course
@@ -81,7 +81,7 @@ public class ImportCSV extends Adjustments {
 			// add a new assignment break down to the assignment type
 			newCourse.getAssignmentBreakDown().get(assignType).add(new GradeBreakDown(assignType, Double.parseDouble(assignmentDetails[(2*i)+1].substring(0, assignmentDetails[(2*i)+1].length()-1))/100.0, Double.parseDouble(assignmentDetails[(2*i)+1].substring(0, assignmentDetails[(2*i)+1].length()-1))/100.0, 0, Integer.parseInt(assignmentDetails[2*i]),0.0, 1));
 			
-			if (assignType.toLowerCase().equals("project")) {				// if the type is a project
+			/*if (assignType.toLowerCase().equals("project")) {				// if the type is a project
 				for (int j = 1; j < 4; j++) {
 					// Get the current percentage and total points of the project 
 					percent = newCourse.getAssignmentBreakDown().get(assignType).get(newCourse.getAssignmentBreakDown().get(assignType).size()-1).getUndergradAssignPercent();
@@ -96,6 +96,7 @@ public class ImportCSV extends Adjustments {
 				}
 				i += 3  ;		// update the i value 
 			}
+			*/
 		}
 		numCategories = newCourse.getCourseBreakDown().size(); //Determine the number of assignment types
 
@@ -117,7 +118,7 @@ public class ImportCSV extends Adjustments {
 			for (int j = 0; j < assignments.length; j++) {													// for all the assignments 
 				assignType = assignments[j].substring(0, assignments[j].indexOf("_"));						// get the assignment type
 				tempNum = Integer.parseInt(assignments[j].substring(assignments[j].lastIndexOf("_")+1))-1;	// get the assignment number
-				if (assignType.toLowerCase().equals("project")) {											// if the assignment is a project
+				/*if (assignType.toLowerCase().equals("project")) {											// if the assignment is a project
 					// get the project presentation, report, technical, and survey scores to create a new project type for the student
 					newCourse.getLabSections().get(labSection).getStudents().get(type.toLowerCase()).get(tempIndex).getCourseWork().add(new Project(assignType, Integer.parseInt(tempStudentDetail[j*2+6]), Integer.parseInt(tempStudentDetail[(j+1)*2+6]), Integer.parseInt(tempStudentDetail[(j+2)*2+6]),Integer.parseInt(tempStudentDetail[(j+3)*2+6]), (Integer.parseInt(assignmentDetails[(j)*2])+Integer.parseInt(assignmentDetails[(j+1)*2])+Integer.parseInt(assignmentDetails[(j+2)*2])+Integer.parseInt(assignmentDetails[(j+3)*2]))));
 					// get the assignment grade break down percentage
@@ -130,6 +131,12 @@ public class ImportCSV extends Adjustments {
 					// get the assignment grade break down percentage
 					percent = (Double.parseDouble(assignmentDetails[j*2+1].substring(0, assignmentDetails[j*2+1].indexOf("%"))))/100.0;
 				}
+				*/
+				
+				// create a new assignment type in the student's profile
+				newCourse.getLabSections().get(labSection).getStudents().get(type.toLowerCase()).get(tempIndex).getCourseWork().add(new Assignment(assignType,  Integer.parseInt(tempStudentDetail[j*2+6]), Integer.parseInt(assignmentDetails[j*2]), 0));
+				// get the assignment grade break down percentage
+				percent = (Double.parseDouble(assignmentDetails[j*2+1].substring(0, assignmentDetails[j*2+1].indexOf("%"))))/100.0;
 				// get assignment number
 				tempNumAssign = newCourse.getLabSections().get(labSection).getStudents().get(type.toLowerCase()).get(tempIndex).getCourseWork().size();
 				// get assignment score
