@@ -3,7 +3,7 @@ import Entity.Profile;
 
 import java.util.*;
 
-public class Testing extends Adjustments {
+public class LoginTest extends Adjustments {
 
 	public static void main(String[] args) throws Exception {
 		

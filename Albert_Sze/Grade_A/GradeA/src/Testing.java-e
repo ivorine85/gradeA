@@ -1,7 +1,9 @@
-import java.io.*; 
-import java.util.*; 
+import Entity.Adjustments;
+import Entity.Profile;
 
-public class Testing extends Adjustments{
+import java.util.*;
+
+public class Testing extends Adjustments {
 
 	public static void main(String[] args) throws Exception {
 		
@@ -62,7 +64,7 @@ public class Testing extends Adjustments{
 		profileList.set(0, Forgetpassword(profileList.get(0)));
 		
 // adding new course
-		//profileList.get(0).setCourses(<Course> Additem(profileList.get(0).getCourses(), new Course("Awesome Class")));
+		//profileList.get(0).setCourses(<Entity.Course> Additem(profileList.get(0).getCourses(), new Entity.Course("Awesome Class")));
 		
 	}
 
