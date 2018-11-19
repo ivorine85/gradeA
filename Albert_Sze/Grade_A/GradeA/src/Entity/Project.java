@@ -1,3 +1,6 @@
+package Entity;
+
+import Entity.Assignment;
 
 public class Project extends Assignment {
 	private int ptsLostReport;
@@ -5,6 +8,23 @@ public class Project extends Assignment {
 	private int ptsLostTechnical;
 	private int ptsLostSurvey;
 
+	public Project() {
+		super();
+		this.ptsLostReport = 0;
+		this.ptsLostPresentation = 0;
+		this.ptsLostTechnical = 0;
+		this.ptsLostSurvey = 0;
+	}
+	
+	public Project(String type, int ptsLostPresentation, int ptsLostReport, int ptsLostTechnical,int ptsLostSurvey, int totalPts) {
+		super(type, ptsLostReport+ptsLostPresentation+ptsLostTechnical+ptsLostSurvey, totalPts, 0);
+		this.ptsLostReport = ptsLostReport;
+		this.ptsLostPresentation = ptsLostPresentation;
+		this.ptsLostTechnical = ptsLostTechnical;
+		this.ptsLostSurvey = ptsLostSurvey;
+	}
+
+/*********************************** Getters and Setters ***********************************/	
 	public int getPtsLostReport() {
 		return ptsLostReport;
 	}
@@ -34,22 +54,6 @@ public class Project extends Assignment {
 	}
 
 	public void setPtsLostSurvey(int ptsLostSurvey) {
-		this.ptsLostSurvey = ptsLostSurvey;
-	}
-
-	public Project() {
-		super();
-		this.ptsLostReport = 0;
-		this.ptsLostPresentation = 0;
-		this.ptsLostTechnical = 0;
-		this.ptsLostSurvey = 0;
-	}
-	
-	public Project(String type, int ptsLostPresentation, int ptsLostReport, int ptsLostTechnical,int ptsLostSurvey, int totalPts) {
-		super(type, ptsLostReport+ptsLostPresentation+ptsLostTechnical+ptsLostSurvey, totalPts, 0);
-		this.ptsLostReport = ptsLostReport;
-		this.ptsLostPresentation = ptsLostPresentation;
-		this.ptsLostTechnical = ptsLostTechnical;
 		this.ptsLostSurvey = ptsLostSurvey;
 	}
 }

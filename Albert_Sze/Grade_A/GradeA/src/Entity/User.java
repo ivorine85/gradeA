@@ -1,9 +1,23 @@
+package Entity;
 
 public class User {
 	private String username;
 	private String name;
 	private String password;
 	
+	public User() {
+		this.name = "None";
+		this.username = "None";
+		this.password = "None";
+	}
+	
+	public User(String name,String username,String password) {
+		this.name = name;
+		this.username = username;
+		this.password = password;
+	}
+	
+/*********************************** Getters and Setters ***********************************/	
 	public String getUsername() {
 		return username;
 	}
@@ -20,18 +34,6 @@ public class User {
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	public User() {
-		this.name = "None";
-		this.username = "None";
-		this.password = "None";
-	}
-	
-	public User(String name,String username,String password) {
-		this.name = name;
-		this.username = username;
 		this.password = password;
 	}
 }

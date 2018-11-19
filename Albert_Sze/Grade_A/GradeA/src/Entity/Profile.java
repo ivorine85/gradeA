@@ -1,3 +1,7 @@
+package Entity;
+
+import Entity.Course;
+
 import java.util.ArrayList;
 
 public class Profile {
@@ -6,7 +10,24 @@ public class Profile {
 	private ArrayList<Course> courses;
 	private String[] securityAnswers;
 	private String[] securityQuestions;
+	
+	public Profile() {
+		this.username = "None";
+		this.password = "None";
+		
+		this.securityAnswers = new String[3];
+		this.securityQuestions = new String[3];
+	}
+	
+	public Profile(String username, String password, String[] answers, String[] questions) {
+		this.username = username;
+		this.password = password;
+		
+		this.securityAnswers = answers;
+		this.securityQuestions = questions;
+	}
 
+/*********************************** Getters and Setters ***********************************/
 	public String getUsername() {
 		return username;
 	}
@@ -45,21 +66,5 @@ public class Profile {
 
 	public void setSecurityQuestions(String[] securityQuestions) {
 		this.securityQuestions = securityQuestions;
-	}
-
-	public Profile() {
-		this.username = "None";
-		this.password = "None";
-		
-		this.securityAnswers = new String[3];
-		this.securityQuestions = new String[3];
-	}
-	
-	public Profile(String username, String password, String[] answers, String[] questions) {
-		this.username = username;
-		this.password = password;
-		
-		this.securityAnswers = answers;
-		this.securityQuestions = questions;
 	}
 }

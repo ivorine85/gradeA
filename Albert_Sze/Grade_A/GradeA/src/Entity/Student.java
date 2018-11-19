@@ -1,46 +1,40 @@
+package Entity;
+
+import Entity.Assignment;
+
 import java.util.ArrayList;
 
 public class Student {
-	//private String fname;
-	//private String lname;
 	private String name; // new
 	private String sid;
-	//private String major;
 	private String studentType;
+	private String pohtoPath;
 	private int year;
 	private String email;
-	//private String labSection;
 	private double grade;
 	private ArrayList<Assignment> courseWork;
 	
 	public Student() {
-		//this.fname = "None";
-		//this.lname = "None";
 		this.name = "None";
 		this.sid = "None";
-		//this.major = "None";
 		this.studentType = "None";
 		this.year = 0;
 		this.email =  "None";
-		//this.labSection =  "None";
 		this.grade = 0.0;
 		this.courseWork = new ArrayList<Assignment>(1);
 	}
-	
-	public Student(String name,String sid,String studentType, int year,String email,double grade) {
-		//this.fname = fname;
-		//this.lname = lname;
+
+	public Student(String sid,String name,String studentType,String photoPath,String email,int year) {
 		this.name = name;
 		this.sid = sid;
-		//this.major = major;
 		this.studentType = studentType;
 		this.year = year;
 		this.email =  email;
-		//this.labSection =  labSection;
-		this.grade = grade;
 		this.courseWork = new ArrayList<Assignment>(1);
+		this.pohtoPath = photoPath;
 	}
-	
+
+/*********************************** Getters and Setters ***********************************/
 	public String getName() {
 		return name;
 	}
@@ -49,13 +43,13 @@ public class Student {
 		this.name = name;
 	}
 
-	//public String getMajor() {
-	//	return major;
-	//}
+	public String getPohtoPath() {
+		return pohtoPath;
+	}
 
-	//public void setMajor(String major) {
-	//	this.major = major;
-	//}
+	public void setPohtoPath(String pohtoPath) {
+		this.pohtoPath = pohtoPath;
+	}
 
 	public String getStudentType() {
 		return studentType;
@@ -80,30 +74,6 @@ public class Student {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	//public String getLabSection() {
-	//	return labSection;
-	//}
-
-	//public void setLabSection(String labSection) {
-	//	this.labSection = labSection;
-	//}
-
-	//public String getFname() {
-	//	return fname;
-	//}
-
-	//public void setFname(String fname) {
-	//	this.fname = fname;
-	//}
-
-	//public String getLname() {
-	//	return lname;
-	//}
-
-	//public void setLname(String lname) {
-	//	this.lname = lname;
-	//}
 
 	public String getSid() {
 		return sid;

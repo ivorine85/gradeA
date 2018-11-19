@@ -1,3 +1,4 @@
+package Entity;
 
 public class Assignment {
 	private String type;
@@ -5,7 +6,24 @@ public class Assignment {
 	private int totalPts;
 	private double percent;
 	private int weight;
+	
+	public Assignment () {
+		this.type = "None";
+		this.ptsLost = 0;
+		this.totalPts = 0;
+		this.percent = 0;
+		this.weight = 0;	
+	}
+	
+	public Assignment (String type, int ptsLost, int totalPts, int weight) {
+		this.type = type;
+		this.ptsLost = ptsLost;
+		this.totalPts = totalPts;
+		this.percent = (totalPts-ptsLost)/(double)(totalPts);
+		this.weight = weight;	
+	}
 
+/*********************************** Getters and Setters ***********************************/
 	public String getType() {
 		return type;
 	}
@@ -46,19 +64,4 @@ public class Assignment {
 		this.weight = weight;
 	}
 
-	public Assignment () {
-		this.type = "None";
-		this.ptsLost = 0;
-		this.totalPts = 0;
-		this.percent = 0;
-		this.weight = 0;	
-	}
-	
-	public Assignment (String type, int ptsLost, int totalPts, int weight) {
-		this.type = type;
-		this.ptsLost = ptsLost;
-		this.totalPts = totalPts;
-		this.percent = (totalPts-ptsLost)/(double)(totalPts);
-		this.weight = weight;	
-	}
 }

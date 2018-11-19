@@ -1,8 +1,10 @@
+package Entity;
+
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
-abstract class Adjustments extends Calculations{
+public abstract class Adjustments extends Calculations {
 	protected static  <E> ArrayList<E> Additem(ArrayList<E> array_list, E item) {
 		array_list.add(item);
 		return array_list;		
