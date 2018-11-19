@@ -3,4 +3,10 @@
 <fullyQualifiedTypeName name="java.util.Locale"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="Entity.GradeBreakDown"/>
+<fullyQualifiedTypeName name="Entity.Project"/>
+<fullyQualifiedTypeName name="Entity.Assistant"/>
+<fullyQualifiedTypeName name="Entity.Assignment"/>
+<fullyQualifiedTypeName name="Entity.Course"/>
+<fullyQualifiedTypeName name="Entity.Lab"/>
 </qualifiedTypeNameHistroy>
