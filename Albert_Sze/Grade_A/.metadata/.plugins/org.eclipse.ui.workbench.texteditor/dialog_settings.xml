@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="temp" key="selection"/>
+		<item value="project" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="true" key="wholeword"/>
 		<list key="findhistory">
+			<item value="project"/>
 			<item value="temp"/>
 			<item value="assignmentBreakDown"/>
 			<item value="courseBreakDown"/>
@@ -22,7 +23,6 @@
 			<item value="ptslost"/>
 			<item value="graderanges"/>
 			<item value="gradcw"/>
-			<item value="undergradcw"/>
 		</list>
 		<list key="replacehistory">
 			<item value="newCourse.getAssignmentBreakDown()"/>
