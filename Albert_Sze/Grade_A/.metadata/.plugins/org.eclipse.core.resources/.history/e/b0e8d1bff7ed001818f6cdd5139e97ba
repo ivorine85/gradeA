@@ -1,0 +1,106 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Color;
+import java.sql.*;
+import java.swing.*;
+
+public class AddStudents {
+
+	private JFrame frame;
+	private JTable table;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					AddStudents window = new AddStudents();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	
+	// Create connection to sql database
+	// Connection connection = null;
+	/**
+	 * Create the application.
+	 */
+	public AddStudents() {
+		//connection = SqlConnection.dbConnector(); 
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.getContentPane().setForeground(new Color(0, 0, 0));
+		frame.setBounds(100, 100, 628, 409);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		// Label of window
+		JLabel lblAddStudents = new JLabel("Add Students");
+		lblAddStudents.setFont(new Font("Tahoma", Font.PLAIN, 36));
+		lblAddStudents.setBounds(10, 11, 212, 44);
+		frame.getContentPane().add(lblAddStudents);
+		
+		//Cancel Button
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCancel.setBounds(513, 336, 89, 23);
+		frame.getContentPane().add(btnCancel);
+		
+		//Finish Button
+		JButton btnFinish = new JButton("Finish");
+		btnFinish.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnFinish.setBounds(414, 336, 89, 23);
+		frame.getContentPane().add(btnFinish);
+		
+		//Add Student button
+		JButton btnAddStudent = new JButton("Add Student");
+		btnAddStudent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("yup");
+			}
+		});
+		btnAddStudent.setBounds(315, 336, 93, 23);
+		frame.getContentPane().add(btnAddStudent);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(25, 78, 535, 233);
+		frame.getContentPane().add(scrollPane);
+		
+		String [] header={"Last Name","First Name","Year","Lab","Student Type"};
+		String [][] data={{"","","","Select","Select"},{"","","","Select","Select"},{"","","","Select","Select"},{"","","","Select","Select"},{"","","","Select","Select"}};
+		DefaultTableModel model = new DefaultTableModel(data,header);
+		
+		table = new JTable(model);
+		scrollPane.setViewportView(table);
+
+	}
+}
