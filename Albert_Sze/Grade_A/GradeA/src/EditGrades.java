@@ -1,0 +1,193 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
+import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Color;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.JComboBox;
+import Entity.*;
+
+public class EditGrades extends Adjustments {
+
+	private JFrame frame;
+	private JTable table;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					EditGrades window = new EditGrades();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	
+	// Create connection to sql database
+	// Connection connection = null;
+	/**
+	 * Create the application.
+	 */
+	public EditGrades() {
+		//connection = SqlConnection.dbConnector(); 
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+/*********************************** for the purpose of this example ***********************************/
+		Course newCourse = new Course ("CS591");												// Generate new course
+		newCourse.getCourseBreakDown().put("HW", new GradeBreakDown("HW", .5, .5, 0, 0,0, 1));
+		newCourse.getCourseBreakDown().put("Exam", new GradeBreakDown("Exam", .5, .5, 0, 0,0, 1));
+		
+		newCourse.getLabSections().put("A1",new Lab("A1"));										// Create Lab Sections
+		newCourse.getLabSections().put("A2",new Lab("A2"));										// Create Lab Sections
+		newCourse.getLabSections().put("A3",new Lab("A3"));										// Create Lab Sections
+		newCourse.getLabSections().get("A1").getStudents().put("undergrad", new ArrayList<Student>(0));
+		newCourse.getLabSections().get("A1").getStudents().get("undergrad").add(new Student("U1","Albert Sze","undergrad","None","yup@gmail",2018));
+		newCourse.getLabSections().get("A1").getStudents().get("undergrad").get(0).getCourseWork().add(new Assignment ("HW", 3, 103, 0));
+		newCourse.getLabSections().get("A1").getStudents().get("undergrad").get(0).getCourseWork().add(new Assignment ("Exam", 12, 100, 0));
+		newCourse.getLabSections().get("A1").getStudents().get("undergrad").get(0).getCourseWork().add(new Assignment ("Exam", 12, 100, 0));
+		newCourse.getLabSections().get("A1").getStudents().get("undergrad").get(0).setGrade(0.98);
+		newCourse.getLabSections().get("A1").getStudents().put("grad", new ArrayList<Student>(0));
+		newCourse.getLabSections().get("A1").getStudents().get("grad").add(new Student("U1","Albert Sze","grad","None","yup@gmail",2018));
+		newCourse.getLabSections().get("A1").getStudents().get("grad").get(0).getCourseWork().add(new Assignment ("HW", 10, 100, 0));
+		newCourse.getLabSections().get("A1").getStudents().get("grad").get(0).getCourseWork().add(new Assignment ("Exam", 5, 100, 0));
+		newCourse.getLabSections().get("A1").getStudents().get("grad").get(0).getCourseWork().add(new Assignment ("Exam", 5, 100, 0));
+		newCourse.getLabSections().get("A1").getStudents().get("grad").get(0).setGrade(0.97);
+/*******************************************************************************************************/
+		frame = new JFrame();
+		frame.getContentPane().setForeground(new Color(0, 0, 0));
+		frame.setBounds(100, 100, 801, 487);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		//Create header
+		ArrayList<String> header = new ArrayList<String>(0);
+		ArrayList<ArrayList<String>> allStudentData = new ArrayList<ArrayList<String>>(0);
+		ArrayList<String> studentData;
+		HashMap<String, Integer> assignCount = new HashMap<String, Integer>(0);
+		double sum = 0.0;
+		//for this example
+		String currentLabSection = "A1";
+		ArrayList<Student> allStudents = newCourse.getLabSections().get(currentLabSection).getStudents().get("undergrad");
+		allStudents.addAll(newCourse.getLabSections().get(currentLabSection).getStudents().get("grad"));
+		
+		header.add("Student Name");
+		for (Map.Entry<String, GradeBreakDown> entry : newCourse.getCourseBreakDown().entrySet()) {
+			assignCount.put(entry.getKey(),entry.getValue().getNumAssign()-1);
+		}
+		
+				
+		for (int i = 0; i < allStudents.size();i++) {
+			studentData = new ArrayList<String>(0);
+			studentData.add(allStudents.get(i).getName());
+			for (Assignment curInstance: allStudents.get(i).getCourseWork()) {
+				if (i == 0) {
+					int j = newCourse.getCourseBreakDown().get(curInstance.getType()).getNumAssign()-assignCount.get(curInstance.getType());
+					header.add(curInstance.getType() + " " + Integer.toString(j) + " Pts Lost");
+					header.add(curInstance.getType() + " " + Integer.toString(j) + " %");
+					assignCount.put(curInstance.getType(), assignCount.get(curInstance.getType())-1);
+				}
+				
+				studentData.add(Integer.toString(curInstance.getPtsLost()));
+				studentData.add(Double.toString((double)Math.round(curInstance.getPercent()*10000)/100));
+			}
+			studentData.add(Double.toString((double)Math.round(allStudents.get(i).getGrade()*10000)/100));
+			allStudentData.add(studentData);
+		}
+		header.add("Final Grade");
+		studentData = new ArrayList<String>(0);
+		studentData.add("Average");
+		for (int i = 1; i < header.size(); i++) {
+			sum = 0.0;
+			for (int j = 0; j < allStudentData.size(); j ++ ) {
+				sum = Calcaverage(sum, Double.parseDouble(allStudentData.get(j).get(i)), j);
+			}
+			studentData.add(Double.toString((double)Math.round(sum*100)/100));
+		}
+		allStudentData.add(studentData);
+		
+		
+		String[][] array = new String[allStudentData.size()][];
+		for (int i = 0; i < allStudentData.size(); i++) {
+		    ArrayList<String> row = allStudentData.get(i);
+		    array[i] = row.toArray(new String[row.size()]);
+		}
+		
+		String [][] data={{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"}};
+		DefaultTableModel model = new DefaultTableModel (array,header.toArray()) {
+			public boolean isCellEditable(int row, int col)
+			{
+			    //If you didn't want the first column to be editable
+			    if(col%2 == 0 || row == allStudentData.size()-1 || col == header.size()-1) {
+			    	return false;
+			    }
+			    else {
+			    	return true;
+			    }
+			}
+		};
+		
+		// Label of window
+		JLabel lblEditGrades = new JLabel("Edit Grades");
+		lblEditGrades.setFont(new Font("Tahoma", Font.PLAIN, 36));
+		lblEditGrades.setBounds(10, 11, 212, 44);
+		frame.getContentPane().add(lblEditGrades);
+		
+		//Cancel Button
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
+		btnCancel.setBounds(686, 414, 89, 23);
+		frame.getContentPane().add(btnCancel);
+		
+		//Finish Button
+		JButton btnFinish = new JButton("Finish");
+		btnFinish.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// return to proper frame
+				frame.dispose();
+			}
+		});
+		btnFinish.setBounds(587, 414, 89, 23);
+		frame.getContentPane().add(btnFinish);
+		
+		//Add ScrollPanel for table
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(25, 78, 738, 325);
+		frame.getContentPane().add(scrollPane);
+				
+		table = new JTable(model);
+		scrollPane.setViewportView(table);
+
+	}
+}
