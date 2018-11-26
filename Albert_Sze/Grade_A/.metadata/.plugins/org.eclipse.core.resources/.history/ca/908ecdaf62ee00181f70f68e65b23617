@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import Entity.*;
 
-public class ImportCSV extends Adjustments {
+public class Import.ImportCSV extends Adjustments {
 
 	public static void main(String[] args) throws Exception   {
 		HashMap<String, Double> tempStudentGrades = new HashMap();                              // Obtains Student's assignment averages per type, used to calculate student's grades later 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map; 
 
-public class ImportCSV extends Adjustments {
+public class Import.ImportCSV extends Adjustments {
 
 	public static void main(String[] args) throws Exception   {
 		Hashtable<String, GradeBreakDown> courseBreakDown = new Hashtable();
