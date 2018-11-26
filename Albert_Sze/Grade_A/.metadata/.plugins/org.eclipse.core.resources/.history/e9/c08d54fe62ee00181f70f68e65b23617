@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import Entity.*;
 
-public class ImportCSV extends Adjustments {
+public class Import.ImportCSV extends Adjustments {
 
 	//public static void main(String[] args) throws Exception   {
 	public Course yup() throws Exception   {		
