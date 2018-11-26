@@ -60,7 +60,7 @@ public class EditGrades {
 	 */
 	private void initialize() {
 /*********************************** for the purpose of this example ***********************************/
-		ImportCSV newCourse = ImportCSV();
+		Import.ImportCSV newCourse = Import.ImportCSV();
 /*******************************************************************************************************/
 		frame = new JFrame();
 		frame.getContentPane().setForeground(new Color(0, 0, 0));
