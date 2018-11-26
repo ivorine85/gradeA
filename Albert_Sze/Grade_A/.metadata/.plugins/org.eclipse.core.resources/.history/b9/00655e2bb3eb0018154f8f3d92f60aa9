@@ -10,7 +10,7 @@ import Entity.Student;
 import Entity.Course;
 import Entity.Lab;
 
-public class ImportCSV extends Adjustments {
+public class Import.ImportCSV extends Adjustments {
 
 	public static void main(String[] args) throws Exception   {
 		//HashMap<String, ArrayList<Student>> studentList = new HashMap();                      // Student List
