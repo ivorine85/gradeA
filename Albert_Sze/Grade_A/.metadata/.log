@@ -645,7 +645,7 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 !ENTRY org.eclipse.jdt.ui 4 10001 2018-11-18 15:46:56.170
 !MESSAGE Internal Error
 !STACK 1
-Java Model Exception: Core Exception [code 272] A resource already exists on disk 'C:\Users\alber\Google Drive\Boston University\CS591_Object_Oriented_Design_in_Java\Project\Github\gradeA\Albert_Sze\Grade_A\GradeA\src\Entity'.
+Java Model Exception: Core Exception [code 272] A resource already exists on disk 'C:\Users\alber\Google Drive\Boston University\CS591_Object_Oriented_Design_in_Java\Project\Github\gradeA\Albert_Sze\Grade_A\GradeA\src\entity'.
 	at org.eclipse.jdt.internal.core.JavaModelOperation.createFolder(JavaModelOperation.java:298)
 	at org.eclipse.jdt.internal.core.CreatePackageFragmentOperation.executeOperation(CreatePackageFragmentOperation.java:93)
 	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:736)
@@ -693,14 +693,14 @@ Java Model Exception: Core Exception [code 272] A resource already exists on dis
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
-Caused by: java.lang.Exception: A resource already exists on disk 'C:\Users\alber\Google Drive\Boston University\CS591_Object_Oriented_Design_in_Java\Project\Github\gradeA\Albert_Sze\Grade_A\GradeA\src\Entity'.
+Caused by: java.lang.Exception: A resource already exists on disk 'C:\Users\alber\Google Drive\Boston University\CS591_Object_Oriented_Design_in_Java\Project\Github\gradeA\Albert_Sze\Grade_A\GradeA\src\entity'.
 	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
 	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
 	at org.eclipse.core.internal.resources.Folder.assertCreateRequirements(Folder.java:50)
 	at org.eclipse.core.internal.resources.Folder.create(Folder.java:96)
 	at org.eclipse.jdt.internal.core.JavaModelOperation.createFolder(JavaModelOperation.java:292)
 	... 46 more
-Caused by: org.eclipse.core.internal.resources.ResourceException(/GradeA/src/Entity)[272]: java.lang.Exception: A resource already exists on disk 'C:\Users\alber\Google Drive\Boston University\CS591_Object_Oriented_Design_in_Java\Project\Github\gradeA\Albert_Sze\Grade_A\GradeA\src\Entity'.
+Caused by: org.eclipse.core.internal.resources.ResourceException(/GradeA/src/entity)[272]: java.lang.Exception: A resource already exists on disk 'C:\Users\alber\Google Drive\Boston University\CS591_Object_Oriented_Design_in_Java\Project\Github\gradeA\Albert_Sze\Grade_A\GradeA\src\entity'.
 	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
 	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
 	at org.eclipse.core.internal.resources.Folder.assertCreateRequirements(Folder.java:50)
@@ -753,9 +753,9 @@ Caused by: org.eclipse.core.internal.resources.ResourceException(/GradeA/src/Ent
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
 !SUBENTRY 1 org.eclipse.core.resources 4 272 2018-11-18 15:46:56.174
-!MESSAGE A resource already exists on disk 'C:\Users\alber\Google Drive\Boston University\CS591_Object_Oriented_Design_in_Java\Project\Github\gradeA\Albert_Sze\Grade_A\GradeA\src\Entity'.
+!MESSAGE A resource already exists on disk 'C:\Users\alber\Google Drive\Boston University\CS591_Object_Oriented_Design_in_Java\Project\Github\gradeA\Albert_Sze\Grade_A\GradeA\src\entity'.
 !STACK 0
-java.lang.Exception: A resource already exists on disk 'C:\Users\alber\Google Drive\Boston University\CS591_Object_Oriented_Design_in_Java\Project\Github\gradeA\Albert_Sze\Grade_A\GradeA\src\Entity'.
+java.lang.Exception: A resource already exists on disk 'C:\Users\alber\Google Drive\Boston University\CS591_Object_Oriented_Design_in_Java\Project\Github\gradeA\Albert_Sze\Grade_A\GradeA\src\entity'.
 	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
 	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
 	at org.eclipse.core.internal.resources.Folder.assertCreateRequirements(Folder.java:50)
@@ -1385,7 +1385,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JComboBox;
-import Entity.*;
+import entity.*;
 
 public class StudentProfile extends Adjustments {
 
@@ -1761,7 +1761,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JComboBox;
-import Entity.*;
+import entity.*;
 
 public class StudentProfile extends Adjustments {
 

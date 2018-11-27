@@ -1,6 +1,4 @@
-package Entity;
-
-import Entity.Assignment;
+package entity;
 
 import java.util.ArrayList;
 
