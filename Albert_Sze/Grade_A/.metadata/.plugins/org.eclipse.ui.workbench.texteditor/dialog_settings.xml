@@ -2,29 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="project" key="selection"/>
+		<item value="JFrame" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="true" key="wholeword"/>
 		<list key="findhistory">
+			<item value="JFrame"/>
+			<item value="lastindex"/>
+			<item value="assignCount"/>
+			<item value="header"/>
+			<item value="studentProfile"/>
+			<item value="EditGrades"/>
+			<item value="ImportCSV"/>
+			<item value="message"/>
+			<item value="try"/>
 			<item value="project"/>
 			<item value="temp"/>
 			<item value="assignmentBreakDown"/>
 			<item value="courseBreakDown"/>
 			<item value="studentList"/>
 			<item value="type"/>
-			<item value="Hashtable"/>
-			<item value="tempStudent"/>
-			<item value="tempNumAssign"/>
-			<item value="tempIndex"/>
-			<item value="Survery"/>
-			<item value="totalpts"/>
-			<item value="ptslost"/>
-			<item value="graderanges"/>
-			<item value="gradcw"/>
 		</list>
 		<list key="replacehistory">
+			<item value="StudentProfile"/>
 			<item value="newCourse.getAssignmentBreakDown()"/>
 			<item value="newCourse.getCourseBreakDown()"/>
 			<item value="HashMap"/>
@@ -39,14 +40,13 @@
 			<item value="teachAssist"/>
 			<item value="classDuration"/>
 			<item value="classTime"/>
-			<item value="courseName"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="284" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="379" key="DIALOG_HEIGHT"/>
-		<item value="1234" key="DIALOG_X_ORIGIN"/>
-		<item value="425" key="DIALOG_Y_ORIGIN"/>
+		<item value="1203" key="DIALOG_X_ORIGIN"/>
+		<item value="568" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>
