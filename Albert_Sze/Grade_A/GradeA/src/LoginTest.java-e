@@ -1,5 +1,5 @@
-import Entity.Adjustments;
-import Entity.Profile;
+import entity.Adjustments;
+import entity.Profile;
 
 import java.util.*;
 
@@ -64,7 +64,7 @@ public class LoginTest extends Adjustments {
 		profileList.set(0, Forgetpassword(profileList.get(0)));
 		
 // adding new course
-		//profileList.get(0).setCourses(<Entity.Course> Additem(profileList.get(0).getCourses(), new Entity.Course("Awesome Class")));
+		//profileList.get(0).setCourses(<entity.Course> Additem(profileList.get(0).getCourses(), new entity.Course("Awesome Class")));
 		
 	}
 

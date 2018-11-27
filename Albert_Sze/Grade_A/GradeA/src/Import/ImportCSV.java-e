@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import Entity.*;
+import entity.*;
 
 public class ImportCSV extends Adjustments {
 

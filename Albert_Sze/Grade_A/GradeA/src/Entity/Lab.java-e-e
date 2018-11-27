@@ -1,15 +1,9 @@
-package Entity;
-
-import Entity.Assistant;
-import Entity.Student;
+package entity;
 
 
 import java.sql.Time;
-import java.time.Duration;
 import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.*;
-import java.sql.*;
 
 public class Lab {
 	private String section;

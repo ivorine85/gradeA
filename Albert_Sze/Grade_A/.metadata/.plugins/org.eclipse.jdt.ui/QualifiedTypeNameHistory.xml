@@ -2,12 +2,12 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.util.Locale"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
-<fullyQualifiedTypeName name="Entity.GradeBreakDown"/>
-<fullyQualifiedTypeName name="Entity.Project"/>
-<fullyQualifiedTypeName name="Entity.Assistant"/>
-<fullyQualifiedTypeName name="Entity.Assignment"/>
-<fullyQualifiedTypeName name="Entity.Course"/>
-<fullyQualifiedTypeName name="Entity.Lab"/>
+<fullyQualifiedTypeName name="entity.GradeBreakDown"/>
+<fullyQualifiedTypeName name="entity.Project"/>
+<fullyQualifiedTypeName name="entity.Assistant"/>
+<fullyQualifiedTypeName name="entity.Assignment"/>
+<fullyQualifiedTypeName name="entity.Course"/>
+<fullyQualifiedTypeName name="entity.Lab"/>
 <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
