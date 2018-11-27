@@ -18,7 +18,7 @@ import java.awt.Font;
 import java.awt.Color;
 import java.sql.*;
 import javax.swing.JComboBox;
-import Entity.*;
+import entity.*;
 
 public class EditGrades {
 
