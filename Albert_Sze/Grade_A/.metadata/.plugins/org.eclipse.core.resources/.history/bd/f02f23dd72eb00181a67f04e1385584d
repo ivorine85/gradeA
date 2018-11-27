@@ -1,4 +1,4 @@
-import Entity.*;
+import entity.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class Import.ImportCSV extends Adjustments {
 <<<<<<< HEAD
 		File file = new File("C:\\Users\\alber\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Github\\gradeA\\Albert_Sze\\Grade_A\\GradeA\\src\\Excel_template_3.csv");
 =======
-		File file = new File("C:\\Users\\Albert Sze\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Entity.Project\\Github\\gradeA\\Albert_Sze\\Grade_A (1)\\GradeA\\src\\Excel_template_3.csv");
+		File file = new File("C:\\Users\\Albert Sze\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\entity.Project\\Github\\gradeA\\Albert_Sze\\Grade_A (1)\\GradeA\\src\\Excel_template_3.csv");
 >>>>>>> 851aa1ff4fe88617bcc6b35007bcea606f3b2947
 		
 		studentList.put("undergrad", new ArrayList<Student>(0));
