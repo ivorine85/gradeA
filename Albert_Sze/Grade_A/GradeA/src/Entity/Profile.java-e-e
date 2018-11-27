@@ -1,6 +1,4 @@
-package Entity;
-
-import Entity.Course;
+package entity;
 
 import java.util.ArrayList;
 

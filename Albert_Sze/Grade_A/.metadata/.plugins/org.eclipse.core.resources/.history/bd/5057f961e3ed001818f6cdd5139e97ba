@@ -3,14 +3,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import Entity.*;
-//import Entity.Adjustments;
-//import Entity.GradeBreakDown;
-//import Entity.Project;
-//import Entity.Assignment;
-//import Entity.Student;
-//import Entity.Course;
-//import Entity.Lab;
+import entity.*;
+//import entity.Adjustments;
+//import entity.GradeBreakDown;
+//import entity.Project;
+//import entity.Assignment;
+//import entity.Student;
+//import entity.Course;
+//import entity.Lab;
 
 public class Import.ImportCSV extends Adjustments {
 

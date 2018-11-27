@@ -10,9 +10,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import Entity.Course;
-import Entity.Lab;
-import Entity.Student;
+import entity.Course;
+import entity.Lab;
+import entity.Student;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;

@@ -1,7 +1,6 @@
-package DAO;
+package dao;
 
-import Entity.Assistant;
-import Entity.Course;
+import entity.Assistant;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

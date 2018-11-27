@@ -1,4 +1,4 @@
-package Entity;
+package entity;
 
 abstract class Calculations {
 	protected static double Calcaverage(double average, double assignment, int numitems) {
