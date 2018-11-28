@@ -189,7 +189,7 @@ public class CourseInfo {
             }
         });
 
-        JLabel lblTFName = new JLabel("TF Name");
+        JLabel lblTFName = new JLabel("TF #1 Name");
         lblTFName.setBounds(410, 85, 100, 14);
         frame.getContentPane().add(lblTFName);
 
@@ -198,7 +198,7 @@ public class CourseInfo {
         frame.getContentPane().add(textField);
         textField.setColumns(10);
 
-        JLabel lblTFEmail = new JLabel("TF Email");
+        JLabel lblTFEmail = new JLabel("TF #1 Email");
         lblTFEmail.setBounds(410, 145, 100, 14);
         frame.getContentPane().add(lblTFEmail);
 
@@ -207,7 +207,7 @@ public class CourseInfo {
         frame.getContentPane().add(textField);
         textField.setColumns(10);
 
-        JLabel lblCAName = new JLabel("CA Name");
+        JLabel lblCAName = new JLabel("TF #2 Name");
         lblCAName.setBounds(410, 205, 100, 14);
         frame.getContentPane().add(lblCAName);
 
@@ -216,7 +216,7 @@ public class CourseInfo {
         frame.getContentPane().add(textField);
         textField.setColumns(10);
 
-        JLabel lblCAEmail = new JLabel("CA Email");
+        JLabel lblCAEmail = new JLabel("TF #2 Email");
         lblCAEmail.setBounds(410, 265, 100, 14);
         frame.getContentPane().add(lblCAEmail);
 
@@ -230,6 +230,7 @@ public class CourseInfo {
         frame.getContentPane().add(lblNumLabs);
 
         JComboBox<String> comboBoxNumLabs = new JComboBox<String>();
+        comboBoxNumLabs.addItem("0");
         comboBoxNumLabs.addItem("1");
         comboBoxNumLabs.addItem("2");
         comboBoxNumLabs.addItem("3");
@@ -247,6 +248,7 @@ public class CourseInfo {
         frame.getContentPane().add(lblNumAssign);
 
         JComboBox<String> comboBoxNumAssign = new JComboBox<String>();
+        comboBoxNumAssign.addItem("0");
         comboBoxNumAssign.addItem("1");
         comboBoxNumAssign.addItem("2");
         comboBoxNumAssign.addItem("3");
@@ -267,6 +269,7 @@ public class CourseInfo {
         frame.getContentPane().add(lblNumExams);
 
         JComboBox<String> comboBoxNumExams = new JComboBox<String>();
+        comboBoxNumExams.addItem("0");
         comboBoxNumExams.addItem("1");
         comboBoxNumExams.addItem("2");
         comboBoxNumExams.addItem("3");
