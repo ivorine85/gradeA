@@ -16,9 +16,13 @@ import javax.swing.JComboBox;
 public class CourseInfo {
 
     private JFrame frame;
-    private JTextField textField;
-    private JTextField textField_1;
-    private JTextField textField_2;
+    private JTextField textFieldCourseTitle;
+    private JTextField textFieldStartTime;
+    private JTextField textFieldEndTime;
+    private JTextField textFieldTF1Name;
+    private JTextField textFieldTF1Email;
+    private JTextField textFieldTF2Name;
+    private JTextField textFieldTF2Email;
     private JLabel lblCourseInfo;
 
     /**
@@ -63,10 +67,10 @@ public class CourseInfo {
         lblCourseTitle.setBounds(40, 85, 100, 14);
         frame.getContentPane().add(lblCourseTitle);
 
-        textField = new JTextField();
-        textField.setBounds(40, 110, 150, 20);
-        frame.getContentPane().add(textField);
-        textField.setColumns(10);
+        textFieldCourseTitle = new JTextField();
+        textFieldCourseTitle.setBounds(40, 110, 150, 20);
+        frame.getContentPane().add(textFieldCourseTitle);
+        textFieldCourseTitle.setColumns(10);
 
         JLabel lblDate = new JLabel("Choose Date");
         lblDate.setBounds(40, 145, 100, 14);
@@ -116,10 +120,10 @@ public class CourseInfo {
         lblStartTime.setBounds(40, 215, 100, 14);
         frame.getContentPane().add(lblStartTime);
 
-        textField_1 = new JTextField();
-        textField_1.setBounds(40, 240, 60, 20);
-        frame.getContentPane().add(textField_1);
-        textField_1.setColumns(10);
+        textFieldStartTime = new JTextField();
+        textFieldStartTime.setBounds(40, 240, 60, 20);
+        frame.getContentPane().add(textFieldStartTime);
+        textFieldStartTime.setColumns(10);
 
         JComboBox<String> comboBoxStart = new JComboBox<String>();
         comboBoxStart.addItem("AM");
@@ -135,10 +139,10 @@ public class CourseInfo {
         lblEndTime.setBounds(180, 215, 100, 14);
         frame.getContentPane().add(lblEndTime);
 
-        textField_2 = new JTextField();
-        textField_2.setBounds(180, 240, 60, 20);
-        frame.getContentPane().add(textField_2);
-        textField_2.setColumns(10);
+        textFieldEndTime = new JTextField();
+        textFieldEndTime.setBounds(180, 240, 60, 20);
+        frame.getContentPane().add(textFieldEndTime);
+        textFieldEndTime.setColumns(10);
 
         JComboBox<String> comboBoxEnd = new JComboBox<String>();
         comboBoxEnd.addItem("AM");
@@ -189,41 +193,41 @@ public class CourseInfo {
             }
         });
 
-        JLabel lblTFName = new JLabel("TF #1 Name");
-        lblTFName.setBounds(410, 85, 100, 14);
-        frame.getContentPane().add(lblTFName);
+        JLabel lblTF1Name = new JLabel("TF #1 Name");
+        lblTF1Name.setBounds(410, 85, 100, 14);
+        frame.getContentPane().add(lblTF1Name);
 
-        textField = new JTextField();
-        textField.setBounds(410, 110, 150, 20);
-        frame.getContentPane().add(textField);
-        textField.setColumns(10);
+        textFieldTF1Name = new JTextField();
+        textFieldTF1Name.setBounds(410, 110, 150, 20);
+        frame.getContentPane().add(textFieldTF1Name);
+        textFieldTF1Name.setColumns(10);
 
-        JLabel lblTFEmail = new JLabel("TF #1 Email");
-        lblTFEmail.setBounds(410, 145, 100, 14);
-        frame.getContentPane().add(lblTFEmail);
+        JLabel lblTF1Email = new JLabel("TF #1 Email");
+        lblTF1Email.setBounds(410, 145, 100, 14);
+        frame.getContentPane().add(lblTF1Email);
 
-        textField = new JTextField();
-        textField.setBounds(410, 170, 150, 20);
-        frame.getContentPane().add(textField);
-        textField.setColumns(10);
+        textFieldTF1Email = new JTextField();
+        textFieldTF1Email.setBounds(410, 170, 150, 20);
+        frame.getContentPane().add(textFieldTF1Email);
+        textFieldTF1Email.setColumns(10);
 
-        JLabel lblCAName = new JLabel("TF #2 Name");
-        lblCAName.setBounds(410, 205, 100, 14);
-        frame.getContentPane().add(lblCAName);
+        JLabel lblTA2Name = new JLabel("TF #2 Name");
+        lblTA2Name.setBounds(410, 205, 100, 14);
+        frame.getContentPane().add(lblTA2Name);
 
-        textField = new JTextField();
-        textField.setBounds(410, 230, 150, 20);
-        frame.getContentPane().add(textField);
-        textField.setColumns(10);
+        textFieldTF2Name = new JTextField();
+        textFieldTF2Name.setBounds(410, 230, 150, 20);
+        frame.getContentPane().add(textFieldTF2Name);
+        textFieldTF2Name.setColumns(10);
 
-        JLabel lblCAEmail = new JLabel("TF #2 Email");
-        lblCAEmail.setBounds(410, 265, 100, 14);
-        frame.getContentPane().add(lblCAEmail);
+        JLabel lblTA2Email = new JLabel("TF #2 Email");
+        lblTA2Email.setBounds(410, 265, 100, 14);
+        frame.getContentPane().add(lblTA2Email);
 
-        textField = new JTextField();
-        textField.setBounds(410, 290, 150, 20);
-        frame.getContentPane().add(textField);
-        textField.setColumns(10);
+        textFieldTF2Email = new JTextField();
+        textFieldTF2Email.setBounds(410, 290, 150, 20);
+        frame.getContentPane().add(textFieldTF2Email);
+        textFieldTF2Email.setColumns(10);
 
         JLabel lblNumLabs = new JLabel("Number of Labs");
         lblNumLabs.setBounds(610, 85, 100, 14);
@@ -338,7 +342,7 @@ public class CourseInfo {
 
         btnCreate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                if(textField.getText().isEmpty()||(textField_1.getText().isEmpty())||(textField_2.getText().isEmpty())||((radioButtonTues.isSelected())&&(radioButtonMon.isSelected()))||(comboBoxStart.getSelectedItem().equals("Select")))
+                if(textFieldCourseTitle.getText().isEmpty()||(textFieldStartTime.getText().isEmpty())||(textFieldEndTime.getText().isEmpty())||((radioButtonTues.isSelected())&&(radioButtonMon.isSelected()))||(comboBoxStart.getSelectedItem().equals("Select")))
                     JOptionPane.showMessageDialog(null, "Data Missing");
                 else
                     JOptionPane.showMessageDialog(null, "Data Submitted");
@@ -347,9 +351,9 @@ public class CourseInfo {
 
         btnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                textField_1.setText(null);
-                textField_2.setText(null);
-                textField.setText(null);
+                textFieldStartTime.setText(null);
+                textFieldEndTime.setText(null);
+                textFieldCourseTitle.setText(null);
                 radioButtonMon.setSelected(false);
                 radioButtonTues.setSelected(false);
                 comboBoxStart.setSelectedItem("Select");
