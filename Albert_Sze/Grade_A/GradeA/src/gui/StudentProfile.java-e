@@ -1,19 +1,26 @@
 package gui;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Color;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -210,7 +217,7 @@ public class StudentProfile extends Adjustments {
 		String dir = System.getProperty("user.dir");
 		//dir = dir.substring(dir.lastIndexOf("/""+1));
 		System.out.println(dir);
-		Image profileImg = new ImageIcon(this.getClass().getResource("C:\\Users\\alber\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Github\\gradeA\\Albert_Sze\\Grade_A\\GradeA\\Images\\default_profile.png")).getImage();
+		Image profileImg = new ImageIcon(this.getClass().getResource("/default_profile.png")).getImage();
 		lblProfileImg.setIcon(new ImageIcon(profileImg));
 		lblProfileImg.setBounds(25, 11, 109, 113);
 		frame.getContentPane().add(lblProfileImg);
@@ -220,7 +227,7 @@ public class StudentProfile extends Adjustments {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		Image homeImg = new ImageIcon(this.getClass().getResource("C:\\Users\\alber\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Github\\gradeA\\Albert_Sze\\Grade_A\\GradeA\\Images\\home_icon.png")).getImage();
+		Image homeImg = new ImageIcon(this.getClass().getResource("/home_icon.png")).getImage();
 		btnHome.setIcon(new ImageIcon(homeImg));
 		btnHome.setBounds(10, 391, 55, 54);
 		frame.getContentPane().add(btnHome);
