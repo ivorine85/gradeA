@@ -1,5 +1,8 @@
 package gui;
 
+import dao.CourseDAO;
+import entity.Course;
+
 import java.awt.*;
 import javax.swing.*;
 
@@ -8,6 +11,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.Date;
+import java.sql.Time;
+import java.util.ArrayList;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
@@ -344,8 +350,25 @@ public class CourseInfo {
             public void actionPerformed(ActionEvent arg0) {
                 if(textFieldCourseTitle.getText().isEmpty()||(textFieldStartTime.getText().isEmpty())||(textFieldEndTime.getText().isEmpty())||((radioButtonTues.isSelected())&&(radioButtonMon.isSelected()))||(comboBoxStart.getSelectedItem().equals("Select")))
                     JOptionPane.showMessageDialog(null, "Data Missing");
-                else
+                else{
+                    String cname = textFieldCourseTitle.getText();
+                    Date startDate = getDate(textStartDate.getText());
+                    Date endDate = getDate(textEndDate.getText());
+                    Time startTime = getTime(textFieldStartTime.getText());
+                    Time endTime = getTime(textFieldEndTime.getText());
+                    java.util.List<String> days = new ArrayList<>();
+                    if(radioButtonMon.isSelected()) days.add("Monday");
+                    if(radioButtonTues.isSelected()) days.add("Tuesday");
+                    if(radioButtonWed.isSelected()) days.add("Wednesday");
+                    if(radioButtonThurs.isSelected()) days.add("Thursday");
+                    if(radioButtonFri.isSelected()) days.add("Friday");
+                    String[] day = new String[days.size()];
+                    for(int i = 0;i<day.length;i++) day[i] = days.get(i);
+                    Course c = new Course(cname,startTime,endTime,startDate,endDate,day);
+                    CourseDAO cd = new CourseDAO();
+                    cd.insert(c);
                     JOptionPane.showMessageDialog(null, "Data Submitted");
+                }
             }
         });
 
@@ -372,4 +395,18 @@ public class CourseInfo {
         });
 
     }
+
+    private Date getDate(String start){
+        String[] a = start.split("-");
+        start = a[2]+"-"+a[1]+"-"+a[0];
+        Date startDate = Date.valueOf(start);
+        return startDate;
+    }
+
+    private Time getTime(String str){
+        str+=":00";
+        return Time.valueOf(str);
+    }
+
+
 }
