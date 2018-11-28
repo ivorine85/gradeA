@@ -1,20 +1,24 @@
 package gui;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
+import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
+import java.sql.*;
 import java.util.Map;
 
 import javax.swing.JComboBox;
@@ -24,15 +28,17 @@ public class AddStudents {
 
 	private JFrame frame;
 	private JTable table;
+	private static String prevPage;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	//public static void main(String[] args) {
+	public static void ShowPage() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddStudents window = new AddStudents();
+					AddStudents window = new AddStudents(prevPage);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +53,8 @@ public class AddStudents {
 	/**
 	 * Create the application.
 	 */
-	public AddStudents() {
+	public AddStudents(String prevPage) {
+		this.prevPage = prevPage;
 		//connection = SqlConnection.dbConnector(); 
 		initialize();
 	}
@@ -95,6 +102,10 @@ public class AddStudents {
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (prevPage == "CoursePage") {
+					CoursePage changePage = new CoursePage(false);
+					System.out.println(prevPage);
+				}
 				frame.dispose();
 			}
 		});
@@ -138,6 +149,10 @@ public class AddStudents {
 			
 					}
 					// return to proper frame
+					if (prevPage == "CoursePage") {
+						CoursePage changePage = new CoursePage(false);
+						System.out.println(prevPage);
+					}
 					frame.dispose();
 				}
 			}

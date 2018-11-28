@@ -1,4 +1,4 @@
-import entity/Student;
+import Entity/Student;
 
 
 import java.io.*;
