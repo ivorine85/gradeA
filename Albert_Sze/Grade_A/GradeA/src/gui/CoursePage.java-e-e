@@ -21,8 +21,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Map;
 import java.awt.event.ActionEvent;
-import java.awt.Canvas;
-import javax.swing.JPanel;
 
 public class CoursePage {
 
