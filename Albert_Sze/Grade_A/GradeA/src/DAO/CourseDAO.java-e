@@ -11,15 +11,19 @@ public class CourseDAO {
 
     public boolean insert(Course c){
         connection = Connector.getConnection();
-        String sql = "insert into Course (cid,cname,startTime,endTime,startDate,endDate) values (?,?,?,?,?,?)";
+        String sql = "insert into Course (cname,startTime,endTime,startDate,endDate,weekDay) values (?,?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1,c.getCourseId());
-            ps.setString(2,c.getCourseName());
-            ps.setTime(3,c.getClassTime()[0]);
-            ps.setTime(4,c.getClassTime()[1]);
-            ps.setDate(5,c.getClassDuration()[0]);
-            ps.setDate(6,c.getClassDuration()[1]);
+            ps.setString(1,c.getCourseName());
+            ps.setTime(2,c.getClassTime()[0]);
+            ps.setTime(3,c.getClassTime()[1]);
+            ps.setDate(4,c.getClassDuration()[0]);
+            ps.setDate(5,c.getClassDuration()[1]);
+            String weekDay = "";
+            for(String s:c.getWeekDay()){
+                weekDay+=s+",";
+            }
+            ps.setString(6,weekDay);
             ps.execute();
             ps.close();
             connection.close();
