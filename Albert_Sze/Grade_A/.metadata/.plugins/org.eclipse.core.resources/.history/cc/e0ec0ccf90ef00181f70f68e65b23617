@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JComboBox;
-import entity.*;
+import Entity.*;
 
 public class StudentProfile extends Adjustments {
 

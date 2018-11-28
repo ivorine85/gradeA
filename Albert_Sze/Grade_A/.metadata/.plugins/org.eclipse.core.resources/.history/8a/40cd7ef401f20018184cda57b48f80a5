@@ -1,0 +1,250 @@
+package gui;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import java.awt.Image;
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import Entity.*;
+
+import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Map;
+import java.awt.event.ActionEvent;
+import java.awt.Canvas;
+import javax.swing.JPanel;
+
+public class CoursePage {
+
+	private JFrame frame;
+	private JTable table;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CoursePage window = new CoursePage();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	private boolean CalcSum (JTable table) {
+		for (int i = 0; i < table.getRowCount();i++) {
+			double sum  = 0.0;
+			for (int j = 0; j < table.getColumnCount(); j++) {
+				sum += Double.parseDouble(table.getModel().getValueAt(i, j));
+			}
+			if (sum != 100.00) {
+				return false;
+			}
+		}
+		return true;
+	}
+	/**
+	 * Create the application.
+	 */
+	public CoursePage() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+/*********************************** for the purpose of this example ***********************************/
+		Profile profile = new Profile();
+		Course newCourse2 = new Course ("CS112");												// Generate new course
+		newCourse2.getCourseBreakDown().put("HW", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));
+		newCourse2.getCourseBreakDown().put("Exam", new GradeBreakDown("Exam", .5, .7, 0, 0,0.0, 1));
+		newCourse2.getAssignmentBreakDown().put("hw", new ArrayList<GradeBreakDown>(0));
+		newCourse2.getAssignmentBreakDown().put("exam", new ArrayList<GradeBreakDown>(0));
+		newCourse2.getAssignmentBreakDown().get("hw").add(new GradeBreakDown("HW", 1.0, 1.0, 0, 103,0.54, 1));
+		newCourse2.getAssignmentBreakDown().get("exam").add(new GradeBreakDown("Exam", 1, 1, 0, 100,0.80, 1));
+		
+		Course newCourse = new Course ("CS591");												// Generate new course
+		newCourse.getCourseBreakDown().put("HW", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));
+		/*
+		newCourse.getCourseBreakDown().put("HW1", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));
+		newCourse.getCourseBreakDown().put("HW2", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));
+		newCourse.getCourseBreakDown().put("HW3", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));
+		newCourse.getCourseBreakDown().put("HW4", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));
+		newCourse.getCourseBreakDown().put("HW5", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));
+		newCourse.getCourseBreakDown().put("HW6", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));
+		newCourse.getCourseBreakDown().put("HW7", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));
+		newCourse.getCourseBreakDown().put("HW8", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));
+		newCourse.getCourseBreakDown().put("HW9", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));
+		newCourse.getCourseBreakDown().put("HW10", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));
+		newCourse.getCourseBreakDown().put("HW11", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));
+		newCourse.getCourseBreakDown().put("HW12", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));
+		newCourse.getCourseBreakDown().put("HW13", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));
+		*/
+		newCourse.getCourseBreakDown().put("Exam", new GradeBreakDown("Exam", .5, .7, 0, 0,0.0, 1));
+		newCourse.getAssignmentBreakDown().put("hw", new ArrayList<GradeBreakDown>(0));
+		newCourse.getAssignmentBreakDown().put("exam", new ArrayList<GradeBreakDown>(0));
+		newCourse.getAssignmentBreakDown().get("hw").add(new GradeBreakDown("HW", 1.0, 1.0, 0, 103,0.54, 1));
+		newCourse.getAssignmentBreakDown().get("exam").add(new GradeBreakDown("Exam", 1, 1, 0, 100,0.80, 1));
+		
+		newCourse.getLabSections().put("A1",new Lab("A1"));										// Create Lab Sections
+		newCourse.getLabSections().put("A2",new Lab("A2"));										// Create Lab Sections
+		newCourse.getLabSections().put("A3",new Lab("A3"));										// Create Lab Sections
+		newCourse.getLabSections().get("A1").getStudents().put("undergrad", new ArrayList<Student>(0));
+		newCourse.getLabSections().get("A1").getStudents().get("undergrad").add(new Student("U1","Albert Sze","undergrad","None","yup@gmail",2018));
+		newCourse.getLabSections().get("A1").getStudents().get("undergrad").get(0).getCourseWork().add(new Assignment ("HW", 3, 103, 0));
+		newCourse.getLabSections().get("A1").getStudents().get("undergrad").get(0).getCourseWork().add(new Assignment ("Exam", 12, 100, 0));
+		newCourse.getLabSections().get("A1").getStudents().get("undergrad").get(0).setGrade(.955);
+		newCourse.getLabSections().get("A2").getStudents().put("grad", new ArrayList<Student>(0));
+		newCourse.getLabSections().get("A2").getStudents().get("grad").add(new Student("U1","Albert Sze","grad","None","yup@gmail",2018));
+		newCourse.getLabSections().get("A2").getStudents().get("grad").get(0).getCourseWork().add(new Assignment ("HW", 10, 103, 0));
+		newCourse.getLabSections().get("A2").getStudents().get("grad").get(0).getCourseWork().add(new Assignment ("Exam", 5, 100, 0));
+		newCourse.getLabSections().get("A2").getStudents().get("grad").get(0).setGrade(.80);
+		profile.setCourses(new ArrayList<Course>(0));
+		profile.getCourses().add(newCourse);
+		profile.getCourses().add(newCourse2);
+		Course courseProfile = profile.getCourses().get(0);
+/*******************************************************************************************************/
+		ArrayList<String> header = new ArrayList<String>(0);
+		ArrayList<String> undergradPercent = new ArrayList<String>(0);
+		ArrayList<String> gradPercent = new ArrayList<String>(0);
+		ArrayList<ArrayList<String>> percentages = new ArrayList<ArrayList<String>>(0);
+		header.add("");
+		undergradPercent.add("Undergraduate");
+		gradPercent.add("Graduate");
+		for (Map.Entry<String, GradeBreakDown> entry : courseProfile.getCourseBreakDown().entrySet()) {
+			header.add(entry.getKey());
+			undergradPercent.add(Double.toString(Math.round(entry.getValue().getUndergradAssignPercent()*10000)/100));
+			gradPercent.add(Double.toString(Math.round(entry.getValue().getGradAssignPercent()*10000)/100));
+		}
+		percentages.add(undergradPercent);
+		percentages.add(gradPercent);
+		
+		String[][] array = new String[percentages.size()][];
+		for (int i = 0; i < percentages.size(); i++) {
+		    ArrayList<String> row = percentages.get(i);
+		    array[i] = row.toArray(new String[row.size()]);
+		}
+		
+		DefaultTableModel model = new DefaultTableModel (array,header.toArray()) {
+			public boolean isCellEditable(int row, int col)
+			{
+			    //If you didn't want the first column to be editable
+			    if(col == 0) {
+			    	return false;
+			    }
+			    else {
+			    	return true;
+			    }
+			}
+		};
+		
+		frame = new JFrame();
+		frame.setBounds(100, 100, 801, 487);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JLabel lblCourseTitle = new JLabel("Course Title");
+		lblCourseTitle.setText(courseProfile.getCourseName() + " Grades");
+		lblCourseTitle.setFont(new Font("Tahoma", Font.PLAIN, 34));
+		lblCourseTitle.setBounds(10, 11, 349, 47);
+		frame.getContentPane().add(lblCourseTitle);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(125, 304, 543, 55);
+		frame.getContentPane().add(scrollPane);
+		
+		table = new JTable(model);
+		scrollPane.setViewportView(table);
+		
+		JButton btnHome = new JButton("");
+		btnHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		Image homeImg = new ImageIcon(this.getClass().getResource("/home_icon.png")).getImage();
+		btnHome.setIcon(new ImageIcon(homeImg));
+		btnHome.setBounds(10, 383, 55, 54);
+		frame.getContentPane().add(btnHome);
+		
+		JButton btnDelete = new JButton("");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//need to ask for valid to delete 
+			}
+		});
+		Image trashImg = new ImageIcon(this.getClass().getResource("/trash_icon.png")).getImage();
+		btnDelete.setIcon(new ImageIcon(trashImg));
+		btnDelete.setBounds(71, 383, 55, 54);
+		frame.getContentPane().add(btnDelete);
+		
+		JButton btnEditCourse = new JButton("Edit Course");
+		btnEditCourse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (CalcSum(table)) {
+					
+				}
+				else {
+					JOptionPane.showMessageDialog(frame, "Percentages do not add up to 100%, please try again.");;
+				}
+			}
+		});
+		btnEditCourse.setBounds(672, 414, 103, 23);
+		frame.getContentPane().add(btnEditCourse);
+		
+		JButton btnAddStudent = new JButton("Add Student");
+		btnAddStudent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//check that the percentages add up to 100%
+				// go to add students page
+			}
+		});
+		btnAddStudent.setBounds(424, 414, 103, 23);
+		frame.getContentPane().add(btnAddStudent);
+		
+		JButton btnAddCoursework = new JButton("Add Coursework");
+		btnAddCoursework.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//check that the percentages add up to 100%
+				// go to add course page
+			}
+		});
+		btnAddCoursework.setBounds(531, 414, 137, 23);
+		frame.getContentPane().add(btnAddCoursework);
+		
+		JButton btnAddLab = new JButton("Add Lab");
+		btnAddLab.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//check that the percentages add up to 100%
+				// go to add lab page
+			}
+		});
+		btnAddLab.setBounds(332, 414, 89, 23);
+		frame.getContentPane().add(btnAddLab);
+		
+		JLabel lblGradeBreakdown = new JLabel("Grade Breakdown %");
+		lblGradeBreakdown.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblGradeBreakdown.setBounds(270, 264, 252, 29);
+		frame.getContentPane().add(lblGradeBreakdown);
+		
+		JPanel panel = new JPanel();
+		//ChartPanel CP = new ChartPanel(chart);
+		panel.setBounds(125, 57, 543, 180);
+		frame.getContentPane().add(panel);
+	}
+}
