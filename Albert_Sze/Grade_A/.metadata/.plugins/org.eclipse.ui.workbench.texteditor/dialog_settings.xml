@@ -2,12 +2,15 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="JFrame" key="selection"/>
+		<item value="doubleArrayList" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="true" key="wholeword"/>
 		<list key="findhistory">
+			<item value="percentages"/>
+			<item value="gradPercent"/>
+			<item value="undergradPercent"/>
 			<item value="JFrame"/>
 			<item value="lastindex"/>
 			<item value="assignCount"/>
@@ -20,11 +23,11 @@
 			<item value="project"/>
 			<item value="temp"/>
 			<item value="assignmentBreakDown"/>
-			<item value="courseBreakDown"/>
-			<item value="studentList"/>
-			<item value="type"/>
 		</list>
 		<list key="replacehistory">
+			<item value="doubleArrayList"/>
+			<item value="arrayList2"/>
+			<item value="arrayList1"/>
 			<item value="StudentProfile"/>
 			<item value="newCourse.getAssignmentBreakDown()"/>
 			<item value="newCourse.getCourseBreakDown()"/>
@@ -37,9 +40,6 @@
 			<item value="underGradCW"/>
 			<item value="labSections"/>
 			<item value="courseAssist"/>
-			<item value="teachAssist"/>
-			<item value="classDuration"/>
-			<item value="classTime"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
