@@ -163,16 +163,16 @@ public class CourseInfo {
         lblStartDate.setBounds(40, 270, 100, 14);
         frame.getContentPane().add(lblStartDate);
 
-        JTextField text = new JTextField(20);
+        JTextField textStartDate = new JTextField(20);
         JButton b = new JButton("Choose");
-        JPanel p = new JPanel();
-        p.add(text);
-        p.add(b);
-        p.setBounds(15, 290, 400, 40);
-        frame.getContentPane().add(p);
+        JPanel pStartDate = new JPanel();
+        pStartDate.add(textStartDate);
+        pStartDate.add(b);
+        pStartDate.setBounds(15, 290, 400, 40);
+        frame.getContentPane().add(pStartDate);
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
-                text.setText(new DatePicker(frame).setPickedDate());
+                textStartDate.setText(new DatePicker(frame).setPickedDate());
             }
         });
 
@@ -354,8 +354,17 @@ public class CourseInfo {
                 textFieldStartTime.setText(null);
                 textFieldEndTime.setText(null);
                 textFieldCourseTitle.setText(null);
+                textFieldTF1Name.setText(null);
+                textFieldTF2Name.setText(null);
+                textFieldTF1Email.setText(null);
+                textFieldTF2Email.setText(null);
+                textStartDate.setText(null);
+                textEndDate.setText(null);
                 radioButtonMon.setSelected(false);
                 radioButtonTues.setSelected(false);
+                radioButtonWed.setSelected(false);
+                radioButtonThurs.setSelected(false);
+                radioButtonFri.setSelected(false);
                 comboBoxStart.setSelectedItem("Select");
 
 
