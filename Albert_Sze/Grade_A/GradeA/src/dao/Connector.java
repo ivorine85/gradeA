@@ -9,7 +9,7 @@ public class Connector {
         Connection conn = null;
         try{
             String user = "root";
-            String psw = "19950924";
+            String psw = "mjmd1995";
             String url = "jdbc:mysql://localhost:3306/gradeA?&serverTimezone=UTC";
             conn = DriverManager.getConnection(url,user,psw);
         }
