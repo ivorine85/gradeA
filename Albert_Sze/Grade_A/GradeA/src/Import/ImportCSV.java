@@ -27,9 +27,11 @@ public class ImportCSV extends Adjustments {
 		double score;																			// score of assignment 
 		double percent;																			// percent assignment holds 
 		//Need to change file directory if you are going to run this code
-		File file = new File("C:\\Users\\alber\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Github\\gradeA\\Albert_Sze\\Grade_A\\GradeA\\src\\Excel_template_3.csv");			
+		File file = new File("C:\\Users\\alber\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Github\\gradeA\\Albert_Sze\\Grade_A\\GradeA\\src\\Excel_template_4.csv");			
 		
 /*********************************** for the purpose of this example ***********************************/
+		Profile newProfile = new Profile();
+		newProfile.setCourses(new ArrayList<Course>(0));
 		Course newCourse = new Course ("CS591");												// Generate new course
 		
 		newCourse.getLabSections().put("A1",new Lab("A1"));										// Create Lab Sections
@@ -46,21 +48,33 @@ public class ImportCSV extends Adjustments {
 		}
 		
 		// Parse out first and third row and remove extra ","
-		if (csvData.get(0).substring(csvData.get(0).length()-1).equals(",")) {
-			csvData.set(0, csvData.get(0).substring(6,csvData.get(0).length()-1));
+		if (csvData.get(3).substring(csvData.get(3).length()-1).equals(",")) {
+			csvData.set(3, csvData.get(3).substring(6,csvData.get(3).length()-1));
 		}
 		else{
-			csvData.set(0, csvData.get(0).substring(6));
+			csvData.set(3, csvData.get(3).substring(6));
 		}
-		csvData.set(2, csvData.get(2).substring(6));
+		csvData.set(5, csvData.get(5).substring(6));
 		
 		// split the rows by comma delimiters.
-		String[] assignments = csvData.get(0).split(",,");
+		String[] assignments = csvData.get(3).split(",,");
 		for (int i = 0; i < assignments.length; i++) {												// Change assignment types to lower case
 			assignments[i] = assignments[i].toLowerCase();
 		}
-		String[] assignmentDetails = csvData.get(2).split(",");
-
+		String[] assignmentDetails = csvData.get(5).split(",");
+/***************************************** Create course profile ***************************************/
+		String[] weekdayName = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+		String[] tempCourseDetails = csvData.get(1).split(",");										// Generate an array of student information
+		ArrayList<String> tempDates = new ArrayList<String>(0); 
+		for (int i = 0; i <tempCourseDetails.length;i++) {
+			System.out.println(tempCourseDetails[i]);
+		}
+		for (int i = 6; i<tempCourseDetails.length;i++) {
+			tempDates.add(weekdayName[i-6]);
+			System.out.println(tempDates.get(i-6));
+		}
+		//newCourse = new Course(newProfile.getCourses().size(), tempCourseDetails[0],new Time(, int minute, int second) )
+		
 /*************************** Create course and assignment grade break down *****************************/
 		//Assign grade break downs
 		for (int i = 0; i < assignments.length;i++) {												// run through each assignment
@@ -98,7 +112,7 @@ public class ImportCSV extends Adjustments {
 		numCategories = newCourse.getCourseBreakDown().size(); //Determine the number of assignment types
 
 /******************************* Assign students and generate profiles *********************************/
-		for (int i = 4;i < csvData.size() ; i++) {											// for each student in the CSV file
+		for (int i = 7;i < csvData.size() ; i++) {											// for each student in the CSV file
 			String[] tempStudentDetail = csvData.get(i).split(",");							// Generate an array of student information
 			studentName = tempStudentDetail[0];												// Student's name
 			studentEmail = tempStudentDetail[1];											// Student's email 
@@ -141,7 +155,7 @@ public class ImportCSV extends Adjustments {
 				// update assignment type overall grade
 				tempStudentGrades.put(assignType, Calcfinalgrade(tempStudentGrades.get(assignType), score, percent));
 				// update Course average for assignment type 
-				newCourse.getAssignmentBreakDown().get(assignType).get(tempNum).setAverage(Calcaverage(newCourse.getAssignmentBreakDown().get(assignType).get(tempNum).getAverage(), score, i-4));;
+				newCourse.getAssignmentBreakDown().get(assignType).get(tempNum).setAverage(Calcaverage(newCourse.getAssignmentBreakDown().get(assignType).get(tempNum).getAverage(), score, i-7));;
 			}
 
 /********************************* Calculate student's final grade ************************************/
@@ -168,7 +182,8 @@ public class ImportCSV extends Adjustments {
 			newCourse.getCourseBreakDown().get(entry.getKey()).setGradAssignPercent(100.0/numCategories);			
 		}
 
-/**************************** Print out Course Details and students **********************************/				
+/**************************** Print out Course Details and students **********************************/	
+		/*
 		Student tempStudent;
 		System.out.println("Course: " + newCourse.getCourseName());
 		for (Map.Entry<String, ArrayList<GradeBreakDown>> entry : newCourse.getAssignmentBreakDown().entrySet()) {
@@ -199,5 +214,6 @@ public class ImportCSV extends Adjustments {
 			}
 			System.out.println("");
 		}
+		*/
 	}
 }
