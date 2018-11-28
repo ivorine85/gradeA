@@ -6,11 +6,19 @@ import java.util.ArrayList;
 import java.sql.*;
 
 public class Course {
+	public String[] getWeekDay() {
+		return weekDay;
+	}
+
+	public void setWeekDay(String[] weekDay) {
+		this.weekDay = weekDay;
+	}
+
 	private int courseId;
 	private String courseName;
-	private int[] dates;
 	private Time[] classTime;
 	private java.sql.Date[] classDuration;
+	private String[] weekDay;
 	private ArrayList<Assistant> teachAssist;
 	private ArrayList<Assistant> courseAssist;
 	private HashMap<String, Lab> labSections;
@@ -21,7 +29,6 @@ public class Course {
 	public Course () {
 		this.courseId = 0;
 		this.courseName = "None";
-		this.dates = new int[7];
 		this.classTime = new Time[2];
 		this.classDuration = new java.sql.Date[2];
 		this.teachAssist = new ArrayList<Assistant>(1);
@@ -35,7 +42,6 @@ public class Course {
 	public Course (String courseName) {
 		this.courseId = 0;
 		this.courseName = courseName;
-		this.dates = new int[7];
 		this.classTime = new Time[2];
 		this.classDuration = new java.sql.Date[2];
 		this.teachAssist = new ArrayList<Assistant>(1);
@@ -51,16 +57,15 @@ public class Course {
 		this.gradeRanges.put("E", .50);
 	}
 
-	public Course(int cid, String cname, Time startTime,Time endTime,java.sql.Date startDate,java.sql.Date endDate){
-		this.courseId = cid;
+	public Course(String cname, Time startTime,Time endTime,java.sql.Date startDate,java.sql.Date endDate,String[] weekday){
 		this.courseName = cname;
-		this.dates = new int[7];
 		this.classTime = new Time[2];
 		this.classTime[0] = startTime;
 		this.classTime[1] = endTime;
 		this.classDuration = new java.sql.Date[2];
 		this.classDuration[0] = startDate;
 		this.classDuration[1] = endDate;
+		this.weekDay = weekday;
 		this.teachAssist = new ArrayList<Assistant>(1);
 		this.courseAssist = new ArrayList<Assistant>(1);
 		this.labSections = new HashMap(0);
@@ -73,6 +78,7 @@ public class Course {
 		this.gradeRanges.put("D", .60);
 		this.gradeRanges.put("E", .50);
 	}
+
 
 /*********************************** Getters and Setters ***********************************/	
 	public int getCourseId() {
@@ -91,13 +97,6 @@ public class Course {
 		this.courseName = courseName;
 	}
 
-	public int[] getDates() {
-		return dates;
-	}
-
-	public void setDates(int[] dates) {
-		this.dates = dates;
-	}
 
 	public Time[] getClassTime() {
 		return classTime;
