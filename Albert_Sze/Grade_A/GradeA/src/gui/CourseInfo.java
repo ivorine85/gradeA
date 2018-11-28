@@ -10,13 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
-import javax.swing.JToggleButton;
-import javax.swing.JScrollBar;
 import javax.swing.JComboBox;
-import javax.swing.JCheckBox;
-import gui.DatePickerExample;
 
 public class CourseInfo {
 
