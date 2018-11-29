@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Color;
@@ -199,19 +201,29 @@ public class StudentProfile extends Adjustments {
 		comboBox.setBounds(60, 155, 74, 23);
 		frame.getContentPane().add(comboBox);
 		
-		JButton btnDeleteStudent = new JButton("Delete Student");
+		JButton btnDeleteStudent = new JButton("");
+		Image trashImg = new ImageIcon(this.getClass().getResource("trash_icon.png")).getImage();
+		btnDeleteStudent.setIcon(new ImageIcon(trashImg));
 		btnDeleteStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				int dialogButton = JOptionPane.YES_NO_OPTION;
+				int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete this Student?","Warning",dialogButton);
+				if(dialogResult == JOptionPane.YES_OPTION){
+					//delete course return to the home page
+					System.out.println("delete Student");
+					//go to Lab section
+					frame.dispose();
+				} 
 			}
 		});
-		btnDeleteStudent.setBounds(657, 11, 118, 23);
+		btnDeleteStudent.setBounds(729, 11, 46, 54);
 		frame.getContentPane().add(btnDeleteStudent);
 		
 		JLabel lblProfileImg = new JLabel("");
 		String dir = System.getProperty("user.dir");
 		//dir = dir.substring(dir.lastIndexOf("/""+1));
 		System.out.println(dir);
-		Image profileImg = new ImageIcon(this.getClass().getResource("/default_profile.png")).getImage();
+		Image profileImg = new ImageIcon(this.getClass().getResource("default_profile.png")).getImage();
 		lblProfileImg.setIcon(new ImageIcon(profileImg));
 		lblProfileImg.setBounds(25, 11, 109, 113);
 		frame.getContentPane().add(lblProfileImg);
@@ -221,7 +233,7 @@ public class StudentProfile extends Adjustments {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		Image homeImg = new ImageIcon(this.getClass().getResource("/home_icon.png")).getImage();
+		Image homeImg = new ImageIcon(this.getClass().getResource("home_icon.png")).getImage();
 		btnHome.setIcon(new ImageIcon(homeImg));
 		btnHome.setBounds(10, 391, 55, 54);
 		frame.getContentPane().add(btnHome);
