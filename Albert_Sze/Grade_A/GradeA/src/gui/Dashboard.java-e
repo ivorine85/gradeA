@@ -25,7 +25,8 @@ public class Dashboard {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
+    public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -108,6 +109,9 @@ public class Dashboard {
             public void actionPerformed(ActionEvent e) {
                 String[] temp = {"","Temp"};
                 model.addRow(temp);
+                //AddCourse addCoursePage = new addCoursePage();
+                //addCoursePage.ShowPage();
+                frame.dispose();
             }
         });
         //457, 414, 120, 23

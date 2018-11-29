@@ -24,7 +24,8 @@ public class LabInfo {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
+    public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -212,8 +213,19 @@ public class LabInfo {
             public void actionPerformed(ActionEvent arg0) {
                 if(textFieldLabSection.getText().isEmpty()||(textFieldStartTime.getText().isEmpty())||(textFieldEndTime.getText().isEmpty())||((radioButtonTues.isSelected())&&(radioButtonMon.isSelected()))||(comboBoxStart.getSelectedItem().equals("Select")))
                     JOptionPane.showMessageDialog(null, "Data Missing");
-                else
+                else{
                     JOptionPane.showMessageDialog(null, "Data Submitted");
+                    AddStudents addStudentsPage = new AddStudents("LabInfo");
+                    addStudentsPage.ShowPage();
+                    frame.dispose();
+                }
+                /*
+                AddStudents addStudentsPage = new AddStudents("LabInfo");
+                addStudentsPage.ShowPage();
+                frame.dispose();
+                */
+
+
             }
         });
 

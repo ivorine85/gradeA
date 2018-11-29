@@ -36,7 +36,7 @@ public class CoursePage {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CoursePage window = new CoursePage(false);
+					CoursePage window = new CoursePage();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -69,14 +69,8 @@ public class CoursePage {
 	/**
 	 * Create the application.
 	 */
-	public CoursePage(boolean delete) {
-		if(delete) {
-			//delete course and return to home page
-			Dashboard dashboardPage = new Dashboard();
-		}
-		else {
-			initialize();
-		}
+	public CoursePage() {
+		initialize();
 	}
 
 	/**
@@ -212,7 +206,8 @@ public class CoursePage {
 			public void actionPerformed(ActionEvent arg0) {
 				if (CalcSum(tableGradeBreakDown)) {
 					Dashboard dashboardPage = new Dashboard();
-					//dashboardPage
+					dashboardPage.ShowPage();
+					frame.dispose();
 				}
 				else {
 					JOptionPane.showMessageDialog(frame, "Percentages do not add up to 100%, please try again.");;
@@ -231,8 +226,9 @@ public class CoursePage {
 				int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete this " + courseProfile.getCourseName() + "?","Warning",dialogButton);
 				if(dialogResult == JOptionPane.YES_OPTION){
 					//delete course return to the home page
-					Dashboard dashboardPage = new Dashboard();
 					System.out.println("delete course");
+					Dashboard dashboardPage = new Dashboard();
+					dashboardPage.ShowPage();
 					frame.dispose();
 				} 
 			}
@@ -276,7 +272,9 @@ public class CoursePage {
 		btnAddCoursework.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (CalcSum(tableGradeBreakDown)) {
-					//go to add coursework page
+					AddCoursework addCourseWorkPage = new AddCoursework();
+					addCourseWorkPage.ShowPage();
+					frame.dispose();
 				}
 				else {
 					JOptionPane.showMessageDialog(frame, "Percentages do not add up to 100%, please try again.");;
@@ -290,7 +288,9 @@ public class CoursePage {
 		btnAddLab.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (CalcSum(tableGradeBreakDown)) {
-					//go to add lab page
+					LabInfo labInfoPage = new LabInfo();
+					labInfoPage.ShowPage();
+					frame.dispose();
 				}
 				else {
 					JOptionPane.showMessageDialog(frame, "Percentages do not add up to 100%, please try again.");;
