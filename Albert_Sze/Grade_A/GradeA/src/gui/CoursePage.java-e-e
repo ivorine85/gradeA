@@ -214,7 +214,7 @@ public class CoursePage {
 				}
 			}
 		});
-		Image homeImg = new ImageIcon(this.getClass().getResource("/home_icon.png")).getImage();
+		Image homeImg = new ImageIcon(this.getClass().getResource("home_icon.png")).getImage();
 		btnHome.setIcon(new ImageIcon(homeImg));
 		btnHome.setBounds(10, 383, 55, 54);
 		frame.getContentPane().add(btnHome);
@@ -233,7 +233,7 @@ public class CoursePage {
 				} 
 			}
 		});
-		Image trashImg = new ImageIcon(this.getClass().getResource("/trash_icon.png")).getImage();
+		Image trashImg = new ImageIcon(this.getClass().getResource("trash_icon.png")).getImage();
 		btnDelete.setIcon(new ImageIcon(trashImg));
 		btnDelete.setBounds(71, 383, 55, 54);
 		frame.getContentPane().add(btnDelete);
