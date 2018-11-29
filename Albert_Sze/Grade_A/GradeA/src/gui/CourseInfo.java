@@ -368,7 +368,16 @@ public class CourseInfo {
                     CourseDAO cd = new CourseDAO();
                     cd.insert(c);
                     JOptionPane.showMessageDialog(null, "Data Submitted");
+                    LabInfo labInfoPage = new LabInfo();
+                    labInfoPage.ShowPage();
+                    frame.dispose();
                 }
+                /*
+                LabInfo labInfoPage = new LabInfo();
+                labInfoPage.ShowPage();
+                frame.dispose();
+                */
+
             }
         });
 
