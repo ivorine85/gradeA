@@ -204,15 +204,15 @@ public class LabInfo {
         frame.getContentPane().add(btnClear);
 
 
-        JButton btnCreate = new JButton("Create");
+        JButton btnNext = new JButton("Next");
 
 //        btnCreate.setBackground(Color.BLUE);
 //        btnCreate.setForeground(Color.MAGENTA);
-        btnCreate.setBounds(900, 410, 89, 23);
-        frame.getContentPane().add(btnCreate);
+        btnNext.setBounds(900, 410, 89, 23);
+        frame.getContentPane().add(btnNext);
 
 
-        btnCreate.addActionListener(new ActionListener() {
+        btnNext.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 if(textFieldLabSection.getText().isEmpty()||(textFieldStartTime.getText().isEmpty())||(textFieldEndTime.getText().isEmpty())||((radioButtonTues.isSelected())&&(radioButtonMon.isSelected()))||(comboBoxStart.getSelectedItem().equals("Select")))
                     JOptionPane.showMessageDialog(null, "Data Missing");
@@ -226,10 +226,6 @@ public class LabInfo {
                 textFieldStartTime.setText(null);
                 textFieldEndTime.setText(null);
                 textFieldLabSection.setText(null);
-                textFieldTF1Name.setText(null);
-                textFieldTF2Name.setText(null);
-                textFieldTF1Email.setText(null);
-                textFieldTF2Email.setText(null);
                 radioButtonMon.setSelected(false);
                 radioButtonTues.setSelected(false);
                 radioButtonWed.setSelected(false);
