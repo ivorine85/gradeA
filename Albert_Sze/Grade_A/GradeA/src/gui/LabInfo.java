@@ -19,10 +19,6 @@ public class LabInfo {
     private JTextField textFieldLabSection;
     private JTextField textFieldStartTime;
     private JTextField textFieldEndTime;
-    private JTextField textFieldTF1Name;
-    private JTextField textFieldTF1Email;
-    private JTextField textFieldTF2Name;
-    private JTextField textFieldTF2Email;
     private JLabel lblCourseInfo;
 
     /**
