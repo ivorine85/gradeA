@@ -2,12 +2,16 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="doubleArrayList" key="selection"/>
+		<item value="delete" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="true" key="wholeword"/>
 		<list key="findhistory">
+			<item value="delete"/>
+			<item value="delete`"/>
+			<item value="delte"/>
+			<item value="getcont"/>
 			<item value="percentages"/>
 			<item value="gradPercent"/>
 			<item value="undergradPercent"/>
@@ -19,10 +23,6 @@
 			<item value="EditGrades"/>
 			<item value="ImportCSV"/>
 			<item value="message"/>
-			<item value="try"/>
-			<item value="project"/>
-			<item value="temp"/>
-			<item value="assignmentBreakDown"/>
 		</list>
 		<list key="replacehistory">
 			<item value="doubleArrayList"/>
