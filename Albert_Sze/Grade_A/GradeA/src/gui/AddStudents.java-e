@@ -99,9 +99,14 @@ public class AddStudents {
         JButton btnCancel = new JButton("Cancel");
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (prevPage == "CoursePage") {
-                    CoursePage changePage = new CoursePage(false);
+                if (prevPage.equals("CoursePage")) {
+                    CoursePage changePage = new CoursePage();
                     System.out.println(prevPage);
+                }
+                else if(prevPage.equals("LabInfo")){
+                    LabInfo labInfoPage = new LabInfo();
+                    labInfoPage.ShowPage();
+                    frame.dispose();
                 }
                 frame.dispose();
             }
@@ -146,9 +151,13 @@ public class AddStudents {
 
                     }
                     // return to proper frame
-                    if (prevPage == "CoursePage") {
-                        CoursePage changePage = new CoursePage(false);
+                    if (prevPage.equals("CoursePage")) {
+                        CoursePage changePage = new CoursePage();
                         System.out.println(prevPage);
+                    }
+                    else if (prevPage.equals("LabInfo")){
+                        Dashboard dashboardPage = new Dashboard();
+                        dashboardPage.ShowPage();
                     }
                     frame.dispose();
                 }
