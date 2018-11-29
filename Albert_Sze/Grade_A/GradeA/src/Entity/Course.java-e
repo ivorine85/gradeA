@@ -6,14 +6,6 @@ import java.util.ArrayList;
 import java.sql.*;
 
 public class Course {
-	public String[] getWeekDay() {
-		return weekDay;
-	}
-
-	public void setWeekDay(String[] weekDay) {
-		this.weekDay = weekDay;
-	}
-
 	private int courseId;
 	private String courseName;
 	private Time[] classTime;
@@ -160,5 +152,13 @@ public class Course {
 
 	public void setGradeRanges(HashMap<String, Double> gradeRanges) {
 		this.gradeRanges = gradeRanges;
+	}
+	
+	public String[] getWeekDay() {
+		return weekDay;
+	}
+
+	public void setWeekDay(String[] weekDay) {
+		this.weekDay = weekDay;
 	}
 }

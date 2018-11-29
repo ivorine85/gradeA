@@ -1,7 +1,7 @@
 package Import;
 
 import java.io.*;
-
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,16 +27,11 @@ public class ImportCSV extends Adjustments {
 		double score;																			// score of assignment 
 		double percent;																			// percent assignment holds 
 		//Need to change file directory if you are going to run this code
-		File file = new File("C:\\Users\\alber\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Github\\gradeA\\Albert_Sze\\Grade_A\\GradeA\\src\\Excel_template_4.csv");			
+		File file = new File("C:\\Users\\Albert Sze\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Github\\gradeA\\Albert_Sze\\Grade_A\\GradeA\\src\\Excel_template_4.csv");			
 		
 /*********************************** for the purpose of this example ***********************************/
 		Profile newProfile = new Profile();
 		newProfile.setCourses(new ArrayList<Course>(0));
-		Course newCourse = new Course ("CS591");												// Generate new course
-		
-		newCourse.getLabSections().put("A1",new Lab("A1"));										// Create Lab Sections
-		newCourse.getLabSections().put("A2",new Lab("A2"));										// Create Lab Sections
-		newCourse.getLabSections().put("A3",new Lab("A3"));										// Create Lab Sections
 /*******************************************************************************************************/
 		
 /***************************************** Read in the CSV file ****************************************/		
@@ -64,16 +59,25 @@ public class ImportCSV extends Adjustments {
 		String[] assignmentDetails = csvData.get(5).split(",");
 /***************************************** Create course profile ***************************************/
 		String[] weekdayName = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
-		String[] tempCourseDetails = csvData.get(1).split(",");										// Generate an array of student information
+		String[] tempCourseDetails = csvData.get(1).split(",");										// Generate an array of Course information
 		ArrayList<String> tempDates = new ArrayList<String>(0); 
-		for (int i = 0; i <tempCourseDetails.length;i++) {
-			System.out.println(tempCourseDetails[i]);
-		}
+		ArrayList<Time> classTimes = new ArrayList<Time>(0);
+		ArrayList<java.sql.Date> classDates = new ArrayList<java.sql.Date>(0);
+		
+		//Find days of the class
 		for (int i = 6; i<tempCourseDetails.length;i++) {
-			tempDates.add(weekdayName[i-6]);
-			System.out.println(tempDates.get(i-6));
+			if (tempCourseDetails[i].equals("x")) {
+				tempDates.add(weekdayName[i-6]);
+			}
 		}
-		//newCourse = new Course(newProfile.getCourses().size(), tempCourseDetails[0],new Time(, int minute, int second) )
+
+		//Find the start and end time and dates
+		for (int i = 1; i <3; i++) {
+			classTimes.add(new Time(Integer.parseInt(tempCourseDetails[i].substring(0, tempCourseDetails[i].indexOf(":"))), Integer.parseInt(tempCourseDetails[i].substring(tempCourseDetails[i].indexOf(":")+1)), 0));
+			classDates.add(java.sql.Date.valueOf(tempCourseDetails[i+2].substring(tempCourseDetails[i+2].lastIndexOf("/")+1) + "-" + tempCourseDetails[i+2].substring(0,tempCourseDetails[i+2].indexOf("/")) + "-" + tempCourseDetails[i+2].substring(tempCourseDetails[i+2].indexOf("/")+1,tempCourseDetails[i+2].lastIndexOf("/"))));
+		}
+		// Generate Course
+		Course newCourse = new Course(tempCourseDetails[0],classTimes.get(0),classTimes.get(1),classDates.get(0),classDates.get(1),tempDates.toArray(new String[tempDates.size()]));
 		
 /*************************** Create course and assignment grade break down *****************************/
 		//Assign grade break downs
@@ -120,7 +124,9 @@ public class ImportCSV extends Adjustments {
 			year = tempStudentDetail[3];											  	 	// Student graduation year
 			type = tempStudentDetail[4];													// Student type 
 			labSection = tempStudentDetail[5];												// Student lab section
-			//newCourse.getLabSections().put(labSection,new Lab(labSection));				// used to add new lab Section
+			if (!newCourse.getLabSections().containsKey(labSection)) {
+				newCourse.getLabSections().put(labSection,new Lab(labSection));				// used to add new lab Section
+			}
 			// Add student to lab section
 			newCourse.getLabSections().get(labSection).getStudents().get(type.toLowerCase()).add(new Student(sid,studentName,type,"None",studentEmail,Integer.parseInt(year)));
 			// index of the student 
@@ -183,9 +189,22 @@ public class ImportCSV extends Adjustments {
 		}
 
 /**************************** Print out Course Details and students **********************************/	
-		/*
 		Student tempStudent;
 		System.out.println("Course: " + newCourse.getCourseName());
+		System.out.print("Start Date: ");
+		System.out.println(newCourse.getClassDuration()[0]);
+		System.out.print("End Date: ");
+		System.out.println(newCourse.getClassDuration()[1]);
+		System.out.print("Start Time: ");
+		System.out.println(newCourse.getClassTime()[0]);
+		System.out.print("End Time: ");
+		System.out.println(newCourse.getClassTime()[1]);
+		System.out.print("Days of class: ");
+		for (int i = 0; i < newCourse.getWeekDay().length;i++) {
+			System.out.print(newCourse.getWeekDay()[i] + " ");
+		}
+		System.out.println("");
+		System.out.println("");
 		for (Map.Entry<String, ArrayList<GradeBreakDown>> entry : newCourse.getAssignmentBreakDown().entrySet()) {
 			System.out.print(entry.getKey() + ": ");
 			System.out.println(newCourse.getCourseBreakDown().get(entry.getKey()).getGradAssignPercent());
@@ -214,6 +233,5 @@ public class ImportCSV extends Adjustments {
 			}
 			System.out.println("");
 		}
-		*/
 	}
 }
