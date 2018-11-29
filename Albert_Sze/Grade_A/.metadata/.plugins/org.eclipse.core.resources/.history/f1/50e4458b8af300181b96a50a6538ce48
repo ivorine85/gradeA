@@ -1,0 +1,232 @@
+package Import;
+
+import java.io.*;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import entity.*;
+
+public class ImportCSV extends Adjustments {
+
+	public static void main(String[] args) throws Exception   {
+		HashMap<String, Double> tempStudentGrades = new HashMap();                              // Obtains Student's assignment averages per type, used to calculate student's grades later 
+		ArrayList<String> csvData = new ArrayList<String>(1);									// Obtains csv information by row
+		String assignType;																		// Assignment type
+		String studentName;																		// Student name
+		String studentEmail;																	// Student Email 
+		String sid;																				// Student ID 
+		String year;																			// Student graduation year 
+		String type;																			// Type of Student 
+		String labSection; 																		// Student's Lab Section
+		int tempNumAssign;																		// temp number of assignments 
+		int tempNum;																			// temp number 
+		int numCategories; 																		// number of different assignment types
+		int tempIndex;																			// temp index
+		int totalPts; 																			// Total points of an assignment
+		double score;																			// score of assignment 
+		double percent;																			// percent assignment holds 
+		//Need to change file directory if you are going to run this code
+		File file = new File("C:\\Users\\Albert Sze\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Github\\gradeA\\Albert_Sze\\Grade_A\\GradeA\\src\\Excel_template_4.csv");			
+		
+/*********************************** for the purpose of this example ***********************************/
+		Profile newProfile = new Profile();
+		newProfile.setCourses(new ArrayList<Course>(0));
+/*******************************************************************************************************/
+		
+/***************************************** Read in the CSV file ****************************************/		
+		//Read CSV file in
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		String st;
+		while ((st = br.readLine()) != null) {
+			csvData.add(st);
+		}
+		
+		// Parse out first and third row and remove extra ","
+		if (csvData.get(3).substring(csvData.get(3).length()-1).equals(",")) {
+			csvData.set(3, csvData.get(3).substring(6,csvData.get(3).length()-1));
+		}
+		else{
+			csvData.set(3, csvData.get(3).substring(6));
+		}
+		csvData.set(5, csvData.get(5).substring(6));
+		
+		// split the rows by comma delimiters.
+		String[] assignments = csvData.get(3).split(",,");
+		for (int i = 0; i < assignments.length; i++) {												// Change assignment types to lower case
+			assignments[i] = assignments[i].toLowerCase();
+		}
+		String[] assignmentDetails = csvData.get(5).split(",");
+/***************************************** Create course profile ***************************************/
+		String[] weekdayName = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+		String[] tempCourseDetails = csvData.get(1).split(",");										// Generate an array of Course information
+		ArrayList<String> tempDates = new ArrayList<String>(0); 
+		ArrayList<Time> classTimes = new ArrayList<Time>(0);
+		ArrayList<java.sql.Date> classDates = new ArrayList<java.sql.Date>(0);
+		
+		//Find days of the class
+		for (int i = 6; i<tempCourseDetails.length;i++) {
+			if (tempCourseDetails[i].equals("x")) {
+				tempDates.add(weekdayName[i-6]);
+			}
+		}
+
+		//Find the start and end time and dates
+		for (int i = 1; i <3; i++) {
+			classTimes.add(new Time(Integer.parseInt(tempCourseDetails[i].substring(0, tempCourseDetails[i].indexOf(":"))), Integer.parseInt(tempCourseDetails[i].substring(tempCourseDetails[i].indexOf(":")+1)), 0));
+			classDates.add(java.sql.Date.valueOf(tempCourseDetails[i+2].substring(tempCourseDetails[i+2].lastIndexOf("/")+1) + "-" + tempCourseDetails[i+2].substring(0,tempCourseDetails[i+2].indexOf("/")) + "-" + tempCourseDetails[i+2].substring(tempCourseDetails[i+2].indexOf("/")+1,tempCourseDetails[i+2].lastIndexOf("/"))));
+		}
+		// Generate Course
+		Course newCourse = new Course(newProfile.getCourses().size(), tempCourseDetails[0],classTimes.get(0),classTimes.get(1),classDates.get(0),classDates.get(1));
+		
+/*************************** Create course and assignment grade break down *****************************/
+		//Assign grade break downs
+		for (int i = 0; i < assignments.length;i++) {												// run through each assignment
+			assignType = assignments[i].substring(0, assignments[i].indexOf("_"));					// Get Assignment type
+
+			if (!newCourse.getCourseBreakDown().containsKey(assignType)) {											// If the assignment type does not exists 
+				tempStudentGrades.put(assignType, 0.0);																// Add assignment type to temp student
+				newCourse.getCourseBreakDown().put(assignType, new GradeBreakDown(assignType,0.0,0.0,0,0,0.0,1));   // Generate course grade break down for the assignment type 
+				newCourse.getAssignmentBreakDown().put(assignType,new ArrayList<GradeBreakDown>(0));				// Generate a new grade break down for assignment
+			}
+			else {																									// If the assignment type already exists
+				tempNumAssign = newCourse.getCourseBreakDown().get(assignType).getNumAssign();						// Get the number of this particular type of assignment
+				newCourse.getCourseBreakDown().get(assignType).setNumAssign(tempNumAssign+1);						// increate the number of this assignment by 1
+			}			
+			// add a new assignment break down to the assignment type
+			newCourse.getAssignmentBreakDown().get(assignType).add(new GradeBreakDown(assignType, Double.parseDouble(assignmentDetails[(2*i)+1].substring(0, assignmentDetails[(2*i)+1].length()-1))/100.0, Double.parseDouble(assignmentDetails[(2*i)+1].substring(0, assignmentDetails[(2*i)+1].length()-1))/100.0, 0, Integer.parseInt(assignmentDetails[2*i]),0.0, 1));
+			
+			/*if (assignType.toLowerCase().equals("project")) {				// if the type is a project
+				for (int j = 1; j < 4; j++) {
+					// Get the current percentage and total points of the project 
+					percent = newCourse.getAssignmentBreakDown().get(assignType).get(newCourse.getAssignmentBreakDown().get(assignType).size()-1).getUndergradAssignPercent();
+					totalPts = newCourse.getAssignmentBreakDown().get(assignType).get(newCourse.getAssignmentBreakDown().get(assignType).size()-1).getTotalPoints();
+					// Update the percent and total points
+					percent += Double.parseDouble(assignmentDetails[(2*(i+j))+1].substring(0, assignmentDetails[(2*(i+j))+1].length()-1))/100.0;
+					totalPts += Integer.parseInt(assignmentDetails[2*(i+j)]);
+					// set the new percentage and total points to the assignment grade break down class
+					newCourse.getAssignmentBreakDown().get(assignType).get(newCourse.getAssignmentBreakDown().get(assignType).size()-1).setUndergradAssignPercent(percent);
+					newCourse.getAssignmentBreakDown().get(assignType).get(newCourse.getAssignmentBreakDown().get(assignType).size()-1).setGradAssignPercent(percent);
+					newCourse.getAssignmentBreakDown().get(assignType).get(newCourse.getAssignmentBreakDown().get(assignType).size()-1).setTotalPoints(totalPts);
+				}
+				i += 3  ;		// update the i value 
+			}
+			*/
+		}
+		numCategories = newCourse.getCourseBreakDown().size(); //Determine the number of assignment types
+
+/******************************* Assign students and generate profiles *********************************/
+		for (int i = 7;i < csvData.size() ; i++) {											// for each student in the CSV file
+			String[] tempStudentDetail = csvData.get(i).split(",");							// Generate an array of student information
+			studentName = tempStudentDetail[0];												// Student's name
+			studentEmail = tempStudentDetail[1];											// Student's email 
+			sid = tempStudentDetail[2];														// Student ID 
+			year = tempStudentDetail[3];											  	 	// Student graduation year
+			type = tempStudentDetail[4];													// Student type 
+			labSection = tempStudentDetail[5];												// Student lab section
+			if (!newCourse.getLabSections().containsKey(labSection)) {
+				newCourse.getLabSections().put(labSection,new Lab(labSection));				// used to add new lab Section
+			}
+			// Add student to lab section
+			newCourse.getLabSections().get(labSection).getStudents().get(type.toLowerCase()).add(new Student(sid,studentName,type,"None",studentEmail,Integer.parseInt(year)));
+			// index of the student 
+			tempIndex = newCourse.getLabSections().get(labSection).getStudents().get(type.toLowerCase()).size()-1;
+			
+			for (int j = 0; j < assignments.length; j++) {													// for all the assignments 
+				assignType = assignments[j].substring(0, assignments[j].indexOf("_"));						// get the assignment type
+				tempNum = Integer.parseInt(assignments[j].substring(assignments[j].lastIndexOf("_")+1))-1;	// get the assignment number
+				/*if (assignType.toLowerCase().equals("project")) {											// if the assignment is a project
+					// get the project presentation, report, technical, and survey scores to create a new project type for the student
+					newCourse.getLabSections().get(labSection).getStudents().get(type.toLowerCase()).get(tempIndex).getCourseWork().add(new Project(assignType, Integer.parseInt(tempStudentDetail[j*2+6]), Integer.parseInt(tempStudentDetail[(j+1)*2+6]), Integer.parseInt(tempStudentDetail[(j+2)*2+6]),Integer.parseInt(tempStudentDetail[(j+3)*2+6]), (Integer.parseInt(assignmentDetails[(j)*2])+Integer.parseInt(assignmentDetails[(j+1)*2])+Integer.parseInt(assignmentDetails[(j+2)*2])+Integer.parseInt(assignmentDetails[(j+3)*2]))));
+					// get the assignment grade break down percentage
+					percent = (Double.parseDouble(assignmentDetails[j*2+1].substring(0, assignmentDetails[j*2+1].indexOf("%")))+Double.parseDouble(assignmentDetails[(j+1)*2+1].substring(0, assignmentDetails[(j+1)*2+1].indexOf("%")))+Double.parseDouble(assignmentDetails[(j+2)*2+1].substring(0, assignmentDetails[(j+2)*2+1].indexOf("%")))+Double.parseDouble(assignmentDetails[(j+3)*2+1].substring(0, assignmentDetails[(j+3)*2+1].indexOf("%"))))/100.0;
+					j += 3;
+				}
+				else {																						// if it is not a project type
+					// create a new assignment type in the student's profile
+					newCourse.getLabSections().get(labSection).getStudents().get(type.toLowerCase()).get(tempIndex).getCourseWork().add(new Assignment(assignType,  Integer.parseInt(tempStudentDetail[j*2+6]), Integer.parseInt(assignmentDetails[j*2]), 0));
+					// get the assignment grade break down percentage
+					percent = (Double.parseDouble(assignmentDetails[j*2+1].substring(0, assignmentDetails[j*2+1].indexOf("%"))))/100.0;
+				}
+				*/
+				
+				// create a new assignment type in the student's profile
+				newCourse.getLabSections().get(labSection).getStudents().get(type.toLowerCase()).get(tempIndex).getCourseWork().add(new Assignment(assignType,  Integer.parseInt(tempStudentDetail[j*2+6]), Integer.parseInt(assignmentDetails[j*2]), 0));
+				// get the assignment grade break down percentage
+				percent = (Double.parseDouble(assignmentDetails[j*2+1].substring(0, assignmentDetails[j*2+1].indexOf("%"))))/100.0;
+				// get assignment number
+				tempNumAssign = newCourse.getLabSections().get(labSection).getStudents().get(type.toLowerCase()).get(tempIndex).getCourseWork().size();
+				// get assignment score
+				score = newCourse.getLabSections().get(labSection).getStudents().get(type.toLowerCase()).get(tempIndex).getCourseWork().get(tempNumAssign-1).getPercent();
+				// update assignment type overall grade
+				tempStudentGrades.put(assignType, Calcfinalgrade(tempStudentGrades.get(assignType), score, percent));
+				// update Course average for assignment type 
+				newCourse.getAssignmentBreakDown().get(assignType).get(tempNum).setAverage(Calcaverage(newCourse.getAssignmentBreakDown().get(assignType).get(tempNum).getAverage(), score, i-7));;
+			}
+
+/********************************* Calculate student's final grade ************************************/
+			for (Map.Entry<String, Double> entry : tempStudentGrades.entrySet()) {
+				// Get student's current grade
+				score = newCourse.getLabSections().get(labSection).getStudents().get(type.toLowerCase()).get(tempIndex).getGrade();
+				if (type.equals("undergrad")) {								// if undergrad
+					// Update Student's final grade
+					newCourse.getLabSections().get(labSection).getStudents().get(type.toLowerCase()).get(tempIndex).setGrade(Calcfinalgrade(score, entry.getValue(), newCourse.getCourseBreakDown().get(entry.getKey()).getUndergradAssignPercent()));
+				}
+				else {														// if grad
+					// Update Student's final grade
+					newCourse.getLabSections().get(labSection).getStudents().get(type.toLowerCase()).get(tempIndex).setGrade(Calcfinalgrade(score, entry.getValue(), newCourse.getCourseBreakDown().get(entry.getKey()).getGradAssignPercent()));
+				}
+				// Reset temp student value to 0.0 for next student
+				tempStudentGrades.put(entry.getKey(), 0.0);	
+			}
+		}
+
+/**************************** Set Assignment type's percentage weight *********************************/		
+		// set all Assignment types to the same percentages
+		for (Map.Entry<String, ArrayList<GradeBreakDown>> entry : newCourse.getAssignmentBreakDown().entrySet()) {
+			newCourse.getCourseBreakDown().get(entry.getKey()).setUndergradAssignPercent(100.0/numCategories);
+			newCourse.getCourseBreakDown().get(entry.getKey()).setGradAssignPercent(100.0/numCategories);			
+		}
+
+/**************************** Print out Course Details and students **********************************/	
+		Student tempStudent;
+		System.out.println("Course: " + newCourse.getCourseName());
+		System.out.print("Start Date: ");
+		System.out.println(newCourse.getClassDuration()[0]);
+		System.out.print("End Date: ");
+		System.out.println(newCourse.getClassDuration()[1]);
+		System.out.print("Start Time: ");
+		System.out.println(newCourse.getClassTime()[0]);
+		System.out.print("End Time: ");
+		System.out.println(newCourse.getClassTime()[1]);
+		System.out.println(" ");
+		for (Map.Entry<String, ArrayList<GradeBreakDown>> entry : newCourse.getAssignmentBreakDown().entrySet()) {
+			System.out.print(entry.getKey() + ": ");
+			System.out.println(newCourse.getCourseBreakDown().get(entry.getKey()).getGradAssignPercent());
+			for (int i = 0; i < entry.getValue().size();i++) {
+				System.out.print(entry.getValue().get(i).getAssignType() + (i+1) + ": ");
+				System.out.print(entry.getValue().get(i).getGradAssignPercent()+"    ");
+				System.out.print(entry.getValue().get(i).getTotalPoints()+"    ");
+				System.out.println(entry.getValue().get(i).getAverage());
+			}
+			System.out.println(" ");
+		}
+		for (Map.Entry<String, Lab> labentry : newCourse.getLabSections().entrySet()) {
+			System.out.println("Lab Section: " + labentry.getKey());
+			for (Map.Entry<String, ArrayList<Student>> entry : labentry.getValue().getStudents().entrySet()) {
+				System.out.print(entry.getKey() + ": ");
+				System.out.println(entry.getValue().size());
+				for (int i = 0; i < entry.getValue().size(); i++) {
+					tempStudent = entry.getValue().get(i);
+					System.out.println(tempStudent.getName());
+					for (int j = 0; j <entry.getValue().get(i).getCourseWork().size(); j++) {
+						System.out.print(entry.getValue().get(i).getCourseWork().get(j).getType() + ": ");
+						System.out.println(entry.getValue().get(i).getCourseWork().get(j).getPercent());
+					}
+					System.out.println("");
+				}
+			}
+			System.out.println("");
+		}
+	}
+}
