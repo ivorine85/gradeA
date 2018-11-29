@@ -13,8 +13,11 @@ public class Login {
     private JLabel lbl_uname;
     private JLabel lbl_password;
     private JTextField input_uname;
+    private JFrame message;
+    private static JFrame frame;
 
     public Login() {
+        message = new JFrame();
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -25,19 +28,29 @@ public class Login {
                 String psw = userDAO.getPsw(username);
                 if(psw.equals("No such user!")){
                     System.out.println("can't find this username!");
+                    JOptionPane.showMessageDialog(message, "User does not exist.");
                 }
                 else if(psw.equals(password)){
                     System.out.println("Match!");
+                    Dashboard dashboardPage = new Dashboard();
+                    dashboardPage.ShowPage();
+                    frame.dispose();
                 }
                 else{
+                    JOptionPane.showMessageDialog(message, "Username or Password incorrect");
                     System.out.println("Wrong!");
                 }
+                /*
+                Dashboard dashboardPage = new Dashboard();
+                dashboardPage.ShowPage();
+                frame.dispose();
+                */
             }
         });
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Login");
+        frame = new JFrame("Login");
         frame.setContentPane(new Login().panelMain);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

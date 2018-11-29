@@ -22,7 +22,8 @@ public class AddCoursework {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
+    public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -126,8 +127,18 @@ public class AddCoursework {
             public void actionPerformed(ActionEvent arg0) {
                 if(textFieldTotalPoints.getText().isEmpty()||(comboBoxType.getSelectedItem().equals("Select")))
                     JOptionPane.showMessageDialog(null, "Data Missing");
-                else
+                else{
                     JOptionPane.showMessageDialog(null, "Data Submitted");
+                    CoursePage changePage = new CoursePage();
+                    System.out.println("CoursePage");
+                    frame.dispose();
+                }
+                /*
+                CoursePage changePage = new CoursePage();
+                System.out.println("CoursePage");
+                frame.dispose();
+                */
+
             }
         });
 
