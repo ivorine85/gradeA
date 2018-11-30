@@ -26,7 +26,8 @@ public class EditGrades extends Adjustments {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
+    public static void ShowPage(){
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -45,17 +46,20 @@ public class EditGrades extends Adjustments {
     /**
      * Create the application.
      */
+    //public EditGrades(Course newCourse, String currentLabSection) {
     public EditGrades() {
         //connection = SqlConnection.dbConnector();
         initialize();
+        //initialize(newCourse, currentLabSection);
     }
 
     /**
      * Initialize the contents of the frame.
      */
+    //private void initialize(Course newCourse, String currentLabSection) {
     private void initialize() {
 /*********************************** for the purpose of this example ***********************************/
-        Course newCourse = new Course("CS591");												// Generate new course
+        Course newCourse = new Course ("CS591");												// Generate new course
         newCourse.getCourseBreakDown().put("HW", new GradeBreakDown("HW", .5, .5, 0, 0,0, 1));
         newCourse.getCourseBreakDown().put("Exam", new GradeBreakDown("Exam", .5, .5, 0, 0,0, 1));
 
@@ -158,6 +162,10 @@ public class EditGrades extends Adjustments {
         JButton btnCancel = new JButton("Cancel");
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                LabPage labPageReturn = new LabPage();
+                System.out.println("LabPage");
+                //LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
+                //labPageReturn.ShowPage();
                 frame.dispose();
             }
         });
@@ -168,7 +176,10 @@ public class EditGrades extends Adjustments {
         JButton btnFinish = new JButton("Finish");
         btnFinish.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // return to proper frame
+                LabPage labPageReturn = new LabPage();
+                System.out.println("LabPage");
+                //LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
+                //labPageReturn.ShowPage();
                 frame.dispose();
             }
         });
