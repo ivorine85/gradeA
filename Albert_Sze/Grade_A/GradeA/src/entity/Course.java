@@ -18,7 +18,7 @@ public class Course {
 	private HashMap<String, ArrayList<GradeBreakDown>> assignmentBreakDown;
 	private HashMap<String, Double> gradeRanges;
 
-	public Course () {
+	public Course() {
 		this.courseId = 0;
 		this.courseName = "None";
 		this.classTime = new Time[2];
@@ -31,7 +31,7 @@ public class Course {
 		this.gradeRanges = new HashMap(5);
 	}
 	
-	public Course (String courseName) {
+	public Course(String courseName) {
 		this.courseId = 0;
 		this.courseName = courseName;
 		this.classTime = new Time[2];
@@ -49,7 +49,7 @@ public class Course {
 		this.gradeRanges.put("E", .50);
 	}
 
-	public Course(String cname, Time startTime,Time endTime,java.sql.Date startDate,java.sql.Date endDate,String[] weekday){
+	public Course(String cname, Time startTime, Time endTime, java.sql.Date startDate, java.sql.Date endDate, String[] weekday){
 		this.courseName = cname;
 		this.classTime = new Time[2];
 		this.classTime[0] = startTime;

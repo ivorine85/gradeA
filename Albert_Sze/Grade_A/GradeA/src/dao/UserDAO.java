@@ -1,7 +1,5 @@
 package dao;
 
-import com.sun.org.apache.regexp.internal.RE;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -30,7 +30,7 @@ public class ImportCSV extends Adjustments {
 		File file = new File("C:\\Users\\Albert Sze\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Github\\gradeA\\Albert_Sze\\Grade_A\\GradeA\\src\\Excel_template_4.csv");			
 		
 /*********************************** for the purpose of this example ***********************************/
-		Profile newProfile = new Profile();
+		Profilete newProfile = new Profilete();
 		newProfile.setCourses(new ArrayList<Course>(0));
 /*******************************************************************************************************/
 		
@@ -160,7 +160,7 @@ public class ImportCSV extends Adjustments {
 				score = newCourse.getLabSections().get(labSection).getStudents().get(type.toLowerCase()).get(tempIndex).getCourseWork().get(tempNumAssign-1).getPercent();
 				// update assignment type overall grade
 				tempStudentGrades.put(assignType, Calcfinalgrade(tempStudentGrades.get(assignType), score, percent));
-				// update Course average for assignment type 
+				// update Course average for assignment type
 				newCourse.getAssignmentBreakDown().get(assignType).get(tempNum).setAverage(Calcaverage(newCourse.getAssignmentBreakDown().get(assignType).get(tempNum).getAverage(), score, i-7));;
 			}
 
@@ -188,7 +188,7 @@ public class ImportCSV extends Adjustments {
 			newCourse.getCourseBreakDown().get(entry.getKey()).setGradAssignPercent(100.0/numCategories);			
 		}
 
-/**************************** Print out Course Details and students **********************************/	
+/**************************** Print out Course Details and students **********************************/
 		Student tempStudent;
 		System.out.println("Course: " + newCourse.getCourseName());
 		System.out.print("Start Date: ");

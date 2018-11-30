@@ -1,5 +1,5 @@
 import entity.Adjustments;
-import entity.Profile;
+import entity.Profilete;
 
 import java.util.*;
 
@@ -14,7 +14,7 @@ public class LoginTest extends Adjustments {
 		String answer2 = "null";
 		String action = "null";
 		boolean valid = false;
-		ArrayList<Profile> profileList = new ArrayList<Profile> (1);
+		ArrayList<Profilete> profileList = new ArrayList<Profilete> (1);
 		ArrayList<String> usernameList = new ArrayList<String> (1);
 
 // Login Page
