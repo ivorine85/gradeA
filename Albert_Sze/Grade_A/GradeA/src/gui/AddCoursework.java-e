@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.*;
-import javax.swing.*;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -10,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 
 public class AddCoursework {

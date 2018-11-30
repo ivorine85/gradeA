@@ -61,7 +61,7 @@ public class AddStudents {
      */
     private void initialize() {
 /*********************************** for the purpose of this example ***********************************/
-        Course newCourse = new Course ("CS591");												// Generate new course
+        Course newCourse = new Course("CS591");												// Generate new course
 
         newCourse.getLabSections().put("A1",new Lab("A1"));										// Create Lab Sections
         newCourse.getLabSections().put("A2",new Lab("A2"));										// Create Lab Sections

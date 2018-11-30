@@ -55,8 +55,8 @@ public class Dashboard {
      */
     private void initialize() {
 /*********************************** for the purpose of this example ***********************************/
-        Course newCourse_591 = new Course ("CS591");												// Generate new course
-        Course newCourse_112 = new Course ("CS112");												// Generate new course
+        Course newCourse_591 = new Course("CS591");												// Generate new course
+        Course newCourse_112 = new Course("CS112");												// Generate new course
 
         newCourse_591.getLabSections().put("A1",new Lab("A1"));										// Create Lab Sections
         newCourse_591.getLabSections().put("A2",new Lab("A2"));										// Create Lab Sections

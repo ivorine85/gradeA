@@ -15,7 +15,7 @@ public abstract class Adjustments extends Calculations {
 		return array_list;
 	}
 	
-	protected static Profile Createuser() {
+	protected static Profilete Createuser() {
 		boolean valid = false;
 		String username;
 		String password;
@@ -83,11 +83,11 @@ public abstract class Adjustments extends Calculations {
 		}
 		//scan.close();
 		
-		Profile userprofile = new Profile(username, password, answers, questions);
+		Profilete userprofile = new Profilete(username, password, answers, questions);
 		return userprofile;
 	}
 	
-	protected static boolean Checklogin(Profile profile, String password) {
+	protected static boolean Checklogin(Profilete profile, String password) {
 		if (password.equals(profile.getPassword())){
 			return true;
 		}
@@ -96,7 +96,7 @@ public abstract class Adjustments extends Calculations {
 		}
 	}
 	
-	protected static Profile Forgetpassword(Profile profile) {
+	protected static Profilete Forgetpassword(Profilete profile) {
 		boolean valid = true;
 		String password;
 		String answer = "null";
