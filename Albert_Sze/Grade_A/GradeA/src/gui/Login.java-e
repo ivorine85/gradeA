@@ -21,7 +21,6 @@ public class Login {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "hello, world.");
                 String password = String.valueOf(input_pass.getPassword());
                 String username = input_uname.getText();
                 UserDAO userDAO = new UserDAO();
@@ -40,20 +39,18 @@ public class Login {
                     JOptionPane.showMessageDialog(message, "Username or Password incorrect");
                     System.out.println("Wrong!");
                 }
-                /*
                 Dashboard dashboardPage = new Dashboard();
                 dashboardPage.ShowPage();
                 frame.dispose();
-                */
             }
         });
     }
 
     public static void main(String[] args) {
-        frame = new JFrame("Login");
-        frame.setContentPane(new Login().panelMain);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        Login.frame = new JFrame("Login");
+        Login.frame.setContentPane(new Login().panelMain);
+        Login.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Login.frame.pack();
+        Login.frame.setVisible(true);
     }
 }
