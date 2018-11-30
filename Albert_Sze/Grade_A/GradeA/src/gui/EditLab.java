@@ -18,7 +18,7 @@ public class EditLab {
     private JTextField textFieldLabSection;
     private JTextField textFieldStartTime;
     private JTextField textFieldEndTime;
-    private JLabel lblCourseInfo;
+    private JLabel lblEditLab;
 
     /**
      * Launch the application.
