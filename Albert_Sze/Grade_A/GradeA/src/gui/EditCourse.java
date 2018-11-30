@@ -14,10 +14,15 @@ import java.awt.event.ActionEvent;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
+
+import entity.*;
 
 public class EditCourse {
 
@@ -30,6 +35,7 @@ public class EditCourse {
     private JTextField textFieldTF2Name;
     private JTextField textFieldTF2Email;
     private JLabel lblCourseInfo;
+    private JTable table;
 
     /**
      * Launch the application.
@@ -59,15 +65,15 @@ public class EditCourse {
      */
     private void initialize() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 1000, 489);
+        frame.setBounds(100, 100, 1500, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
         // Label of window
-        JLabel lblCourseInfo = new JLabel("Course Info");
-        lblCourseInfo.setFont(new Font("Tahoma", Font.PLAIN, 36));
-        lblCourseInfo.setBounds(30, 20, 212, 44);
-        frame.getContentPane().add(lblCourseInfo);
+        JLabel lblEditCourse = new JLabel("Edit Course");
+        lblEditCourse.setFont(new Font("Tahoma", Font.PLAIN, 36));
+        lblEditCourse.setBounds(30, 20, 212, 44);
+        frame.getContentPane().add(lblEditCourse);
 
         JLabel lblCourseTitle = new JLabel("Course Title");
         lblCourseTitle.setBounds(40, 85, 100, 14);
@@ -235,74 +241,7 @@ public class EditCourse {
         frame.getContentPane().add(textFieldTF2Email);
         textFieldTF2Email.setColumns(10);
 
-        JLabel lblNumLabs = new JLabel("Number of Labs");
-        lblNumLabs.setBounds(610, 85, 100, 14);
-        frame.getContentPane().add(lblNumLabs);
 
-        JComboBox<String> comboBoxNumLabs = new JComboBox<String>();
-        comboBoxNumLabs.addItem("0");
-        comboBoxNumLabs.addItem("1");
-        comboBoxNumLabs.addItem("2");
-        comboBoxNumLabs.addItem("3");
-        comboBoxNumLabs.addItem("4");
-        comboBoxNumLabs.addItem("5");
-        comboBoxNumLabs.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
-        comboBoxNumLabs.setBounds(610, 112, 70, 20);
-        frame.getContentPane().add(comboBoxNumLabs);
-
-        JLabel lblNumAssign = new JLabel("Number of Assignments");
-        lblNumAssign.setBounds(610, 145, 155, 14);
-        frame.getContentPane().add(lblNumAssign);
-
-        JComboBox<String> comboBoxNumAssign = new JComboBox<String>();
-        comboBoxNumAssign.addItem("0");
-        comboBoxNumAssign.addItem("1");
-        comboBoxNumAssign.addItem("2");
-        comboBoxNumAssign.addItem("3");
-        comboBoxNumAssign.addItem("4");
-        comboBoxNumAssign.addItem("5");
-        comboBoxNumAssign.addItem("6");
-        comboBoxNumAssign.addItem("7");
-        comboBoxNumAssign.addItem("8");
-        comboBoxNumAssign.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
-        comboBoxNumAssign.setBounds(610, 172, 70, 20);
-        frame.getContentPane().add(comboBoxNumAssign);
-
-        JLabel lblNumExams = new JLabel("Number of Exams");
-        lblNumExams.setBounds(610, 205, 155, 14);
-        frame.getContentPane().add(lblNumExams);
-
-        JComboBox<String> comboBoxNumExams = new JComboBox<String>();
-        comboBoxNumExams.addItem("0");
-        comboBoxNumExams.addItem("1");
-        comboBoxNumExams.addItem("2");
-        comboBoxNumExams.addItem("3");
-        comboBoxNumExams.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
-        comboBoxNumExams.setBounds(610, 232, 70, 20);
-        frame.getContentPane().add(comboBoxNumExams);
-
-        JLabel lblFinal = new JLabel("Will there be a final?");
-        lblFinal.setBounds(610, 265, 200, 14);
-        frame.getContentPane().add(lblFinal);
-
-        JComboBox<String> comboBoxFinal = new JComboBox<String>();
-        comboBoxFinal.addItem("Yes");
-        comboBoxFinal.addItem("No");
-        comboBoxFinal.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
-        comboBoxFinal.setBounds(610, 292, 80, 20);
-        frame.getContentPane().add(comboBoxFinal);
 
 //        JLabel lblPhone = new JLabel("Phone #");
 //        lblPhone.setBounds(65, 88, 46, 14);
@@ -330,7 +269,126 @@ public class EditCourse {
 //        textArea_1.setBounds(126, 177, 212, 40);
 //        frame.getContentPane().add(textArea_1);
 
+        Course newCourse = new Course("CS591");												// Generate new course
+        newCourse.getCourseBreakDown().put("HW", new GradeBreakDown("HW", .5, .5, 0, 0,0, 1));
+        newCourse.getCourseBreakDown().put("Exam", new GradeBreakDown("Exam", .5, .5, 0, 0,0, 1));
 
+        newCourse.getLabSections().put("A1",new Lab("A1"));										// Create Lab Sections
+        newCourse.getLabSections().put("A2",new Lab("A2"));										// Create Lab Sections
+        newCourse.getLabSections().put("A3",new Lab("A3"));										// Create Lab Sections
+        newCourse.getLabSections().get("A1").getStudents().put("undergrad", new ArrayList<Student>(0));
+        newCourse.getLabSections().get("A1").getStudents().get("undergrad").add(new Student("U1","Albert Sze","undergrad","None","yup@gmail",2018));
+        newCourse.getLabSections().get("A1").getStudents().get("undergrad").get(0).getCourseWork().add(new Assignment ("HW", 3, 103, 0));
+        newCourse.getLabSections().get("A1").getStudents().get("undergrad").get(0).getCourseWork().add(new Assignment ("Exam", 12, 100, 0));
+        newCourse.getLabSections().get("A1").getStudents().get("undergrad").get(0).getCourseWork().add(new Assignment ("Exam", 12, 100, 0));
+        newCourse.getLabSections().get("A1").getStudents().get("undergrad").get(0).setGrade(0.98);
+        newCourse.getLabSections().get("A1").getStudents().put("grad", new ArrayList<Student>(0));
+        newCourse.getLabSections().get("A1").getStudents().get("grad").add(new Student("U1","Albert Sze","grad","None","yup@gmail",2018));
+        newCourse.getLabSections().get("A1").getStudents().get("grad").get(0).getCourseWork().add(new Assignment ("HW", 10, 100, 0));
+        newCourse.getLabSections().get("A1").getStudents().get("grad").get(0).getCourseWork().add(new Assignment ("Exam", 5, 100, 0));
+        newCourse.getLabSections().get("A1").getStudents().get("grad").get(0).getCourseWork().add(new Assignment ("Exam", 5, 100, 0));
+        newCourse.getLabSections().get("A1").getStudents().get("grad").get(0).setGrade(0.97);
+/*******************************************************************************************************/
+//        frame = new JFrame();
+//        frame.getContentPane().setForeground(new Color(0, 0, 0));
+//        frame.setBounds(100, 100, 801, 487);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.getContentPane().setLayout(null);
+
+        //Create header
+        ArrayList<String> header = new ArrayList<String>(0);
+        ArrayList<ArrayList<String>> allStudentData = new ArrayList<ArrayList<String>>(0);
+        ArrayList<String> studentData;
+        HashMap<String, Integer> assignCount = new HashMap<String, Integer>(0);
+        double sum = 0.0;
+        //for this example
+        String currentLabSection = "A1";
+        ArrayList<Student> allStudents = newCourse.getLabSections().get(currentLabSection).getStudents().get("undergrad");
+        allStudents.addAll(newCourse.getLabSections().get(currentLabSection).getStudents().get("grad"));
+
+        header.add("Item");
+        for (Map.Entry<String, GradeBreakDown> entry : newCourse.getCourseBreakDown().entrySet()) {
+            assignCount.put(entry.getKey(),entry.getValue().getNumAssign()-1);
+        }
+
+
+        for (int i = 0; i < allStudents.size();i++) {
+            studentData = new ArrayList<String>(0);
+            studentData.add(allStudents.get(i).getName());
+            for (Assignment curInstance: allStudents.get(i).getCourseWork()) {
+                if (i == 0) {
+                    int j = newCourse.getCourseBreakDown().get(curInstance.getType()).getNumAssign()-assignCount.get(curInstance.getType());
+                    header.add(curInstance.getType() + " " + Integer.toString(j));
+                    assignCount.put(curInstance.getType(), assignCount.get(curInstance.getType())-1);
+                }
+
+                studentData.add(Integer.toString(curInstance.getPtsLost()));
+                studentData.add(Double.toString((double)Math.round(curInstance.getPercent()*10000)/100));
+            }
+            studentData.add(Double.toString((double)Math.round(allStudents.get(i).getGrade()*10000)/100));
+            allStudentData.add(studentData);
+        }
+        header.add("Final");
+        studentData = new ArrayList<String>(0);
+        studentData.add("Total Points");
+        for (int i = 1; i < header.size(); i++) {
+            sum = 0.0;
+            for (int j = 0; j < allStudentData.size(); j ++ ) {
+                sum = j;
+            }
+            studentData.add(Double.toString((double)Math.round(sum*100)/100));
+        }
+        allStudentData.add(studentData);
+
+
+        String[][] array = new String[allStudentData.size()][];
+        for (int i = 0; i < allStudentData.size(); i++) {
+            ArrayList<String> row = allStudentData.get(i);
+            array[i] = row.toArray(new String[row.size()]);
+        }
+
+        String [][] data={{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"}};
+        DefaultTableModel model = new DefaultTableModel (array,header.toArray()) {
+            public boolean isCellEditable(int row, int col)
+            {
+                //If you didn't want the first column to be editable
+                if(col%2 == 0 || row == allStudentData.size()-1 || col == header.size()-1) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+        };
+
+        //Cancel Button
+        JButton btnCancel = new JButton("Cancel");
+        btnCancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+            }
+        });
+        btnCancel.setBounds(686, 414, 89, 23);
+        frame.getContentPane().add(btnCancel);
+
+        //Finish Button
+        JButton btnFinish = new JButton("Finish");
+        btnFinish.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // return to proper frame
+                frame.dispose();
+            }
+        });
+        btnFinish.setBounds(587, 414, 89, 23);
+        frame.getContentPane().add(btnFinish);
+
+        //Add ScrollPanel for table
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(40, 400, 738, 205);
+        frame.getContentPane().add(scrollPane);
+
+        table = new JTable(model);
+        scrollPane.setViewportView(table);
 
         JButton btnClear = new JButton("Clear");
 
