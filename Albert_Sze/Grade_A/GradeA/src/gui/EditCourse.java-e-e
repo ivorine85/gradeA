@@ -65,7 +65,7 @@ public class EditCourse {
      */
     private void initialize() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 1500, 700);
+        frame.setBounds(100, 100, 1300, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
@@ -368,7 +368,7 @@ public class EditCourse {
                 frame.dispose();
             }
         });
-        btnCancel.setBounds(686, 414, 89, 23);
+        btnCancel.setBounds(686, 614, 89, 23);
         frame.getContentPane().add(btnCancel);
 
         //Finish Button
@@ -379,12 +379,12 @@ public class EditCourse {
                 frame.dispose();
             }
         });
-        btnFinish.setBounds(587, 414, 89, 23);
+        btnFinish.setBounds(580, 614, 89, 23);
         frame.getContentPane().add(btnFinish);
 
         //Add ScrollPanel for table
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(40, 400, 738, 205);
+        scrollPane.setBounds(40, 400, 738, 150);
         frame.getContentPane().add(scrollPane);
 
         table = new JTable(model);
@@ -392,7 +392,7 @@ public class EditCourse {
 
         JButton btnClear = new JButton("Clear");
 
-        btnClear.setBounds(800, 410, 89, 23);
+        btnClear.setBounds(800, 614, 89, 23);
         frame.getContentPane().add(btnClear);
 
 
@@ -400,7 +400,7 @@ public class EditCourse {
 
 //        btnCreate.setBackground(Color.BLUE);
 //        btnCreate.setForeground(Color.MAGENTA);
-        btnCreate.setBounds(900, 410, 89, 23);
+        btnCreate.setBounds(900, 614, 89, 23);
         frame.getContentPane().add(btnCreate);
 
 
