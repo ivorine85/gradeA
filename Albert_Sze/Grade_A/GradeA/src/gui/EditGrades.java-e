@@ -55,7 +55,7 @@ public class EditGrades extends Adjustments {
      */
     private void initialize() {
 /*********************************** for the purpose of this example ***********************************/
-        Course newCourse = new Course ("CS591");												// Generate new course
+        Course newCourse = new Course("CS591");												// Generate new course
         newCourse.getCourseBreakDown().put("HW", new GradeBreakDown("HW", .5, .5, 0, 0,0, 1));
         newCourse.getCourseBreakDown().put("Exam", new GradeBreakDown("Exam", .5, .5, 0, 0,0, 1));
 

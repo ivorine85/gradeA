@@ -1510,7 +1510,7 @@
   <commands xmi:id="_ImVYA-hDEeiSUPPmPgdSyQ" elementId="org.eclipse.egit.ui.team.Commit" commandName="Commit..." category="_ImP4hehDEeiSUPPmPgdSyQ"/>
   <commands xmi:id="_ImVYBOhDEeiSUPPmPgdSyQ" elementId="org.eclipse.jdt.ui.edit.text.java.inline" commandName="Inline" description="Inline a constant, local variable or method" category="_ImP4fuhDEeiSUPPmPgdSyQ"/>
   <commands xmi:id="_ImVYBehDEeiSUPPmPgdSyQ" elementId="org.eclipse.egit.ui.team.submodule.update" commandName="Update Submodule" category="_ImP4hehDEeiSUPPmPgdSyQ"/>
-  <commands xmi:id="_ImVYBuhDEeiSUPPmPgdSyQ" elementId="org.eclipse.debug.ui.commands.ProfileLast" commandName="entity.Profile" description="Launch in profile mode" category="_ImP4guhDEeiSUPPmPgdSyQ"/>
+  <commands xmi:id="_ImVYBuhDEeiSUPPmPgdSyQ" elementId="org.eclipse.debug.ui.commands.ProfileLast" commandName="entity.Profilete" description="Launch in profile mode" category="_ImP4guhDEeiSUPPmPgdSyQ"/>
   <commands xmi:id="_ImVYB-hDEeiSUPPmPgdSyQ" elementId="org.eclipse.ui.edit.text.shiftRight" commandName="Shift Right" description="Shift a block of text to the right" category="_ImPRYuhDEeiSUPPmPgdSyQ"/>
   <commands xmi:id="_ImVYCOhDEeiSUPPmPgdSyQ" elementId="org.eclipse.ui.navigate.backwardHistory" commandName="Backward History" description="Move backward in the editor navigation history" category="_ImP4d-hDEeiSUPPmPgdSyQ"/>
   <commands xmi:id="_ImVYCehDEeiSUPPmPgdSyQ" elementId="org.eclipse.eclemma.ui.workbenchShortcut.coverage" commandName="Coverage Eclipse Application" description="Coverage Eclipse Application" category="_ImP4guhDEeiSUPPmPgdSyQ"/>
@@ -2193,7 +2193,7 @@
     <parameters xmi:id="_Imeh_OhDEeiSUPPmPgdSyQ" elementId="org.eclipse.recommenders.utils.rcp.linkContribution.href" name="URI" optional="false"/>
   </commands>
   <commands xmi:id="_Imeh_ehDEeiSUPPmPgdSyQ" elementId="org.eclipse.compare.copyRightToLeft" commandName="Copy from Right to Left" description="Copy Current Change from Right to Left" category="_ImP4fOhDEeiSUPPmPgdSyQ"/>
-  <commands xmi:id="_Imeh_uhDEeiSUPPmPgdSyQ" elementId="org.eclipse.debug.ui.commands.OpenProfileConfigurations" commandName="entity.Profile..." description="Open profile launch configuration dialog" category="_ImP4guhDEeiSUPPmPgdSyQ"/>
+  <commands xmi:id="_Imeh_uhDEeiSUPPmPgdSyQ" elementId="org.eclipse.debug.ui.commands.OpenProfileConfigurations" commandName="entity.Profilete..." description="Open profile launch configuration dialog" category="_ImP4guhDEeiSUPPmPgdSyQ"/>
   <commands xmi:id="_Imeh_-hDEeiSUPPmPgdSyQ" elementId="org.eclipse.ui.ide.markCompleted" commandName="Mark Completed" description="Mark the selected tasks as completed" category="_ImP4jOhDEeiSUPPmPgdSyQ"/>
   <commands xmi:id="_ImeiAOhDEeiSUPPmPgdSyQ" elementId="org.eclipse.ui.edit.text.recenter" commandName="Recenter" description="Scroll cursor line to center, top and bottom" category="_ImP4dOhDEeiSUPPmPgdSyQ"/>
   <commands xmi:id="_ImeiAehDEeiSUPPmPgdSyQ" elementId="org.eclipse.jdt.ui.edit.text.java.add.unimplemented.constructors" commandName="Generate Constructors from Superclass" description="Evaluate and add constructors from superclass" category="_ImP4iehDEeiSUPPmPgdSyQ"/>
@@ -2225,9 +2225,9 @@
   <commands xmi:id="_JG7joOhDEeiSUPPmPgdSyQ" elementId="AUTOGEN:::org.eclipse.debug.ui.launchActionSet/org.eclipse.debug.internal.ui.actions.DebugWithConfigurationAction" commandName="Debug As" category="_ImP4jOhDEeiSUPPmPgdSyQ"/>
   <commands xmi:id="_JG7joehDEeiSUPPmPgdSyQ" elementId="AUTOGEN:::org.eclipse.debug.ui.launchActionSet/org.eclipse.debug.internal.ui.actions.DebugHistoryMenuAction" commandName="Debug History" category="_ImP4jOhDEeiSUPPmPgdSyQ"/>
   <commands xmi:id="_JG7jouhDEeiSUPPmPgdSyQ" elementId="AUTOGEN:::org.eclipse.debug.ui.launchActionSet/org.eclipse.debug.internal.ui.actions.DebugDropDownAction" commandName="Debug" category="_ImP4jOhDEeiSUPPmPgdSyQ"/>
-  <commands xmi:id="_JG8KsOhDEeiSUPPmPgdSyQ" elementId="AUTOGEN:::org.eclipse.debug.ui.profileActionSet/org.eclipse.debug.internal.ui.actions.ProfileDropDownAction" commandName="entity.Profile" category="_ImP4jOhDEeiSUPPmPgdSyQ"/>
-  <commands xmi:id="_JG8KsehDEeiSUPPmPgdSyQ" elementId="AUTOGEN:::org.eclipse.debug.ui.profileActionSet/org.eclipse.debug.internal.ui.actions.ProfileWithConfigurationAction" commandName="entity.Profile As" category="_ImP4jOhDEeiSUPPmPgdSyQ"/>
-  <commands xmi:id="_JG8KsuhDEeiSUPPmPgdSyQ" elementId="AUTOGEN:::org.eclipse.debug.ui.profileActionSet/org.eclipse.debug.internal.ui.actions.ProfileHistoryMenuAction" commandName="entity.Profile History" category="_ImP4jOhDEeiSUPPmPgdSyQ"/>
+  <commands xmi:id="_JG8KsOhDEeiSUPPmPgdSyQ" elementId="AUTOGEN:::org.eclipse.debug.ui.profileActionSet/org.eclipse.debug.internal.ui.actions.ProfileDropDownAction" commandName="entity.Profilete" category="_ImP4jOhDEeiSUPPmPgdSyQ"/>
+  <commands xmi:id="_JG8KsehDEeiSUPPmPgdSyQ" elementId="AUTOGEN:::org.eclipse.debug.ui.profileActionSet/org.eclipse.debug.internal.ui.actions.ProfileWithConfigurationAction" commandName="entity.Profilete As" category="_ImP4jOhDEeiSUPPmPgdSyQ"/>
+  <commands xmi:id="_JG8KsuhDEeiSUPPmPgdSyQ" elementId="AUTOGEN:::org.eclipse.debug.ui.profileActionSet/org.eclipse.debug.internal.ui.actions.ProfileHistoryMenuAction" commandName="entity.Profilete History" category="_ImP4jOhDEeiSUPPmPgdSyQ"/>
   <commands xmi:id="_JG8xwOhDEeiSUPPmPgdSyQ" elementId="AUTOGEN:::org.eclipse.eclemma.ui.CoverageActionSet/org.eclipse.eclemma.ui.actions.CoverageDropDownAction" commandName="Coverage" category="_ImP4jOhDEeiSUPPmPgdSyQ"/>
   <commands xmi:id="_JG8xwehDEeiSUPPmPgdSyQ" elementId="AUTOGEN:::org.eclipse.eclemma.ui.CoverageActionSet/org.eclipse.eclemma.ui.actions.CoverageAsAction" commandName="Coverage As" category="_ImP4jOhDEeiSUPPmPgdSyQ"/>
   <commands xmi:id="_JG8xwuhDEeiSUPPmPgdSyQ" elementId="AUTOGEN:::org.eclipse.eclemma.ui.CoverageActionSet/org.eclipse.eclemma.ui.actions.CoverageHistoryAction" commandName="Coverage History" category="_ImP4jOhDEeiSUPPmPgdSyQ"/>
