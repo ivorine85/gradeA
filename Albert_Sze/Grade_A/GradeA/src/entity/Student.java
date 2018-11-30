@@ -10,7 +10,7 @@ public class Student {
 	private int year;
 	private String email;
 	private double grade;
-	private ArrayList<Assignment> courseWork;
+	private ArrayList<Coursework> courseWork;
 	
 	public Student() {
 		this.name = "None";
@@ -19,7 +19,7 @@ public class Student {
 		this.year = 0;
 		this.email =  "None";
 		this.grade = 0.0;
-		this.courseWork = new ArrayList<Assignment>(1);
+		this.courseWork = new ArrayList<Coursework>(1);
 	}
 
 	public Student(String sid,String name,String studentType,String photoPath,String email,int year) {
@@ -28,7 +28,7 @@ public class Student {
 		this.studentType = studentType;
 		this.year = year;
 		this.email =  email;
-		this.courseWork = new ArrayList<Assignment>(1);
+		//this.courseWork = new ArrayList<Assignment>(1);
 		this.pohtoPath = photoPath;
 	}
 
@@ -89,11 +89,11 @@ public class Student {
 		this.year = year;
 	}
 
-	public ArrayList<Assignment> getCourseWork() {
+	public ArrayList<Coursework> getCourseWork() {
 		return courseWork;
 	}
 
-	public void setCourseWork(ArrayList<Assignment> courseWork) {
+	public void setCourseWork(ArrayList<Coursework> courseWork) {
 		this.courseWork = courseWork;
 	}
 	
