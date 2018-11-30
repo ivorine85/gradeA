@@ -78,8 +78,8 @@ public class CoursePage {
 	 */
 	private void initialize() {
 /*********************************** for the purpose of this example ***********************************/
-		Profile profile = new Profile();
-		Course newCourse2 = new Course ("CS112");												// Generate new course
+		Profilete profile = new Profilete();
+		Course newCourse2 = new Course("CS112");												// Generate new course
 		newCourse2.getCourseBreakDown().put("HW", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));
 		newCourse2.getCourseBreakDown().put("Exam", new GradeBreakDown("Exam", .5, .7, 0, 0,0.0, 1));
 		newCourse2.getAssignmentBreakDown().put("hw", new ArrayList<GradeBreakDown>(0));
@@ -87,7 +87,7 @@ public class CoursePage {
 		newCourse2.getAssignmentBreakDown().get("hw").add(new GradeBreakDown("HW", 1.0, 1.0, 0, 103,0.54, 1));
 		newCourse2.getAssignmentBreakDown().get("exam").add(new GradeBreakDown("Exam", 1, 1, 0, 100,0.80, 1));
 		
-		Course newCourse = new Course ("CS591");												// Generate new course
+		Course newCourse = new Course("CS591");												// Generate new course
 		newCourse.getCourseBreakDown().put("HW", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));
 		/*
 		newCourse.getCourseBreakDown().put("HW1", new GradeBreakDown("HW", .5, .3, 0, 0,0.0, 1));

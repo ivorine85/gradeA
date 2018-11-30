@@ -2,14 +2,14 @@ package entity;
 
 import java.util.ArrayList;
 
-public class Profile {
+public class Profilete {
 	private String username;
 	private String password;
 	private ArrayList<Course> courses;
 	private String[] securityAnswers;
 	private String[] securityQuestions;
 	
-	public Profile() {
+	public Profilete() {
 		this.username = "None";
 		this.password = "None";
 		
@@ -17,7 +17,7 @@ public class Profile {
 		this.securityQuestions = new String[3];
 	}
 	
-	public Profile(String username, String password, String[] answers, String[] questions) {
+	public Profilete(String username, String password, String[] answers, String[] questions) {
 		this.username = username;
 		this.password = password;
 		
