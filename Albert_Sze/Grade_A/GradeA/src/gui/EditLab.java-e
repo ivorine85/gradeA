@@ -23,8 +23,8 @@ public class EditLab {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
-    //public static void ShowPage() {
+    //public static void main(String[] args) {
+    public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -200,7 +200,7 @@ public class EditLab {
         frame.getContentPane().add(btnClear);
 
 
-        JButton btnNext = new JButton("Next");
+        JButton btnNext = new JButton("Finish");
 
 //        btnCreate.setBackground(Color.BLUE);
 //        btnCreate.setForeground(Color.MAGENTA);
@@ -214,15 +214,13 @@ public class EditLab {
                     JOptionPane.showMessageDialog(null, "Data Missing");
                 else{
                     JOptionPane.showMessageDialog(null, "Data Submitted");
-                    AddStudents addStudentsPage = new AddStudents("LabInfo");
-                    addStudentsPage.ShowPage();
+                    LabPage returnLabPage = new LabPage();
+                    returnLabPage.ShowPage();
                     frame.dispose();
                 }
-                /*
-                AddStudents addStudentsPage = new AddStudents("LabInfo");
-                addStudentsPage.ShowPage();
+                LabPage returnLabPage = new LabPage();
+                returnLabPage.ShowPage();
                 frame.dispose();
-                */
 
 
             }
