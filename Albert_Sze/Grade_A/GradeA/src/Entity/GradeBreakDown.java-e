@@ -2,10 +2,14 @@ package entity;
 
 public class GradeBreakDown {
 	private String assignType;
+	private String cwname;
+	private double undergradTypePercentage;
 	private double undergradAssignPercent;
+	private double gradTypePercentage;
 	private double gradAssignPercent;
 	private int weight;
 	private int totalPoints;
+	private double average;
 	private int numAssign;
 
 	public GradeBreakDown() {
@@ -14,6 +18,7 @@ public class GradeBreakDown {
 		this.gradAssignPercent = 0.0;
 		this.weight = 0;
 		this.totalPoints = 0;
+		this.average = 0.0;
 		this.numAssign = 0;
 	}
 
@@ -23,6 +28,7 @@ public class GradeBreakDown {
 		this.gradAssignPercent = gradAssignPercent;
 		this.weight = weight;
 		this.totalPoints = totalPoints;
+		this.average = average;
 		this.numAssign = numAssign;
 	}
 /*********************************** Getters and Setters ***********************************/
@@ -32,6 +38,30 @@ public class GradeBreakDown {
 
 	public void setAssignType(String assignType) {
 		this.assignType = assignType;
+	}
+
+	public String getCwname() {
+		return cwname;
+	}
+
+	public void setCwname(String cwname) {
+		this.cwname = cwname;
+	}
+
+	public double getUndergradTypePercentage() {
+		return undergradTypePercentage;
+	}
+
+	public void setUndergradTypePercentage(double undergradTypePercentage) {
+		this.undergradTypePercentage = undergradTypePercentage;
+	}
+
+	public double getGradTypePercentage() {
+		return gradTypePercentage;
+	}
+
+	public void setGradTypePercentage(double gradTypePercentage) {
+		this.gradTypePercentage = gradTypePercentage;
 	}
 
 	public double getUndergradAssignPercent() {
@@ -64,6 +94,14 @@ public class GradeBreakDown {
 
 	public void setTotalPoints(int totalPoints) {
 		this.totalPoints = totalPoints;
+	}
+
+	public double getAverage() {
+		return average;
+	}
+
+	public void setAverage(double average) {
+		this.average = average;
 	}
 
 	public int getNumAssign() {
