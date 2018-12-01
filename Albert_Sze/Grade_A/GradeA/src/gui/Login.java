@@ -6,12 +6,12 @@ import java.awt.event.ActionListener;
 
 public class Login {
     private JButton loginButton;
+    private JButton createUserButton;
     private JPanel panelMain;
     private JPasswordField input_pass;
     private JLabel lbl_uname;
     private JLabel lbl_password;
     private JTextField input_uname;
-    private JButton createUserButton;
     private JFrame message;
     private static JFrame frame;
 
@@ -44,16 +44,16 @@ public class Login {
                 frame.dispose();
             }
         });
-        createUserButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                //go to new user page, page not created yet
-                Dashboard dashboardPage = new Dashboard();
-                dashboardPage.ShowPage();
-                frame.dispose();
-            }
-        });
+//        createUserButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//                //go to new user page, page not created yet
+//                Dashboard dashboardPage = new Dashboard();
+//                dashboardPage.ShowPage();
+//                frame.dispose();
+//            }
+//        });
     }
 
     public static void main(String[] args) {
