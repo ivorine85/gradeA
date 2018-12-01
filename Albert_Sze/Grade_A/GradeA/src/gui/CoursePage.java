@@ -27,15 +27,17 @@ public class CoursePage {
 	private JFrame frame;
 	private JTable tableGradeBreakDown;
 	private JTable tableStats;
+	private static Course currentCourse;
 
 	/**
 	 * Launch the application.
 	 */
-	//public static void ShowPage() {
-	public static void main(String[] args) {
+	public static void ShowPage() {
+	//public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					//CoursePage window = new CoursePage(currentCourse);
 					CoursePage window = new CoursePage();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -69,6 +71,7 @@ public class CoursePage {
 	/**
 	 * Create the application.
 	 */
+	//public CoursePage(Course currentCourse) {
 	public CoursePage() {
 		initialize();
 	}
@@ -242,7 +245,9 @@ public class CoursePage {
 		btnEditCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (CalcSum(tableGradeBreakDown)) {
-					//go to edit page
+					EditCourse editCoursePage = new EditCourse();
+					editCoursePage.ShowPage();
+					frame.dispose();
 				}
 				else {
 					JOptionPane.showMessageDialog(frame, "Percentages do not add up to 100%, please try again.");;
@@ -288,7 +293,7 @@ public class CoursePage {
 		btnAddLab.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (CalcSum(tableGradeBreakDown)) {
-					LabInfo labInfoPage = new LabInfo();
+					LabInfo labInfoPage = new LabInfo("CoursePage");
 					labInfoPage.ShowPage();
 					frame.dispose();
 				}

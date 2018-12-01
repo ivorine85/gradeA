@@ -31,14 +31,17 @@ import javax.swing.Icon;
 public class LabPage {
 
     private JFrame frame;
+    private static Course currentCourse;
 
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
+    public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
+                    //LabPage window = new LabPage(currentCourse);
                     LabPage window = new LabPage();
                     window.frame.setVisible(true);
                 } catch (Exception e) {
@@ -51,6 +54,7 @@ public class LabPage {
     /**
      * Create the application.
      */
+    //public LabPage(Course currentCourse) {
     public LabPage() {
         initialize();
     }
@@ -136,7 +140,7 @@ public class LabPage {
             public void actionPerformed(ActionEvent arg0) {
                 Dashboard dashboardPage = new Dashboard();
                 dashboardPage.ShowPage();
-                //frame.dispose();
+                frame.dispose();
             }
         });
         btnHome.setBounds(10, 384, 55, 54);
@@ -168,6 +172,9 @@ public class LabPage {
         JButton btnEditLab = new JButton("Edit Lab");
         btnEditLab.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
+                EditLab editLabPage = new EditLab();
+                editLabPage.ShowPage();
+                frame.dispose();
             }
         });
         btnEditLab.setBounds(686, 415, 89, 23);
@@ -178,7 +185,7 @@ public class LabPage {
             public void actionPerformed(ActionEvent e) {
                 EditGrades editGradesPage = new EditGrades();
                 editGradesPage.ShowPage();
-                //frame.dispose();
+                frame.dispose();
             }
         });
         btnEditGrades.setBounds(570, 415, 109, 23);
@@ -207,7 +214,7 @@ public class LabPage {
                             JButton but = (JButton) ae.getSource();
                             StudentProfile studentProfilePage = new StudentProfile(newCourse,currentLabSection,allStudents.get(Integer.parseInt(but.getActionCommand())));
                             studentProfilePage.ShowPage();
-                            //frame.dispose();
+                            frame.dispose();
                         }
                     });
                     studentProfiles.add(button);

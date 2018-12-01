@@ -34,7 +34,8 @@ public class CourseInfo {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
+    public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -368,15 +369,15 @@ public class CourseInfo {
                     CourseDAO cd = new CourseDAO();
                     cd.insert(c);
                     JOptionPane.showMessageDialog(null, "Data Submitted");
-                    LabInfo labInfoPage = new LabInfo();
+                    LabInfo labInfoPage = new LabInfo("LabInfo");
                     labInfoPage.ShowPage();
                     frame.dispose();
                 }
-                /*
-                LabInfo labInfoPage = new LabInfo();
+
+                LabInfo labInfoPage = new LabInfo("LabInfo");
                 labInfoPage.ShowPage();
                 frame.dispose();
-                */
+
 
             }
         });

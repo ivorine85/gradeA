@@ -40,7 +40,8 @@ public class EditCourse {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
+    public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -365,6 +366,8 @@ public class EditCourse {
         JButton btnCancel = new JButton("Cancel");
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                CoursePage changePage = new CoursePage();
+                changePage.ShowPage();
                 frame.dispose();
             }
         });
@@ -375,7 +378,19 @@ public class EditCourse {
         JButton btnFinish = new JButton("Finish");
         btnFinish.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // return to proper frame
+                /* need to fix perform check that percentage are correct
+                if (CalcSum(tableGradeBreakDown)) {
+                    //need to add save edits
+                    CoursePage changePage = new CoursePage();
+                    changePage.ShowPage();
+                    frame.dispose();
+                }
+                else {
+                    JOptionPane.showMessageDialog(frame, "Percentages do not add up to 100%, please try again.");;
+                }
+                */
+                CoursePage changePage = new CoursePage();
+                changePage.ShowPage();
                 frame.dispose();
             }
         });
@@ -396,7 +411,7 @@ public class EditCourse {
         frame.getContentPane().add(btnClear);
 
 
-        JButton btnCreate = new JButton("Create");
+        /*JButton btnCreate = new JButton("Create");
 
 //        btnCreate.setBackground(Color.BLUE);
 //        btnCreate.setForeground(Color.MAGENTA);
@@ -429,7 +444,7 @@ public class EditCourse {
                 }
             }
         });
-
+*/
         btnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 textFieldStartTime.setText(null);
