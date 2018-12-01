@@ -163,9 +163,8 @@ public class EditGrades extends Adjustments {
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 LabPage labPageReturn = new LabPage();
-                System.out.println("LabPage");
                 //LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
-                //labPageReturn.ShowPage();
+                labPageReturn.ShowPage();
                 frame.dispose();
             }
         });
@@ -177,9 +176,8 @@ public class EditGrades extends Adjustments {
         btnFinish.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 LabPage labPageReturn = new LabPage();
-                System.out.println("LabPage");
                 //LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
-                //labPageReturn.ShowPage();
+                labPageReturn.ShowPage();
                 frame.dispose();
             }
         });

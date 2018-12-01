@@ -101,11 +101,12 @@ public class AddStudents {
             public void actionPerformed(ActionEvent e) {
                 if (prevPage.equals("CoursePage")) {
                     CoursePage changePage = new CoursePage();
-                    System.out.println(prevPage);
+                    CoursePage.ShowPage();
+                    frame.dispose();
                 }
                 else if(prevPage.equals("LabInfo")){
-                    LabInfo labInfoPage = new LabInfo();
-                    labInfoPage.ShowPage();
+                    Dashboard dashboardPage = new Dashboard();
+                    dashboardPage.ShowPage();
                     frame.dispose();
                 }
                 frame.dispose();
@@ -153,7 +154,8 @@ public class AddStudents {
                     // return to proper frame
                     if (prevPage.equals("CoursePage")) {
                         CoursePage changePage = new CoursePage();
-                        System.out.println(prevPage);
+                        CoursePage.ShowPage();
+                        frame.dispose();
                     }
                     else if (prevPage.equals("LabInfo")){
                         Dashboard dashboardPage = new Dashboard();

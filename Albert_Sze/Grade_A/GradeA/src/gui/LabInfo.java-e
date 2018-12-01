@@ -19,6 +19,7 @@ public class LabInfo {
     private JTextField textFieldStartTime;
     private JTextField textFieldEndTime;
     private JLabel lblCourseInfo;
+    private static String prevPage;
 
     /**
      * Launch the application.
@@ -28,7 +29,7 @@ public class LabInfo {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    LabInfo window = new LabInfo();
+                    LabInfo window = new LabInfo(prevPage);
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -40,7 +41,8 @@ public class LabInfo {
     /**
      * Create the application.
      */
-    public LabInfo() {
+    public LabInfo(String prevPage) {
+        this.prevPage = prevPage;
         initialize();
     }
 
@@ -214,15 +216,15 @@ public class LabInfo {
                     JOptionPane.showMessageDialog(null, "Data Missing");
                 else{
                     JOptionPane.showMessageDialog(null, "Data Submitted");
-                    AddStudents addStudentsPage = new AddStudents("LabInfo");
+                    AddStudents addStudentsPage = new AddStudents(prevPage);
                     addStudentsPage.ShowPage();
                     frame.dispose();
                 }
-                /*
-                AddStudents addStudentsPage = new AddStudents("LabInfo");
+
+                AddStudents addStudentsPage = new AddStudents(prevPage);
                 addStudentsPage.ShowPage();
                 frame.dispose();
-                */
+
 
 
             }
