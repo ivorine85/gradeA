@@ -3,7 +3,6 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import entity.Course;
@@ -34,25 +33,6 @@ public class CourseDAO {
             e.printStackTrace();
         }
         return true;
-    }
-
-    public int getIdByName(String courseName){
-        connection = Connector.getConnection();
-        String sql = "select cid from course where cname =?";
-        int cid = -1;
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1,courseName);
-            ResultSet res = ps.executeQuery();
-            res.next();
-            cid = res.getInt(1);
-            res.close();
-            ps.close();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return cid;
     }
 
 }
