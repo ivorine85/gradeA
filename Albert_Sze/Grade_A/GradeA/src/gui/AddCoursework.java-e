@@ -51,7 +51,7 @@ public class AddCoursework {
         frame.getContentPane().setLayout(null);
 
         // Label of window
-        JLabel lblLabInfo = new JLabel("Lab Info");
+        JLabel lblLabInfo = new JLabel("Add Coursework");
         lblLabInfo.setFont(new Font("Tahoma", Font.PLAIN, 36));
         lblLabInfo.setBounds(30, 20, 212, 44);
         frame.getContentPane().add(lblLabInfo);
@@ -128,21 +128,22 @@ public class AddCoursework {
                 else{
                     JOptionPane.showMessageDialog(null, "Data Submitted");
                     CoursePage changePage = new CoursePage();
-                    System.out.println("CoursePage");
+                    CoursePage.ShowPage();
                     frame.dispose();
                 }
-                /*
-                CoursePage changePage = new CoursePage();
-                System.out.println("CoursePage");
-                frame.dispose();
-                */
 
+                CoursePage changePage = new CoursePage();
+                CoursePage.ShowPage();
+                frame.dispose();
             }
         });
 
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 comboBoxType.setSelectedItem("Select");
+                CoursePage changePage = new CoursePage();
+                CoursePage.ShowPage();
+                frame.dispose();
 
 
             }

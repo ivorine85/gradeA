@@ -10,11 +10,13 @@ public class AddCourse {
     private JButton btnCreate;
     private JLabel lblAddCourse;
     private JPanel panelAddCourse;
+    private static JFrame frame;
 
     public AddCourse() {
         btnUpload.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //need to send to page asking for file path
                 String[] args = new String[0];
                 try {
                     ImportCSV.main(args);
@@ -28,18 +30,16 @@ public class AddCourse {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String[] args = new String[0];
-                try {
-                    ImportCSV.main(args);
-                }
-                catch (Exception ex) {
-                    System.out.println("CSV did not upload.");
-                }
+                CourseInfo courseInfoPage = new CourseInfo();
+                CourseInfo.ShowPage();
+                frame.dispose();
             }
         });
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Add Course");
+    //public static void main(String[] args) {
+    public static void ShowPage() {
+        frame = new JFrame("Add Course");
         frame.setContentPane(new AddCourse().panelAddCourse);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
