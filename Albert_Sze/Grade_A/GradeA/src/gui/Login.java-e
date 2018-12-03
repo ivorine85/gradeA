@@ -44,16 +44,16 @@ public class Login {
                 frame.dispose();
             }
         });
-//        createUserButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//
-//                //go to new user page, page not created yet
-//                Dashboard dashboardPage = new Dashboard();
-//                dashboardPage.ShowPage();
-//                frame.dispose();
-//            }
-//        });
+        createUserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                //go to new user page, page not created yet
+                NewUser newUserPage = new NewUser();
+                newUserPage.ShowPage();
+                frame.dispose();
+            }
+        });
     }
 
     public static void main(String[] args) {

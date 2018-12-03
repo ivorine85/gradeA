@@ -16,14 +16,9 @@ public class AddCourse {
         btnUpload.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //need to send to page asking for file path
-                String[] args = new String[0];
-                try {
-                    ImportCSV.main(args);
-                }
-                catch (Exception ex) {
-                    System.out.println("CSV did not upload.");
-                }
+                ImportPage importPageNext = new ImportPage();
+                importPageNext.ShowPage();
+                frame.dispose();
             }
         });
         btnCreate.addActionListener(new ActionListener() {
