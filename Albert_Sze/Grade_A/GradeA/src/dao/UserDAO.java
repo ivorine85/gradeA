@@ -76,6 +76,9 @@ public class UserDAO {
                     res[i] = rs.getString(i+1);
                 }
             }
+            rs.close();
+            ps.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
