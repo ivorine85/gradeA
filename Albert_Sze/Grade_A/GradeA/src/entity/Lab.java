@@ -11,6 +11,8 @@ public class Lab {
 	private Time[] classtime;
 	private Assistant teachAssist;
 	private Assistant courseAssist;
+	private String courseName;
+	String[] weekday;
 	private HashMap<String, ArrayList<Student>> students;
 	
 	public Lab() {
@@ -32,9 +34,34 @@ public class Lab {
 		this.students = new HashMap();
 		students.put("undergrad", new ArrayList<Student>(0));
 		students.put("grad", new ArrayList<Student>(0));	
-	}	
-	
-/*********************************** Getters and Setters ***********************************/
+	}
+
+	public Lab(String cname, Time startTime, Time endTime, String[] weekday){
+		this.section = cname;
+		this.classtime = new Time[2];
+		this.classtime[0] = startTime;
+		this.classtime[1] = endTime;
+		this.weekday = weekday;
+	}
+
+	public String[] getWeekday() {
+		return weekday;
+	}
+
+	public void setWeekday(String[] weekday) {
+		this.weekday = weekday;
+	}
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	/*********************************** Getters and Setters ***********************************/
+
 	public String getSection() {
 		return section;
 	}

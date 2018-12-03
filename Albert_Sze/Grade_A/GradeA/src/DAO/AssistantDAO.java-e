@@ -1,6 +1,8 @@
 package dao;
 
 import entity.Assistant;
+import entity.Course;
+import entity.Lab;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,14 +40,15 @@ public class AssistantDAO {
         return object;
     }
 
-    public List<Assistant> findAssistantByCourse(int cid) throws SQLException {
+    public List<Assistant> findAssistantByCourse(String cname) throws SQLException {
         connection = Connector.getConnection();
         List<Assistant> rtn = new ArrayList<>();
-        String sql = "select tf.tfname,tf.email from Teaching_fellow tf , assist a" +
-                "where a.tfid = tf.tfid AND a.cid = ?";
+        CourseDAO cd = new CourseDAO();
+        int cid = cd.getIdByName(cname);
+        String sql = "select tf.tfname,tf.email from Teaching_fellow tf , assist_course a where a.tfname = tf.tfname AND a.cid = ?";
         try{
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1,String.valueOf(cid));
+            ps.setInt(1,cid);
             ResultSet rs =ps.executeQuery();
             while(rs.next()){
                 rtn.add(new Assistant(rs.getString(1),rs.getString(2)));
@@ -65,8 +68,8 @@ public class AssistantDAO {
         String sql = "insert into Teaching_fellow (tfname,email) values (?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1,a.getEmail());
-            ps.setString(2,a.getName());;
+            ps.setString(1,a.getName());
+            ps.setString(2,a.getEmail());;
             ps.execute();
             ps.close();
         } catch (SQLException e) {
@@ -76,15 +79,53 @@ public class AssistantDAO {
         return true;
     }
 
-//    public boolean asignAssistantToCourse(Assistant a, Course c) throws SQLException {
-//        if(findAssistantByName(a.getName()) == null) insert(a);
-//        connection = Connector.getConnection();
-//        String sql = "insert into assist (tfid,cid) values (?,?)";
-//        try {
-//            PreparedStatement statement = connection.prepareStatement(sql);
-//            statement.setInt(a.)
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void assign(Assistant a,String courseName){
+        CourseDAO cd = new CourseDAO();
+        int cid = cd.getIdByName(courseName);
+        connection = Connector.getConnection();
+        String sql = "insert into assist_course (cid,tfname) values (?,?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1,cid);
+            ps.setString(2,a.getName());;
+            ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void assignToLab(String aname, Lab l){
+        connection = Connector.getConnection();
+        String sql = "insert into assist_lab (labname,tfname) values (?,?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,l.getSection());
+            ps.setString(2,aname);
+            ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean checkExist(String email){
+        connection = Connector.getConnection();
+        String sql = "select * from teaching_fellow where email = ?";
+        boolean r = false;
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,email);
+            ResultSet res = ps.executeQuery();
+            r = res.next();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return r;
+    }
+
 }
