@@ -7,9 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 import entity.*;
 
-public class ImportCSV extends Adjustments {
+public abstract class ImportCSV extends Adjustments {
 
-	public static void main(String[] args) throws Exception   {
+	//public static void main(String[] args) throws Exception   {
+	public Course Import(File file) throws Exception   {
 		HashMap<String, Double> tempStudentGrades = new HashMap();                              // Obtains Student's assignment averages per type, used to calculate student's grades later 
 		ArrayList<String> csvData = new ArrayList<String>(1);									// Obtains csv information by row
 		String assignType;																		// Assignment type
@@ -27,7 +28,7 @@ public class ImportCSV extends Adjustments {
 		double score;																			// score of assignment 
 		double percent;																			// percent assignment holds 
 		//Need to change file directory if you are going to run this code
-		File file = new File("C:\\Users\\Albert Sze\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Github\\gradeA\\Albert_Sze\\Grade_A\\GradeA\\src\\Excel_template_4.csv");			
+		//File file = new File("C:\\Users\\Albert Sze\\Google Drive\\Boston University\\CS591_Object_Oriented_Design_in_Java\\Project\\Github\\gradeA\\Albert_Sze\\Grade_A\\GradeA\\src\\Excel_template_4.csv");
 		
 /*********************************** for the purpose of this example ***********************************/
 		Profilete newProfile = new Profilete();
@@ -233,5 +234,6 @@ public class ImportCSV extends Adjustments {
 			}
 			System.out.println("");
 		}
+		return newCourse;
 	}
 }
