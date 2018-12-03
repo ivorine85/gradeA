@@ -1,6 +1,8 @@
 package gui;
 
+import dao.AssistantDAO;
 import dao.CourseDAO;
+import entity.Assistant;
 import entity.Course;
 
 import java.awt.*;
@@ -12,6 +14,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import javax.swing.JTextField;
@@ -368,15 +371,36 @@ public class CourseInfo {
                     Course c = new Course(cname,startTime,endTime,startDate,endDate,day);
                     CourseDAO cd = new CourseDAO();
                     cd.insert(c);
+                    AssistantDAO assistantDAO = new AssistantDAO();
+                    String tfName2 = textFieldTF2Name.getText();
+                    String tfEmail2 = textFieldTF2Email.getText();
+                    String tfName1 = textFieldTF1Name.getText();
+                    String tfEmail1 = textFieldTF1Email.getText();
+                    try {
+                        Assistant a1 = new Assistant(tfName1,tfEmail1);
+                        if(!assistantDAO.checkExist(tfEmail1)) assistantDAO.insert(a1);
+                        Assistant a2 = new Assistant(tfName2,tfEmail2);
+                        if(!assistantDAO.checkExist(tfEmail2)) assistantDAO.insert(a2);
+                        assistantDAO.assign(a1,cname);
+                        assistantDAO.assign(a2,cname);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                     JOptionPane.showMessageDialog(null, "Data Submitted");
-                    LabInfo labInfoPage = new LabInfo("LabInfo");
+                    LabInfo labInfoPage = null;
+                    try {
+                        labInfoPage = new LabInfo("LabInfo",cname);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                     labInfoPage.ShowPage();
+
                     frame.dispose();
                 }
 
-                LabInfo labInfoPage = new LabInfo("LabInfo");
-                labInfoPage.ShowPage();
-                frame.dispose();
+//                LabInfo labInfoPage = new LabInfo("LabInfo",);
+//                labInfoPage.ShowPage();
+//                frame.dispose();
 
 
             }

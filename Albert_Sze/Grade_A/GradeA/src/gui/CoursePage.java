@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.awt.event.ActionEvent;
@@ -261,7 +262,7 @@ public class CoursePage {
 		btnAddStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (CalcSum(tableGradeBreakDown)) {
-					AddStudents addStudentsPage = new AddStudents("CoursePage");
+					AddStudents addStudentsPage = new AddStudents("CoursePage",currentCourse.getCourseName());
 					addStudentsPage.ShowPage();
 					frame.dispose();
 				}
@@ -293,7 +294,12 @@ public class CoursePage {
 		btnAddLab.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (CalcSum(tableGradeBreakDown)) {
-					LabInfo labInfoPage = new LabInfo("CoursePage");
+					LabInfo labInfoPage = null;
+					try {
+						labInfoPage = new LabInfo("CoursePage",newCourse.getCourseName());
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
 					labInfoPage.ShowPage();
 					frame.dispose();
 				}
