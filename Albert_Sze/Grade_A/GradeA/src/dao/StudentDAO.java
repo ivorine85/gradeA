@@ -1,5 +1,7 @@
 package dao;
 
+import entity.Course;
+import entity.Lab;
 import entity.Student;
 
 import java.sql.Connection;
@@ -62,7 +64,9 @@ public class StudentDAO {
         return true;
     }
 
-    public List<Student> findStudentByCourse(int cid){
+    public List<Student> findStudentByCourse(String cname){
+        CourseDAO cd = new CourseDAO();
+        int cid =cd.getIdByName(cname);
         connection = Connector.getConnection();
         List<Student> objs = new ArrayList<>();
         String sql = "select s.sid,s.sname,s.sype,s.photo,s.email,s.year from Student s,attend_course ac ,Cousrse c" +
@@ -79,12 +83,46 @@ public class StudentDAO {
                         res.getString(5),
                         res.getInt(6)));
             }
+            res.close();
+            ps.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return objs;
     }
 
+    public void assignToCourse(Student s,String courseName){
+        CourseDAO cd = new CourseDAO();
+        int cid = cd.getIdByName(courseName);
+        connection = Connector.getConnection();
+        String sql = "insert into attend_course (cid,sid) values (?,?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1,cid);
+            ps.setString(2,s.getSid());
+            ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void assignToLab(Student s, Lab l){
+        connection = Connector.getConnection();
+        String sql = "insert into attend_lab (sid,labname) values (?,?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,s.getSid());
+            ps.setString(2,l.getSection());
+            ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

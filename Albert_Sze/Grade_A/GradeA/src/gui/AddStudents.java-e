@@ -16,9 +16,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JComboBox;
+
+import dao.CourseDAO;
+import dao.LabDAO;
+import dao.StudentDAO;
 import entity.*;
 
 public class AddStudents {
@@ -26,6 +32,8 @@ public class AddStudents {
     private JFrame frame;
     private JTable table;
     private static String prevPage;
+    Map<String,Lab> labList = new HashMap<>();
+    private static String curCourse;
 
     /**
      * Launch the application.
@@ -35,7 +43,7 @@ public class AddStudents {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    AddStudents window = new AddStudents(prevPage);
+                    AddStudents window = new AddStudents(prevPage,curCourse);
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -50,8 +58,9 @@ public class AddStudents {
     /**
      * Create the application.
      */
-    public AddStudents(String prevPage) {
+    public AddStudents(String prevPage,String cname) {
         this.prevPage = prevPage;
+        this.curCourse = cname;
         //connection = SqlConnection.dbConnector();
         initialize();
     }
@@ -61,11 +70,11 @@ public class AddStudents {
      */
     private void initialize() {
 /*********************************** for the purpose of this example ***********************************/
-        Course newCourse = new Course("CS591");												// Generate new course
-
-        newCourse.getLabSections().put("A1",new Lab("A1"));										// Create Lab Sections
-        newCourse.getLabSections().put("A2",new Lab("A2"));										// Create Lab Sections
-        newCourse.getLabSections().put("A3",new Lab("A3"));										// Create Lab Sections
+//        Course newCourse = new Course("CS591");												// Generate new course
+//
+//        newCourse.getLabSections().put("A1",new Lab("A1"));										// Create Lab Sections
+//        newCourse.getLabSections().put("A2",new Lab("A2"));										// Create Lab Sections
+//        newCourse.getLabSections().put("A3",new Lab("A3"));										// Create Lab Sections
 /*******************************************************************************************************/
         frame = new JFrame();
         frame.getContentPane().setForeground(new Color(0, 0, 0));
@@ -81,9 +90,17 @@ public class AddStudents {
         //Create Combo box for student type and labs
         // For the purpose of this example, but this should come from the labs section page
         JComboBox<String> labs = new JComboBox<String>();
-        for (Map.Entry<String, Lab> entry : newCourse.getLabSections().entrySet()) {
-            labs.addItem(entry.getKey());
+
+        //TODO: find all lab section
+        LabDAO labDAO = new LabDAO();
+        for(Lab l:labDAO.findLabOfCourse(curCourse)){
+            labList.put(l.getSection(),l);
+            labs.addItem(l.getSection());
         }
+//        for (Map.Entry<String, Lab> entry : newCourse.getLabSections().entrySet()) {
+//            labs.addItem(entry.getKey());
+//        }
+
 
         JComboBox<String> studentType = new JComboBox<String>();
         studentType.addItem("Undergraduate");
@@ -142,13 +159,17 @@ public class AddStudents {
                         int year = Integer.parseInt(table.getValueAt(row, 4).toString());
                         String labSection = table.getValueAt(row, 5).toString();
                         String studType = table.getValueAt(row, 6).toString();
+                        //TODO:1.Add student to table
+                        Student s = new Student(sid,name,studType,null,email,year);
+                        StudentDAO studentDAO = new StudentDAO();
+                        studentDAO.insert(s);
+                        //TODO:2.Assign student to course
+                        studentDAO.assignToCourse(s,curCourse);
+                        //TODO:3.Assign student to lab
+                        Lab l = labList.get(labSection);
+                        studentDAO.assignToLab(s,l);
+
                         // bug below//
-                        if (studType.equals("Undergraduate")){
-                            newCourse.getLabSections().get(labSection).getStudents().get("undergrad").add(new Student(sid,name,studType,"None",email,year));
-                        }
-                        else {
-                            newCourse.getLabSections().get(labSection).getStudents().get("grad").add(new Student(sid,name,studType,"None",email,year));
-                        }
 
                     }
                     // return to proper frame

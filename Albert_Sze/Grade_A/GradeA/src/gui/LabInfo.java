@@ -1,5 +1,10 @@
 package gui;
 
+import dao.AssistantDAO;
+import dao.LabDAO;
+import entity.Assistant;
+import entity.Lab;
+
 import java.awt.*;
 
 import javax.swing.JFrame;
@@ -7,6 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.util.ArrayList;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
@@ -20,7 +28,8 @@ public class LabInfo {
     private JTextField textFieldEndTime;
     private JLabel lblCourseInfo;
     private static String prevPage;
-
+    private static String coursename;
+    private static String chosedName;
     /**
      * Launch the application.
      */
@@ -29,7 +38,7 @@ public class LabInfo {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    LabInfo window = new LabInfo(prevPage);
+                    LabInfo window = new LabInfo(prevPage,coursename);
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -41,15 +50,16 @@ public class LabInfo {
     /**
      * Create the application.
      */
-    public LabInfo(String prevPage) {
+    public LabInfo(String prevPage,String courseName) throws SQLException {
         this.prevPage = prevPage;
+        this.coursename = courseName;
         initialize();
     }
 
     /**
      * Initialize the contents of the frame.
      */
-    private void initialize() {
+    private void initialize() throws SQLException {
         frame = new JFrame();
         frame.setBounds(100, 100, 1000, 489);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -157,12 +167,14 @@ public class LabInfo {
         frame.getContentPane().add(lblAssignTF);
 
         JComboBox<String> comboBoxTF = new JComboBox<String>();
-        comboBoxTF.addItem("Gavin Brown");
-        comboBoxTF.addItem("Nathan Canterbury");
-        comboBoxTF.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
+        AssistantDAO ad =  new AssistantDAO();
+        java.util.List<Assistant> assistantList = ad.findAssistantByCourse(coursename);
+        for(Assistant a:assistantList) comboBoxTF.addItem(a.getName());
+//        comboBoxTF.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent arg0) {
+//                chosedName =
+//            }
+//        });
         comboBoxTF.setBounds(40, 300, 200, 20);
         frame.getContentPane().add(comboBoxTF);
 
@@ -215,15 +227,36 @@ public class LabInfo {
                 if(textFieldLabSection.getText().isEmpty()||(textFieldStartTime.getText().isEmpty())||(textFieldEndTime.getText().isEmpty())||((radioButtonTues.isSelected())&&(radioButtonMon.isSelected()))||(comboBoxStart.getSelectedItem().equals("Select")))
                     JOptionPane.showMessageDialog(null, "Data Missing");
                 else{
+                    String labname = textFieldLabSection.getText();
+                    String startTime = textFieldStartTime.getText();
+                    Time labstart = getTime(startTime);
+                    String endTime = textFieldEndTime.getText();
+                    Time labend = getTime(endTime);
+                    java.util.List<String> days = new ArrayList<>();
+                    if(radioButtonMon.isSelected()) days.add("Monday");
+                    if(radioButtonTues.isSelected()) days.add("Tuesday");
+                    if(radioButtonWed.isSelected()) days.add("Wednesday");
+                    if(radioButtonThurs.isSelected()) days.add("Thursday");
+                    if(radioButtonFri.isSelected()) days.add("Friday");
+                    String[] day = new String[days.size()];
+                    for(int i = 0;i<day.length;i++) day[i] = days.get(i);
+                    Lab newlab = new Lab(labname,labstart,labend,day);
+                    newlab.setCourseName(coursename);
+                    //TODO:Test assign tf to lab
+                    LabDAO ld = new LabDAO();
+                    ld.insert(newlab);
+                    String tfname = comboBoxTF.getSelectedItem().toString();
+                    AssistantDAO assistantDAO = new AssistantDAO();
+                    assistantDAO.assignToLab(tfname,newlab);
                     JOptionPane.showMessageDialog(null, "Data Submitted");
-                    AddStudents addStudentsPage = new AddStudents(prevPage);
+                    AddStudents addStudentsPage = new AddStudents(prevPage,coursename);
                     addStudentsPage.ShowPage();
                     frame.dispose();
                 }
 
-                AddStudents addStudentsPage = new AddStudents(prevPage);
-                addStudentsPage.ShowPage();
-                frame.dispose();
+//                AddStudents addStudentsPage = new AddStudents(prevPage,newlab);
+//                addStudentsPage.ShowPage();
+//                frame.dispose();
 
 
 
@@ -245,6 +278,9 @@ public class LabInfo {
 
             }
         });
-
+    }
+    private Time getTime(String str){
+        str+=":00";
+        return Time.valueOf(str);
     }
 }

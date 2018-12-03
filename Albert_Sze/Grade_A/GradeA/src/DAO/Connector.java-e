@@ -10,7 +10,7 @@ public class Connector {
         try{
             String user = "root";
             String psw = "mjmd1995";
-            String url = "jdbc:mysql://localhost:3306/gradeA?&serverTimezone=UTC";
+            String url = "jdbc:mysql://localhost:3306/gradeA?&serverTimezone=EST";
             conn = DriverManager.getConnection(url,user,psw);
         }
         catch (SQLException e){
