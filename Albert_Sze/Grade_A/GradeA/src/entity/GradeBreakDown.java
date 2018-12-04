@@ -1,83 +1,63 @@
 package entity;
 
 public class GradeBreakDown {
-	private String assignType;
-	private String cwname;
-	private double undergradTypePercentage;
-	private double undergradAssignPercent;
-	private double gradTypePercentage;
-	private double gradAssignPercent;
-	private int weight;
-	private int totalPoints;
-	private double average;
-	private int numAssign;
+	String cwName;
+	String courseName;
+	float typePercentage;
+	float percentage;
+	String type;
+	int weight;
+	int totalPoint;
+	int pointLost;
 
-	public GradeBreakDown() {
-		this.assignType = "None";
-		this.undergradAssignPercent = 0.0;
-		this.gradAssignPercent = 0.0;
-		this.weight = 0;
-		this.totalPoints = 0;
-		this.average = 0.0;
-		this.numAssign = 0;
+	public GradeBreakDown(String name,String cname,float tpt,float p,String t,int w,int tt,int pl){
+		cwName = name;
+		courseName = cname;
+		typePercentage = tpt;
+		percentage = p;
+		type = t;
+		weight = w;
+		totalPoint = tt;
+		pointLost = pl;
+	}
+	public String getCourseName() {
+		return courseName;
 	}
 
-	public GradeBreakDown(String assignType, double undergradAssignPercent, double gradAssignPercent, int weight, int totalPoints,double average, int numAssign) {
-		this.assignType = assignType;
-		this.undergradAssignPercent = undergradAssignPercent;
-		this.gradAssignPercent = gradAssignPercent;
-		this.weight = weight;
-		this.totalPoints = totalPoints;
-		this.average = average;
-		this.numAssign = numAssign;
-	}
-/*********************************** Getters and Setters ***********************************/
-	public String getAssignType() {
-		return assignType;
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
 
-	public void setAssignType(String assignType) {
-		this.assignType = assignType;
+	public String getCwName() {
+		return cwName;
 	}
 
-	public String getCwname() {
-		return cwname;
+	public void setCwName(String cwName) {
+		this.cwName = cwName;
 	}
 
-	public void setCwname(String cwname) {
-		this.cwname = cwname;
+	public float getTypePercentage() {
+		return typePercentage;
 	}
 
-	public double getUndergradTypePercentage() {
-		return undergradTypePercentage;
+	public void setTypePercentage(float typePercentage) {
+		this.typePercentage = typePercentage;
 	}
 
-	public void setUndergradTypePercentage(double undergradTypePercentage) {
-		this.undergradTypePercentage = undergradTypePercentage;
+	public float getPercentage() {
+		return percentage;
 	}
 
-	public double getGradTypePercentage() {
-		return gradTypePercentage;
+	public void setPercentage(float percentage) {
+		this.percentage = percentage;
 	}
 
-	public void setGradTypePercentage(double gradTypePercentage) {
-		this.gradTypePercentage = gradTypePercentage;
+	public String getType() {
+		return type;
 	}
 
-	public double getUndergradAssignPercent() {
-		return undergradAssignPercent;
-	}
-
-	public void setUndergradAssignPercent(double undergradAssignPercent) {
-		this.undergradAssignPercent = undergradAssignPercent;
-	}
-
-	public double getGradAssignPercent() {
-		return gradAssignPercent;
-	}
-
-	public void setGradAssignPercent(double gradAssignPercent) {
-		this.gradAssignPercent = gradAssignPercent;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public int getWeight() {
@@ -88,28 +68,31 @@ public class GradeBreakDown {
 		this.weight = weight;
 	}
 
-	public int getTotalPoints() {
-		return totalPoints;
+	public int getTotalPoint() {
+		return totalPoint;
 	}
 
-	public void setTotalPoints(int totalPoints) {
-		this.totalPoints = totalPoints;
+	public void setTotalPoint(int totalPoint) {
+		this.totalPoint = totalPoint;
 	}
 
-	public double getAverage() {
-		return average;
+	public int getPointLost() {
+		return pointLost;
 	}
 
-	public void setAverage(double average) {
-		this.average = average;
+	public void setPointLost(int pointLost) {
+		this.pointLost = pointLost;
 	}
 
-	public int getNumAssign() {
-		return numAssign;
-	}
+	public GradeBreakDown(String cwName,int tp,int p,String t,int w,int totalPoint,int pl){
+		this.cwName = cwName;
+		typePercentage = tp;
+		percentage = p;
+		type = t;
+		weight = w;
+		this.totalPoint = totalPoint;
+		pointLost = pl;
 
-	public void setNumAssign(int numAssign) {
-		this.numAssign = numAssign;
 	}
 
 }	
