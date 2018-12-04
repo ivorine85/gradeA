@@ -1,5 +1,6 @@
 package dao;
 
+import Import.ImportCSV;
 import com.mysql.cj.protocol.Resultset;
 
 import java.sql.*;
@@ -7,17 +8,14 @@ import java.sql.*;
 public class test {
 
 
-    public static void main(String[] args) throws SQLException {
-        String sql = "select * from course where cid = 5";
-        Connection c = Connector.getConnection();
-        PreparedStatement ps = c.prepareStatement(sql);
-        ResultSet res = ps.executeQuery();
-        while(res.next()){
-            System.out.println(res.getString("startTime"));
-        }
+    public static void main(String[] args) throws Exception {
+        ImportCSV importCSV = new ImportCSV() {
+            @Override
+            public void Import() throws Exception {
+                super.Import();
+            }
+        };
+        importCSV.Import();
     }
-    private static Time getTime(String str){
-        str+=":00";
-        return Time.valueOf(str);
-    }
+
 }
