@@ -1,183 +1,224 @@
-//package gui;
-//
-//import java.awt.EventQueue;
-//
-//import javax.swing.JFrame;
-//import javax.swing.JLabel;
-//import javax.swing.JOptionPane;
-//
-//import java.awt.Font;
-//import javax.swing.JTextField;
-//import javax.swing.JComboBox;
-//import javax.swing.JButton;
-//import java.awt.event.ActionListener;
-//import java.awt.event.ActionEvent;
-//
-//public class NewUser {
-//
-//	private JFrame frame;
-//	private JTextField textFieldUsername;
-//	private JTextField textFieldPassword;
-//	private JTextField textFieldReenter;
-//	private JLabel lblQuestion1;
-//	private JTextField textFieldA1;
-//	private JTextField textFieldA2;
-//	private JTextField textFieldA3;
-//
-//	/**
-//	 * Launch the application.
-//	 */
-//	//public static void main(String[] args) {
-//	public static void ShowPage() {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					NewUser window = new NewUser();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-//
-//	/**
-//	 * Create the application.
-//	 */
-//	public NewUser() {
-//		initialize();
-//	}
-//
-//	/**
-//	 * Initialize the contents of the frame.
-//	 */
-//	private void initialize() {
-//		frame = new JFrame();
-//		frame.setBounds(100, 100, 450, 639);
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.getContentPane().setLayout(null);
-//
-//		JLabel lblNewUser = new JLabel("New User");
-//		lblNewUser.setFont(new Font("Tahoma", Font.PLAIN, 20));
-//		lblNewUser.setBounds(10, 11, 101, 25);
-//		frame.getContentPane().add(lblNewUser);
-//
-//		JLabel lblUsername = new JLabel("Username");
-//		lblUsername.setBounds(10, 47, 62, 14);
-//		frame.getContentPane().add(lblUsername);
-//
-//		textFieldUsername = new JTextField();
-//		textFieldUsername.setBounds(10, 72, 86, 20);
-//		frame.getContentPane().add(textFieldUsername);
-//		textFieldUsername.setColumns(10);
-//
-//		JLabel lblPassword = new JLabel("Password");
-//		lblPassword.setBounds(10, 103, 62, 14);
-//		frame.getContentPane().add(lblPassword);
-//
-//		textFieldPassword = new JTextField();
-//		textFieldPassword.setBounds(10, 128, 86, 20);
-//		frame.getContentPane().add(textFieldPassword);
-//		textFieldPassword.setColumns(10);
-//
-//		JLabel lblNewLabel = new JLabel("Reenter Password");
-//		lblNewLabel.setBounds(10, 159, 115, 14);
-//		frame.getContentPane().add(lblNewLabel);
-//
-//		textFieldReenter = new JTextField();
-//		textFieldReenter.setBounds(10, 184, 86, 20);
-//		frame.getContentPane().add(textFieldReenter);
-//		textFieldReenter.setColumns(10);
-//
-//		lblQuestion1 = new JLabel("Question 1:");
-//		lblQuestion1.setBounds(10, 215, 86, 14);
-//		frame.getContentPane().add(lblQuestion1);
-//
-//		JComboBox comboBoxQ1 = new JComboBox();
-//		comboBoxQ1.addItem("Question1 choice A");
-//		comboBoxQ1.addItem("Question1 choice B");
-//		comboBoxQ1.addItem("Question1 choice C");
-//		comboBoxQ1.setBounds(10, 240, 396, 20);
-//		frame.getContentPane().add(comboBoxQ1);
-//
-//		JLabel lblAnswer1 = new JLabel("Answer:");
-//		lblAnswer1.setBounds(10, 271, 71, 14);
-//		frame.getContentPane().add(lblAnswer1);
-//
-//		textFieldA1 = new JTextField();
-//		textFieldA1.setBounds(10, 296, 396, 20);
-//		frame.getContentPane().add(textFieldA1);
-//		textFieldA1.setColumns(10);
-//
-//		JLabel lblQuestion2 = new JLabel("Question 2:");
-//		lblQuestion2.setBounds(10, 330, 101, 14);
-//		frame.getContentPane().add(lblQuestion2);
-//
-//		JComboBox comboBoxQ2 = new JComboBox();
-//		comboBoxQ2.addItem("Question2 choice A");
-//		comboBoxQ2.addItem("Question2 choice B");
-//		comboBoxQ2.addItem("Question2 choice C");
-//		comboBoxQ2.setBounds(10, 355, 396, 20);
-//		frame.getContentPane().add(comboBoxQ2);
-//
-//		JLabel lblAnswer2 = new JLabel("Answer:");
-//		lblAnswer2.setBounds(10, 386, 80, 14);
-//		frame.getContentPane().add(lblAnswer2);
-//
-//		textFieldA2 = new JTextField();
-//		textFieldA2.setBounds(10, 405, 396, 20);
-//		frame.getContentPane().add(textFieldA2);
-//		textFieldA2.setColumns(10);
-//
-//		JLabel lblQuestion3 = new JLabel("Question 3:");
-//		lblQuestion3.setBounds(10, 440, 62, 14);
-//		frame.getContentPane().add(lblQuestion3);
-//
-//		JComboBox comboBoxQ3 = new JComboBox();
-//		comboBoxQ3.addItem("Question3 choice A");
-//		comboBoxQ3.addItem("Question3 choice B");
-//		comboBoxQ3.addItem("Question3 choice C");
-//		comboBoxQ3.setBounds(10, 465, 396, 20);
-//		frame.getContentPane().add(comboBoxQ3);
-//
-//		JLabel lblAnswer3 = new JLabel("Answer:");
-//		lblAnswer3.setBounds(10, 496, 101, 14);
-//		frame.getContentPane().add(lblAnswer3);
-//
-//		textFieldA3 = new JTextField();
-//		textFieldA3.setBounds(10, 521, 396, 20);
-//		frame.getContentPane().add(textFieldA3);
-//		textFieldA3.setColumns(10);
-//
-//		JButton btnCancel = new JButton("Cancel");
-//		btnCancel.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				Login.main(new String[0]);
-//				frame.dispose();
-//			}
-//		});
-//		btnCancel.setBounds(317, 567, 89, 23);
-//		frame.getContentPane().add(btnCancel);
-//		JButton btnFinish = new JButton("Finish");
-//		btnFinish.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				if (textFieldUsername.getText().isEmpty() || textFieldPassword.getText().isEmpty() || textFieldReenter.getText().isEmpty() || textFieldA1.getText().isEmpty() || textFieldA2.getText().isEmpty() || textFieldA3.getText().isEmpty() || !textFieldPassword.getText().equals(textFieldReenter.getText()) ) {
-//					JOptionPane.showMessageDialog(null, "Not all components are filled in.");
-//				}
-//				else {
-//					Dashboard dashboardPage = new Dashboard();
-//					dashboardPage.ShowPage();
-//					frame.dispose();
-//				}
-//			}
-//		});
-//
-//		btnFinish.setBounds(218, 567, 89, 23);
-//		frame.getContentPane().add(btnFinish);
-//	}
-//	private static class __Tmp {
-//		private static void __tmp() {
-//			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
-//		}
-//	}
-//}
+package gui;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class NewUser {
+
+	private JFrame frame;
+	private JTextField usernameTextField;
+	private JTextField passwordTextField;
+	private JTextField reenterTextField;
+	private JTextField answer1;
+	private JTextField answer2;
+	private JTextField answer3;
+
+	//public static void main(String[] args) {
+	public static void ShowPage() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					NewUser window = new NewUser();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public NewUser() {
+		initialize();
+	}
+
+	private void initialize() {
+		JLabel NewUserLabel;
+		JLabel usernameLabel;
+		JLabel passwordLabel;
+		JLabel reenterLabel;
+		JLabel question1Label;
+		JLabel question2Label;
+		JLabel question3Label;
+		JLabel answer1Label;
+		JLabel answer2Label;
+		JLabel answer3Label;
+		JComboBox question1Options;
+		JComboBox question2Options;
+		JComboBox question3Options;
+		JButton cancelButton;
+		JButton finishButton;
+
+		/*********************************** Generate frame for New User page ***************************************/
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 639);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+
+		/*********************************** New User Title **************************************/
+		NewUserLabel = new JLabel("New User");
+		NewUserLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		NewUserLabel.setBounds(10, 11, 101, 25);
+		frame.getContentPane().add(NewUserLabel);
+
+		/*********************************** Username label **************************************/
+		usernameLabel = new JLabel("Username");
+		usernameLabel.setBounds(10, 47, 62, 14);
+		frame.getContentPane().add(usernameLabel);
+
+		/*********************************** Username textfield **************************************/
+		usernameTextField = new JTextField();
+		usernameTextField.setBounds(10, 72, 86, 20);
+		frame.getContentPane().add(usernameTextField);
+		usernameTextField.setColumns(10);
+
+		/*********************************** Password label **************************************/
+		passwordLabel = new JLabel("Password");
+		passwordLabel.setBounds(10, 103, 62, 14);
+		frame.getContentPane().add(passwordLabel);
+
+		/*********************************** Password textfield **************************************/
+		passwordTextField = new JTextField();
+		passwordTextField.setBounds(10, 128, 86, 20);
+		frame.getContentPane().add(passwordTextField);
+		passwordTextField.setColumns(10);
+
+		/*********************************** Reenter Password label **************************************/
+		reenterLabel = new JLabel("Reenter Password");
+		reenterLabel.setBounds(10, 159, 115, 14);
+		frame.getContentPane().add(reenterLabel);
+
+		/*********************************** Reenter Password textfield **************************************/
+		reenterTextField = new JTextField();
+		reenterTextField.setBounds(10, 184, 86, 20);
+		frame.getContentPane().add(reenterTextField);
+		reenterTextField.setColumns(10);
+
+		/*********************************** Question1 label **************************************/
+		question1Label = new JLabel("Question 1:");
+		question1Label.setBounds(10, 215, 86, 14);
+		frame.getContentPane().add(question1Label);
+
+		/*********************************** Question1 Combobox **************************************/
+		question1Options = new JComboBox();
+        //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+		// Andy Change the questions options
+		question1Options.addItem("Question1 choice A");
+		question1Options.addItem("Question1 choice B");
+		question1Options.addItem("Question1 choice C");
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+		question1Options.setBounds(10, 240, 396, 20);
+		frame.getContentPane().add(question1Options);
+
+		/*********************************** Answer1 label **************************************/
+		answer1Label = new JLabel("Answer:");
+		answer1Label.setBounds(10, 271, 71, 14);
+		frame.getContentPane().add(answer1Label);
+
+		/*********************************** Answer1 textfield **************************************/
+		answer1 = new JTextField();
+		answer1.setBounds(10, 296, 396, 20);
+		frame.getContentPane().add(answer1);
+		answer1.setColumns(10);
+
+		/*********************************** Question2 label **************************************/
+		question2Label = new JLabel("Question 2:");
+		question2Label.setBounds(10, 330, 101, 14);
+		frame.getContentPane().add(question2Label);
+
+		/*********************************** Question2 Combobox **************************************/
+		question2Options = new JComboBox();
+		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+		// Andy Change the questions options
+		question2Options.addItem("Question2 choice A");
+		question2Options.addItem("Question2 choice B");
+		question2Options.addItem("Question2 choice C");
+		//////////////////////////////////////////////////////////////////////////////////////////////////
+		question2Options.setBounds(10, 355, 396, 20);
+		frame.getContentPane().add(question2Options);
+
+		/*********************************** Answer2 label **************************************/
+		answer2Label = new JLabel("Answer:");
+		answer2Label.setBounds(10, 386, 80, 14);
+		frame.getContentPane().add(answer2Label);
+
+		/*********************************** Answer2 textfield **************************************/
+		answer2 = new JTextField();
+		answer2.setBounds(10, 405, 396, 20);
+		frame.getContentPane().add(answer2);
+		answer2.setColumns(10);
+
+		/*********************************** Question3 label **************************************/
+		question3Label = new JLabel("Question 3:");
+		question3Label.setBounds(10, 440, 62, 14);
+		frame.getContentPane().add(question3Label);
+
+		/*********************************** Question3 combobox **************************************/
+		question3Options = new JComboBox();
+		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+		// Andy Change the questions options
+		question3Options.addItem("Question3 choice A");
+		question3Options.addItem("Question3 choice B");
+		question3Options.addItem("Question3 choice C");
+		//////////////////////////////////////////////////////////////////////////////////////////////////
+		question3Options.setBounds(10, 465, 396, 20);
+		frame.getContentPane().add(question3Options);
+
+		/*********************************** Answer3 label **************************************/
+		answer3Label = new JLabel("Answer:");
+		answer3Label.setBounds(10, 496, 101, 14);
+		frame.getContentPane().add(answer3Label);
+
+		/*********************************** Answer3 textfield **************************************/
+		answer3 = new JTextField();
+		answer3.setBounds(10, 521, 396, 20);
+		frame.getContentPane().add(answer3);
+		answer3.setColumns(10);
+
+		/*********************************** Cancel Button **************************************/
+		cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Login.main(new String[0]);
+				frame.dispose();
+			}
+		});
+		cancelButton.setBounds(317, 567, 89, 23);
+		frame.getContentPane().add(cancelButton);
+		
+		/*********************************** Finish Button **************************************/
+		finishButton = new JButton("Finish");
+		finishButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (usernameTextField.getText().isEmpty() || passwordTextField.getText().isEmpty() || reenterTextField.getText().isEmpty() || answer1.getText().isEmpty() || answer2.getText().isEmpty() || answer3.getText().isEmpty() || !passwordTextField.getText().equals(reenterTextField.getText()) ) {
+					JOptionPane.showMessageDialog(null, "Not all components are filled in.");
+				}
+				else {
+					//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+					// Add New User information into database
+					//////////////////////////////////////////////////////////////////////////////////////////////////
+					Dashboard dashboardPage = new Dashboard();
+					dashboardPage.ShowPage();
+					frame.dispose();
+				}
+			}
+		});
+
+		finishButton.setBounds(218, 567, 89, 23);
+		frame.getContentPane().add(finishButton);
+	}
+	private static class __Tmp {
+		private static void __tmp() {
+			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
+		}
+	}
+}
