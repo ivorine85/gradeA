@@ -26,8 +26,8 @@ public class Dashboard {
     /**
      * Launch the application.
      */
-    //public static void main(String[] args) {
-    public static void ShowPage() {
+    public static void main(String[] args) {
+    //public static void ShowPage() {
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -58,17 +58,23 @@ public class Dashboard {
     private void initialize() {
 /*********************************** for the purpose of this example ***********************************/
         CourseDAO cd = new CourseDAO();
+        int totalCount = 0;
         List<Course> allCourses = cd.findAllActive();										// Create Lab Sections
+        System.out.println(allCourses.size());
         Profilete userProfile = new Profilete();
         userProfile.setCourses(allCourses);
         LabDAO labDAO = new LabDAO();
         Map<Course,List<Lab>> getLabsOfCourse = new HashMap<>();
         for(Course c:allCourses){
             List<Lab> labs = labDAO.findLabOfCourse(c.getCourseName());
+            System.out.println(labs.get(0).getSection());
+            totalCount += 1+labs.size();
             getLabsOfCourse.put(c,labs);
         }
         HashMap<Integer,Course> courseList = new HashMap<>(0);
-        HashMap<Integer,Course> labList = new HashMap<>(0);
+        HashMap<Integer,Lab> labList = new HashMap<>();
+
+
 /*******************************************************************************************************/
         frame = new JFrame();
         frame.getContentPane().setForeground(new Color(0, 0, 0));
@@ -79,17 +85,19 @@ public class Dashboard {
 
         //Create Dashboard
         String [] header={"My Courses","Performance"};
-        String [][] data= new String[10][2];
+        String [][] data= new String[totalCount][2];
         int count = 0;
         for (int i = 0; i < allCourses.size();i++){
-            String [] row = {allCourses.get(i).getCourseName(),"Temp"};
+            Course c = allCourses.get(i);
+            String [] row = {c.getCourseName(),"Temp"};
+            courseList.put(count,c);
             data[count] = row;
             courseList.put(count,allCourses.get(i));
             count++;
-            for (Object key : allCourses.get(i).getLabSections().keySet()) {
-                String[] value = {allCourses.get(i).getLabSections().get(key).getSection(),"Temp"};
-                data[count] = value;
-                labList.put(count,allCourses.get(i));
+            for (Lab lab : getLabsOfCourse.get(c)) {
+                labList.put(count,lab);
+                data[count][0] = lab.getSection();
+                data[count][1] = "Temp";
                 count++;
             }
         }
@@ -118,8 +126,8 @@ public class Dashboard {
             public void actionPerformed(ActionEvent e) {
                 String[] temp = {"","Temp"};
                 model.addRow(temp);
-                AddCourse addCoursePage = new AddCourse();
-                addCoursePage.ShowPage();
+                //AddCourse addCoursePage = new AddCourse();
+                //addCoursePage.ShowPage();
                 frame.dispose();
             }
         });
@@ -142,14 +150,13 @@ public class Dashboard {
                 if (mouseEvent.getClickCount() == 2 && mousetable.getSelectedRow() != -1 && mousetable.getSelectedColumn() != 1) {
                     if (courseList.containsKey(row)){
                         //go to course page
-                        //CoursePage coursePageNext = new CoursePage(courseList.get(row));
-                        CoursePage coursePageNext = new CoursePage();
-                        coursePageNext.ShowPage();
+                        CoursePage coursePageNext = new CoursePage(courseList.get(row));
+                        //coursePageNext.ShowPage();
                     }
                     else{
                         // LabPage labPageNext = new LabPage(LabList.get(row));
-                        LabPage labPageNext = new LabPage();
-                        labPageNext.ShowPage();
+                        //LabPage labPageNext = new LabPage();
+                        //labPageNext.ShowPage();
                         //go to lab page
                     }
                     frame.dispose();
