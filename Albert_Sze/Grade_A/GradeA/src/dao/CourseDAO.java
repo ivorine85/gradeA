@@ -5,8 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import entity.Course;
 
@@ -67,9 +66,9 @@ public class CourseDAO {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1,1);
             ResultSet res = ps.executeQuery();
-            String day = res.getString(7);
-            String[] days = day.split(",");
             while(res.next()){
+                String day = res.getString(7);
+                String[] days = day.split(",");
                 Course c = new Course(res.getString(2),res.getTime(3),res.getTime(4),res.getDate(5),res.getDate(6),days);
                 c.setCourseId(res.getInt(1));
                 list.add(c);
@@ -82,6 +81,7 @@ public class CourseDAO {
         }
         return list;
     }
+
 
 
 }
