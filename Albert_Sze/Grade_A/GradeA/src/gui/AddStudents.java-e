@@ -30,14 +30,11 @@ import entity.*;
 public class AddStudents {
 
     private JFrame frame;
-    private JTable table;
+    private JTable addStudentsTable;
     private static String prevPage;
     Map<String,Lab> labList = new HashMap<>();
     private static String curCourse;
 
-    /**
-     * Launch the application.
-     */
     //public static void main(String[] args) {
     public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
@@ -55,9 +52,7 @@ public class AddStudents {
 
     // Create connection to sql database
     // Connection connection = null;
-    /**
-     * Create the application.
-     */
+
     public AddStudents(String prevPage,String cname) {
         this.prevPage = prevPage;
         this.curCourse = cname;
@@ -65,9 +60,6 @@ public class AddStudents {
         initialize();
     }
 
-    /**
-     * Initialize the contents of the frame.
-     */
     private void initialize() {
 /*********************************** for the purpose of this example ***********************************/
 //        Course newCourse = new Course("CS591");												// Generate new course
@@ -76,23 +68,28 @@ public class AddStudents {
 //        newCourse.getLabSections().put("A2",new Lab("A2"));										// Create Lab Sections
 //        newCourse.getLabSections().put("A3",new Lab("A3"));										// Create Lab Sections
 /*******************************************************************************************************/
+    	JComboBox<String> labs = new JComboBox<String>();
+    	JComboBox<String> studentType = new JComboBox<String>();
+    	JLabel addStudentsTitle;
+    	JButton cancelButton;
+    	JButton finishButton;
+    	JButton addStudentButton; 
+    	JScrollPane scrollStudents;
+    	TableColumn labcolumn;
+    	TableColumn studentTypecolumn;
+    	DefaultTableModel model;
+    	LabDAO labDAO = new LabDAO();
+
+    	/*********************************** Generate Frame ***********************************/
         frame = new JFrame();
         frame.getContentPane().setForeground(new Color(0, 0, 0));
         frame.setBounds(100, 100, 801, 487);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
-
-        //Create Student
-        String [] header={"Last Name","First Name","Student ID","Email","Year","Lab","Student Type"};
-        String [][] data={{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"}};
-        DefaultTableModel model = new DefaultTableModel(data,header);
-
+        
+        /*********************************** Create Combo box of Lab section ***********************************/
         //Create Combo box for student type and labs
-        // For the purpose of this example, but this should come from the labs section page
-        JComboBox<String> labs = new JComboBox<String>();
-
         //TODO: find all lab section
-        LabDAO labDAO = new LabDAO();
         for(Lab l:labDAO.findLabOfCourse(curCourse)){
             labList.put(l.getSection(),l);
             labs.addItem(l.getSection());
@@ -101,20 +98,19 @@ public class AddStudents {
 //            labs.addItem(entry.getKey());
 //        }
 
-
-        JComboBox<String> studentType = new JComboBox<String>();
+        /*********************************** Create Combo box for type of student ********************/
         studentType.addItem("Undergraduate");
         studentType.addItem("Graduate");
 
-        // Label of window
-        JLabel lblAddStudents = new JLabel("Add Students");
-        lblAddStudents.setFont(new Font("Tahoma", Font.PLAIN, 36));
-        lblAddStudents.setBounds(10, 11, 212, 44);
-        frame.getContentPane().add(lblAddStudents);
+        /*********************************** Generate Student Label **********************************/
+        addStudentsTitle = new JLabel("Add Students");
+        addStudentsTitle.setFont(new Font("Tahoma", Font.PLAIN, 36));
+        addStudentsTitle.setBounds(10, 11, 212, 44);
+        frame.getContentPane().add(addStudentsTitle);
 
-        //Cancel Button
-        JButton btnCancel = new JButton("Cancel");
-        btnCancel.addActionListener(new ActionListener() {
+        /*********************************** Create Cancel button ************************************/
+        cancelButton = new JButton("Cancel");
+        cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (prevPage.equals("CoursePage")) {
                     CoursePage changePage = new CoursePage();
@@ -129,36 +125,36 @@ public class AddStudents {
                 frame.dispose();
             }
         });
-        btnCancel.setBounds(686, 414, 89, 23);
-        frame.getContentPane().add(btnCancel);
+        cancelButton.setBounds(686, 414, 89, 23);
+        frame.getContentPane().add(cancelButton);
 
-        //Finish Button
-        JButton btnFinish = new JButton("Finish");
-        btnFinish.addActionListener(new ActionListener() {
+        /*********************************** Create Finish button ************************************/
+        finishButton = new JButton("Finish");
+        finishButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 boolean valid = true;
-                for (int row = 0; row < table.getRowCount(); row++) {
-                    if ((table.getValueAt(row, 0)).toString().isEmpty()) {
+                for (int row = 0; row < addStudentsTable.getRowCount(); row++) {
+                    if ((addStudentsTable.getValueAt(row, 0)).toString().isEmpty()) {
                         break;
                     }
                     try {
-                        Integer.parseInt(table.getValueAt(row, 4).toString());
+                        Integer.parseInt(addStudentsTable.getValueAt(row, 4).toString());
                     } catch (Exception e1) {
                         valid = false;
                         JOptionPane.showMessageDialog(null, "Make sure all year inputs are numbers");
                     }
                 }
                 if (valid) {
-                    for (int row = 0; row < table.getRowCount(); row++) {
-                        if ((table.getValueAt(row, 0)).toString().isEmpty()) {
+                    for (int row = 0; row < addStudentsTable.getRowCount(); row++) {
+                        if ((addStudentsTable.getValueAt(row, 0)).toString().isEmpty()) {
                             break;
                         }
-                        String name = table.getValueAt(row, 1).toString() + " " + table.getValueAt(row, 0).toString();
-                        String sid = table.getValueAt(row,2).toString();
-                        String email = table.getValueAt(row, 3).toString();
-                        int year = Integer.parseInt(table.getValueAt(row, 4).toString());
-                        String labSection = table.getValueAt(row, 5).toString();
-                        String studType = table.getValueAt(row, 6).toString();
+                        String name = addStudentsTable.getValueAt(row, 1).toString() + " " + addStudentsTable.getValueAt(row, 0).toString();
+                        String sid = addStudentsTable.getValueAt(row,2).toString();
+                        String email = addStudentsTable.getValueAt(row, 3).toString();
+                        int year = Integer.parseInt(addStudentsTable.getValueAt(row, 4).toString());
+                        String labSection = addStudentsTable.getValueAt(row, 5).toString();
+                        String studType = addStudentsTable.getValueAt(row, 6).toString();
                         //TODO:1.Add student to table
                         Student s = new Student(sid,name,studType,null,email,year);
                         StudentDAO studentDAO = new StudentDAO();
@@ -186,29 +182,34 @@ public class AddStudents {
                 }
             }
         });
-        btnFinish.setBounds(587, 414, 89, 23);
-        frame.getContentPane().add(btnFinish);
+        finishButton.setBounds(587, 414, 89, 23);
+        frame.getContentPane().add(finishButton);
 
-        //Add Student button
-        JButton btnAddStudent = new JButton("Add Student");
-        btnAddStudent.addActionListener(new ActionListener() {
+        /*********************************** Create Add Student button ************************************/
+        addStudentButton = new JButton("Add Student");
+        addStudentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String[] temp = {"","","","","","Select","Select"};
                 model.addRow(temp);
             }
         });
-        btnAddStudent.setBounds(457, 414, 120, 23);
-        frame.getContentPane().add(btnAddStudent);
+        addStudentButton.setBounds(457, 414, 120, 23);
+        frame.getContentPane().add(addStudentButton);
 
-        //Add ScrollPanel for table
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(25, 78, 738, 325);
-        frame.getContentPane().add(scrollPane);
-
-        table = new JTable(model);
-        scrollPane.setViewportView(table);
-        TableColumn labcolumn = table.getColumnModel().getColumn(5);
-        TableColumn studentTypecolumn = table.getColumnModel().getColumn(6);
+        /*********************************** Add Scroll Panel and Table Student button ************************************/
+        scrollStudents = new JScrollPane();
+        scrollStudents.setBounds(25, 78, 738, 325);
+        frame.getContentPane().add(scrollStudents);
+        
+        /*********************************** Generate Student Information tables ***********************************/
+        //Create Student
+        String [] header = {"Last Name","First Name","Student ID","Email","Year","Lab","Student Type"};
+        String [][] data = {{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"}};
+        model = new DefaultTableModel(data,header);
+        addStudentsTable = new JTable(model);
+        scrollStudents.setViewportView(addStudentsTable);
+        labcolumn = addStudentsTable.getColumnModel().getColumn(5);
+        studentTypecolumn = addStudentsTable.getColumnModel().getColumn(6);
         labcolumn.setCellEditor(new DefaultCellEditor(labs));
         studentTypecolumn.setCellEditor(new DefaultCellEditor(studentType));
 
