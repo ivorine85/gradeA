@@ -23,11 +23,8 @@ import java.awt.event.ActionEvent;
 public class ImportPage extends ImportCSV {
 
 	private JFrame frame;
-	private JTextField textField;
+	private JTextField filePathTextField;
 
-	/**
-	 * Launch the application.
-	 */
 	//public static void main(String[] args) {
 	public static void ShowPage() {
 		EventQueue.invokeLater(new Runnable() {
@@ -42,51 +39,57 @@ public class ImportPage extends ImportCSV {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+
 	public ImportPage() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frame = new JFrame();
+		JLabel importFileTitle;
+		JLabel filePathTitle;
+		JButton cancelButton;
+		JButton importButton;
+		
+		/*********************************** Generate frame for Import File Page *******************************/
 		frame.setBounds(100, 100, 450, 235);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		JLabel lblImportFile = new JLabel("Import File");
-		lblImportFile.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblImportFile.setBounds(10, 11, 120, 31);
-		frame.getContentPane().add(lblImportFile);
+		/*********************************** Import File Title **************************************/
+		importFileTitle = new JLabel("Import File");
+		importFileTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		importFileTitle.setBounds(10, 11, 120, 31);
+		frame.getContentPane().add(importFileTitle);
 
-		JLabel lblFilePath = new JLabel("File Path:");
-		lblFilePath.setBounds(10, 64, 46, 14);
-		frame.getContentPane().add(lblFilePath);
+		/*********************************** File path label ***********************************/
+		filePathTitle = new JLabel("File Path:");
+		filePathTitle.setBounds(10, 64, 65, 14);
+		frame.getContentPane().add(filePathTitle);
 
-		textField = new JTextField();
-		textField.setBounds(10, 89, 403, 20);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		/*********************************** File path text field ***********************************/
+		filePathTextField = new JTextField();
+		filePathTextField.setBounds(10, 89, 403, 20);
+		frame.getContentPane().add(filePathTextField);
+		filePathTextField.setColumns(10);
 
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.addActionListener(new ActionListener() {
+		/*********************************** Create Cancel button ************************************/
+		cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddCourse addCoursePage = new AddCourse();
 				addCoursePage.ShowPage();
 				frame.dispose();
 			}
 		});
-		btnCancel.setBounds(335, 163, 89, 23);
-		frame.getContentPane().add(btnCancel);
+		cancelButton.setBounds(335, 163, 89, 23);
+		frame.getContentPane().add(cancelButton);
 
-		JButton btnImport = new JButton("Import");
-		btnImport.addActionListener(new ActionListener() {
+		/*********************************** Create Import button ************************************/
+		importButton = new JButton("Import");
+		importButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Path filePath = Paths.get(textField.getText());
+				Path filePath = Paths.get(filePathTextField.getText());
 				if(Files.notExists(filePath)) {
 					JOptionPane.showMessageDialog(null,"File Path Does not exist.");
 				}
@@ -95,10 +98,10 @@ public class ImportPage extends ImportCSV {
 				}
 				else {
 					try {
-	                    Course newcourse = Import();
+	                    Course newcourse = Import(filePath.toFile());
 	                    //add to profile
 	                    Dashboard dashboardPage = new Dashboard();
-	                    //dashboardPage.ShowPage();
+	                    dashboardPage.ShowPage();
 	                    frame.disable();
 	                }
 	                catch (Exception ex) {
@@ -107,8 +110,7 @@ public class ImportPage extends ImportCSV {
 				}
 			}
 		});
-		btnImport.setBounds(236, 163, 89, 23);
-		frame.getContentPane().add(btnImport);
+		importButton.setBounds(236, 163, 89, 23);
+		frame.getContentPane().add(importButton);
 	}
-
 }

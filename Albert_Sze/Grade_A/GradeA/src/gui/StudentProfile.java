@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import javax.swing.JScrollPane;
@@ -27,14 +29,11 @@ import entity.*;
 public class StudentProfile extends Adjustments {
 
 	private JFrame frame;
-	private JTable table;
+	private JTable studentInfoTable;
 	private static Course newCourse;
 	private static String currentLabSection;
 	private static Student studentProfile;
 
-	/**
-	 * Launch the application.
-	 */
 	//public static void main(String[] args) {
 	public static void ShowPage() {
 		EventQueue.invokeLater(new Runnable() {
@@ -52,9 +51,6 @@ public class StudentProfile extends Adjustments {
 
 	// Create connection to sql database
 	// Connection connection = null;
-	/**
-	 * Create the application.
-	 */
 	public StudentProfile(Course newCourse,String currentLabSection, Student studentProfile) {
 		this.newCourse =newCourse;
 		this.currentLabSection = currentLabSection;
@@ -63,12 +59,10 @@ public class StudentProfile extends Adjustments {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 /*********************************** for the purpose of this example ***********************************/
-		/*Course newCourse = new Course ("CS591");												// Generate new course
+		/*
+		Course newCourse = new Course ("CS591");												// Generate new course
 		newCourse.getCourseBreakDown().put("HW", new GradeBreakDown("HW", .5, .5, 0, 0,0.0, 1));
 		newCourse.getCourseBreakDown().put("Exam", new GradeBreakDown("Exam", .5, .5, 0, 0,0.0, 1));
 		newCourse.getAssignmentBreakDown().put("hw", new ArrayList<GradeBreakDown>(0));
@@ -93,22 +87,43 @@ public class StudentProfile extends Adjustments {
 		Student studentProfile = labSection.getStudents().get("grad").get(0);
 		*/
 /*******************************************************************************************************/
-		Lab labSection =newCourse.getLabSections().get(currentLabSection);
-		frame = new JFrame();
-		frame.getContentPane().setForeground(new Color(0, 0, 0));
-		frame.setBounds(100, 100, 801, 487);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-
-		//Create header
+		Lab labSection;
+		DefaultTableModel model;
+		JLabel studentNameLabel;
+		JLabel profileImage;
+		JLabel labLabel;
+		JLabel graduatingYearLabel;
+		JLabel gradeLabel;
+		JButton homeButton;
+		JButton deleteStudentButton;
+		JButton finishButton;
+		JButton cancelButton;
+		JComboBox labOptions;
+		JScrollPane scrollStudentTable;
+		ArrayList<String> assignments;
 		ArrayList<ArrayList<String>> allAssignData = new ArrayList<ArrayList<String>>(0);
 		HashMap<String, Integer> assignCount = new HashMap<String, Integer>(0);
 		double sum = 0.0;
-		//for this example
-		ArrayList<String> assignments;
+		int assignNum;
+		String[][] allAssignArray;
+		Image profileImg = new ImageIcon(this.getClass().getResource("default_profile.png")).getImage();
+		Image trashImg = new ImageIcon(this.getClass().getResource("trash_icon.png")).getImage();
+		Image homeImg = new ImageIcon(this.getClass().getResource("home_icon.png")).getImage();
+		
+		
+		
+		
+		/*********************************** Set Data up **************************************/
+		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+		//Load proper lab section
+		labSection =newCourse.getLabSections().get(currentLabSection);
 
-
+		/*********************************** Set Data in table **************************************/
 		String[] header = {"Assignment","Points Lost","Total Points Available","Percentage","Class Average"};
+        //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+		// Get the count of number of assignments
+        // example assinCount will know there are 2 HW, 3 Exams, 2 Quizzes
+        // Andy I am not sure if you need this anymore
 		for (Map.Entry<String, GradeBreakDown> entry : newCourse.getCourseBreakDown().entrySet()) {
 			assignCount.put(entry.getKey(),entry.getValue().getNumAssign()-1);
 		}
@@ -116,27 +131,33 @@ public class StudentProfile extends Adjustments {
 
 		for (int i = 0; i < studentProfile.getCourseWork().size();i++) {
 			assignments = new ArrayList<String>(0);
-			int j = newCourse.getCourseBreakDown().get(studentProfile.getCourseWork().get(i).getType()).getNumAssign()-assignCount.get(studentProfile.getCourseWork().get(i).getType());
+			// assignNum - is the current assignment number example HW1 or HW2 will be converted to string in next step
+			assignNum = newCourse.getCourseBreakDown().get(studentProfile.getCourseWork().get(i).getType()).getNumAssign()-assignCount.get(studentProfile.getCourseWork().get(i).getType());
+			// Update assignCount = assignCount-1 for given assignment type
 			assignCount.put(studentProfile.getCourseWork().get(i).getType(), assignCount.get(studentProfile.getCourseWork().get(i).getType())-1);
-			assignments.add(studentProfile.getCourseWork().get(i).getType() + " " + Integer.toString(j));
+			// Add assignment to arraylist
+			assignments.add(studentProfile.getCourseWork().get(i).getType() + " " + Integer.toString(assignNum));
+			// Add points lost for assignment
 			assignments.add(Integer.toString(studentProfile.getCourseWork().get(i).getPtsLost()));
-			//assignments.add("");
-			//System.out.println(newCourse.getAssignmentBreakDown().get(studentProfile.getCourseWork().get(i).getType().toLowerCase()));
-			assignments.add(Integer.toString(newCourse.getAssignmentBreakDown().get(studentProfile.getCourseWork().get(i).getType().toLowerCase()).get(j-1).getTotalPoints()));
+			// Add assignment percentage not typepercentage
+			assignments.add(Integer.toString(newCourse.getAssignmentBreakDown().get(studentProfile.getCourseWork().get(i).getType().toLowerCase()).get(assignNum-1).getTotalPoints()));
+			// Add Student assignment percentage
 			assignments.add(Double.toString((double)Math.round(studentProfile.getCourseWork().get(i).getPercent()*10000)/100));
-			//assignments.add("");
-			assignments.add(Double.toString((double)Math.round(newCourse.getAssignmentBreakDown().get(studentProfile.getCourseWork().get(i).getType().toLowerCase()).get(j-1).getAverage()*10000)/100));
+			// Add class average on assignment
+			assignments.add(Double.toString((double)Math.round(newCourse.getAssignmentBreakDown().get(studentProfile.getCourseWork().get(i).getType().toLowerCase()).get(assignNum-1).getAverage()*10000)/100));
+			// Add assignment to all assignment data
 			allAssignData.add(assignments);
 		}
-
-		String[][] array = new String[allAssignData.size()][];
+		//////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		/*********************************** Convert ArrayList to Array **************************************/
+		allAssignArray = new String[allAssignData.size()][];
 		for (int i = 0; i < allAssignData.size(); i++) {
 			ArrayList<String> row = allAssignData.get(i);
-			array[i] = row.toArray(new String[row.size()]);
+			allAssignArray[i] = row.toArray(new String[row.size()]);
 		}
 
-		String [][] data={{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"}};
-		DefaultTableModel model = new DefaultTableModel (array,header) {
+		model = new DefaultTableModel (allAssignArray,header) {
 			public boolean isCellEditable(int row, int col)
 			{
 				//If you didn't want the first column to be editable
@@ -149,16 +170,58 @@ public class StudentProfile extends Adjustments {
 			}
 		};
 
-		// Label of window
-		JLabel lblStudentName = new JLabel("Student's Name");
-		lblStudentName.setText(studentProfile.getName());
-		lblStudentName.setFont(new Font("Tahoma", Font.PLAIN, 36));
-		lblStudentName.setBounds(188, 11, 338, 44);
-		frame.getContentPane().add(lblStudentName);
+		/*********************************** Set Frame up **************************************/
+		frame = new JFrame();
+		frame.getContentPane().setForeground(new Color(0, 0, 0));
+		frame.setBounds(100, 100, 801, 487);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 
-		//Cancel Button
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.addActionListener(new ActionListener() {
+
+		/*********************************** Student Name Title **************************************/
+        //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+		// change studentProfile.getName() to student's name
+		studentNameLabel = new JLabel(studentProfile.getName());
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+		studentNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 36));
+		studentNameLabel.setBounds(188, 11, 338, 44);
+		frame.getContentPane().add(studentNameLabel);
+		
+		/*********************************** Grade Label **************************************/
+		gradeLabel = new JLabel("grade");
+		////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+		// Andy change the label to the Student's current grade
+		gradeLabel.setText(Double.toString((double)Math.round(studentProfile.getGrade()*10000)/100) + "%");
+		////////////////////////////////////////////////////////////////////////////////////////////////
+		gradeLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		gradeLabel.setBounds(188, 68, 152, 35);
+		frame.getContentPane().add(gradeLabel);
+
+		/*********************************** Graduating Year Label **************************************/
+		graduatingYearLabel = new JLabel("Graduating Year");
+		////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+		// Andy change the text to the graduating year of the student
+		graduatingYearLabel.setText("Graduating Year: " + Integer.toString(studentProfile.getYear()));
+		////////////////////////////////////////////////////////////////////////////////////////////////
+		graduatingYearLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		graduatingYearLabel.setBounds(25, 125, 160, 19);
+		frame.getContentPane().add(graduatingYearLabel);
+
+		/*********************************** Lab Label **************************************/
+		labLabel = new JLabel("Lab: ");
+		labLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		labLabel.setBounds(25, 155, 46, 14);
+		frame.getContentPane().add(labLabel);
+		
+		/*********************************** Student's Image **************************************/
+		profileImage = new JLabel("");
+		profileImage.setIcon(new ImageIcon(profileImg));
+		profileImage.setBounds(25, 11, 109, 113);
+		frame.getContentPane().add(profileImage);
+
+		/*********************************** Cancel Button **************************************/
+		cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LabPage labPageReturn = new LabPage();
 				//LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
@@ -166,95 +229,107 @@ public class StudentProfile extends Adjustments {
 				frame.dispose();
 			}
 		});
+		cancelButton.setBounds(686, 414, 89, 23);
+		frame.getContentPane().add(cancelButton);		
 
-		JLabel lblGrade = new JLabel("grade");
-		lblGrade.setText(Double.toString((double)Math.round(studentProfile.getGrade()*10000)/100) + "%");
-		lblGrade.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblGrade.setBounds(188, 68, 152, 35);
-		frame.getContentPane().add(lblGrade);
-
-		JLabel lblGraduatingYear = new JLabel("Graduating Year");
-		lblGraduatingYear.setText("Graduating Year: " + Integer.toString(studentProfile.getYear()));
-		lblGraduatingYear.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblGraduatingYear.setBounds(25, 125, 160, 19);
-		frame.getContentPane().add(lblGraduatingYear);
-
-		JLabel lblLab = new JLabel("Lab: ");
-		lblLab.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblLab.setBounds(25, 155, 46, 14);
-		frame.getContentPane().add(lblLab);
-		btnCancel.setBounds(686, 414, 89, 23);
-		frame.getContentPane().add(btnCancel);
-
-		//Finish Button
-		JButton btnFinish = new JButton("Finish");
-		btnFinish.addActionListener(new ActionListener() {
+		/*********************************** Finish Button **************************************/
+		finishButton = new JButton("Finish");
+		finishButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+				// Save the changes to the table of student's grades
+				// Save the changes to labsection
+				////////////////////////////////////////////////////////////////////////////////////////////////
 				LabPage labPageReturn = new LabPage();
 				//LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
 				labPageReturn.ShowPage();
 				frame.dispose();
 			}
 		});
-		btnFinish.setBounds(587, 414, 89, 23);
-		frame.getContentPane().add(btnFinish);
+		finishButton.setBounds(587, 414, 89, 23);
+		frame.getContentPane().add(finishButton);
 
-		//Add ScrollPanel for table
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(25, 180, 738, 206);
-		frame.getContentPane().add(scrollPane);
-
-		table = new JTable(model);
-		scrollPane.setViewportView(table);
-
-		JComboBox comboBox = new JComboBox();
-		for (Map.Entry<String, Lab> entry : newCourse.getLabSections().entrySet()) {
-			comboBox.addItem(entry.getKey());
-			comboBox.setSelectedItem(labSection.getSection());
-		}
-		comboBox.setBounds(60, 155, 74, 23);
-		frame.getContentPane().add(comboBox);
-
-		JButton btnDeleteStudent = new JButton("");
-		Image trashImg = new ImageIcon(this.getClass().getResource("trash_icon.png")).getImage();
-		btnDeleteStudent.setIcon(new ImageIcon(trashImg));
-		btnDeleteStudent.addActionListener(new ActionListener() {
+		/*********************************** Delete Student Button **************************************/
+		deleteStudentButton = new JButton("");		
+		deleteStudentButton.setIcon(new ImageIcon(trashImg));
+		deleteStudentButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int dialogButton = JOptionPane.YES_NO_OPTION;
 				int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete this Student?","Warning",dialogButton);
 				if(dialogResult == JOptionPane.YES_OPTION){
+					////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
 					//Delete student
 					System.out.println("delete Student");
 					LabPage labPageReturn = new LabPage();
 					System.out.println("LabPage");
 					//LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
 					//labPageReturn.ShowPage();
+					////////////////////////////////////////////////////////////////////////////////////////////////
 					frame.dispose();
 				}
 			}
 		});
-		btnDeleteStudent.setBounds(729, 11, 46, 54);
-		frame.getContentPane().add(btnDeleteStudent);
-
-		JLabel lblProfileImg = new JLabel("");
-		Image profileImg = new ImageIcon(this.getClass().getResource("default_profile.png")).getImage();
-		lblProfileImg.setIcon(new ImageIcon(profileImg));
-		lblProfileImg.setBounds(25, 11, 109, 113);
-		frame.getContentPane().add(lblProfileImg);
-
-		JButton btnHome = new JButton("");
-		btnHome.addActionListener(new ActionListener() {
+		deleteStudentButton.setBounds(729, 11, 46, 54);
+		frame.getContentPane().add(deleteStudentButton);
+		
+		/*********************************** Home Button **************************************/
+		homeButton = new JButton("");
+		homeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+				// Save the changes to the table of student's grades
+				// Save the changes to labsection
+				////////////////////////////////////////////////////////////////////////////////////////////////
 				Dashboard dashboardPage = new Dashboard();
 				dashboardPage.ShowPage();
 				frame.dispose();
 			}
-		});
-		Image homeImg = new ImageIcon(this.getClass().getResource("home_icon.png")).getImage();
-		btnHome.setIcon(new ImageIcon(homeImg));
-		btnHome.setBounds(10, 391, 55, 54);
-		frame.getContentPane().add(btnHome);
+		});		
+		homeButton.setIcon(new ImageIcon(homeImg));
+		homeButton.setBounds(10, 391, 55, 54);
+		frame.getContentPane().add(homeButton);
+		
+		/*********************************** Scroll Panel for Student table **************************************/
+		scrollStudentTable = new JScrollPane();
+		scrollStudentTable.setBounds(25, 180, 738, 206);
+		frame.getContentPane().add(scrollStudentTable);
+		
+		/*********************************** Load Student Table **************************************/
+		studentInfoTable = new JTable(model);
+		scrollStudentTable.setViewportView(studentInfoTable);
+		
+		/************************************ Detects when value is changed in studentInfoTable ****************************************/
+        //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+        // Andy: This can detect where an edit is made, you might want to put this on the buttons or something, not totally sure
+		studentInfoTable.getModel().addTableModelListener(new TableModelListener(){
+                public void tableChanged(TableModelEvent e){
+                    try{
+                        int row = e.getFirstRow();
+                        int col = e.getColumn();
+                        int edit = Integer.parseInt((String)studentInfoTable.getValueAt(row, col));
+                        //Save Changes maybe?
+                        frame.dispose();
+                        ShowPage();
+                    } catch (NumberFormatException nfe) {
+                        JOptionPane.showMessageDialog(null,"not valid edit");
+                    }
+                }
+        });
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		/*********************************** Combobox of labsection **************************************/
+		labOptions = new JComboBox();
+		labOptions.setBounds(60, 155, 74, 23);
+		frame.getContentPane().add(labOptions);
 
+		////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+		for (Map.Entry<String, Lab> entry : newCourse.getLabSections().entrySet()) {
+			// Set the options of existing labs
+			labOptions.addItem(entry.getKey());
+		}
+		// Set the item as the current Student's lab 
+		labOptions.setSelectedItem(labSection.getSection());
+		////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 	private static class __Tmp {
 		private static void __tmp() {
