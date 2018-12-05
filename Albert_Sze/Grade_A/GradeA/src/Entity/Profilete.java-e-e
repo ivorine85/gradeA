@@ -1,11 +1,12 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Profilete {
 	private String username;
 	private String password;
-	private ArrayList<Course> courses;
+	private List<Course> courses;
 	private String[] securityAnswers;
 	private String[] securityQuestions;
 	
@@ -42,11 +43,11 @@ public class Profilete {
 		this.password = password;
 	}
 
-	public ArrayList<Course> getCourses() {
+	public List<Course> getCourses() {
 		return courses;
 	}
 
-	public void setCourses(ArrayList<Course> courses) {
+	public void setCourses(List<Course> courses) {
 		this.courses = courses;
 	}
 
