@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AssignmentDAO {
     Connection connection;
@@ -51,5 +53,25 @@ public class AssignmentDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public Map<String,Float[]> getPercentage(String cname){
+        connection = Connector.getConnection();
+        Map<String,Float[]> rtn = new HashMap<>();
+        String sql = "SELECT cwname,gradPercentage,gradTypePercentage, undergradPercentage , undergradTypePercentage FROM GradeA.Coursework where courseName = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,cname);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                float gradPer = (float)rs.getInt(2)*rs.getInt(3)/100;
+                float underGradePer = (float)rs.getInt(4)*rs.getInt(5)/100;
+                rtn.put(rs.getString(1),new Float[]{gradPer,underGradePer});
+                System.out.println(rs.getString(1)+" "+gradPer+ " "+underGradePer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rtn;
     }
 }
