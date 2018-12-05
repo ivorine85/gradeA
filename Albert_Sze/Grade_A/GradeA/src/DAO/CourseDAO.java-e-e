@@ -83,5 +83,28 @@ public class CourseDAO {
     }
 
 
+    public void deleteCourse(String cname){
+        connection = Connector.getConnection();
+        String sql1 = "delete from course where cname = ?";
+        String sql2 = "delete from coursework where coursename = ?";
+        String sql3 = "delete from gradebreakdown where coursename = ?";
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(sql1);
+            preparedStatement.setString(1,cname);
+            preparedStatement.execute();
+            preparedStatement = connection.prepareStatement(sql2);
+            preparedStatement.setString(1,cname);
+            preparedStatement.execute();
+            preparedStatement = connection.prepareStatement(sql3);
+            preparedStatement.setString(1, cname);
+            preparedStatement.execute();
+            preparedStatement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+
+    }
 }
