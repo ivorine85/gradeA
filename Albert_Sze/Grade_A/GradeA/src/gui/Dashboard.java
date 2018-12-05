@@ -150,7 +150,7 @@ public class Dashboard {
                 if (mouseEvent.getClickCount() == 2 && mousetable.getSelectedRow() != -1 && mousetable.getSelectedColumn() != 1) {
                     if (courseList.containsKey(row)){
                         //go to course page
-                        CoursePage coursePageNext = new CoursePage(courseList.get(row));
+                        //CoursePage coursePageNext = new CoursePage(courseList.get(row));
                         //coursePageNext.ShowPage();
                     }
                     else{
