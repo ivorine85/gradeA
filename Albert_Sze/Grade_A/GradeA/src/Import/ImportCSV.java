@@ -16,8 +16,8 @@ import entity.*;
 
 public abstract class ImportCSV extends Adjustments {
 
-    //public static void main(String[] args) throws Exception   {
-    public Course Import() throws Exception {
+    public static void main(String[] args) throws Exception   {
+    //public Course Import() throws Exception {
         HashMap<String, Double> tempStudentGrades = new HashMap();                              // Obtains Student's assignment averages per type, used to calculate student's grades later
         ArrayList<String> csvData = new ArrayList<String>(1);                                    // Obtains csv information by row
         String assignType;                                                                        // Assignment type
@@ -117,6 +117,7 @@ public abstract class ImportCSV extends Adjustments {
             type = tempStudentDetail[4];
             Student s = new Student(sid, studentName, type, null, studentEmail, Integer.valueOf(year));
             studentDAO.insert(s);
+            studentDAO.assignToCourse(s,curCourse.getCourseName());
             for(int j = 6;j<tempStudentDetail.length;j+=2){
                 int index = (j-6)/2;
                 Assignment cur = arr[index];
@@ -126,16 +127,15 @@ public abstract class ImportCSV extends Adjustments {
                 gradeBreakDownDAO.insert(g,s);
             }
         }
-        return curCourse;
     }
 
 
-    private Time getTime(String str) {
+    private static Time getTime(String str) {
         str += ":00";
         return Time.valueOf(str);
     }
 
-    private Date getDate(String start) {
+    private static Date getDate(String start) {
         String[] a = start.split("-");
         start = a[2] + "-" + a[1] + "-" + a[0];
         Date startDate = Date.valueOf(start);
