@@ -12,6 +12,7 @@ import java.awt.Image;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import dao.CourseDAO;
 import entity.*;
 
 import javax.swing.JScrollPane;
@@ -20,6 +21,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.awt.event.ActionEvent;
 
@@ -31,8 +33,8 @@ public class CoursePage {
 	private static Course currentCourse;
 
 
-//	public static void ShowPage() {
-	public static void main(String[] args) {
+	public static void ShowPage() {
+	//public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -78,12 +80,14 @@ public class CoursePage {
 	private void initialize() {
 		////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
 		//Load course information here
-		Course courseProfile = profile.getCourses().get(0);
+		//Course courseProfile = profile.getCourses().get(0);
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		ArrayList<String> header = new ArrayList<String>(0);
 		ArrayList<String> arrayList1 = new ArrayList<String>(0);
 		ArrayList<String> arrayList2 = new ArrayList<String>(0);
 		ArrayList<ArrayList<String>> doubleArrayList = new ArrayList<ArrayList<String>>(0);
+
+
 		DefaultTableModel model;
 		DefaultTableModel assignStats;
 		JLabel courseTitle;
@@ -104,14 +108,14 @@ public class CoursePage {
 		arrayList1.add("Undergraduate");
 		arrayList2.add("Graduate");
 		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-		for (Map.Entry<String, GradeBreakDown> entry : courseProfile.getCourseBreakDown().entrySet()) {
-			// Add Assignment type  to header ex, HW Exam
-			header.add(entry.getKey());
-			// Add undergrad typePercentage to arraylist1
-			arrayList1.add(Double.toString(Math.round(entry.getValue().getUndergradAssignPercent()*10000)/100));
-			// Add grad typePercentage to arraylist1
-			arrayList2.add(Double.toString(Math.round(entry.getValue().getGradAssignPercent()*10000)/100));
-		}
+//		for (Map.Entry<String, GradeBreakDown> entry : courseProfile.getCourseBreakDown().entrySet()) {
+//			// Add Assignment type  to header ex, HW Exam
+//			header.add(entry.getKey());
+//			// Add undergrad typePercentage to arraylist1
+//			arrayList1.add(Double.toString(Math.round(entry.getValue().getUndergradAssignPercent()*10000)/100));
+//			// Add grad typePercentage to arraylist1
+//			arrayList2.add(Double.toString(Math.round(entry.getValue().getGradAssignPercent()*10000)/100));
+//		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		doubleArrayList.add(arrayList1);
 		doubleArrayList.add(arrayList2);
@@ -137,14 +141,14 @@ public class CoursePage {
 		arrayList2.add("Averages");
 
 		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-		for (Map.Entry<String, ArrayList<GradeBreakDown>> entry: courseProfile.getAssignmentBreakDown().entrySet()) {
-			for (int i = 0; i < entry.getValue().size(); i++) {
-				// Add individual assignment to header ex. HW1 HW2 Quiz1 Project1
-				header.add(entry.getKey() + Integer.toString(i+1));
-				// Add individual assignment averages ex. HW1 average HW2 average etc.
-				arrayList2.add(Double.toString(Math.round(entry.getValue().get(i).getAverage()*10000)/100));
-			}
-		}
+//		for (Map.Entry<String, ArrayList<GradeBreakDown>> entry: courseProfile.getAssignmentBreakDown().entrySet()) {
+//			for (int i = 0; i < entry.getValue().size(); i++) {
+//				// Add individual assignment to header ex. HW1 HW2 Quiz1 Project1
+//				header.add(entry.getKey() + Integer.toString(i+1));
+//				// Add individual assignment averages ex. HW1 average HW2 average etc.
+//				arrayList2.add(Double.toString(Math.round(entry.getValue().get(i).getAverage()*10000)/100));
+//			}
+//		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		doubleArrayList.add(arrayList2);
 

@@ -17,7 +17,7 @@ import entity.*;
 public abstract class ImportCSV extends Adjustments {
 
     //public static void main(String[] args) throws Exception   {
-    public void Import() throws Exception {
+    public Course Import() throws Exception {
         HashMap<String, Double> tempStudentGrades = new HashMap();                              // Obtains Student's assignment averages per type, used to calculate student's grades later
         ArrayList<String> csvData = new ArrayList<String>(1);                                    // Obtains csv information by row
         String assignType;                                                                        // Assignment type
@@ -126,7 +126,7 @@ public abstract class ImportCSV extends Adjustments {
                 gradeBreakDownDAO.insert(g,s);
             }
         }
-
+        return curCourse;
     }
 
 

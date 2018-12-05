@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import entity.Course;
 
@@ -55,5 +57,31 @@ public class CourseDAO {
         }
         return cid;
     }
+
+    public List<Course> findAllActive(){
+        connection = Connector.getConnection();
+        String sql = "select * from course where status =?";
+        List<Course> list = new ArrayList<>();
+        int cid = -1;
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1,1);
+            ResultSet res = ps.executeQuery();
+            String day = res.getString(7);
+            String[] days = day.split(",");
+            while(res.next()){
+                Course c = new Course(res.getString(2),res.getTime(3),res.getTime(4),res.getDate(5),res.getDate(6),days);
+                c.setCourseId(res.getInt(1));
+                list.add(c);
+            }
+            res.close();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 
 }
