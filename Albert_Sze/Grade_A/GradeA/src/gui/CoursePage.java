@@ -31,8 +31,8 @@ public class CoursePage {
 	private static Course currentCourse;
 
 
-//	public static void ShowPage() {
-	public static void main(String[] args) {
+	public static void ShowPage() {
+//	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -109,7 +109,7 @@ public class CoursePage {
 			header.add(entry.getKey());
 			// Add undergrad typePercentage to arraylist1
 			arrayList1.add(Double.toString(Math.round(entry.getValue().getUndergradAssignPercent()*10000)/100));
-			// Add grad typePercentage to arraylist1
+			// Add grad typePercentage to arraylist2
 			arrayList2.add(Double.toString(Math.round(entry.getValue().getGradAssignPercent()*10000)/100));
 		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////
