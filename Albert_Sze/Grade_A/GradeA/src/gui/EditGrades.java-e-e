@@ -227,13 +227,14 @@ public class EditGrades extends Adjustments {
 
         /************************************ Detects when value is changed in tableGrades ****************************************/
         //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-        // Andy: This can detect where an edit is made, you might wnat ot put this on the buttons or something, not totally sure
+        // Andy: This can detect where an edit is made, you might want to put this on the buttons or something, not totally sure
         tableGrades.getModel().addTableModelListener(new TableModelListener(){
                 public void tableChanged(TableModelEvent e){
                     try{
                         int row = e.getFirstRow();
                         int col = e.getColumn();
                         int edit = Integer.parseInt((String)tableGrades.getValueAt(row, col));
+                        //Save Changes maybe?
                         frame.dispose();
                         ShowPage();
                     } catch (NumberFormatException nfe) {
@@ -241,6 +242,6 @@ public class EditGrades extends Adjustments {
                     }
                 }
         });
-        //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////
     }
 }
