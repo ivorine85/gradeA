@@ -12,6 +12,8 @@ import java.awt.Image;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import dao.AssignmentDAO;
+import dao.GradeBreakDownDAO;
 import entity.*;
 
 import javax.swing.JScrollPane;
@@ -20,8 +22,10 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.awt.event.ActionEvent;
+
 
 public class CoursePage {
 
@@ -31,13 +35,13 @@ public class CoursePage {
 	private static Course currentCourse;
 
 
-	public static void ShowPage() {
-//	public static void main(String[] args) {
+	//public static void ShowPage() {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					//CoursePage window = new CoursePage(currentCourse);
-					CoursePage window = new CoursePage();
+					CoursePage window = new CoursePage(currentCourse);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -68,14 +72,16 @@ public class CoursePage {
 		return array;
 	}
 
-	public CoursePage() {
+	public CoursePage(Course c) {
+		currentCourse = c;
 		initialize();
+
 	}
 
 	private void initialize() {
 		////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
 		//Load course information here
-		Course courseProfile = profile.getCourses().get(0);
+		//Course courseProfile = profile.getCourses().get(0);
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		ArrayList<String> header = new ArrayList<String>(0);
 		ArrayList<String> arrayList1 = new ArrayList<String>(0);
@@ -95,21 +101,29 @@ public class CoursePage {
 		Image homeImg;
 		JLabel gradeBreakdownTitle;
 		JLabel assignmentStatisticsTitle;
+        Map<String,Double> getAvg = new HashMap<>();
+        GradeBreakDownDAO gd = new GradeBreakDownDAO();
+        //The getAvg score of each assignment
+		//key : the name of assignment , value: the avgPoint;
+        Map<String,Double[]> avgScore = gd.getPerformance(currentCourse.getCourseName());
+        for(String key:avgScore.keySet()){
+        	Double[] points = avgScore.get(key);
+        	getAvg.put(key,points[0]/points[1]*100);
+
+		}
+
+
+		AssignmentDAO assignmentDAO = new AssignmentDAO();
+		//The percentage of each hw1
+		//key : the name of assignment
+		//value: Float[] arr ,  arr[0] is the percent in gradPer , arr[1] is the percent in undergrad
+		Map<String,Float[]> getPercentage = assignmentDAO.getPercentage(currentCourse.getCourseName());
 
 		/*********************************** Generate Type Percentage tables ***********************************/
 		header.add("");
 		arrayList1.add("Undergraduate");
 		arrayList2.add("Graduate");
-		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-		for (Map.Entry<String, GradeBreakDown> entry : courseProfile.getCourseBreakDown().entrySet()) {
-			// Add Assignment type  to header ex, HW Exam
-			header.add(entry.getKey());
-			// Add undergrad typePercentage to arraylist1
-			arrayList1.add(Double.toString(Math.round(entry.getValue().getUndergradAssignPercent()*10000)/100));
-			// Add grad typePercentage to arraylist2
-			arrayList2.add(Double.toString(Math.round(entry.getValue().getGradAssignPercent()*10000)/100));
-		}
-		//////////////////////////////////////////////////////////////////////////////////////////////////
+
 		doubleArrayList.add(arrayList1);
 		doubleArrayList.add(arrayList2);
 
@@ -134,14 +148,14 @@ public class CoursePage {
 		arrayList2.add("Averages");
 
 		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-		for (Map.Entry<String, ArrayList<GradeBreakDown>> entry: courseProfile.getAssignmentBreakDown().entrySet()) {
-			for (int i = 0; i < entry.getValue().size(); i++) {
-				// Add individual assignment to header ex. HW1 HW2 Quiz1 Project1
-				header.add(entry.getKey() + Integer.toString(i+1));
-				// Add individual assignment averages ex. HW1 average HW2 average etc.
-				arrayList2.add(Double.toString(Math.round(entry.getValue().get(i).getAverage()*10000)/100));
-			}
-		}
+//		for (Map.Entry<String, ArrayList<GradeBreakDown>> entry: courseProfile.getAssignmentBreakDown().entrySet()) {
+//			for (int i = 0; i < entry.getValue().size(); i++) {
+//				// Add individual assignment to header ex. HW1 HW2 Quiz1 Project1
+//				header.add(entry.getKey() + Integer.toString(i+1));
+//				// Add individual assignment averages ex. HW1 average HW2 average etc.
+//				arrayList2.add(Double.toString(Math.round(entry.getValue().get(i).getAverage()*10000)/100));
+//			}
+//		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		doubleArrayList.add(arrayList2);
 
@@ -161,7 +175,7 @@ public class CoursePage {
 		/*********************************** Add Course Title ***********************************/
 		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
 		// Change courseProfile.getCourseName() to the current course name
-		courseTitle = new JLabel(courseProfile.getCourseName() + " Grades");
+		courseTitle = new JLabel( " Grades");
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		//lblCourseTitle.setText(courseProfile.getCourseName() + " Grades");
 		courseTitle.setFont(new Font("Tahoma", Font.PLAIN, 34));
@@ -182,7 +196,7 @@ public class CoursePage {
 			public void actionPerformed(ActionEvent arg0) {
 				if (CalcSum(tableGradeBreakDown)) {
 					Dashboard dashboardPage = new Dashboard();
-					dashboardPage.ShowPage();
+					//dashboardPage.ShowPage(currentCourse.getCourseName());
 					frame.dispose();
 				}
 				else {
@@ -202,12 +216,12 @@ public class CoursePage {
 				int dialogButton = JOptionPane.YES_NO_OPTION;
 				//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
 				// change courseProfile.getCourseName() to current cousrse name
-				int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete this " + courseProfile.getCourseName() + "?","Warning",dialogButton);
+				int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete this " + currentCourse.getCourseName() + "?","Warning",dialogButton);
 				if(dialogResult == JOptionPane.YES_OPTION){
 					// Need to add deleting of course here
 					System.out.println("delete course");
 					Dashboard dashboardPage = new Dashboard();
-					dashboardPage.ShowPage();
+					//dashboardPage.ShowPage();
 					frame.dispose();
 				}
 				//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -223,9 +237,9 @@ public class CoursePage {
 		editCourseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (CalcSum(tableGradeBreakDown)) {
-					EditCourse editCoursePage = new EditCourse();
-					editCoursePage.ShowPage();
-					frame.dispose();
+					//EditCourse editCoursePage = new EditCourse();
+					//editCoursePage.ShowPage();
+					//frame.dispose();
 				}
 				else {
 					JOptionPane.showMessageDialog(frame, "Percentages do not add up to 100%, please try again.");;
@@ -243,9 +257,9 @@ public class CoursePage {
 					//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
 					// change currentCourse.getCourseName()-represents the current course's name you are looking at
 					// DON'T CHANGE "CoursePage" this allows for AddStudent to know the previous page
-					AddStudents addStudentsPage = new AddStudents("CoursePage",currentCourse.getCourseName());
+					//AddStudents addStudentsPage = new AddStudents("CoursePage",currentCourse.getCourseName());
 					//////////////////////////////////////////////////////////////////////////////////////////////////
-					addStudentsPage.ShowPage();
+					//addStudentsPage.ShowPage();
 					frame.dispose();
 				}
 				else {
@@ -261,8 +275,8 @@ public class CoursePage {
 		addCourseworkButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (CalcSum(tableGradeBreakDown)) {
-					AddCoursework addCourseWorkPage = new AddCoursework();
-					addCourseWorkPage.ShowPage();
+					//AddCoursework addCourseWorkPage = new AddCoursework();
+					//addCourseWorkPage.ShowPage();
 					frame.dispose();
 				}
 				else {
@@ -275,23 +289,23 @@ public class CoursePage {
 
 		/*********************************** Add Lab button ***********************************/
 		btnAddLab = new JButton("Add Lab");
-		btnAddLab.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (CalcSum(tableGradeBreakDown)) {
-					LabInfo labInfoPage = null;
-					try {
-						labInfoPage = new LabInfo("CoursePage",newCourse.getCourseName());
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-					labInfoPage.ShowPage();
-					frame.dispose();
-				}
-				else {
-					JOptionPane.showMessageDialog(frame, "Percentages do not add up to 100%, please try again.");;
-				}
-			}
-		});
+//		btnAddLab.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				if (CalcSum(tableGradeBreakDown)) {
+//					LabInfo labInfoPage = null;
+//					try {
+//						labInfoPage = new LabInfo("CoursePage",newCourse.getCourseName());
+//					} catch (SQLException e1) {
+//						e1.printStackTrace();
+//					}
+//					labInfoPage.ShowPage();
+//					frame.dispose();
+//				}
+//				else {
+//					JOptionPane.showMessageDialog(frame, "Percentages do not add up to 100%, please try again.");;
+//				}
+//			}
+//		});
 		btnAddLab.setBounds(332, 414, 89, 23);
 		this.frame.getContentPane().add(btnAddLab);
 
