@@ -10,6 +10,8 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import dao.AssignmentDAO;
@@ -97,7 +99,8 @@ public class CoursePage {
 		JButton editCourseButton;
 		JButton addStudentButton;
 		JButton addCourseworkButton;
-		JButton btnAddLab;
+		JButton addLabButton;
+		JButton saveButton;
 		Image homeImg;
 		JLabel gradeBreakdownTitle;
 		JLabel assignmentStatisticsTitle;
@@ -288,7 +291,7 @@ public class CoursePage {
 		this.frame.getContentPane().add(addCourseworkButton);
 
 		/*********************************** Add Lab button ***********************************/
-		btnAddLab = new JButton("Add Lab");
+		addLabButton = new JButton("Add Lab");
 //		btnAddLab.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
 //				if (CalcSum(tableGradeBreakDown)) {
@@ -306,9 +309,23 @@ public class CoursePage {
 //				}
 //			}
 //		});
-		btnAddLab.setBounds(332, 414, 89, 23);
-		this.frame.getContentPane().add(btnAddLab);
-
+		addLabButton.setBounds(332, 414, 89, 23);
+		this.frame.getContentPane().add(addLabButton);
+		
+		/***********************************  Update button ***********************************/
+		saveButton = new JButton("Save");
+		saveButton.setEnabled(false);
+		saveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+				// update data base with information
+				saveButton.setEnabled(false);
+				//////////////////////////////////////////////////////////////////////////////////////////////////
+			}
+		});
+		saveButton.setBounds(238, 414, 89, 23);
+		frame.getContentPane().add(saveButton);
+		
 		/*********************************** Grade Breakdown Label ***********************************/
 		gradeBreakdownTitle = new JLabel("Grade Breakdown %");
 		gradeBreakdownTitle.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -328,5 +345,22 @@ public class CoursePage {
 
 		tableStats = new JTable(assignStats);
 		scrollAssignStat.setViewportView(tableStats);
+		
+		/************************************ Detects when value is changed in tableGrades ****************************************/
+		tableGradeBreakDown.getModel().addTableModelListener(new TableModelListener(){
+			public void tableChanged(TableModelEvent e){
+				try{
+					int row = e.getFirstRow();
+					int col = e.getColumn();
+					int edit = Integer.parseInt((String)tableGradeBreakDown.getValueAt(row, col));
+					if (CalcSum(tableGradeBreakDown)) {
+						saveButton.setEnabled(true);
+					}
+				} catch (NumberFormatException nfe) {
+					saveButton.setEnabled(false);
+					//JOptionPane.showMessageDialog(null,"not valid edit");
+				}
+			}
+		});
 	}
 }
