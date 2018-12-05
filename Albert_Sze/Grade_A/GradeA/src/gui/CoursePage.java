@@ -72,9 +72,6 @@ public class CoursePage {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
 		//Load course information here
