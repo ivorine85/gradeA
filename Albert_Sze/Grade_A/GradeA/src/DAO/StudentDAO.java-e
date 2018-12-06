@@ -69,7 +69,7 @@ public class StudentDAO {
         int cid =cd.getIdByName(cname);
         connection = Connector.getConnection();
         List<Student> objs = new ArrayList<>();
-        String sql = "select s.sid,s.sname,s.sype,s.photo,s.email,s.year from Student s,attend_course ac ,Cousrse c" +
+        String sql = "select s.sid,s.sname,s.stype,s.photo,s.email,s.syear from Student s,attend_course ac ,Cousrse c" +
                 "where c.cid = ? AND c.cid = ac.cid AND ac.sid = s.sid";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -124,5 +124,29 @@ public class StudentDAO {
         }
     }
 
+    public List<Student> findStudentByLab(String labName){
+        connection = Connector.getConnection();
+        List<Student> objs = new ArrayList<>();
+        String sql = "select s.sid,s.sname,s.stype,s.photo,s.email,s.syear from Student s,attend_lab att ,Lab l where l.labname = ? AND l.labname = att.labname AND att.sid = s.sid";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,labName);
+            ResultSet res = ps.executeQuery();
+            while(res.next()){
+                objs.add(new Student(res.getString(1),
+                        res.getString(2),
+                        res.getString(3),
+                        res.getString(4),
+                        res.getString(5),
+                        res.getInt(6)));
+            }
+            res.close();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return objs;
+    }
 
 }

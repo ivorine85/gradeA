@@ -26,8 +26,8 @@ public class Dashboard {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
-    //public static void ShowPage() {
+    //public static void main(String[] args) {
+    public static void ShowPage() {
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -60,14 +60,12 @@ public class Dashboard {
         CourseDAO cd = new CourseDAO();
         int totalCount = 0;
         List<Course> allCourses = cd.findAllActive();										// Create Lab Sections
-        System.out.println(allCourses.size());
         Profilete userProfile = new Profilete();
         userProfile.setCourses(allCourses);
         LabDAO labDAO = new LabDAO();
         Map<Course,List<Lab>> getLabsOfCourse = new HashMap<>();
         for(Course c:allCourses){
             List<Lab> labs = labDAO.findLabOfCourse(c.getCourseName());
-            System.out.println(labs.get(0).getSection());
             totalCount += 1+labs.size();
             getLabsOfCourse.put(c,labs);
         }
@@ -150,11 +148,11 @@ public class Dashboard {
                 if (mouseEvent.getClickCount() == 2 && mousetable.getSelectedRow() != -1 && mousetable.getSelectedColumn() != 1) {
                     if (courseList.containsKey(row)){
                         //go to course page
-                        //CoursePage coursePageNext = new CoursePage(courseList.get(row));
-                        //coursePageNext.ShowPage();
+                        CoursePage coursePageNext = new CoursePage(courseList.get(row));
+                        coursePageNext.ShowPage();
                     }
                     else{
-                        // LabPage labPageNext = new LabPage(LabList.get(row));
+                        LabPage labPageNext = new LabPage(labList.get(row));
                         //LabPage labPageNext = new LabPage();
                         //labPageNext.ShowPage();
                         //go to lab page
