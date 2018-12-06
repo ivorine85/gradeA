@@ -1,5 +1,10 @@
 package gui;
 
+import dao.AssistantDAO;
+import dao.LabDAO;
+import entity.Assistant;
+import entity.Lab;
+
 import java.awt.*;
 
 import javax.swing.JFrame;
@@ -7,6 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.util.ArrayList;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
@@ -19,7 +27,7 @@ public class EditLab {
     private JTextField textFieldStartTime;
     private JTextField textFieldEndTime;
     private JLabel lblEditLab;
-
+    private static Lab currentLab;
     /**
      * Launch the application.
      */
@@ -28,7 +36,7 @@ public class EditLab {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    EditLab window = new EditLab();
+                    EditLab window = new EditLab(currentLab);
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -40,14 +48,19 @@ public class EditLab {
     /**
      * Create the application.
      */
-    public EditLab() {
-        initialize();
+    public EditLab(Lab currentLab)  {
+        this.currentLab = currentLab;
+        try {
+            initialize();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Initialize the contents of the frame.
      */
-    private void initialize() {
+    private void initialize() throws SQLException {
         frame = new JFrame();
         frame.setBounds(100, 100, 1000, 489);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,6 +80,7 @@ public class EditLab {
         textFieldLabSection.setBounds(40, 110, 50, 20);
         frame.getContentPane().add(textFieldLabSection);
         textFieldLabSection.setColumns(10);
+        textFieldLabSection.setText(currentLab.getSection());
 
         JLabel lblDate = new JLabel("Choose Date");
         lblDate.setBounds(40, 145, 100, 14);
@@ -87,6 +101,7 @@ public class EditLab {
         JRadioButton radioButtonTues = new JRadioButton("");
         radioButtonTues.setBounds(78, 185, 109, 23);
         frame.getContentPane().add(radioButtonTues);
+
 
         JLabel lblWed = new JLabel("Wed");
         lblWed.setBounds(115, 170, 46, 14);
@@ -112,15 +127,24 @@ public class EditLab {
         radioButtonFri.setBounds(200, 185, 109, 23);
         frame.getContentPane().add(radioButtonFri);
 
+        String[] days = currentLab.getWeekday();
+        for(String str:days){
+            if(str.equals("Monday")) radioButtonMon.setSelected(true);
+            else if(str.equals("Tuesday")) radioButtonTues.setSelected(true);
+            else if(str.equals("Wednesday")) radioButtonWed.setSelected(true);
+            else if(str.equals("Thursday")) radioButtonThurs.setSelected(true);
+            else if(str.equals("Friday")) radioButtonFri.setSelected(true);
+        }
         JLabel lblStartTime = new JLabel("Start Time");
         lblStartTime.setBounds(40, 215, 100, 14);
         frame.getContentPane().add(lblStartTime);
 
         textFieldStartTime = new JTextField();
         textFieldStartTime.setBounds(40, 240, 60, 20);
+
         frame.getContentPane().add(textFieldStartTime);
         textFieldStartTime.setColumns(10);
-
+        textFieldStartTime.setText(currentLab.getClasstime()[0].toString());
         JComboBox<String> comboBoxStart = new JComboBox<String>();
         comboBoxStart.addItem("AM");
         comboBoxStart.addItem("PM");
@@ -139,7 +163,7 @@ public class EditLab {
         textFieldEndTime.setBounds(180, 240, 60, 20);
         frame.getContentPane().add(textFieldEndTime);
         textFieldEndTime.setColumns(10);
-
+        textFieldEndTime.setText(currentLab.getClasstime()[1].toString());
         JComboBox<String> comboBoxEnd = new JComboBox<String>();
         comboBoxEnd.addItem("AM");
         comboBoxEnd.addItem("PM");
@@ -155,12 +179,13 @@ public class EditLab {
         frame.getContentPane().add(lblAssignTF);
 
         JComboBox<String> comboBoxTF = new JComboBox<String>();
-        comboBoxTF.addItem("Gavin Brown");
-        comboBoxTF.addItem("Nathan Canterbury");
-        comboBoxTF.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
+        AssistantDAO ad =  new AssistantDAO();
+        java.util.List<Assistant> assistantList = ad.findAssistantByCourse(currentLab.getCourseName());
+        for(Assistant a:assistantList) comboBoxTF.addItem(a.getName());
+//        comboBoxTF.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent arg0) {
+//            }
+//        });
         comboBoxTF.setBounds(40, 300, 200, 20);
         frame.getContentPane().add(comboBoxTF);
 
@@ -210,16 +235,36 @@ public class EditLab {
 
         btnNext.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                if(textFieldLabSection.getText().isEmpty()||(textFieldStartTime.getText().isEmpty())||(textFieldEndTime.getText().isEmpty())||((radioButtonTues.isSelected())&&(radioButtonMon.isSelected()))||(comboBoxStart.getSelectedItem().equals("Select")))
+                if(textFieldLabSection.getText().isEmpty()||(textFieldStartTime.getText().isEmpty())||(textFieldEndTime.getText().isEmpty())||(comboBoxStart.getSelectedItem().equals("Select")))
                     JOptionPane.showMessageDialog(null, "Data Missing");
                 else{
                     JOptionPane.showMessageDialog(null, "Data Submitted");
-                    LabPage returnLabPage = new LabPage();
+                    String labname = currentLab.getSection();
+                    String startTime = textFieldStartTime.getText();
+                    Time labstart = getTime(startTime);
+                    String endTime = textFieldEndTime.getText();
+                    Time labend = getTime(endTime);
+                    java.util.List<String> days = new ArrayList<>();
+                    if(radioButtonMon.isSelected()) days.add("Monday");
+                    if(radioButtonTues.isSelected()) days.add("Tuesday");
+                    if(radioButtonWed.isSelected()) days.add("Wednesday");
+                    if(radioButtonThurs.isSelected()) days.add("Thursday");
+                    if(radioButtonFri.isSelected()) days.add("Friday");
+                    String[] day = new String[days.size()];
+                    for(int i = 0;i<day.length;i++) day[i] = days.get(i);
+                    currentLab.setWeekday(day);
+                    currentLab.setClasstime(new Time[]{labstart,labend});
+                    LabDAO labDAO = new LabDAO();
+                    labDAO.update(currentLab);
+                    String tfname = comboBoxTF.getSelectedItem().toString();
+                    AssistantDAO assistantDAO = new AssistantDAO();
+                    assistantDAO.assignToLab(tfname,currentLab);
+                    LabPage returnLabPage = new LabPage(currentLab);
                     returnLabPage.ShowPage();
                     frame.dispose();
                 }
-                LabPage returnLabPage = new LabPage();
-                returnLabPage.ShowPage();
+                LabPage returnLabPage = new LabPage(currentLab);
+                //returnLabPage.ShowPage();
                 frame.dispose();
 
 
@@ -242,5 +287,10 @@ public class EditLab {
             }
         });
 
+    }
+    private Time getTime(String str){
+        if(str.length()==8) return Time.valueOf(str);
+        str+=":00";
+        return Time.valueOf(str);
     }
 }

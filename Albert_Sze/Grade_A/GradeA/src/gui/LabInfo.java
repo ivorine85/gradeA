@@ -172,7 +172,7 @@ public class LabInfo {
         for(Assistant a:assistantList) comboBoxTF.addItem(a.getName());
 //        comboBoxTF.addActionListener(new ActionListener() {
 //            public void actionPerformed(ActionEvent arg0) {
-//                chosedName =
+//
 //            }
 //        });
         comboBoxTF.setBounds(40, 300, 200, 20);
@@ -242,7 +242,6 @@ public class LabInfo {
                     for(int i = 0;i<day.length;i++) day[i] = days.get(i);
                     Lab newlab = new Lab(labname,labstart,labend,day);
                     newlab.setCourseName(coursename);
-                    //TODO:Test assign tf to lab
                     LabDAO ld = new LabDAO();
                     ld.insert(newlab);
                     String tfname = comboBoxTF.getSelectedItem().toString();
