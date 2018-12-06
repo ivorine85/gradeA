@@ -33,8 +33,8 @@ public class LabPage {
     private JFrame frame;
     private static Lab currentLab;
 
-    public static void main(String[] args) {
-    //public static void ShowPage() {
+    //public static void main(String[] args) {
+    public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -50,10 +50,7 @@ public class LabPage {
 
     //public LabPage(Course currentCourse) {
     public LabPage(Lab currentLab) {
-        //this.currenLab = currentLab;
-        this.currentLab = new Lab();
-        this.currentLab.setCourseName("cs591");
-        this.currentLab.setSection("labname");
+        this.currentLab = currentLab;
         initialize();
     }
 
@@ -215,8 +212,8 @@ public class LabPage {
         editLabButton = new JButton("Edit Lab");
         editLabButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-//                EditLab editLabPage = new EditLab();
-//                editLabPage.ShowPage();
+                EditLab editLabPage = new EditLab();
+                editLabPage.ShowPage();
                 frame.dispose();
             }
         });
