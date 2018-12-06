@@ -95,4 +95,17 @@ public class GradeBreakDown {
 
 	}
 
-}	
+	@Override
+	public String toString() {
+		return "GradeBreakDown{" +
+				"cwName='" + cwName + '\'' +
+				", courseName='" + courseName + '\'' +
+				", typePercentage=" + typePercentage +
+				", percentage=" + percentage +
+				", type='" + type + '\'' +
+				", weight=" + weight +
+				", totalPoint=" + totalPoint +
+				", pointLost=" + pointLost +
+				'}';
+	}
+}

@@ -14,6 +14,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.util.List;
@@ -212,7 +213,7 @@ public class LabPage {
         editLabButton = new JButton("Edit Lab");
         editLabButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                EditLab editLabPage = new EditLab();
+                EditLab editLabPage = new EditLab(currentLab);
                 editLabPage.ShowPage();
                 frame.dispose();
             }
@@ -224,8 +225,8 @@ public class LabPage {
         editGradesButton = new JButton("Edit Grades");
         editGradesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//                EditGrades editGradesPage = new EditGrades();
-//                editGradesPage.ShowPage();
+                //EditGrades editGradesPage = new EditGrades(currentLab);
+                //editGradesPage.ShowPage();
                 frame.dispose();
             }
         });
@@ -258,12 +259,14 @@ public class LabPage {
                         public void actionPerformed(ActionEvent ae)
                         {
                             JButton but = (JButton) ae.getSource();
+
+                            //TODO:need the student object related to the button clicked , and pass it into the constructor of sudentProfile
                             //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
                             // you might need to change this if you are changing what is StudentProfile needs to run
                             // Take a look at the StudentProfile class first
-//                            StudentProfile studentProfilePage = new StudentProfile(newCourse,currentLabSection,allStudents.get(Integer.parseInt(but.getActionCommand())));
+                           //StudentProfile studentProfilePage = new StudentProfile(curLab,Student);
 //                            //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-//                            studentProfilePage.ShowPage();
+                           // studentProfilePage.ShowPage();
                             frame.dispose();
                         }
                     });

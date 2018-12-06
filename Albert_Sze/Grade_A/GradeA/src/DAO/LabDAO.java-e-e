@@ -73,4 +73,32 @@ public class LabDAO {
 
     }
 
+    public void update(Lab l){
+        connection = Connector.getConnection();
+        String sql = "UPDATE Lab set startTime = ?,endTime = ?,weekDay = ? where labname = ? and coursename = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setTime(1,l.getClasstime()[0]);
+            ps.setTime(2,l.getClasstime()[1]);
+            String weekDay = "";
+            for(String s:l.getWeekday()){
+                weekDay+=s+",";
+            }
+            ps.setString(3,weekDay);
+            ps.setString(4,l.getSection());
+            ps.setString(5,l.getCourseName());
+            ps.execute();
+
+            sql = "delete from assist_lab where labname = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1,l.getSection());
+            ps.close();
+            connection.close();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
