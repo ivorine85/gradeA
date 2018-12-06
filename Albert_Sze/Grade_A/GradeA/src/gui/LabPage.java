@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import dao.AssistantDAO;
+import dao.LabDAO;
 import dao.StudentDAO;
 import entity.*;
 
@@ -199,6 +200,8 @@ public class LabPage {
                 if(dialogResult == JOptionPane.YES_OPTION){
                     //delete course return to the home page
                     Dashboard dashboardPage = new Dashboard();
+                    LabDAO labDAO = new LabDAO();
+                    labDAO.deleteLab(currentLab.getSection());
                     Dashboard.ShowPage();
                     frame.dispose();
                 }
