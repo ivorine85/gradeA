@@ -114,7 +114,7 @@
 //            public void actionPerformed(ActionEvent e) {
 //                if (prevPage.equals("CoursePage")) {
 //                    CoursePage changePage = new CoursePage();
-//                    CoursePage.ShowPage();
+//                    //CoursePage.ShowPage();
 //                    frame.dispose();
 //                }
 //                else if(prevPage.equals("LabInfo")){

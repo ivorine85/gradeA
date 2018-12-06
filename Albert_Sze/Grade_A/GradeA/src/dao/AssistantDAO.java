@@ -128,4 +128,25 @@ public class AssistantDAO {
         return r;
     }
 
+    public List<Assistant> findAssistantByLab(String labName){
+        List<Assistant> rtn = new ArrayList<>();
+        String sql = "select tfname from assist_lab where labname = ?";
+        connection = Connector.getConnection();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,labName);
+            ResultSet res = ps.executeQuery();
+            while(res.next()){
+                String tfname = res.getString(1);
+                rtn.add(findAssistantByName(tfname));
+            }
+            res.close();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rtn;
+    }
+
 }
