@@ -98,4 +98,10 @@ public class Assignment {
 		this.undergradTypePercentage = undergradTypePercentage;
 	}
 
+	@Override
+	public String toString(){
+		return "type "+type+" cwname:"+cwname+" total:"+totalPts+" gradP:"+gradPercentage +" gradTP:"+gradTypePercentage+
+				" up:"+undergradPercentage+" utp:"+undergradTypePercentage;
+	}
+
 }

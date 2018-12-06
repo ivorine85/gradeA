@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AssignmentDAO {
@@ -68,6 +70,31 @@ public class AssignmentDAO {
                 float underGradePer = (float)rs.getInt(4)*rs.getInt(5)/100;
                 rtn.put(rs.getString(1),new Float[]{gradPer,underGradePer});
                 System.out.println(rs.getString(1)+" "+gradPer+ " "+underGradePer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rtn;
+    }
+
+    public List<Assignment> findAssignmentByCourse(String cname){
+        connection = Connector.getConnection();
+        List<Assignment> rtn = new ArrayList<>();
+        try{
+            String sql = "select type,cwname,totalpoint,gradPercentage,gradTypePercentage,undergradPercentage,undergradTypePercentage,weight from Coursework where courseName = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,cname);
+            ResultSet res = ps.executeQuery();
+            while(res.next()){
+                Assignment a = new Assignment(res.getString(1),
+                        res.getString(2),
+                        res.getInt(3),
+                        res.getFloat(4),
+                        res.getFloat(5),
+                        res.getFloat(6),
+                        res.getFloat(7),
+                        res.getInt(8));
+                rtn.add(a);
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -263,9 +263,9 @@ public class CoursePage {
 					//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
 					// change currentCourse.getCourseName()-represents the current course's name you are looking at
 					// DON'T CHANGE "CoursePage" this allows for AddStudent to know the previous page
-					//AddStudents addStudentsPage = new AddStudents("CoursePage",currentCourse.getCourseName());
+					AddStudents addStudentsPage = new AddStudents("CoursePage",currentCourse);
 					//////////////////////////////////////////////////////////////////////////////////////////////////
-					//addStudentsPage.ShowPage();
+					addStudentsPage.ShowPage();
 					frame.dispose();
 				}
 				else {
