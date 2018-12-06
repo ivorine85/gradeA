@@ -58,4 +58,19 @@ public class LabDAO {
         return rtn;
     }
 
+    public void deleteLab(String labname){
+        connection = Connector.getConnection();
+        String sql = "delete from Lab where labname = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,labname);
+            ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
