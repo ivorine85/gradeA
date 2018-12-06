@@ -1,5 +1,7 @@
 package gui;
 
+import entity.Course;
+
 import java.awt.*;
 
 import javax.swing.JFrame;
@@ -16,16 +18,17 @@ public class AddCoursework {
     private JFrame frame;
     private JTextField textFieldTotalPoints;
     private JLabel lblCourseInfo;
+    private static Course currentCourse;
 
     /**
      * Launch the application.
      */
-    //public static void main(String[] args) {
-    public static void ShowPage() {
+    public static void main(String[] args) {
+    //public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    AddCoursework window = new AddCoursework();
+                    AddCoursework window = new AddCoursework(currentCourse);
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -37,7 +40,8 @@ public class AddCoursework {
     /**
      * Create the application.
      */
-    public AddCoursework() {
+    public AddCoursework(Course course) {
+        currentCourse = course;
         initialize();
     }
 

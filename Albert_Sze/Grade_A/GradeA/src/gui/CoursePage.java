@@ -15,6 +15,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import dao.AssignmentDAO;
+import dao.CourseDAO;
 import dao.GradeBreakDownDAO;
 import entity.*;
 
@@ -223,6 +224,8 @@ public class CoursePage {
 				if(dialogResult == JOptionPane.YES_OPTION){
 					// Need to add deleting of course here
 					System.out.println("delete course");
+					CourseDAO cd = new CourseDAO();
+					cd.deleteCourse(currentCourse.getCourseName());
 					Dashboard dashboardPage = new Dashboard();
 					//dashboardPage.ShowPage();
 					frame.dispose();
@@ -278,7 +281,7 @@ public class CoursePage {
 		addCourseworkButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (CalcSum(tableGradeBreakDown)) {
-					//AddCoursework addCourseWorkPage = new AddCoursework();
+					//AddCoursework addCourseWorkPage = new AddCoursework(currentCourse);
 					//addCourseWorkPage.ShowPage();
 					frame.dispose();
 				}
