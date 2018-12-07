@@ -137,6 +137,8 @@ public class Login {
             public void actionPerformed(ActionEvent e) {
                 //CoursePage changePage = new CoursePage();
                 //CoursePage.ShowPage();
+                Dashboard dashboard = new Dashboard();
+                dashboard.ShowPage();
                 frame.dispose();
 
 

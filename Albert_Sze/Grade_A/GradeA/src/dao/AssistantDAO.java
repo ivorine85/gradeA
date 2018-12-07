@@ -2,6 +2,7 @@ package dao;
 
 import entity.Assistant;
 import entity.Course;
+import entity.GradeBreakDown;
 import entity.Lab;
 
 import java.sql.Connection;
