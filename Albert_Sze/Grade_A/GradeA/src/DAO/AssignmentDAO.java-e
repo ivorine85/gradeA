@@ -69,9 +69,7 @@ public class AssignmentDAO {
             while(rs.next()){
                 float gradPer = (float)rs.getInt(2)*rs.getInt(3)/100;
                 float underGradePer = (float)rs.getInt(4)*rs.getInt(5)/100;
-                rtn.put(rs.getString(1),new Float[]{gradPer,underGradePer});
-                System.out.println(rs.getString(1)+" "+gradPer+ " "+underGradePer);
-            }
+                rtn.put(rs.getString(1),new Float[]{gradPer,underGradePer}); }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -142,6 +140,27 @@ public class AssignmentDAO {
             h.updateGradType(cname,cwtype,gradTypePer);
             h.updateUnderType(cname,cwtype,underTypePer);
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updatePercentage(String cname,String cwname,float underPer,float gradPer){
+        connection = Connector.getConnection();
+        try{
+            String sql = "UPDATE Coursework set gradPercentage = ? , undergradPercentage = ? where courseName = ? and cwname = ?";;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setFloat(1,gradPer);
+            ps.setFloat(2,underPer);
+            ps.setString(3,cname);
+            ps.setString(4,cwname);
+            GradeBreakDownDAO h = new GradeBreakDownDAO();
+            ps.execute();
+            h.updateGrad(cname,cwname,gradPer);
+            h.updateUnder(cname,cwname,underPer);
+            ps.close();
+            connection.close();
+        }
+        catch (SQLException e){
             e.printStackTrace();
         }
     }
