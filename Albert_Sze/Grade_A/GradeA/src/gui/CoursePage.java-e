@@ -122,7 +122,7 @@ public class CoursePage {
 		//key : the name of assignment
 		//value: Float[] arr ,  arr[0] is the percent in gradPer , arr[1] is the percent in undergrad
 		Map<String,Float[]> getPercentage = assignmentDAO.getPercentage(currentCourse.getCourseName());
-
+		Map<String,Float[]> typePercentage = assignmentDAO.getTypePercentage(currentCourse.getCourseName());
 		/*********************************** Generate Type Percentage tables ***********************************/
 		header.add("");
 		arrayList1.add("Undergraduate");
