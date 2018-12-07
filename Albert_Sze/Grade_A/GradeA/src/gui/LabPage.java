@@ -34,8 +34,8 @@ public class LabPage {
     private JFrame frame;
     private static Lab currentLab;
 
-    public static void main(String[] args) {
-        //public static void ShowPage() {
+    //public static void main(String[] args) {
+        public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
