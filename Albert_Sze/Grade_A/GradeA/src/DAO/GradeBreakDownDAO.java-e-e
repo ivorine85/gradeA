@@ -91,4 +91,13 @@ public class GradeBreakDownDAO {
         return rtn;
     }
 
+//    public void updateUnderType(String cname,String cwname , float underTypePer ){
+//        connection = Connector.getConnection();
+//        String sql = "update "
+//    }
+
+    public void updateGradType(String cname,String cwname , float gradTypePer){
+
+    }
+
 }
