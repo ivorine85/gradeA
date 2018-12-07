@@ -91,13 +91,36 @@ public class GradeBreakDownDAO {
         return rtn;
     }
 
-//    public void updateUnderType(String cname,String cwname , float underTypePer ){
-//        connection = Connector.getConnection();
-//        String sql = "update "
-//    }
+    public void updateUnderType(String cname,String type , float underTypePer ){
+        connection = Connector.getConnection();
+        String sql = "update gradebreakDown g set g.typePercentage = ? where g.coursename = ? and g.type = ? and g.sid in(select sid from student s where s.stype ='Undergrad')";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setFloat(1,underTypePer);
+            ps.setString(2,cname);
+            ps.setString(3,type);
+            ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-    public void updateGradType(String cname,String cwname , float gradTypePer){
-
+    public void updateGradType(String cname,String type , float gradTypePer){
+        connection = Connector.getConnection();
+        String sql = "update gradebreakDown g set g.typePercentage = ? where g.coursename = ? and g.type = ? and g.sid in(select sid from student s where s.stype ='Grad')";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setFloat(1,gradTypePer);
+            ps.setString(2,cname);
+            ps.setString(3,type);
+            ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }
