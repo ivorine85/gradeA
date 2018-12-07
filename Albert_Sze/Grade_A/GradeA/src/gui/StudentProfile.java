@@ -268,6 +268,7 @@
 //					////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
 //					//Delete student
 //					System.out.println("delete Student");
+//					LabPage labPageReturn = new LabPage();
 //					LabPage labPageReturn = new LabPage(curLab);
 //					System.out.println("LabPage");
 //					//LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
