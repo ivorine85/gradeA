@@ -60,6 +60,7 @@ public class Dashboard {
         CourseDAO cd = new CourseDAO();
         int totalCount = 0;
         List<Course> allCourses = cd.findAllActive();										// Create Lab Sections
+        System.out.println(allCourses.size());
         Profilete userProfile = new Profilete();
         userProfile.setCourses(allCourses);
         LabDAO labDAO = new LabDAO();
@@ -153,8 +154,7 @@ public class Dashboard {
                     }
                     else{
                         LabPage labPageNext = new LabPage(labList.get(row));
-                        //LabPage labPageNext = new LabPage();
-                        //labPageNext.ShowPage();
+                        labPageNext.ShowPage();
                         //go to lab page
                     }
                     frame.dispose();
