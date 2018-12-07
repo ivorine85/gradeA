@@ -1,6 +1,7 @@
 package dao;
 
 import entity.Assignment;
+import sun.jvm.hotspot.ui.tree.FloatTreeNodeAdapter;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -77,6 +78,28 @@ public class AssignmentDAO {
         return rtn;
     }
 
+    public Map<String,Float[]> getTypePercentage(String cname){
+        connection = Connector.getConnection();
+        Map<String,Float[]> rtn = new HashMap<>();
+        String sql = "SELECT cwname,gradTypePercentage,undergradTypePercentage FROM GradeA.Coursework where courseName = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,cname);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                String cwname = rs.getString(1);
+                Float gradTypePer = rs.getFloat(2);
+                Float under = rs.getFloat(3);
+                String type = cwname.split("_")[0];
+                if(rtn.containsKey(type)) continue;
+                else rtn.put(type,new Float[]{under,gradTypePer});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rtn;
+    }
+
     public List<Assignment> findAssignmentByCourse(String cname){
         connection = Connector.getConnection();
         List<Assignment> rtn = new ArrayList<>();
@@ -100,5 +123,24 @@ public class AssignmentDAO {
             e.printStackTrace();
         }
         return rtn;
+    }
+
+    public void updateTypePercent(String cname,String cwtype , float underTypePer , float gradTypePer){
+        connection = Connector.getConnection();
+        String sql = "UPDATE Coursework set gradTypePercentage = ? , undergradTypePercentage = ? where courseName = ? and type = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setFloat(1,gradTypePer);
+            ps.setFloat(2,underTypePer);
+            ps.setString(3,cname);
+            ps.setString(4,cwtype);
+            ps.execute();
+            ps.close();
+            connection.close();
+            //TODO:
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
