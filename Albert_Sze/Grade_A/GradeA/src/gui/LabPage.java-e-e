@@ -34,8 +34,8 @@ public class LabPage {
     private JFrame frame;
     private static Lab currentLab;
 
-    //public static void main(String[] args) {
-    public static void ShowPage() {
+    public static void main(String[] args) {
+        //public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -131,19 +131,20 @@ public class LabPage {
 
         /*********************************** TFs & TAs Title **************************************/
         teachAssistTitle = new JLabel("TFs & TAs");
-
-
+        teachAssistTitle.setFont(new Font("Tahoma", Font.PLAIN, 17));
+        teachAssistTitle.setBounds(682, 69, 88, 22);
+        frame.getContentPane().add(teachAssistTitle);
 
         /*********************************** Get TFs & TAs information Title **************************************/
-        teachAssist1 = new JLabel(new ImageIcon(profileImg));
         AssistantDAO assistantDAO = new AssistantDAO();
         allAssistant = assistantDAO.findAssistantByLab(currentLab.getSection());
 
+        teachAssist1 = new JLabel(new ImageIcon(profileImg));
         teachAssist1.setVerticalAlignment(SwingConstants.TOP);
         teachAssist1.setHorizontalAlignment(SwingConstants.CENTER);
         //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
         // change the text to the teaching Assistant name and email
-        teachAssist1.setText("<html>Teaching Assistant<br/>Email<html>");
+        teachAssist1.setText("<html>" + allAssistant.get(0).getName()  + "<br/>"+ allAssistant.get(0).getEmail() +"<html>");
         //////////////////////////////////////////////////////////////////////////////////////////////////
         teachAssist1.setVerticalTextPosition(JLabel.BOTTOM);
         teachAssist1.setHorizontalTextPosition(JLabel.CENTER);
@@ -152,20 +153,19 @@ public class LabPage {
 
         //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
         // if there is a second teaching assistant
-        boolean twoAssistant = allAssistant.size()==2;
-        if (twoAssistant) {
-        //////////////////////////////////////////////////////////////////////////////////////////////////
-	        teachAssist2 = new JLabel(new ImageIcon(profileImg));
-	        teachAssist2.setVerticalTextPosition(SwingConstants.BOTTOM);
-	        teachAssist2.setVerticalAlignment(SwingConstants.TOP);
-	        //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-	        // change the text to the teaching Assistant name and email
-	        teachAssist2.setText("<html>Teaching Assistant<br/>Email<html>");
-	        //////////////////////////////////////////////////////////////////////////////////////////////////
-	        teachAssist2.setHorizontalTextPosition(SwingConstants.CENTER);
-	        teachAssist2.setHorizontalAlignment(SwingConstants.CENTER);
-	        teachAssist2.setBounds(677, 252, 98, 125);
-	        frame.getContentPane().add(teachAssist2);
+        if (allAssistant.size()==2) {
+            //////////////////////////////////////////////////////////////////////////////////////////////////
+            teachAssist2 = new JLabel(new ImageIcon(profileImg));
+            teachAssist2.setVerticalTextPosition(SwingConstants.BOTTOM);
+            teachAssist2.setVerticalAlignment(SwingConstants.TOP);
+            //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+            // change the text to the teaching Assistant name and email
+            teachAssist1.setText("<html>" + allAssistant.get(1).getName()  + "<br/>"+ allAssistant.get(1).getEmail() +"<html>");
+            //////////////////////////////////////////////////////////////////////////////////////////////////
+            teachAssist2.setHorizontalTextPosition(SwingConstants.CENTER);
+            teachAssist2.setHorizontalAlignment(SwingConstants.CENTER);
+            teachAssist2.setBounds(677, 252, 98, 125);
+            frame.getContentPane().add(teachAssist2);
         }
 
         /*********************************** Generating Home button ***********************************************/
@@ -173,8 +173,8 @@ public class LabPage {
         homeButton.setIcon(new ImageIcon(homeImg));
         homeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                Dashboard dashboardPage = new Dashboard();
-                dashboardPage.ShowPage();
+//                Dashboard dashboardPage = new Dashboard();
+//                dashboardPage.ShowPage();
                 frame.dispose();
             }
         });
@@ -192,15 +192,15 @@ public class LabPage {
         deleteButton.setIcon(new ImageIcon(trashImg));
         deleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-            	//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+                //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
                 int dialogButton = JOptionPane.YES_NO_OPTION;
                 int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete this Lab?","Warning",dialogButton);
                 if(dialogResult == JOptionPane.YES_OPTION){
-                    //delete course return to the home page
-                    Dashboard dashboardPage = new Dashboard();
+                    //delete lab return to the home page
+//                    Dashboard dashboardPage = new Dashboard();
                     LabDAO labDAO = new LabDAO();
                     labDAO.deleteLab(currentLab.getSection());
-                    Dashboard.ShowPage();
+//                    Dashboard.ShowPage();
                     frame.dispose();
                 }
                 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -213,8 +213,8 @@ public class LabPage {
         editLabButton = new JButton("Edit Lab");
         editLabButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                EditLab editLabPage = new EditLab(currentLab);
-                editLabPage.ShowPage();
+//                EditLab editLabPage = new EditLab(currentLab);
+//                editLabPage.ShowPage();
                 frame.dispose();
             }
         });
@@ -264,9 +264,10 @@ public class LabPage {
                             //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
                             // you might need to change this if you are changing what is StudentProfile needs to run
                             // Take a look at the StudentProfile class first
-                           //StudentProfile studentProfilePage = new StudentProfile(curLab,Student);
+                            Student tempStudent = allStudents.get(Integer.parseInt(but.getActionCommand()));
+                            //StudentProfile studentProfilePage = new StudentProfile(curLab,Student);
 //                            //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-                           // studentProfilePage.ShowPage();
+                            // studentProfilePage.ShowPage();
                             frame.dispose();
                         }
                     });
