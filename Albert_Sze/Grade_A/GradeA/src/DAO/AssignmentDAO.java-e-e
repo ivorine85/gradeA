@@ -138,7 +138,9 @@ public class AssignmentDAO {
             ps.close();
             connection.close();
             //TODO:
-
+            GradeBreakDownDAO h = new GradeBreakDownDAO();
+            h.updateGradType(cname,cwtype,gradTypePer);
+            h.updateUnderType(cname,cwtype,underTypePer);
         } catch (SQLException e) {
             e.printStackTrace();
         }
