@@ -313,22 +313,22 @@
 //        }
 //
 //
-//        for (int i = 0; i < allStudents.size();i++) {
-//            studentData = new ArrayList<String>(0);
-//            studentData.add(allStudents.get(i).getName());
-//            for (Assignment curInstance: allStudents.get(i).getCourseWork()) {
-//                if (i == 0) {
-//                    int j = newCourse.getCourseBreakDown().get(curInstance.getType()).getNumAssign()-assignCount.get(curInstance.getType());
-//                    header.add(curInstance.getType() + " " + Integer.toString(j));
-//                    assignCount.put(curInstance.getType(), assignCount.get(curInstance.getType())-1);
-//                }
-//
-//                studentData.add(Integer.toString(curInstance.getPtsLost()));
-//                studentData.add(Double.toString((double)Math.round(curInstance.getPercent()*10000)/100));
-//            }
-//            studentData.add(Double.toString((double)Math.round(allStudents.get(i).getGrade()*10000)/100));
-//            allStudentData.add(studentData);
-//        }
+////        for (int i = 0; i < allStudents.size();i++) {
+////            studentData = new ArrayList<String>(0);
+////            studentData.add(allStudents.get(i).getName());
+////            for (Assignment curInstance: allStudents.get(i).getCourseWork()) {
+////                if (i == 0) {
+////                    int j = newCourse.getCourseBreakDown().get(curInstance.getType()).getNumAssign()-assignCount.get(curInstance.getType());
+////                    header.add(curInstance.getType() + " " + Integer.toString(j));
+////                    assignCount.put(curInstance.getType(), assignCount.get(curInstance.getType())-1);
+////                }
+////
+////                studentData.add(Integer.toString(curInstance.getPtsLost()));
+////                studentData.add(Double.toString((double)Math.round(curInstance.getPercent()*10000)/100));
+////            }
+////            studentData.add(Double.toString((double)Math.round(allStudents.get(i).getGrade()*10000)/100));
+////            allStudentData.add(studentData);
+////        }
 //        header.add("Final");
 //        studentData = new ArrayList<String>(0);
 //        studentData.add("Total Points");
