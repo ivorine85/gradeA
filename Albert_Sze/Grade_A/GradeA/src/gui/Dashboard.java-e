@@ -60,7 +60,6 @@ public class Dashboard {
         CourseDAO cd = new CourseDAO();
         int totalCount = 0;
         List<Course> allCourses = cd.findAllActive();										// Create Lab Sections
-        System.out.println(allCourses.size());
         Profilete userProfile = new Profilete();
         userProfile.setCourses(allCourses);
         LabDAO labDAO = new LabDAO();
