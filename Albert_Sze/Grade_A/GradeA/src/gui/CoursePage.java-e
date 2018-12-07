@@ -127,11 +127,11 @@ public class CoursePage {
 		header.add("");
 		arrayList1.add("Undergraduate");
 		arrayList2.add("Graduate");
-		for (Map.Entry<String, Float[]> entry: getPercentage.entrySet()) {
-			header.add(entry.getKey());
-			arrayList1.add(Double.toString(Math.round(entry.getValue()[1]*10000)/100));
-			arrayList2.add(Double.toString(Math.round(entry.getValue()[0]*10000)/100));
-		}
+        for (Map.Entry<String, Float[]> entry: typePercentage.entrySet()) {
+            header.add(entry.getKey());
+            arrayList1.add(Double.toString(entry.getValue()[1]));
+            arrayList2.add(Double.toString(entry.getValue()[0]));
+        }
 
 		doubleArrayList.add(arrayList1);
 		doubleArrayList.add(arrayList2);
@@ -157,13 +157,10 @@ public class CoursePage {
 		arrayList2.add("Averages");
 
 		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-//		for (Map.Entry<String, Float[]> entry: getPercentage.entrySet()) {
-//			header.add(entry.getKey());
-//			for (int i = 0; i < entry.getValue().size(); i++) {
-//				// Add individual assignment averages ex. HW1 average HW2 average etc.
-//				arrayList2.add(Double.toString(Math.round(entry.getValue().get(i).getAverage()*10000)/100));
-//			}
-//		}
+        for (Map.Entry<String, Double> entry: getAvg.entrySet()) {
+            header.add(entry.getKey());
+            arrayList2.add(Double.toString(Math.round(entry.getValue()*10000)/100));
+        }
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		doubleArrayList.add(arrayList2);
 
