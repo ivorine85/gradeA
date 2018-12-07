@@ -1,6 +1,5 @@
 package gui;
 
-<<<<<<< HEAD
 import entity.Course;
 
 import java.awt.*;
@@ -119,9 +118,9 @@ public class Login {
 
         btnCreateUser.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                if(textFieldTotalPoints.getText().isEmpty())
+                if (textFieldTotalPoints.getText().isEmpty())
                     JOptionPane.showMessageDialog(null, "Data Missing");
-                else{
+                else {
                     JOptionPane.showMessageDialog(null, "Data Submitted");
                     //CoursePage changePage = new CoursePage();
                     //CoursePage.ShowPage();
@@ -143,73 +142,5 @@ public class Login {
 
             }
         });
-
-=======
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-public class Login {
-    private JButton loginButton;
-    private JButton createUserButton;
-    private JPanel panelMain;
-    private JPasswordField input_pass;
-    private JLabel lbl_uname;
-    private JLabel lbl_password;
-    private JTextField input_uname;
-    private JFrame message;
-    private static JFrame frame;
-
-    public Login() {
-                        Dashboard dashboardPage = new Dashboard();
-                dashboardPage.ShowPage();
-                frame.dispose();
-//        loginButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                /*
-//                String password = String.valueOf(input_pass.getPassword());
-//                String username = input_uname.getText();
-//                UserDAO userDAO = new UserDAO();
-//                String psw = userDAO.getPsw(username);
-//                if(psw.equals("No such user!")){
-//                    System.out.println("can't find this username!");
-//                    JOptionPane.showMessageDialog(null, "User does not exist.");
-//                }
-//                else if(psw.equals(password)){
-//                    System.out.println("Match!");
-//                    Dashboard dashboardPage = new Dashboard();
-//                    dashboardPage.ShowPage();
-//                    frame.dispose();
-//                }
-//                else{
-//                    JOptionPane.showMessageDialog(null, "Username or Password incorrect");
-//                    System.out.println("Wrong!");
-//                }
-//                */
-//                Dashboard dashboardPage = new Dashboard();
-//                dashboardPage.ShowPage();
-//                frame.dispose();
-//            }
-//        });
-//        createUserButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//
-//                //go to new user page, page not created yet
-//                NewUser newUserPage = new NewUser();
-//                newUserPage.ShowPage();
-//                frame.dispose();
-//            }
-//        });
-    }
-
-    public static void main(String[] args) {
-        Login.frame = new JFrame("Login");
-        Login.frame.setContentPane(new Login().panelMain);
-        Login.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Login.frame.pack();
-        Login.frame.setVisible(true);
->>>>>>> b92aa5799a1d614bf1e733738d44de60c5044139
     }
 }
