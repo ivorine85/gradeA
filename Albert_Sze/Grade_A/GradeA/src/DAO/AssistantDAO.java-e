@@ -41,7 +41,7 @@ public class AssistantDAO {
         return object;
     }
 
-    public List<Assistant> findAssistantByCourse(String cname) throws SQLException {
+    public List<Assistant> findAssistantByCourse(String cname) {
         connection = Connector.getConnection();
         List<Assistant> rtn = new ArrayList<>();
         CourseDAO cd = new CourseDAO();
@@ -56,11 +56,12 @@ public class AssistantDAO {
             }
             rs.close();
             ps.close();
+            connection.close();
 
         }catch (SQLException e){
             e.printStackTrace();
         }
-        connection.close();
+
         return rtn;
     }
 
@@ -149,5 +150,7 @@ public class AssistantDAO {
         }
         return rtn;
     }
+
+
 
 }

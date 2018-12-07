@@ -54,7 +54,6 @@ public class GradeBreakDownDAO {
                 double avgPointLost = res.getDouble(2)-res.getDouble(4);
                 double total = res.getDouble(3);
                 r.put(cwname,new Double[]{avgPointLost,total});
-                System.out.println(cwname+":"+ avgPointLost+"."+total);
             }
             res.close();
             ps.close();
@@ -115,6 +114,38 @@ public class GradeBreakDownDAO {
             ps.setFloat(1,gradTypePer);
             ps.setString(2,cname);
             ps.setString(3,type);
+            ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateGrad(String cname,String cwname , float gradTypePer){
+        connection = Connector.getConnection();
+        String sql = "update gradebreakDown g set g.percentage = ? where g.coursename = ? and g.cwname = ? and g.sid in(select sid from student s where s.stype ='Grad')";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setFloat(1,gradTypePer);
+            ps.setString(2,cname);
+            ps.setString(3,cwname);
+            ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateUnder(String cname,String cwname , float underTypePer ){
+        connection = Connector.getConnection();
+        String sql = "update gradebreakDown g set g.Percentage = ? where g.coursename = ? and g.cwname = ? and g.sid in(select sid from student s where s.stype ='Undergrad')";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setFloat(1,underTypePer);
+            ps.setString(2,cname);
+            ps.setString(3,cwname);
             ps.execute();
             ps.close();
             connection.close();

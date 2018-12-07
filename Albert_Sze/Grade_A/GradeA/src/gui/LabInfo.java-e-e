@@ -50,7 +50,7 @@ public class LabInfo {
     /**
      * Create the application.
      */
-    public LabInfo(String prevPage,String courseName) throws SQLException {
+    public LabInfo(String prevPage,String courseName) {
         this.prevPage = prevPage;
         this.coursename = courseName;
         initialize();
@@ -59,7 +59,7 @@ public class LabInfo {
     /**
      * Initialize the contents of the frame.
      */
-    private void initialize() throws SQLException {
+    private void initialize(){
         frame = new JFrame();
         frame.setBounds(100, 100, 1000, 489);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
