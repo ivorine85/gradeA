@@ -1,21 +1,24 @@
-//package gui;
-//
-//import javax.swing.*;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
-//
-//public class Login {
-//    private JButton loginButton;
-//    private JButton createUserButton;
-//    private JPanel panelMain;
-//    private JPasswordField input_pass;
-//    private JLabel lbl_uname;
-//    private JLabel lbl_password;
-//    private JTextField input_uname;
-//    private JFrame message;
-//    private static JFrame frame;
-//
-//    public Login() {
+package gui;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Login {
+    private JButton loginButton;
+    private JButton createUserButton;
+    private JPanel panelMain;
+    private JPasswordField input_pass;
+    private JLabel lbl_uname;
+    private JLabel lbl_password;
+    private JTextField input_uname;
+    private JFrame message;
+    private static JFrame frame;
+
+    public Login() {
+                        Dashboard dashboardPage = new Dashboard();
+                dashboardPage.ShowPage();
+                frame.dispose();
 //        loginButton.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {
@@ -54,13 +57,13 @@
 //                frame.dispose();
 //            }
 //        });
-//    }
-//
-//    public static void main(String[] args) {
-//        Login.frame = new JFrame("Login");
-//        Login.frame.setContentPane(new Login().panelMain);
-//        Login.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        Login.frame.pack();
-//        Login.frame.setVisible(true);
-//    }
-//}
+    }
+
+    public static void main(String[] args) {
+        Login.frame = new JFrame("Login");
+        Login.frame.setContentPane(new Login().panelMain);
+        Login.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Login.frame.pack();
+        Login.frame.setVisible(true);
+    }
+}
