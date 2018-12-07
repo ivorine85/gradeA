@@ -89,7 +89,9 @@ public class AddStudents {
 
         /*********************************** Create Combo box of Lab section ***********************************/
         //Create Combo box for student type and labs
-        for(Lab l:labDAO.findLabOfCourse(curCourse.getCourseName())){
+        List<Lab> allLabs = labDAO.findLabOfCourse(curCourse.getCourseName());
+        System.out.println(allLabs.size());
+        for(Lab l:allLabs){
             labList.put(l.getSection(),l);
             labs.addItem(l.getSection());
         }

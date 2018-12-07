@@ -54,11 +54,13 @@ public class CoursePage {
 	}
 
 	private boolean CalcSum (JTable table) {
+
 		for (int i = 0; i < table.getRowCount();i++) {
 			double sum  = 0.0;
 			for (int j = 1; j < table.getColumnCount(); j++) {
 				sum += Double.parseDouble((String) table.getModel().getValueAt(i, j));
 			}
+			System.out.println(sum);
 			if (sum != 100.00) {
 				return false;
 			}
@@ -127,10 +129,13 @@ public class CoursePage {
 		header.add("");
 		arrayList1.add("Undergraduate");
 		arrayList2.add("Graduate");
+		int index = 0;
+		Map<Integer,String> getTypeByIndex = new HashMap<>();
         for (Map.Entry<String, Float[]> entry: typePercentage.entrySet()) {
             header.add(entry.getKey());
             arrayList1.add(Double.toString(entry.getValue()[1]));
             arrayList2.add(Double.toString(entry.getValue()[0]));
+            getTypeByIndex.put(index++,entry.getKey());
         }
 
 		doubleArrayList.add(arrayList1);
@@ -228,7 +233,7 @@ public class CoursePage {
 					CourseDAO cd = new CourseDAO();
 					cd.deleteCourse(currentCourse.getCourseName());
 					Dashboard dashboardPage = new Dashboard();
-					//dashboardPage.ShowPage();
+					dashboardPage.ShowPage();
 					frame.dispose();
 				}
 				//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -244,9 +249,9 @@ public class CoursePage {
 		editCourseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (CalcSum(tableGradeBreakDown)) {
-					//EditCourse editCoursePage = new EditCourse();
-					//editCoursePage.ShowPage();
-					//frame.dispose();
+					EditCourse editCoursePage = new EditCourse(currentCourse);
+					editCoursePage.ShowPage();
+					frame.dispose();
 				}
 				else {
 					JOptionPane.showMessageDialog(frame, "Percentages do not add up to 100%, please try again.");;
@@ -282,8 +287,8 @@ public class CoursePage {
 		addCourseworkButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (CalcSum(tableGradeBreakDown)) {
-					//AddCoursework addCourseWorkPage = new AddCoursework(currentCourse);
-					//addCourseWorkPage.ShowPage();
+					AddCoursework addCourseWorkPage = new AddCoursework(currentCourse);
+					addCourseWorkPage.ShowPage();
 					frame.dispose();
 				}
 				else {
@@ -296,8 +301,8 @@ public class CoursePage {
 
 		/*********************************** Add Lab button ***********************************/
 		addLabButton = new JButton("Add Lab");
-//		btnAddLab.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
+		addLabButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 //				if (CalcSum(tableGradeBreakDown)) {
 //					LabInfo labInfoPage = null;
 //					try {
@@ -305,14 +310,15 @@ public class CoursePage {
 //					} catch (SQLException e1) {
 //						e1.printStackTrace();
 //					}
-//					labInfoPage.ShowPage();
-//					frame.dispose();
+				LabInfo labInfoPage = new LabInfo("CoursePage",currentCourse.getCourseName());
+				labInfoPage.ShowPage();
+				frame.dispose();
 //				}
 //				else {
 //					JOptionPane.showMessageDialog(frame, "Percentages do not add up to 100%, please try again.");;
 //				}
-//			}
-//		});
+			}
+		});
 		addLabButton.setBounds(332, 414, 89, 23);
 		this.frame.getContentPane().add(addLabButton);
 		
@@ -321,8 +327,13 @@ public class CoursePage {
 		saveButton.setEnabled(false);
 		saveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
 				// update data base with information
+				for(int j = 1;j<tableGradeBreakDown.getColumnCount();j++){
+					float underPer = Float.valueOf((String)tableGradeBreakDown.getModel().getValueAt(0,j));
+					float gradPer = Float.valueOf((String)tableGradeBreakDown.getModel().getValueAt(1,j));
+					String type = getTypeByIndex.get(j-1);
+					assignmentDAO.updateTypePercent(currentCourse.getCourseName(),type,underPer,gradPer);
+				}
 				saveButton.setEnabled(false);
 				//////////////////////////////////////////////////////////////////////////////////////////////////
 			}
@@ -353,17 +364,18 @@ public class CoursePage {
 		/************************************ Detects when value is changed in tableGrades ****************************************/
 		tableGradeBreakDown.getModel().addTableModelListener(new TableModelListener(){
 			public void tableChanged(TableModelEvent e){
-				try{
-					int row = e.getFirstRow();
-					int col = e.getColumn();
-					int edit = Integer.parseInt((String)tableGradeBreakDown.getValueAt(row, col));
-					if (CalcSum(tableGradeBreakDown)) {
-						saveButton.setEnabled(true);
-					}
-				} catch (NumberFormatException nfe) {
-					saveButton.setEnabled(false);
-					//JOptionPane.showMessageDialog(null,"not valid edit");
-				}
+				saveButton.setEnabled(true);
+//				try{
+//					int row = e.getFirstRow();
+//					int col = e.getColumn();
+//					int edit = Integer.parseInt((String)tableGradeBreakDown.getValueAt(row, col));
+//					if (CalcSum(tableGradeBreakDown)) {
+//						saveButton.setEnabled(true);
+//					}
+//				} catch (NumberFormatException nfe) {
+//					saveButton.setEnabled(false);
+//					//JOptionPane.showMessageDialog(null,"not valid edit");
+//				}
 			}
 		});
 	}

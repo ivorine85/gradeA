@@ -388,18 +388,14 @@ public class CourseInfo {
                     }
                     JOptionPane.showMessageDialog(null, "Data Submitted");
                     LabInfo labInfoPage = null;
-                    try {
-                        labInfoPage = new LabInfo("LabInfo",cname);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                    labInfoPage = new LabInfo("LabInfo",cname);
                     labInfoPage.ShowPage();
 
                     frame.dispose();
                 }
 
 //                LabInfo labInfoPage = new LabInfo("LabInfo",);
-//                labInfoPage.ShowPage();
+//                labInfoPage.ShowPage();x
 //                frame.dispose();
 
 

@@ -17,7 +17,6 @@ public class CourseDAO {
         String sql = "insert into Course (cname,startTime,endTime,startDate,endDate,weekDay,status) values (?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            System.out.println(c.getClassTime()[0]+" "+c.getClassTime()[1]);
             ps.setString(1,c.getCourseName());
             ps.setTime(2,c.getClassTime()[0]);
             ps.setTime(3,c.getClassTime()[1]);

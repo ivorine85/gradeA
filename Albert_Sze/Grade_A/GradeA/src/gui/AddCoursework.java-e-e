@@ -23,8 +23,8 @@ public class AddCoursework {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
-    //public static void ShowPage() {
+    //public static void main(String[] args) {
+    public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -131,8 +131,10 @@ public class AddCoursework {
                     JOptionPane.showMessageDialog(null, "Data Missing");
                 else{
                     JOptionPane.showMessageDialog(null, "Data Submitted");
-                    //CoursePage changePage = new CoursePage();
-                    //CoursePage.ShowPage();
+                    int total = Integer.valueOf(textFieldTotalPoints.getText());
+
+                    CoursePage changePage = new CoursePage(currentCourse);
+                    CoursePage.ShowPage();
                     frame.dispose();
                 }
 
