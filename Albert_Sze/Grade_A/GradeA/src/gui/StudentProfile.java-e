@@ -268,7 +268,11 @@
 //					////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
 //					//Delete student
 //					System.out.println("delete Student");
+<<<<<<< HEAD
 //					LabPage labPageReturn = new LabPage();
+=======
+//					LabPage labPageReturn = new LabPage(curLab);
+>>>>>>> b92aa5799a1d614bf1e733738d44de60c5044139
 //					System.out.println("LabPage");
 //					//LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
 //					//labPageReturn.ShowPage();
