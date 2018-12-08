@@ -19,8 +19,8 @@ public class AddCourse {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
-        //public static void ShowPage() {
+    //public static void main(String[] args) {
+        public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -85,8 +85,8 @@ public class AddCourse {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Dashboard dashboardPage = new Dashboard();
-                dashboardPage.ShowPage();
+                ImportPage importPagePage = new ImportPage();
+                importPagePage.ShowPage();
                 frame.dispose();
 
             }

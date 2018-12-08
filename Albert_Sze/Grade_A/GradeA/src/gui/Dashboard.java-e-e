@@ -124,8 +124,8 @@ public class Dashboard {
             public void actionPerformed(ActionEvent e) {
                 String[] temp = {"","Temp"};
                 model.addRow(temp);
-                //AddCourse addCoursePage = new AddCourse();
-                //addCoursePage.ShowPage();
+                AddCourse addCoursePage = new AddCourse();
+                addCoursePage.ShowPage();
                 frame.dispose();
             }
         });
