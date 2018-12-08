@@ -364,18 +364,19 @@ public class CoursePage {
 		/************************************ Detects when value is changed in tableGrades ****************************************/
 		tableGradeBreakDown.getModel().addTableModelListener(new TableModelListener(){
 			public void tableChanged(TableModelEvent e){
-				saveButton.setEnabled(true);
-//				try{
-//					int row = e.getFirstRow();
-//					int col = e.getColumn();
-//					int edit = Integer.parseInt((String)tableGradeBreakDown.getValueAt(row, col));
-//					if (CalcSum(tableGradeBreakDown)) {
-//						saveButton.setEnabled(true);
-//					}
-//				} catch (NumberFormatException nfe) {
-//					saveButton.setEnabled(false);
-//					//JOptionPane.showMessageDialog(null,"not valid edit");
-//				}
+
+				try{
+					int row = e.getFirstRow();
+					int col = e.getColumn();
+					double edit = Double.parseDouble((String)tableGradeBreakDown.getValueAt(row, col));
+					if (CalcSum(tableGradeBreakDown)) {
+						saveButton.setEnabled(true);
+					}
+				} catch (NumberFormatException nfe) {
+					saveButton.setEnabled(false);
+					nfe.printStackTrace();
+					//JOptionPane.showMessageDialog(null,"not valid edit");
+				}
 			}
 		});
 	}
