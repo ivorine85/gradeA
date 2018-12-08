@@ -15,7 +15,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.Date;
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JTextField;
@@ -40,9 +43,28 @@ public class EditCourse {
     private JTable table;
     private static Course curCourse;
 
-    /**
-     * Launch the application.
-     */
+
+    private boolean CalcSum (JTable table,int numTypes) {
+
+        for (int i = 0; i < 2; i++) {
+            double sum  = 0.0;
+            for (int j = 1; j < table.getColumnCount(); j++) {
+                try{
+                    sum += Double.parseDouble((String) table.getModel().getValueAt(i, j));
+                }
+                catch(NumberFormatException nfe)
+                {
+                    return false;
+                }
+
+            }
+            if (sum != 100.00* numTypes) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     //public static void main(String[] args) {
     public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
@@ -73,6 +95,9 @@ public class EditCourse {
         //curCourse is the object of current course
         //assignmentList is all the assignments
         //assistantList is all the TFs
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        ArrayList<String> allAssignmentTypes = new ArrayList<String>(0);
         AssignmentDAO ad = new AssignmentDAO();
         java.util.List<Assignment> assignmentList = ad.findAssignmentByCourse(curCourse.getCourseName());
         AssistantDAO assistantDAO = new AssistantDAO();
@@ -92,7 +117,7 @@ public class EditCourse {
         lblCourseTitle.setBounds(40, 85, 100, 14);
         frame.getContentPane().add(lblCourseTitle);
 
-        textFieldCourseTitle = new JTextField();
+        textFieldCourseTitle = new JTextField(curCourse.getCourseName());
         textFieldCourseTitle.setBounds(40, 110, 150, 20);
         frame.getContentPane().add(textFieldCourseTitle);
         textFieldCourseTitle.setColumns(10);
@@ -101,11 +126,12 @@ public class EditCourse {
         lblDate.setBounds(40, 145, 100, 14);
         frame.getContentPane().add(lblDate);
 
+
         JLabel lblMon = new JLabel("Mon");
         lblMon.setBounds(40, 170, 46, 14);
         frame.getContentPane().add(lblMon);
 
-        JRadioButton radioButtonMon = new JRadioButton("");
+        JRadioButton radioButtonMon = new JRadioButton("", Arrays.stream(curCourse.getWeekDay()).anyMatch("Monday"::equals));
         radioButtonMon.setBounds(43, 185, 109, 23);
         frame.getContentPane().add(radioButtonMon);
 
@@ -113,7 +139,7 @@ public class EditCourse {
         lblTues.setBounds(75, 170, 46, 14);
         frame.getContentPane().add(lblTues);
 
-        JRadioButton radioButtonTues = new JRadioButton("");
+        JRadioButton radioButtonTues = new JRadioButton("", Arrays.stream(curCourse.getWeekDay()).anyMatch("Tuesday"::equals));
         radioButtonTues.setBounds(78, 185, 109, 23);
         frame.getContentPane().add(radioButtonTues);
 
@@ -121,7 +147,7 @@ public class EditCourse {
         lblWed.setBounds(115, 170, 46, 14);
         frame.getContentPane().add(lblWed);
 
-        JRadioButton radioButtonWed = new JRadioButton("");
+        JRadioButton radioButtonWed = new JRadioButton("", Arrays.stream(curCourse.getWeekDay()).anyMatch("Wednesday"::equals));
         radioButtonWed.setBounds(118, 185, 109, 23);
         frame.getContentPane().add(radioButtonWed);
 
@@ -129,7 +155,7 @@ public class EditCourse {
         lblThurs.setBounds(150, 170, 46, 14);
         frame.getContentPane().add(lblThurs);
 
-        JRadioButton radioButtonThurs = new JRadioButton("");
+        JRadioButton radioButtonThurs = new JRadioButton("", Arrays.stream(curCourse.getWeekDay()).anyMatch("Thursday"::equals));
         radioButtonThurs.setBounds(153, 185, 109, 23);
         frame.getContentPane().add(radioButtonThurs);
 
@@ -137,7 +163,7 @@ public class EditCourse {
         lblFri.setBounds(200, 170, 46, 14);
         frame.getContentPane().add(lblFri);
 
-        JRadioButton radioButtonFri = new JRadioButton("");
+        JRadioButton radioButtonFri = new JRadioButton("", Arrays.stream(curCourse.getWeekDay()).anyMatch("Friday"::equals));
         radioButtonFri.setBounds(200, 185, 109, 23);
         frame.getContentPane().add(radioButtonFri);
 
@@ -145,7 +171,7 @@ public class EditCourse {
         lblStartTime.setBounds(40, 215, 100, 14);
         frame.getContentPane().add(lblStartTime);
 
-        textFieldStartTime = new JTextField();
+        textFieldStartTime = new JTextField(timeFormat.format(curCourse.getClassTime()[0].getTime()));
         textFieldStartTime.setBounds(40, 240, 60, 20);
         frame.getContentPane().add(textFieldStartTime);
         textFieldStartTime.setColumns(10);
@@ -164,7 +190,7 @@ public class EditCourse {
         lblEndTime.setBounds(180, 215, 100, 14);
         frame.getContentPane().add(lblEndTime);
 
-        textFieldEndTime = new JTextField();
+        textFieldEndTime = new JTextField(timeFormat.format(curCourse.getClassTime()[1].getTime()));
         textFieldEndTime.setBounds(180, 240, 60, 20);
         frame.getContentPane().add(textFieldEndTime);
         textFieldEndTime.setColumns(10);
@@ -188,7 +214,7 @@ public class EditCourse {
         lblStartDate.setBounds(40, 270, 100, 14);
         frame.getContentPane().add(lblStartDate);
 
-        JTextField textStartDate = new JTextField(20);
+        JTextField textStartDate = new JTextField(dateFormat.format(curCourse.getClassDuration()[0]),20);
         JButton b = new JButton("Choose");
         JPanel pStartDate = new JPanel();
         pStartDate.add(textStartDate);
@@ -205,7 +231,7 @@ public class EditCourse {
         lblEndDate.setBounds(40, 335, 100, 14);
         frame.getContentPane().add(lblEndDate);
 
-        JTextField textEndDate = new JTextField(20);
+        JTextField textEndDate = new JTextField(dateFormat.format(curCourse.getClassDuration()[1]),20);
         JButton btnEndDate = new JButton("Choose");
         JPanel pEndDate = new JPanel();
         pEndDate.add(textEndDate);
@@ -222,7 +248,14 @@ public class EditCourse {
         lblTF1Name.setBounds(410, 85, 100, 14);
         frame.getContentPane().add(lblTF1Name);
 
-        textFieldTF1Name = new JTextField();
+        if(assistantList.size()>=1){
+            textFieldTF1Name = new JTextField(assistantList.get(0).getName());
+            textFieldTF1Email = new JTextField(assistantList.get(0).getEmail());
+        }
+        else{
+            textFieldTF1Name = new JTextField();
+            textFieldTF1Email = new JTextField();
+        }
         textFieldTF1Name.setBounds(410, 110, 150, 20);
         frame.getContentPane().add(textFieldTF1Name);
         textFieldTF1Name.setColumns(10);
@@ -231,7 +264,6 @@ public class EditCourse {
         lblTF1Email.setBounds(410, 145, 100, 14);
         frame.getContentPane().add(lblTF1Email);
 
-        textFieldTF1Email = new JTextField();
         textFieldTF1Email.setBounds(410, 170, 150, 20);
         frame.getContentPane().add(textFieldTF1Email);
         textFieldTF1Email.setColumns(10);
@@ -240,7 +272,14 @@ public class EditCourse {
         lblTA2Name.setBounds(410, 205, 100, 14);
         frame.getContentPane().add(lblTA2Name);
 
-        textFieldTF2Name = new JTextField();
+        if(assistantList.size()>=2){
+            textFieldTF2Name = new JTextField(assistantList.get(1).getName());
+            textFieldTF2Email = new JTextField(assistantList.get(1).getEmail());
+        }
+        else{
+            textFieldTF2Name = new JTextField();
+            textFieldTF2Email = new JTextField();
+        }
         textFieldTF2Name.setBounds(410, 230, 150, 20);
         frame.getContentPane().add(textFieldTF2Name);
         textFieldTF2Name.setColumns(10);
@@ -249,7 +288,6 @@ public class EditCourse {
         lblTA2Email.setBounds(410, 265, 100, 14);
         frame.getContentPane().add(lblTA2Email);
 
-        textFieldTF2Email = new JTextField();
         textFieldTF2Email.setBounds(410, 290, 150, 20);
         frame.getContentPane().add(textFieldTF2Email);
         textFieldTF2Email.setColumns(10);
@@ -310,46 +348,47 @@ public class EditCourse {
 
         //Create header
         ArrayList<String> header = new ArrayList<String>(0);
-        ArrayList<ArrayList<String>> allStudentData = new ArrayList<ArrayList<String>>(0);
-        ArrayList<String> studentData;
-        HashMap<String, Integer> assignCount = new HashMap<String, Integer>(0);
+        ArrayList<ArrayList<String>> allAssignmentData = new ArrayList<ArrayList<String>>(0);
+        ArrayList<String> assignmentPercentUndergrad = new ArrayList<String>(0);
+        ArrayList<String> assignmentPercentGrad = new ArrayList<String>(0);;
+        ArrayList<String> assignmentWeight = new ArrayList<String>(0);
+        ArrayList<String> assignmentTotPTS = new ArrayList<String>(0);
         double sum = 0.0;
         //for this example
         String currentLabSection = "A1";
-//        ArrayList<Student> allStudents = newCourse.getLabSections().get(currentLabSection).getStudents().get("undergrad");
-//        allStudents.addAll(newCourse.getLabSections().get(currentLabSection).getStudents().get("grad"));
-//
-//        header.add("Item");
-//        for (Map.Entry<String, GradeBreakDown> entry : newCourse.getCourseBreakDown().entrySet()) {
-//            assignCount.put(entry.getKey(),entry.getValue().getNumAssign()-1);
-//        }
 
-
-        header.add("Final");
-        studentData = new ArrayList<String>(0);
-        studentData.add("Total Points");
-        for (int i = 1; i < header.size(); i++) {
-            sum = 0.0;
-            for (int j = 0; j < allStudentData.size(); j ++ ) {
-                sum = j;
+        header.add("");
+        assignmentPercentUndergrad.add("Undergraduate Assignment %");
+        assignmentPercentGrad.add("Graduate Assignment %");
+        assignmentWeight.add("Extra Points");
+        assignmentTotPTS.add("Total Points");
+        for (int i = 0; i < assignmentList.size(); i++) {
+            if (!allAssignmentTypes.contains(assignmentList.get(i).getType())){
+                allAssignmentTypes.add(assignmentList.get(i).getType());
             }
-            studentData.add(Double.toString((double)Math.round(sum*100)/100));
+            header.add(assignmentList.get(i).getCwname());
+            assignmentPercentUndergrad.add(Float.toString(assignmentList.get(i).getUndergradPercentage()));
+            assignmentPercentGrad.add(Float.toString(assignmentList.get(i).getGradPercentage()));
+            assignmentWeight.add(Integer.toString(assignmentList.get(i).getWeight()));
+            assignmentTotPTS.add(Integer.toString(assignmentList.get(i).getTotalPts()));
         }
-        allStudentData.add(studentData);
+        allAssignmentData.add(assignmentPercentUndergrad);
+        allAssignmentData.add(assignmentPercentGrad);
+        allAssignmentData.add(assignmentWeight);
+        allAssignmentData.add(assignmentTotPTS);
 
 
-        String[][] array = new String[allStudentData.size()][];
-        for (int i = 0; i < allStudentData.size(); i++) {
-            ArrayList<String> row = allStudentData.get(i);
+        String[][] array = new String[allAssignmentData.size()][];
+        for (int i = 0; i < allAssignmentData.size(); i++) {
+            ArrayList<String> row = allAssignmentData.get(i);
             array[i] = row.toArray(new String[row.size()]);
         }
 
-        String [][] data={{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"}};
         DefaultTableModel model = new DefaultTableModel (array,header.toArray()) {
             public boolean isCellEditable(int row, int col)
             {
                 //If you didn't want the first column to be editable
-                if(col%2 == 0 || row == allStudentData.size()-1 || col == header.size()-1) {
+                if(col == 0) {
                     return false;
                 }
                 else {
@@ -374,20 +413,18 @@ public class EditCourse {
         JButton btnFinish = new JButton("Finish");
         btnFinish.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                /* need to fix perform check that percentage are correct
-                if (CalcSum(tableGradeBreakDown)) {
+                System.out.println(allAssignmentTypes.size());
+                if (CalcSum (table,allAssignmentTypes.size())) {
+                    ////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
                     //need to add save edits
-                    CoursePage changePage = new CoursePage();
+                    ////////////////////////////////////////////////////////////////////////////////////////////////
+                    CoursePage changePage = new CoursePage(curCourse);
                     changePage.ShowPage();
                     frame.dispose();
                 }
                 else {
                     JOptionPane.showMessageDialog(frame, "Percentages do not add up to 100%, please try again.");;
                 }
-                */
-                CoursePage changePage = new CoursePage(curCourse);
-                changePage.ShowPage();
-                frame.dispose();
             }
         });
         btnFinish.setBounds(580, 614, 89, 23);
