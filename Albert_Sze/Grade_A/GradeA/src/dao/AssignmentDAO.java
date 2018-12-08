@@ -1,8 +1,8 @@
 package dao;
 
 import entity.Assignment;
-import sun.jvm.hotspot.ui.tree.FloatTreeNodeAdapter;
 
+import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -161,6 +161,28 @@ public class AssignmentDAO {
             connection.close();
         }
         catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void addAssignmentToCourse(String type,String cname,int total){
+        connection = Connector.getConnection();
+        try{
+            String sql = "select count(*) from Coursework where type = ? and courseName = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,type);
+            ps.setString(2,cname);
+            ResultSet rs  = ps.executeQuery();
+            int count = 0;
+            if(rs.next()) count = rs.getInt(1);
+            count++;
+            rs.close();
+            connection.close();
+            String newName = type+"_"+count;
+            Assignment assignment = new Assignment(type,newName,total,0,0,0,0,0);
+            insert(assignment,cname);
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
