@@ -158,51 +158,9 @@ public class Login {
                     JOptionPane.showMessageDialog(null, "Username or Password incorrect");
                     System.out.println("Wrong!");
                 }
-//                Dashboard dashboardPage = new Dashboard();
-//                dashboardPage.ShowPage();
-//                frame.dispose();
-
             }
         });
 
-        //        loginButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                /*
-//                String password = String.valueOf(input_pass.getPassword());
-//                String username = input_uname.getText();
-//                UserDAO userDAO = new UserDAO();
-//                String psw = userDAO.getPsw(username);
-//                if(psw.equals("No such user!")){
-//                    System.out.println("can't find this username!");
-//                    JOptionPane.showMessageDialog(null, "User does not exist.");
-//                }
-//                else if(psw.equals(password)){
-//                    System.out.println("Match!");
-//                    Dashboard dashboardPage = new Dashboard();
-//                    dashboardPage.ShowPage();
-//                    frame.dispose();
-//                }
-//                else{
-//                    JOptionPane.showMessageDialog(null, "Username or Password incorrect");
-//                    System.out.println("Wrong!");
-//                }
-//                */
-//                Dashboard dashboardPage = new Dashboard();
-//                dashboardPage.ShowPage();
-//                frame.dispose();
-//            }
-//        });
-//        createUserButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//
-//                //go to new user page, page not created yet
-//                NewUser newUserPage = new NewUser();
-//                newUserPage.ShowPage();
-//                frame.dispose();
-//            }
-//        });
 
 
 
