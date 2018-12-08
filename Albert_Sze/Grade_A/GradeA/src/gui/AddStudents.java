@@ -101,7 +101,7 @@ public class AddStudents {
 
         /*********************************** Create Combo box for type of student ********************/
         studentType.addItem("Undergraduate");
-        studentType.addItem("Graduate");
+        studentType.addItem("Grad");
 
         /*********************************** Generate Student Label **********************************/
         addStudentsTitle = new JLabel("Add Students");
@@ -115,7 +115,7 @@ public class AddStudents {
             public void actionPerformed(ActionEvent e) {
                 if (prevPage.equals("CoursePage")) {
                     CoursePage changePage = new CoursePage(curCourse);
-                    //CoursePage.ShowPage();
+                    CoursePage.ShowPage();
                     frame.dispose();
                 }
                 else if(prevPage.equals("LabInfo")){
