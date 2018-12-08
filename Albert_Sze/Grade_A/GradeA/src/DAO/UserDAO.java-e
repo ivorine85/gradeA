@@ -11,7 +11,7 @@ public class UserDAO {
     public String getPsw(String username){
         connection = Connector.getConnection();
         String psw = "";
-        String sql = "select password from table User where username =?";
+        String sql = "select password from User where username =?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1,username);

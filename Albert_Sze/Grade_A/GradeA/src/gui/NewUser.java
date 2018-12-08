@@ -1,5 +1,8 @@
 package gui;
 
+import dao.UserDAO;
+import entity.User;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -206,6 +209,16 @@ public class NewUser {
 					//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
 					// Add New User information into database
 					//////////////////////////////////////////////////////////////////////////////////////////////////
+					String q1 = question1Options.getSelectedItem().toString();
+					String q2 = question2Options.getSelectedItem().toString();
+					String q3 = question3Options.getSelectedItem().toString();
+					String a1 = answer1.getText();
+					String a2 = answer2.getText();
+					String a3 = answer3.getText();
+					String uname = usernameTextField.getText();
+					String psw = passwordTextField.getText();
+					UserDAO ud = new UserDAO();
+					ud.insert(uname,psw,new String[]{q1,q2,q3},new String[]{a1,a2,a3});
 					Dashboard dashboardPage = new Dashboard();
 					dashboardPage.ShowPage();
 					frame.dispose();

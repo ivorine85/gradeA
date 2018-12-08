@@ -1,5 +1,7 @@
 package gui;
 
+import dao.AssignmentDAO;
+import entity.Assignment;
 import entity.Course;
 
 import java.awt.*;
@@ -132,7 +134,10 @@ public class AddCoursework {
                 else{
                     JOptionPane.showMessageDialog(null, "Data Submitted");
                     int total = Integer.valueOf(textFieldTotalPoints.getText());
-
+                    String type = comboBoxType.getSelectedItem().toString();
+                    type = type.toLowerCase();
+                    AssignmentDAO assignmentDAO = new AssignmentDAO();
+                    assignmentDAO.addAssignmentToCourse(type,currentCourse.getCourseName(),total);
                     CoursePage changePage = new CoursePage(currentCourse);
                     CoursePage.ShowPage();
                     frame.dispose();
