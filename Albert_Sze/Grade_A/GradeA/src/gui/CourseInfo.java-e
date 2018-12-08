@@ -352,6 +352,7 @@ public class CourseInfo {
 
         btnCreate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
+
                 if(textFieldCourseTitle.getText().isEmpty()||(textFieldStartTime.getText().isEmpty())||(textFieldEndTime.getText().isEmpty())||((radioButtonTues.isSelected())&&(radioButtonMon.isSelected()))||(comboBoxStart.getSelectedItem().equals("Select")))
                     JOptionPane.showMessageDialog(null, "Data Missing");
                 else{
@@ -383,9 +384,16 @@ public class CourseInfo {
                         if(!assistantDAO.checkExist(tfEmail2)) assistantDAO.insert(a2);
                         assistantDAO.assign(a1,cname);
                         assistantDAO.assign(a2,cname);
+                        int numOfHw = Integer.valueOf((String)comboBoxNumAssign.getSelectedItem());
+                        int numOfFinal = ((String)comboBoxFinal.getSelectedItem()).equals("Yes")?1:0;
+                        //TODO num of quiz.Midterm,Project
+
+
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
+
+
                     JOptionPane.showMessageDialog(null, "Data Submitted");
                     LabInfo labInfoPage = null;
                     labInfoPage = new LabInfo("LabInfo",cname);

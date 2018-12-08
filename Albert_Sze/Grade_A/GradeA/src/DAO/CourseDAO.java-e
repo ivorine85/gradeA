@@ -103,7 +103,29 @@ public class CourseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
 
+    public void update(Course c){
+        connection = Connector.getConnection();
+        String sql = "update course set startTime =?,endTime = ?,startDate=?,endDate=?,weekDay=? where cname = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setTime(1,c.getClassTime()[0]);
+            ps.setTime(2,c.getClassTime()[1]);
+            ps.setDate(3,c.getClassDuration()[0]);
+            ps.setDate(4,c.getClassDuration()[1]);
+            String weekDay = "";
+            for(String s:c.getWeekDay()){
+                weekDay+=s+",";
+            }
+            ps.setString(5,weekDay);
+            ps.setString(6,c.getCourseName());
+            ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
