@@ -1,22 +1,19 @@
 package gui;
 
+import dao.UserDAO;
 import entity.Course;
 
 import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
 
 public class Login {
 
     private JFrame frame;
     private JTextField textFieldUsername;
-    private JTextField textFieldPassword;
+    private JPasswordField textFieldPassword;
     private JLabel lblLogin;
     private JLabel lblUsername;
     private JLabel lblPassword;
@@ -75,7 +72,7 @@ public class Login {
         lblPassword.setBounds(375, 150, 100, 14);
         frame.getContentPane().add(lblPassword);
 
-        textFieldPassword = new JTextField();
+        textFieldPassword = new JPasswordField();
         textFieldPassword.setBounds(375, 180, 50, 20);
         frame.getContentPane().add(textFieldPassword);
         textFieldPassword.setColumns(10);
@@ -142,9 +139,9 @@ public class Login {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                /*
-                String password = String.valueOf(input_pass.getPassword());
-                String username = input_uname.getText();
+
+                String password = String.valueOf(textFieldPassword.getPassword());
+                String username = textFieldUsername.getText();
                 UserDAO userDAO = new UserDAO();
                 String psw = userDAO.getPsw(username);
                 if(psw.equals("No such user!")){
@@ -161,10 +158,9 @@ public class Login {
                     JOptionPane.showMessageDialog(null, "Username or Password incorrect");
                     System.out.println("Wrong!");
                 }
-                */
-                Dashboard dashboardPage = new Dashboard();
-                dashboardPage.ShowPage();
-                frame.dispose();
+//                Dashboard dashboardPage = new Dashboard();
+//                dashboardPage.ShowPage();
+//                frame.dispose();
 
             }
         });
