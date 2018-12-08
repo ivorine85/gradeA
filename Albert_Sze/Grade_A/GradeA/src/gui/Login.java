@@ -1,5 +1,6 @@
 package gui;
 
+import dao.UserDAO;
 import entity.Course;
 
 import java.awt.*;
@@ -142,9 +143,9 @@ public class Login {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                /*
-                String password = String.valueOf(input_pass.getPassword());
-                String username = input_uname.getText();
+
+                String password = String.valueOf(textFieldPassword.getText());
+                String username = textFieldUsername.getText();
                 UserDAO userDAO = new UserDAO();
                 String psw = userDAO.getPsw(username);
                 if(psw.equals("No such user!")){
@@ -161,10 +162,9 @@ public class Login {
                     JOptionPane.showMessageDialog(null, "Username or Password incorrect");
                     System.out.println("Wrong!");
                 }
-                */
-                Dashboard dashboardPage = new Dashboard();
-                dashboardPage.ShowPage();
-                frame.dispose();
+//                Dashboard dashboardPage = new Dashboard();
+//                dashboardPage.ShowPage();
+//                frame.dispose();
 
             }
         });
