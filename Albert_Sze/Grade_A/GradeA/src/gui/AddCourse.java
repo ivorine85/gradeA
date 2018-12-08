@@ -32,8 +32,8 @@ public class AddCourse {
         });
     }
 
-    //public static void main(String[] args) {
-    public static void ShowPage() {
+    public static void main(String[] args) {
+    //public static void ShowPage() {
         frame = new JFrame("Add Course");
         frame.setContentPane(new AddCourse().panelAddCourse);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
