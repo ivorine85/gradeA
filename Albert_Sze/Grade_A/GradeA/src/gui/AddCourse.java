@@ -12,9 +12,7 @@ import java.awt.event.ActionEvent;
 public class AddCourse {
 
     private JFrame frame;
-    private JLabel lblLogin;
-    private JLabel lblUsername;
-    private JLabel lblPassword;
+    private JLabel lblAddCourse;
 
     private static Course currentCourse;
 
@@ -52,62 +50,30 @@ public class AddCourse {
         frame.getContentPane().setLayout(null);
 
         // Label of window
-        JLabel lblLogin = new JLabel("Login");
-        lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 36));
-        lblLogin.setBounds(30, 20, 212, 44);
-        frame.getContentPane().add(lblLogin);
+        JLabel lblAddCourse = new JLabel("Add Course");
+        lblAddCourse.setFont(new Font("Tahoma", Font.PLAIN, 36));
+        lblAddCourse.setBounds(30, 20, 212, 44);
+        frame.getContentPane().add(lblAddCourse);
 
-        JLabel lblUsername = new JLabel("Username");
-        lblUsername.setBounds(150, 150, 100, 14);
-        frame.getContentPane().add(lblUsername);
+        JButton btnUpload = new JButton("Upload Excel File");
 
-
-//        JLabel lblPhone = new JLabel("Phone #");
-//        lblPhone.setBounds(65, 88, 46, 14);
-//        frame.getContentPane().add(lblPhone);
-//
-//        textField_1 = new JTextField();
-//        textField_1.setBounds(128, 85, 86, 20);
-//        frame.getContentPane().add(textField_1);
-//        textField_1.setColumns(10);
-//
-//        JLabel lblEmailId = new JLabel("Email Id");
-//        lblEmailId.setBounds(65, 135, 46, 14);
-//        frame.getContentPane().add(lblEmailId);
-//
-//        textField_2 = new JTextField();
-//        textField_2.setBounds(128, 132, 247, 17);
-//        frame.getContentPane().add(textField_2);
-//        textField_2.setColumns(10);
-//
-//        JLabel lblAddress = new JLabel("Address");
-//        lblAddress.setBounds(65, 182, 46, 14);
-//        frame.getContentPane().add(lblAddress);
-//
-//        JTextArea textArea_1 = new JTextArea();
-//        textArea_1.setBounds(126, 177, 212, 40);
-//        frame.getContentPane().add(textArea_1);
+        btnUpload.setBounds(330, 150, 200, 23);
+        frame.getContentPane().add(btnUpload);
 
 
-        JButton btnLogin = new JButton("Login");
-
-        btnLogin.setBounds(780, 410, 89, 23);
-        frame.getContentPane().add(btnLogin);
-
-
-        JButton btnCreateUser = new JButton("Create User");
+        JButton btnCreate = new JButton("Create from Scratch");
 
 //        btnCreate.setBackground(Color.BLUE);
 //        btnCreate.setForeground(Color.MAGENTA);
-        btnCreateUser.setBounds(870, 410, 120, 23);
-        frame.getContentPane().add(btnCreateUser);
+        btnCreate.setBounds(330, 200, 200, 23);
+        frame.getContentPane().add(btnCreate);
 
 
-        btnCreateUser.addActionListener(new ActionListener() {
+        btnCreate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
 
-                Dashboard dashboardPage = new Dashboard();
-                dashboardPage.ShowPage();
+                CourseInfo courseInfoPage = new CourseInfo();
+                courseInfoPage.ShowPage();
                 frame.dispose();
 
                 //CoursePage changePage = new CoursePage();
@@ -115,7 +81,7 @@ public class AddCourse {
             }
         });
 
-        btnLogin.addActionListener(new ActionListener() {
+        btnUpload.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
