@@ -15,7 +15,8 @@ import javax.swing.JLabel;
 public class Login {
 
     private JFrame frame;
-    private JTextField textFieldTotalPoints;
+    private JTextField textFieldUsername;
+    private JTextField textFieldPassword;
     private JLabel lblLogin;
     private JLabel lblUsername;
     private JLabel lblPassword;
@@ -65,15 +66,19 @@ public class Login {
         lblUsername.setBounds(150, 150, 100, 14);
         frame.getContentPane().add(lblUsername);
 
+        textFieldUsername = new JTextField();
+        textFieldUsername.setBounds(150, 180, 50, 20);
+        frame.getContentPane().add(textFieldUsername);
+        textFieldUsername.setColumns(10);
 
         JLabel lblPassword = new JLabel("Password");
         lblPassword.setBounds(375, 150, 100, 14);
         frame.getContentPane().add(lblPassword);
 
-        textFieldTotalPoints = new JTextField();
-        textFieldTotalPoints.setBounds(375, 180, 50, 20);
-        frame.getContentPane().add(textFieldTotalPoints);
-        textFieldTotalPoints.setColumns(10);
+        textFieldPassword = new JTextField();
+        textFieldPassword.setBounds(375, 180, 50, 20);
+        frame.getContentPane().add(textFieldPassword);
+        textFieldPassword.setColumns(10);
 
 //        JLabel lblPhone = new JLabel("Phone #");
 //        lblPhone.setBounds(65, 88, 46, 14);
@@ -104,7 +109,7 @@ public class Login {
 
         JButton btnLogin = new JButton("Login");
 
-        btnLogin.setBounds(800, 410, 89, 23);
+        btnLogin.setBounds(780, 410, 89, 23);
         frame.getContentPane().add(btnLogin);
 
 
@@ -112,24 +117,25 @@ public class Login {
 
 //        btnCreate.setBackground(Color.BLUE);
 //        btnCreate.setForeground(Color.MAGENTA);
-        btnCreateUser.setBounds(900, 410, 89, 23);
+        btnCreateUser.setBounds(870, 410, 120, 23);
         frame.getContentPane().add(btnCreateUser);
 
 
         btnCreateUser.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                if (textFieldTotalPoints.getText().isEmpty())
+                if (textFieldPassword.getText().isEmpty())
                     JOptionPane.showMessageDialog(null, "Data Missing");
                 else {
                     JOptionPane.showMessageDialog(null, "Data Submitted");
                     //CoursePage changePage = new CoursePage();
                     //CoursePage.ShowPage();
+                    NewUser newUserPage = new NewUser();
+                    newUserPage.ShowPage();
                     frame.dispose();
                 }
 
                 //CoursePage changePage = new CoursePage();
                 //CoursePage.ShowPage();
-                frame.dispose();
             }
         });
 
