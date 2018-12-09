@@ -82,7 +82,7 @@ public class CourseInfo {
         frame.getContentPane().add(textFieldCourseTitle);
         textFieldCourseTitle.setColumns(10);
 
-        JLabel lblDate = new JLabel("Choose Date");
+        JLabel lblDate = new JLabel("Choose Date(s)");
         lblDate.setBounds(40, 145, 100, 14);
         frame.getContentPane().add(lblDate);
 
@@ -126,8 +126,8 @@ public class CourseInfo {
         radioButtonFri.setBounds(200, 185, 30, 23);
         frame.getContentPane().add(radioButtonFri);
 
-        JLabel lblStartTime = new JLabel("Start Time");
-        lblStartTime.setBounds(40, 215, 100, 14);
+        JLabel lblStartTime = new JLabel("Start Time (24-hr)");
+        lblStartTime.setBounds(40, 215, 120, 14);
         frame.getContentPane().add(lblStartTime);
 
         textFieldStartTime = new JTextField();
@@ -135,8 +135,8 @@ public class CourseInfo {
         frame.getContentPane().add(textFieldStartTime);
         textFieldStartTime.setColumns(10);
 
-        JLabel lblEndTime = new JLabel("End Time");
-        lblEndTime.setBounds(180, 215, 100, 14);
+        JLabel lblEndTime = new JLabel("End Time (24-hr)");
+        lblEndTime.setBounds(180, 215, 120, 14);
         frame.getContentPane().add(lblEndTime);
 
         textFieldEndTime = new JTextField();
