@@ -89,7 +89,7 @@ public class LabInfo {
         frame.getContentPane().add(lblMon);
 
         JRadioButton radioButtonMon = new JRadioButton("");
-        radioButtonMon.setBounds(43, 185, 109, 23);
+        radioButtonMon.setBounds(43, 185, 30, 23);
         frame.getContentPane().add(radioButtonMon);
 
         JLabel lblTues = new JLabel("Tues");
@@ -97,7 +97,7 @@ public class LabInfo {
         frame.getContentPane().add(lblTues);
 
         JRadioButton radioButtonTues = new JRadioButton("");
-        radioButtonTues.setBounds(78, 185, 109, 23);
+        radioButtonTues.setBounds(78, 185, 30, 23);
         frame.getContentPane().add(radioButtonTues);
 
         JLabel lblWed = new JLabel("Wed");
@@ -105,7 +105,7 @@ public class LabInfo {
         frame.getContentPane().add(lblWed);
 
         JRadioButton radioButtonWed = new JRadioButton("");
-        radioButtonWed.setBounds(118, 185, 109, 23);
+        radioButtonWed.setBounds(118, 185, 30, 23);
         frame.getContentPane().add(radioButtonWed);
 
         JLabel lblThurs = new JLabel("Thurs");
@@ -113,7 +113,7 @@ public class LabInfo {
         frame.getContentPane().add(lblThurs);
 
         JRadioButton radioButtonThurs = new JRadioButton("");
-        radioButtonThurs.setBounds(153, 185, 109, 23);
+        radioButtonThurs.setBounds(153, 185, 30, 23);
         frame.getContentPane().add(radioButtonThurs);
 
         JLabel lblFri = new JLabel("Fri");
@@ -121,46 +121,64 @@ public class LabInfo {
         frame.getContentPane().add(lblFri);
 
         JRadioButton radioButtonFri = new JRadioButton("");
-        radioButtonFri.setBounds(200, 185, 109, 23);
+        radioButtonFri.setBounds(200, 185, 30, 23);
         frame.getContentPane().add(radioButtonFri);
+//
+//        JLabel lblStartTime = new JLabel("Start Time");
+//        lblStartTime.setBounds(40, 215, 100, 14);
+//        frame.getContentPane().add(lblStartTime);
+//
+//        textFieldStartTime = new JTextField();
+//        textFieldStartTime.setBounds(40, 240, 60, 20);
+//        frame.getContentPane().add(textFieldStartTime);
+//        textFieldStartTime.setColumns(10);
+//
+//        JComboBox<String> comboBoxStart = new JComboBox<String>();
+//        comboBoxStart.addItem("AM");
+//        comboBoxStart.addItem("PM");
+//        comboBoxStart.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent arg0) {
+//            }
+//        });
+//        comboBoxStart.setBounds(100, 240, 70, 20);
+//        frame.getContentPane().add(comboBoxStart);
+//
+//        JLabel lblEndTime = new JLabel("End Time");
+//        lblEndTime.setBounds(180, 215, 100, 14);
+//        frame.getContentPane().add(lblEndTime);
+//
+//        textFieldEndTime = new JTextField();
+//        textFieldEndTime.setBounds(180, 240, 60, 20);
+//        frame.getContentPane().add(textFieldEndTime);
+//        textFieldEndTime.setColumns(10);
+//
+//        JComboBox<String> comboBoxEnd = new JComboBox<String>();
+//        comboBoxEnd.addItem("AM");
+//        comboBoxEnd.addItem("PM");
+//        comboBoxEnd.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent arg0) {
+//            }
+//        });
+//        comboBoxEnd.setBounds(240, 240, 70, 20);
+//        frame.getContentPane().add(comboBoxEnd);
 
-        JLabel lblStartTime = new JLabel("Start Time");
-        lblStartTime.setBounds(40, 215, 100, 14);
+        JLabel lblStartTime = new JLabel("Start Time (24-hr)");
+        lblStartTime.setBounds(40, 215, 120, 14);
         frame.getContentPane().add(lblStartTime);
 
         textFieldStartTime = new JTextField();
-        textFieldStartTime.setBounds(40, 240, 60, 20);
+        textFieldStartTime.setBounds(40, 240, 100, 20);
         frame.getContentPane().add(textFieldStartTime);
         textFieldStartTime.setColumns(10);
 
-        JComboBox<String> comboBoxStart = new JComboBox<String>();
-        comboBoxStart.addItem("AM");
-        comboBoxStart.addItem("PM");
-        comboBoxStart.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
-        comboBoxStart.setBounds(100, 240, 70, 20);
-        frame.getContentPane().add(comboBoxStart);
-
-        JLabel lblEndTime = new JLabel("End Time");
-        lblEndTime.setBounds(180, 215, 100, 14);
+        JLabel lblEndTime = new JLabel("End Time (24-hr)");
+        lblEndTime.setBounds(180, 215, 120, 14);
         frame.getContentPane().add(lblEndTime);
 
         textFieldEndTime = new JTextField();
-        textFieldEndTime.setBounds(180, 240, 60, 20);
+        textFieldEndTime.setBounds(180, 240, 100, 20);
         frame.getContentPane().add(textFieldEndTime);
         textFieldEndTime.setColumns(10);
-
-        JComboBox<String> comboBoxEnd = new JComboBox<String>();
-        comboBoxEnd.addItem("AM");
-        comboBoxEnd.addItem("PM");
-        comboBoxEnd.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
-        comboBoxEnd.setBounds(240, 240, 70, 20);
-        frame.getContentPane().add(comboBoxEnd);
 
         JLabel lblAssignTF = new JLabel("Assign TF");
         lblAssignTF.setBounds(40, 270, 100, 14);
@@ -179,35 +197,6 @@ public class LabInfo {
         frame.getContentPane().add(comboBoxTF);
 
 
-
-//        JLabel lblPhone = new JLabel("Phone #");
-//        lblPhone.setBounds(65, 88, 46, 14);
-//        frame.getContentPane().add(lblPhone);
-//
-//        textField_1 = new JTextField();
-//        textField_1.setBounds(128, 85, 86, 20);
-//        frame.getContentPane().add(textField_1);
-//        textField_1.setColumns(10);
-//
-//        JLabel lblEmailId = new JLabel("Email Id");
-//        lblEmailId.setBounds(65, 135, 46, 14);
-//        frame.getContentPane().add(lblEmailId);
-//
-//        textField_2 = new JTextField();
-//        textField_2.setBounds(128, 132, 247, 17);
-//        frame.getContentPane().add(textField_2);
-//        textField_2.setColumns(10);
-//
-//        JLabel lblAddress = new JLabel("Address");
-//        lblAddress.setBounds(65, 182, 46, 14);
-//        frame.getContentPane().add(lblAddress);
-//
-//        JTextArea textArea_1 = new JTextArea();
-//        textArea_1.setBounds(126, 177, 212, 40);
-//        frame.getContentPane().add(textArea_1);
-
-
-
         JButton btnClear = new JButton("Clear");
 
         btnClear.setBounds(800, 410, 89, 23);
@@ -224,7 +213,7 @@ public class LabInfo {
 
         btnNext.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                if(textFieldLabSection.getText().isEmpty()||(textFieldStartTime.getText().isEmpty())||(textFieldEndTime.getText().isEmpty())||((radioButtonTues.isSelected())&&(radioButtonMon.isSelected()))||(comboBoxStart.getSelectedItem().equals("Select")))
+                if(textFieldLabSection.getText().isEmpty()||(textFieldStartTime.getText().isEmpty())||(textFieldEndTime.getText().isEmpty())||((radioButtonTues.isSelected())&&(radioButtonMon.isSelected())))
                     JOptionPane.showMessageDialog(null, "Data Missing");
                 else{
                     String labname = textFieldLabSection.getText();
@@ -272,11 +261,11 @@ public class LabInfo {
                 radioButtonWed.setSelected(false);
                 radioButtonThurs.setSelected(false);
                 radioButtonFri.setSelected(false);
-                comboBoxStart.setSelectedItem("Select");
 
 
             }
         });
+
     }
     private Time getTime(String str){
         str+=":00";
