@@ -31,7 +31,7 @@ public class EditGrades extends Adjustments {
     private JFrame frame;
     private JTable tableGrades;
     private static Lab currentLab;
-//    public static void main(String[] args) {
+    //    public static void main(String[] args) {
     public static void ShowPage(){
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -71,8 +71,7 @@ public class EditGrades extends Adjustments {
         double sum = 0.0;
         DefaultTableModel model;
         JLabel editGradesTitle;
-        JButton cancelButton;
-        JButton finishButton;
+        JButton saveButton;
         JButton backButton;
         JScrollPane scrollGrades;
         boolean valid=false;
@@ -189,9 +188,9 @@ public class EditGrades extends Adjustments {
         editGradesTitle.setBounds(10, 11, 212, 44);
         frame.getContentPane().add(editGradesTitle);
 
-        /****************************************** Add Cancel Button **************************************************************/
-        cancelButton = new JButton("Cancel");
-        cancelButton.addActionListener(new ActionListener() {
+        /****************************************** Add Back Button **************************************************************/
+        backButton = new JButton("Back");
+        backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 LabPage labPageReturn = new LabPage(currentLab);
                 //LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
@@ -199,13 +198,13 @@ public class EditGrades extends Adjustments {
                 frame.dispose();
             }
         });
-        cancelButton.setBounds(686, 414, 89, 23);
-        frame.getContentPane().add(cancelButton);
+        backButton.setBounds(686, 414, 89, 23);
+        frame.getContentPane().add(backButton);
 
-        /****************************************** Add Finish Button **************************************************************/
-        finishButton = new JButton("Finish");
-        finishButton.setEnabled(false);
-        finishButton.addActionListener(new ActionListener() {
+        /****************************************** Add Save Button **************************************************************/
+        saveButton = new JButton("Save");
+        saveButton.setEnabled(false);
+        saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
                 // Andy: update the data base with edited data
@@ -221,21 +220,21 @@ public class EditGrades extends Adjustments {
                 //ShowPage();
             }
         });
-        finishButton.setBounds(587, 414, 89, 23);
-        frame.getContentPane().add(finishButton);
+        saveButton.setBounds(587, 414, 89, 23);
+        frame.getContentPane().add(saveButton);
 
         /****************************************** Back Button **************************************************************/
-        backButton = new JButton("Back");
-        backButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                LabPage labPageReturn = new LabPage(currentLab);
-                //LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
-                labPageReturn.ShowPage();
-                frame.dispose();
-            }
-        });
-        backButton.setBounds(489, 414, 89, 23);
-        frame.getContentPane().add(backButton);
+//        backButton = new JButton("Back");
+//        backButton.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                LabPage labPageReturn = new LabPage(currentLab);
+//                //LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
+//                labPageReturn.ShowPage();
+//                frame.dispose();
+//            }
+//        });
+//        backButton.setBounds(489, 414, 89, 23);
+//        frame.getContentPane().add(backButton);
 
         /************************************ Add Scroll Panel for Grades **********************************************************/
         scrollGrades = new JScrollPane();
@@ -253,9 +252,9 @@ public class EditGrades extends Adjustments {
                     int row = e.getFirstRow();
                     int col = e.getColumn();
                     int edit = Integer.parseInt((String)tableGrades.getValueAt(row, col));
-                    finishButton.setEnabled(true);
+                    saveButton.setEnabled(true);
                 } catch (NumberFormatException nfe) {
-                    finishButton.setEnabled(false);
+                    saveButton.setEnabled(false);
                     //JOptionPane.showMessageDialog(null,"not valid edit");
                 }
             }
