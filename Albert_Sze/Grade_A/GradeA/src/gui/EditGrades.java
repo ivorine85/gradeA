@@ -31,8 +31,8 @@ public class EditGrades extends Adjustments {
     private JFrame frame;
     private JTable tableGrades;
     private static Lab currentLab;
-    public static void main(String[] args) {
-    //public static void ShowPage(){
+//    public static void main(String[] args) {
+    public static void ShowPage(){
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -50,9 +50,9 @@ public class EditGrades extends Adjustments {
     // Connection connection = null;
     //public EditGrades(Course newCourse, String currentLabSection) {
     public EditGrades(Lab lab) {
-        //currentLab = lab;
+        currentLab = lab;
         LabDAO lb = new LabDAO();
-        currentLab = lb.findLabOfCourse("cs591").get(0);
+//        currentLab = lb.findLabOfCourse("cs591").get(0);
         initialize();
         //initialize(newCourse, currentLabSection);
     }
