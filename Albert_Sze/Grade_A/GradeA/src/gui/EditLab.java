@@ -91,7 +91,7 @@ public class EditLab {
         frame.getContentPane().add(lblMon);
 
         JRadioButton radioButtonMon = new JRadioButton("");
-        radioButtonMon.setBounds(43, 185, 109, 23);
+        radioButtonMon.setBounds(43, 185, 30, 23);
         frame.getContentPane().add(radioButtonMon);
 
         JLabel lblTues = new JLabel("Tues");
@@ -99,7 +99,7 @@ public class EditLab {
         frame.getContentPane().add(lblTues);
 
         JRadioButton radioButtonTues = new JRadioButton("");
-        radioButtonTues.setBounds(78, 185, 109, 23);
+        radioButtonTues.setBounds(78, 185, 30, 23);
         frame.getContentPane().add(radioButtonTues);
 
 
@@ -108,7 +108,7 @@ public class EditLab {
         frame.getContentPane().add(lblWed);
 
         JRadioButton radioButtonWed = new JRadioButton("");
-        radioButtonWed.setBounds(118, 185, 109, 23);
+        radioButtonWed.setBounds(118, 185, 30, 23);
         frame.getContentPane().add(radioButtonWed);
 
         JLabel lblThurs = new JLabel("Thurs");
@@ -116,7 +116,7 @@ public class EditLab {
         frame.getContentPane().add(lblThurs);
 
         JRadioButton radioButtonThurs = new JRadioButton("");
-        radioButtonThurs.setBounds(153, 185, 109, 23);
+        radioButtonThurs.setBounds(153, 185, 30, 23);
         frame.getContentPane().add(radioButtonThurs);
 
         JLabel lblFri = new JLabel("Fri");
@@ -124,7 +124,7 @@ public class EditLab {
         frame.getContentPane().add(lblFri);
 
         JRadioButton radioButtonFri = new JRadioButton("");
-        radioButtonFri.setBounds(200, 185, 109, 23);
+        radioButtonFri.setBounds(200, 185, 30, 23);
         frame.getContentPane().add(radioButtonFri);
 
         String[] days = currentLab.getWeekday();
