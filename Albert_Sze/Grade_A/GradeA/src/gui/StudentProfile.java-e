@@ -104,7 +104,7 @@ public class StudentProfile extends Adjustments {
         JComboBox labOptions;
         JScrollPane scrollStudentTable;
         ArrayList<String> assignments;
-        HashMap<String, Integer> assignCount = new HashMap<String, Integer>(0);
+        HashMap<Integer, String> courseworkRow = new HashMap<Integer, String>(0);
         double sum = 0.0;
         int assignNum;
         String[][] allAssignArray;
@@ -165,6 +165,7 @@ public class StudentProfile extends Adjustments {
         allAssignArray = new String[grades.size()][];
 //        String[] header = {"Assignment","Points Lost","Total Points Available","Percentage","Class Average"};
         for (int i = 0; i < grades.size(); i++) {
+            courseworkRow.put(i,grades.get(i).getCwName());
             ArrayList<String> row = new ArrayList<String>(0);
             row.add(grades.get(i).getCwName());
             row.add(Integer.toString(grades.get(i).getPointLost()));
@@ -352,11 +353,12 @@ public class StudentProfile extends Adjustments {
         frame.getContentPane().add(labOptions);
 
         ////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-//		for (Map.Entry<String, Lab> entry : curnewCourse.getLabSections().entrySet()) {
-        // Set the options of existing labs
-//			labOptions.addItem(entry.getKey());
-//		}
+        for (int i = 0; i<allLabs.size(); i++) {
+//         Set the options of existing labs
+            labOptions.addItem(allLabs.get(i).getSection());
+        }
         // Set the item as the current Student's lab
+        System.out.println(curLab.getSection());
         labOptions.setSelectedItem(curLab.getSection());
         ////////////////////////////////////////////////////////////////////////////////////////////////
     }
