@@ -73,7 +73,7 @@ public class AddCourse {
             public void actionPerformed(ActionEvent arg0) {
 
                 CourseInfo courseInfoPage = new CourseInfo();
-                courseInfoPage.ShowPage();
+                //courseInfoPage.ShowPage();
                 frame.dispose();
 
                 //CoursePage changePage = new CoursePage();
