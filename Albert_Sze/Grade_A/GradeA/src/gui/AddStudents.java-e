@@ -190,7 +190,7 @@ public class AddStudents {
                         studentDAO.assignToCourse(s,curCourse.getCourseName());
                         //3.Assign student to lab
                         Lab l = labList.get(labSection);
-                        studentDAO.assignToLab(s,l);
+                        studentDAO.assignToLab(s,l.getSection());
                         //4.Create dum gbd for student
                         AssignmentDAO ad = new AssignmentDAO();
                         List<Assignment> assignments = ad.findAssignmentByCourse(curCourse.getCourseName());
