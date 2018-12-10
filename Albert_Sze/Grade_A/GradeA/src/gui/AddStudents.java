@@ -154,13 +154,23 @@ public class AddStudents {
                     if ((addStudentsTable.getValueAt(row, 0)).toString().isEmpty()) {
                         break;
                     }
-                    try {
-                        Integer.parseInt(addStudentsTable.getValueAt(row, 4).toString());
-                    } catch (Exception e1) {
-                        valid = false;
-                        JOptionPane.showMessageDialog(null, "Make sure all year inputs are numbers");
+                    for (int col = 0; col<addStudentsTable.getColumnCount();col++){
+                        if ((addStudentsTable.getValueAt(row, col)).toString().isEmpty() || addStudentsTable.getValueAt(row, col).toString().equals("Select")) {
+                            valid = false;
+                            JOptionPane.showMessageDialog(null, "Not all information is filled in");
+                            break;
+                        }
+                    }
+                    if (valid) {
+                        try {
+                            Integer.parseInt(addStudentsTable.getValueAt(row, 4).toString());
+                        } catch (Exception e1) {
+                            valid = false;
+                            JOptionPane.showMessageDialog(null, "Make sure all year inputs are numbers");
+                        }
                     }
                 }
+
                 if (valid) {
                     for (int row = 0; row < addStudentsTable.getRowCount(); row++) {
                         if ((addStudentsTable.getValueAt(row, 0)).toString().isEmpty()) {
