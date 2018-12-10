@@ -65,9 +65,11 @@ public class EditGrades extends Adjustments {
         ArrayList<ArrayList<String>> allStudentData = new ArrayList<ArrayList<String>>(0);
         ArrayList<String> studentData;
         List<Assignment> allAssignment;
-        HashMap<String, Integer> assignCount = new HashMap<String, Integer>(0);
+        HashMap<String, GradeBreakDown> tablePointer = new HashMap<String, GradeBreakDown>(0);
         String[][] arrayAllStudentData;
+        String key;
         int assignnum;
+        int count  = 0;
         double sum = 0.0;
         DefaultTableModel model;
         JLabel editGradesTitle;
@@ -107,10 +109,16 @@ public class EditGrades extends Adjustments {
             //TODO:The gradeOfCurrentStudent is a list of grades of current student;
             //TODO:The totalPoint is the final grade of current student
             double totalPoint = 0;
+            count  = 0;
             for(GradeBreakDown gbd:gradeOfCurrentStudent){
+                count++;
                 if (i == 0){
                     header.add(gbd.getCwName() + " Pts Lost");
                     header.add(gbd.getCwName() + "%");
+                }
+                if (count%2 == 1){
+                    key = Integer.toString(i) + "." + Integer.toString(count);
+                    tablePointer.put(key,gbd);
                 }
                 int total = gbd.getTotalPoint();
                 int lost = gbd.getPointLost();
