@@ -37,8 +37,8 @@ public class CourseInfo {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
-    //public static void ShowPage() {
+    //public static void main(String[] args) {
+    public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -219,23 +219,23 @@ public class CourseInfo {
         frame.getContentPane().add(textFieldTF2Email);
         textFieldTF2Email.setColumns(10);
 
-        JLabel lblNumLabs = new JLabel("Number of Labs");
-        lblNumLabs.setBounds(610, 85, 100, 14);
-        frame.getContentPane().add(lblNumLabs);
-
-        JComboBox<String> comboBoxNumLabs = new JComboBox<String>();
-        comboBoxNumLabs.addItem("0");
-        comboBoxNumLabs.addItem("1");
-        comboBoxNumLabs.addItem("2");
-        comboBoxNumLabs.addItem("3");
-        comboBoxNumLabs.addItem("4");
-        comboBoxNumLabs.addItem("5");
-        comboBoxNumLabs.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
-        comboBoxNumLabs.setBounds(610, 112, 70, 20);
-        frame.getContentPane().add(comboBoxNumLabs);
+//        JLabel lblNumLabs = new JLabel("Number of Labs");
+//        lblNumLabs.setBounds(610, 85, 100, 14);
+//        frame.getContentPane().add(lblNumLabs);
+//
+//        JComboBox<String> comboBoxNumLabs = new JComboBox<String>();
+//        comboBoxNumLabs.addItem("0");
+//        comboBoxNumLabs.addItem("1");
+//        comboBoxNumLabs.addItem("2");
+//        comboBoxNumLabs.addItem("3");
+//        comboBoxNumLabs.addItem("4");
+//        comboBoxNumLabs.addItem("5");
+//        comboBoxNumLabs.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent arg0) {
+//            }
+//        });
+//        comboBoxNumLabs.setBounds(610, 112, 70, 20);
+//        frame.getContentPane().add(comboBoxNumLabs);
 
         JLabel lblNumHW = new JLabel("Number of HWs");
         lblNumHW.setBounds(610, 145, 155, 14);
@@ -407,13 +407,25 @@ public class CourseInfo {
                     frame.dispose();
                 }
 
-//                LabInfo labInfoPage = new LabInfo("LabInfo",);
-//                labInfoPage.ShowPage();x
-//                frame.dispose();
+                LabInfo labInfoPage = new LabInfo("LabInfo", textFieldCourseTitle.getText());
+                labInfoPage.ShowPage();
+                frame.dispose();
 
 
             }
         });
+
+        //Back Button
+        JButton btnBack = new JButton("Back");
+        btnBack.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                AddCourse addCoursePage = new AddCourse();
+                addCoursePage.ShowPage();
+                frame.dispose();
+            }
+        });
+        btnBack.setBounds(30, 400, 89, 23);
+        frame.getContentPane().add(btnBack);
 
         btnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
