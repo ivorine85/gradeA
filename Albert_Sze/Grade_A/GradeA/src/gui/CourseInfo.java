@@ -37,8 +37,8 @@ public class CourseInfo {
     /**
      * Launch the application.
      */
-    //public static void main(String[] args) {
-    public static void ShowPage() {
+    public static void main(String[] args) {
+    //public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -82,7 +82,7 @@ public class CourseInfo {
         frame.getContentPane().add(textFieldCourseTitle);
         textFieldCourseTitle.setColumns(10);
 
-        JLabel lblDate = new JLabel("Choose Date");
+        JLabel lblDate = new JLabel("Choose Date(s)");
         lblDate.setBounds(40, 145, 100, 14);
         frame.getContentPane().add(lblDate);
 
@@ -91,7 +91,7 @@ public class CourseInfo {
         frame.getContentPane().add(lblMon);
 
         JRadioButton radioButtonMon = new JRadioButton("");
-        radioButtonMon.setBounds(43, 185, 109, 23);
+        radioButtonMon.setBounds(43, 185, 30, 23);
         frame.getContentPane().add(radioButtonMon);
 
         JLabel lblTues = new JLabel("Tues");
@@ -99,7 +99,7 @@ public class CourseInfo {
         frame.getContentPane().add(lblTues);
 
         JRadioButton radioButtonTues = new JRadioButton("");
-        radioButtonTues.setBounds(78, 185, 109, 23);
+        radioButtonTues.setBounds(78, 185, 30, 23);
         frame.getContentPane().add(radioButtonTues);
 
         JLabel lblWed = new JLabel("Wed");
@@ -107,7 +107,7 @@ public class CourseInfo {
         frame.getContentPane().add(lblWed);
 
         JRadioButton radioButtonWed = new JRadioButton("");
-        radioButtonWed.setBounds(118, 185, 109, 23);
+        radioButtonWed.setBounds(118, 185, 30, 23);
         frame.getContentPane().add(radioButtonWed);
 
         JLabel lblThurs = new JLabel("Thurs");
@@ -115,7 +115,7 @@ public class CourseInfo {
         frame.getContentPane().add(lblThurs);
 
         JRadioButton radioButtonThurs = new JRadioButton("");
-        radioButtonThurs.setBounds(153, 185, 109, 23);
+        radioButtonThurs.setBounds(153, 185, 30, 23);
         frame.getContentPane().add(radioButtonThurs);
 
         JLabel lblFri = new JLabel("Fri");
@@ -123,46 +123,26 @@ public class CourseInfo {
         frame.getContentPane().add(lblFri);
 
         JRadioButton radioButtonFri = new JRadioButton("");
-        radioButtonFri.setBounds(200, 185, 109, 23);
+        radioButtonFri.setBounds(200, 185, 30, 23);
         frame.getContentPane().add(radioButtonFri);
 
-        JLabel lblStartTime = new JLabel("Start Time");
-        lblStartTime.setBounds(40, 215, 100, 14);
+        JLabel lblStartTime = new JLabel("Start Time (24-hr)");
+        lblStartTime.setBounds(40, 215, 120, 14);
         frame.getContentPane().add(lblStartTime);
 
         textFieldStartTime = new JTextField();
-        textFieldStartTime.setBounds(40, 240, 60, 20);
+        textFieldStartTime.setBounds(40, 240, 100, 20);
         frame.getContentPane().add(textFieldStartTime);
         textFieldStartTime.setColumns(10);
 
-        JComboBox<String> comboBoxStart = new JComboBox<String>();
-        comboBoxStart.addItem("AM");
-        comboBoxStart.addItem("PM");
-        comboBoxStart.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
-        comboBoxStart.setBounds(100, 240, 70, 20);
-        frame.getContentPane().add(comboBoxStart);
-
-        JLabel lblEndTime = new JLabel("End Time");
-        lblEndTime.setBounds(180, 215, 100, 14);
+        JLabel lblEndTime = new JLabel("End Time (24-hr)");
+        lblEndTime.setBounds(180, 215, 120, 14);
         frame.getContentPane().add(lblEndTime);
 
         textFieldEndTime = new JTextField();
-        textFieldEndTime.setBounds(180, 240, 60, 20);
+        textFieldEndTime.setBounds(180, 240, 100, 20);
         frame.getContentPane().add(textFieldEndTime);
         textFieldEndTime.setColumns(10);
-
-        JComboBox<String> comboBoxEnd = new JComboBox<String>();
-        comboBoxEnd.addItem("AM");
-        comboBoxEnd.addItem("PM");
-        comboBoxEnd.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
-        comboBoxEnd.setBounds(240, 240, 70, 20);
-        frame.getContentPane().add(comboBoxEnd);
 
 //        JLabel lblPhone = new JLabel("Phone #");
 //        lblPhone.setBounds(65, 88, 46, 14);
@@ -257,45 +237,78 @@ public class CourseInfo {
         comboBoxNumLabs.setBounds(610, 112, 70, 20);
         frame.getContentPane().add(comboBoxNumLabs);
 
-        JLabel lblNumAssign = new JLabel("Number of Assignments");
-        lblNumAssign.setBounds(610, 145, 155, 14);
-        frame.getContentPane().add(lblNumAssign);
+        JLabel lblNumHW = new JLabel("Number of HWs");
+        lblNumHW.setBounds(610, 145, 155, 14);
+        frame.getContentPane().add(lblNumHW);
 
-        JComboBox<String> comboBoxNumAssign = new JComboBox<String>();
-        comboBoxNumAssign.addItem("0");
-        comboBoxNumAssign.addItem("1");
-        comboBoxNumAssign.addItem("2");
-        comboBoxNumAssign.addItem("3");
-        comboBoxNumAssign.addItem("4");
-        comboBoxNumAssign.addItem("5");
-        comboBoxNumAssign.addItem("6");
-        comboBoxNumAssign.addItem("7");
-        comboBoxNumAssign.addItem("8");
-        comboBoxNumAssign.addActionListener(new ActionListener() {
+        JComboBox<String> comboBoxNumHW = new JComboBox<String>();
+        comboBoxNumHW.addItem("0");
+        comboBoxNumHW.addItem("1");
+        comboBoxNumHW.addItem("2");
+        comboBoxNumHW.addItem("3");
+        comboBoxNumHW.addItem("4");
+        comboBoxNumHW.addItem("5");
+        comboBoxNumHW.addItem("6");
+        comboBoxNumHW.addItem("7");
+        comboBoxNumHW.addItem("8");
+        comboBoxNumHW.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
             }
         });
-        comboBoxNumAssign.setBounds(610, 172, 70, 20);
-        frame.getContentPane().add(comboBoxNumAssign);
+        comboBoxNumHW.setBounds(610, 172, 70, 20);
+        frame.getContentPane().add(comboBoxNumHW);
 
-        JLabel lblNumExams = new JLabel("Number of Exams");
-        lblNumExams.setBounds(610, 205, 155, 14);
-        frame.getContentPane().add(lblNumExams);
+        JLabel lblNumQuiz = new JLabel("Number of Quizzes");
+        lblNumQuiz.setBounds(610, 205, 155, 14);
+        frame.getContentPane().add(lblNumQuiz);
 
-        JComboBox<String> comboBoxNumExams = new JComboBox<String>();
-        comboBoxNumExams.addItem("0");
-        comboBoxNumExams.addItem("1");
-        comboBoxNumExams.addItem("2");
-        comboBoxNumExams.addItem("3");
-        comboBoxNumExams.addActionListener(new ActionListener() {
+        JComboBox<String> comboBoxNumQuiz = new JComboBox<String>();
+        comboBoxNumQuiz.addItem("0");
+        comboBoxNumQuiz.addItem("1");
+        comboBoxNumQuiz.addItem("2");
+        comboBoxNumQuiz.addItem("3");
+        comboBoxNumQuiz.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
             }
         });
-        comboBoxNumExams.setBounds(610, 232, 70, 20);
-        frame.getContentPane().add(comboBoxNumExams);
+        comboBoxNumQuiz.setBounds(610, 232, 70, 20);
+        frame.getContentPane().add(comboBoxNumQuiz);
+
+        JLabel lblNumMidterm = new JLabel("Number of Midterms");
+        lblNumMidterm.setBounds(610, 265, 155, 14);
+        frame.getContentPane().add(lblNumMidterm);
+
+        JComboBox<String> comboBoxNumMidterm = new JComboBox<String>();
+        comboBoxNumMidterm.addItem("0");
+        comboBoxNumMidterm.addItem("1");
+        comboBoxNumMidterm.addItem("2");
+        comboBoxNumMidterm.addItem("3");
+        comboBoxNumMidterm.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+            }
+        });
+        comboBoxNumMidterm.setBounds(610, 292, 70, 20);
+        frame.getContentPane().add(comboBoxNumMidterm);
+
+        JLabel lblNumProject = new JLabel("Number of Projects");
+        lblNumProject.setBounds(610, 325, 155, 14);
+        frame.getContentPane().add(lblNumProject);
+
+        JComboBox<String> comboBoxNumProject = new JComboBox<String>();
+        comboBoxNumProject.addItem("0");
+        comboBoxNumProject.addItem("1");
+        comboBoxNumProject.addItem("2");
+        comboBoxNumProject.addItem("3");
+        comboBoxNumProject.addItem("4");
+        comboBoxNumProject.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+            }
+        });
+        comboBoxNumProject.setBounds(610, 352, 70, 20);
+        frame.getContentPane().add(comboBoxNumProject);
 
         JLabel lblFinal = new JLabel("Will there be a final?");
-        lblFinal.setBounds(610, 265, 200, 14);
+        lblFinal.setBounds(610, 385, 200, 14);
         frame.getContentPane().add(lblFinal);
 
         JComboBox<String> comboBoxFinal = new JComboBox<String>();
@@ -305,7 +318,7 @@ public class CourseInfo {
             public void actionPerformed(ActionEvent arg0) {
             }
         });
-        comboBoxFinal.setBounds(610, 292, 80, 20);
+        comboBoxFinal.setBounds(610, 412, 80, 20);
         frame.getContentPane().add(comboBoxFinal);
 
 //        JLabel lblPhone = new JLabel("Phone #");
@@ -352,8 +365,7 @@ public class CourseInfo {
 
         btnCreate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-
-                if(textFieldCourseTitle.getText().isEmpty()||(textFieldStartTime.getText().isEmpty())||(textFieldEndTime.getText().isEmpty())||((radioButtonTues.isSelected())&&(radioButtonMon.isSelected()))||(comboBoxStart.getSelectedItem().equals("Select")))
+                if(textFieldCourseTitle.getText().isEmpty()||(textFieldStartTime.getText().isEmpty())||(textFieldEndTime.getText().isEmpty())||((radioButtonTues.isSelected())&&(radioButtonMon.isSelected())))
                     JOptionPane.showMessageDialog(null, "Data Missing");
                 else{
                     String cname = textFieldCourseTitle.getText();
@@ -384,16 +396,9 @@ public class CourseInfo {
                         if(!assistantDAO.checkExist(tfEmail2)) assistantDAO.insert(a2);
                         assistantDAO.assign(a1,cname);
                         assistantDAO.assign(a2,cname);
-                        int numOfHw = Integer.valueOf((String)comboBoxNumAssign.getSelectedItem());
-                        int numOfFinal = ((String)comboBoxFinal.getSelectedItem()).equals("Yes")?1:0;
-                        //TODO num of quiz.Midterm,Project
-
-
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
-
-
                     JOptionPane.showMessageDialog(null, "Data Submitted");
                     LabInfo labInfoPage = null;
                     labInfoPage = new LabInfo("LabInfo",cname);
@@ -426,7 +431,6 @@ public class CourseInfo {
                 radioButtonWed.setSelected(false);
                 radioButtonThurs.setSelected(false);
                 radioButtonFri.setSelected(false);
-                comboBoxStart.setSelectedItem("Select");
 
 
             }
