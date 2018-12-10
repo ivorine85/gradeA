@@ -120,19 +120,9 @@ public class Login {
 
         btnCreateUser.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                if (textFieldPassword.getText().isEmpty())
-                    JOptionPane.showMessageDialog(null, "Data Missing");
-                else {
-                    JOptionPane.showMessageDialog(null, "Data Submitted");
-                    //CoursePage changePage = new CoursePage();
-                    //CoursePage.ShowPage();
-                    NewUser newUserPage = new NewUser();
-                    newUserPage.ShowPage();
-                    frame.dispose();
-                }
-
-                //CoursePage changePage = new CoursePage();
-                //CoursePage.ShowPage();
+                NewUser newUserPage = new NewUser();
+                newUserPage.ShowPage();
+                frame.dispose();
             }
         });
 
