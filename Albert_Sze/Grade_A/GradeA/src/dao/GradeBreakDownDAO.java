@@ -122,14 +122,16 @@ public class GradeBreakDownDAO {
         }
     }
 
-    public void updateGrad(String cname,String cwname , float gradTypePer){
+    public void updateGrad(String cname,String cwname , float gradTypePer,int total,int weight){
         connection = Connector.getConnection();
-        String sql = "update gradebreakDown g set g.percentage = ? where g.coursename = ? and g.cwname = ? and g.sid in(select sid from student s where s.stype ='Grad')";
+        String sql = "update gradebreakDown g set g.percentage = ? ,g.totalPoint = ?,g.weight = ? where g.coursename = ? and g.cwname = ? and g.sid in(select sid from student s where s.stype ='Grad')";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setFloat(1,gradTypePer);
-            ps.setString(2,cname);
-            ps.setString(3,cwname);
+            ps.setInt(2,total);
+            ps.setInt(3,weight);
+            ps.setString(4,cname);
+            ps.setString(5,cwname);
             ps.execute();
             ps.close();
             connection.close();
@@ -138,14 +140,16 @@ public class GradeBreakDownDAO {
         }
     }
 
-    public void updateUnder(String cname,String cwname , float underTypePer ){
+    public void updateUnder(String cname,String cwname , float underTypePer ,int total,int weight){
         connection = Connector.getConnection();
-        String sql = "update gradebreakDown g set g.Percentage = ? where g.coursename = ? and g.cwname = ? and g.sid in(select sid from student s where s.stype ='Undergrad')";
+        String sql = "update gradebreakDown g set g.Percentage = ? ,g.totalPoint = ?,g.weight = ? where g.coursename = ? and g.cwname = ? and g.sid in(select sid from student s where s.stype ='Undergrad')";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setFloat(1,underTypePer);
-            ps.setString(2,cname);
-            ps.setString(3,cwname);
+            ps.setInt(2,total);
+            ps.setInt(3,weight);
+            ps.setString(4,cname);
+            ps.setString(5,cwname);
             ps.execute();
             ps.close();
             connection.close();
@@ -153,5 +157,7 @@ public class GradeBreakDownDAO {
             e.printStackTrace();
         }
     }
+
+    //public void updateSocre()
 
 }
