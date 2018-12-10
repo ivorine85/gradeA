@@ -10,6 +10,9 @@ public class GradeBreakDown {
 	int totalPoint;
 	int pointLost;
 
+	public GradeBreakDown(){
+
+	}
 	public GradeBreakDown(String name,String cname,float tpt,float p,String t,int w,int tt,int pl){
 		cwName = name;
 		courseName = cname;
