@@ -100,9 +100,15 @@ public class AssistantDAO {
 
     public void assignToLab(String aname, Lab l){
         connection = Connector.getConnection();
-        String sql = "insert into assist_lab (labname,tfname) values (?,?)";
         try {
+            String sql = "select * from assist_lab where labname = ? and tfname = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,l.getSection());
+            ps.setString(2,aname);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) return;
+            sql = "insert into assist_lab (labname,tfname) values (?,?)";
+            ps = connection.prepareStatement(sql);
             ps.setString(1,l.getSection());
             ps.setString(2,aname);
             ps.execute();
@@ -151,6 +157,20 @@ public class AssistantDAO {
         return rtn;
     }
 
+
+    public void removeFromLab(Lab lab){
+        connection = Connector.getConnection();
+        String sql = "delete from assist_lab where labname = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,lab.getSection());
+            ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }
