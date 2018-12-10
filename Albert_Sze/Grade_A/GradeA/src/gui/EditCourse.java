@@ -26,6 +26,8 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import entity.*;
@@ -412,8 +414,9 @@ public class EditCourse {
 
 
         //Finish Button
-        JButton btnFinish = new JButton("Finish");
-        btnFinish.addActionListener(new ActionListener() {
+        JButton saveButton = new JButton("Save");
+        saveButton.setEnabled(false);
+        saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (CalcSum (table,allAssignmentTypes.size())) {
                     String cname = curCourse.getCourseName();
@@ -475,8 +478,8 @@ public class EditCourse {
                 }
             }
         });
-        btnFinish.setBounds(580, 614, 89, 23);
-        frame.getContentPane().add(btnFinish);
+        saveButton.setBounds(580, 614, 89, 23);
+        frame.getContentPane().add(saveButton);
 
         //Add ScrollPanel for table
         JScrollPane scrollPane = new JScrollPane();
@@ -545,6 +548,21 @@ public class EditCourse {
                 comboBoxStart.setSelectedItem("Select");
 
 
+            }
+        });
+
+        /************************************ Detects when value is changed in tableGrades ****************************************/
+        table.getModel().addTableModelListener(new TableModelListener(){
+            public void tableChanged(TableModelEvent e){
+                try{
+                    int row = e.getFirstRow();
+                    int col = e.getColumn();
+                    float edit = Float.parseFloat((String)table.getValueAt(row, col));
+                    saveButton.setEnabled(true);
+                } catch (NumberFormatException nfe) {
+                    saveButton.setEnabled(false);
+                    //JOptionPane.showMessageDialog(null,"not valid edit");
+                }
             }
         });
 
