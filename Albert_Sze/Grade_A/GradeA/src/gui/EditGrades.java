@@ -95,9 +95,6 @@ public class EditGrades extends Adjustments {
 
         AssignmentDAO assignmentDAO = new AssignmentDAO();
         allAssignment = assignmentDAO.findAssignmentByCourse(currentLab.getCourseName());
-        // Get the count of number of assignments
-        // example assinCount will know there are 2 HW, 3 Exams, 2 Quizzes
-        // Andy I am not sure if you need this anymore
 
         studentData = new ArrayList<>();
         for (int i = 0; i < allStudents.size();i++) {				// for loop of all students in particular lab	            // need this variable to construct a double arraylist to display
@@ -117,29 +114,11 @@ public class EditGrades extends Adjustments {
                 }
                 int total = gbd.getTotalPoint();
                 int lost = gbd.getPointLost();
-                float percentPoint = (total-lost+gbd.getWeight())/total*100;
+                float percentPoint = ((float)total-lost+gbd.getWeight())/total*100;
                 studentData.add(Integer.toString(lost));
                 studentData.add(Float.toString(percentPoint));
                 totalPoint += percentPoint*gbd.getPercentage()*gbd.getTypePercentage();
             }
-
-            //loop through Student i's assignments
-//            for (Assignment curInstance: allStudents.get(i).getCourseWork()) {
-//                if (i == 0) {
-//                    // j represents the assignments number
-//                    assignnum = newCourse.getCourseBreakDown().get(curInstance.getType()).getNumAssign()-assignCount.get(curInstance.getType());
-//                    // add the assignment/coursework name to the header
-//                    // create two columns 1 for points lost another for percentage
-//                    header.add(curInstance.getType() + " " + Integer.toString(assignnum) + " Pts Lost");
-//                    header.add(curInstance.getType() + " " + Integer.toString(assignnum) + " %");
-//                    // update assignCount -1
-//                    assignCount.put(curInstance.getType(), assignCount.get(curInstance.getType())-1);
-//                }
-//                // add the points lost the student got on each assignment
-//                studentData.add(Integer.toString(curInstance.getPtsLost()));
-//                // add the percetange the student got on each assignment
-//                studentData.add(Double.toString((double)Math.round(curInstance.getPercent()*10000)/100));
-//            }
             // Add current Final Grade to StudentData
             studentData.add(Double.toString((double)Math.round(allStudents.get(i).getGrade()*10000)/100));
             //Add the studentData to all student Data
