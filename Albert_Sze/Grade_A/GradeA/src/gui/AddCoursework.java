@@ -67,8 +67,11 @@ public class AddCoursework {
         frame.getContentPane().add(lblStartType);
 
         JComboBox<String> comboBoxType = new JComboBox<String>();
-        comboBoxType.addItem("Assignment");
-        comboBoxType.addItem("Exam");
+        comboBoxType.addItem("Homework");
+        comboBoxType.addItem("Quiz");
+        comboBoxType.addItem("Project");
+        comboBoxType.addItem("Midterm");
+        comboBoxType.addItem("Final");
         comboBoxType.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
             }
@@ -139,21 +142,17 @@ public class AddCoursework {
                     AssignmentDAO assignmentDAO = new AssignmentDAO();
                     assignmentDAO.addAssignmentToCourse(type,currentCourse.getCourseName(),total);
                     CoursePage changePage = new CoursePage(currentCourse);
-                    CoursePage.ShowPage();
+                    changePage.ShowPage();
                     frame.dispose();
                 }
-
-                //CoursePage changePage = new CoursePage();
-                //CoursePage.ShowPage();
-                frame.dispose();
             }
         });
 
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 comboBoxType.setSelectedItem("Select");
-                //CoursePage changePage = new CoursePage();
-                //CoursePage.ShowPage();
+                CoursePage changePage = new CoursePage(currentCourse);
+                CoursePage.ShowPage();
                 frame.dispose();
 
 
