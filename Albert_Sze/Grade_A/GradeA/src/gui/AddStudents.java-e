@@ -68,29 +68,45 @@ public class AddStudents {
 //        newCourse.getLabSections().put("A2",new Lab("A2"));										// Create Lab Sections
 //        newCourse.getLabSections().put("A3",new Lab("A3"));										// Create Lab Sections
 /*******************************************************************************************************/
-    	JComboBox<String> labs = new JComboBox<String>();
-    	JComboBox<String> studentType = new JComboBox<String>();
-    	JLabel addStudentsTitle;
-    	JButton cancelButton;
-    	JButton finishButton;
-    	JButton addStudentButton;
-    	JScrollPane scrollStudents;
-    	TableColumn labcolumn;
-    	TableColumn studentTypecolumn;
-    	DefaultTableModel model;
-    	LabDAO labDAO = new LabDAO();
+        JComboBox<String> labs = new JComboBox<String>();
+        JComboBox<String> studentType = new JComboBox<String>();
+        JLabel addStudentsTitle;
+        JButton cancelButton;
+        JButton finishButton;
+        JButton addRowButton;
+        JScrollPane scrollStudents;
+        TableColumn labcolumn;
+        TableColumn studentTypecolumn;
+        DefaultTableModel model;
+        LabDAO labDAO = new LabDAO();
 
-    	/*********************************** Generate Frame ***********************************/
+        /*********************************** Generate Frame ***********************************/
         frame = new JFrame();
         frame.getContentPane().setForeground(new Color(0, 0, 0));
         frame.setBounds(100, 100, 801, 487);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
+        /*********************************** Add Scroll Panel and Table Student button ************************************/
+        scrollStudents = new JScrollPane();
+        scrollStudents.setBounds(25, 78, 738, 325);
+        frame.getContentPane().add(scrollStudents);
+
+        /*********************************** Generate Student Information tables ***********************************/
+        //Create Student
+        String [] header = {"Last Name","First Name","Student ID","Email","Year","Lab","Student Type"};
+        String [][] data = {{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"}};
+        model = new DefaultTableModel(data,header);
+        addStudentsTable = new JTable(model);
+        scrollStudents.setViewportView(addStudentsTable);
+        labcolumn = addStudentsTable.getColumnModel().getColumn(5);
+        studentTypecolumn = addStudentsTable.getColumnModel().getColumn(6);
+        labcolumn.setCellEditor(new DefaultCellEditor(labs));
+        studentTypecolumn.setCellEditor(new DefaultCellEditor(studentType));
+
         /*********************************** Create Combo box of Lab section ***********************************/
         //Create Combo box for student type and labs
         List<Lab> allLabs = labDAO.findLabOfCourse(curCourse.getCourseName());
-        System.out.println(allLabs.size());
         for(Lab l:allLabs){
             labList.put(l.getSection(),l);
             labs.addItem(l.getSection());
@@ -186,33 +202,15 @@ public class AddStudents {
         finishButton.setBounds(587, 414, 89, 23);
         frame.getContentPane().add(finishButton);
 
-        /*********************************** Create Add Student button ************************************/
-        addStudentButton = new JButton("Add Student");
-        addStudentButton.addActionListener(new ActionListener() {
+        /*********************************** Create Add row button ************************************/
+        addRowButton = new JButton("Add Row");
+        addRowButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String[] temp = {"","","","","","Select","Select"};
-                //model.addRow(temp);
+                model.addRow(temp);
             }
         });
-        addStudentButton.setBounds(457, 414, 120, 23);
-        frame.getContentPane().add(addStudentButton);
-
-        /*********************************** Add Scroll Panel and Table Student button ************************************/
-        scrollStudents = new JScrollPane();
-        scrollStudents.setBounds(25, 78, 738, 325);
-        frame.getContentPane().add(scrollStudents);
-
-        /*********************************** Generate Student Information tables ***********************************/
-        //Create Student
-        String [] header = {"Last Name","First Name","Student ID","Email","Year","Lab","Student Type"};
-        String [][] data = {{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"}};
-        model = new DefaultTableModel(data,header);
-        addStudentsTable = new JTable(model);
-        scrollStudents.setViewportView(addStudentsTable);
-        labcolumn = addStudentsTable.getColumnModel().getColumn(5);
-        studentTypecolumn = addStudentsTable.getColumnModel().getColumn(6);
-        labcolumn.setCellEditor(new DefaultCellEditor(labs));
-        studentTypecolumn.setCellEditor(new DefaultCellEditor(studentType));
-
+        addRowButton.setBounds(457, 414, 120, 23);
+        frame.getContentPane().add(addRowButton);
     }
 }
