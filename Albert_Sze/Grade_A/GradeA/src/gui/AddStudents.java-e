@@ -22,9 +22,7 @@ import java.util.Map;
 
 import javax.swing.JComboBox;
 
-import dao.CourseDAO;
-import dao.LabDAO;
-import dao.StudentDAO;
+import dao.*;
 import entity.*;
 
 public class AddStudents {
@@ -192,8 +190,17 @@ public class AddStudents {
                         studentDAO.assignToCourse(s,curCourse.getCourseName());
                         //3.Assign student to lab
                         Lab l = labList.get(labSection);
-                        studentDAO.assignToLab(s,l);
-
+                        studentDAO.assignToLab(s,l.getSection());
+                        //4.Create dum gbd for student
+                        AssignmentDAO ad = new AssignmentDAO();
+                        List<Assignment> assignments = ad.findAssignmentByCourse(curCourse.getCourseName());
+                        GradeBreakDownDAO gradeBreakDownDAO = new GradeBreakDownDAO();
+                        for(Assignment a:assignments){
+                            float typePer = s.getStudentType().equals("Grad")? a.getGradTypePercentage():a.getUndergradTypePercentage();
+                            float per = s.getStudentType().equals("Grad")? a.getGradPercentage():a.getUndergradPercentage();
+                            GradeBreakDown gradeBreakDown = new GradeBreakDown(a.getCwname(),curCourse.getCourseName(),typePer,per,a.getType(),a.getWeight(),a.getTotalPts(),0);
+                            gradeBreakDownDAO.insert(gradeBreakDown,s);
+                        }
                         // bug below//
 
                     }
