@@ -116,11 +116,14 @@ public class StudentProfile extends Adjustments {
         for (int i = 0; i < grades.size(); i++) {
             courseworkRow.put(i,grades.get(i));
             ArrayList<String> row = new ArrayList<String>(0);
+            int total = grades.get(i).getTotalPoint();
+            int lost = grades.get(i).getPointLost();
+            float percentPoint = ((float)total-lost+grades.get(i).getWeight())/total*100;
             row.add(grades.get(i).getCwName());
-            row.add(Integer.toString(grades.get(i).getPointLost()));
+            row.add(Integer.toString(lost));
             row.add(Integer.toString(grades.get(i).getWeight()));
-            row.add(Integer.toString(grades.get(i).getTotalPoint()));
-            row.add(Float.toString(grades.get(i).getPercentage()));
+            row.add(Integer.toString(total));
+            row.add(Float.toString(percentPoint));
             row.add(Double.toString(avg.get(grades.get(i).getCwName())));
             allAssignArray[i] = row.toArray(new String[row.size()]);
         }
@@ -211,7 +214,7 @@ public class StudentProfile extends Adjustments {
                 if(dialogResult == JOptionPane.YES_OPTION){
                     ////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
                     //Delete student
-                    System.out.println("delete Student");
+//                    System.out.println("delete Student");
 //					LabPage labPageReturn = new LabPage();
                     LabPage labPageReturn = new LabPage(curLab);
                     StudentDAO studentDAO = new StudentDAO();
@@ -279,10 +282,10 @@ public class StudentProfile extends Adjustments {
             labOptions.addItem(allLabs.get(i).getSection());
         }
         // Set the item as the current Student's lab
-        System.out.println(curLab.getSection());
+//        System.out.println(curLab.getSection());
         labOptions.setSelectedItem(curLab.getSection());
         ////////////////////////////////////////////////////////////////////////////////////////////////
-        /*********************************** Finish Button **************************************/
+        /*********************************** Save Button **************************************/
         saveButton = new JButton("Save");
         saveButton.setEnabled(false);
         saveButton.addActionListener(new ActionListener() {
@@ -323,6 +326,13 @@ public class StudentProfile extends Adjustments {
                 }
             }
         });
+
+        labOptions.addActionListener (new ActionListener () {
+            public void actionPerformed(ActionEvent e) {
+                saveButton.setEnabled(true);
+            }
+        });
+
     }
     private static class __Tmp {
         private static void __tmp() {
