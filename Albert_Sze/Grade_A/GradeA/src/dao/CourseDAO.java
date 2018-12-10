@@ -107,6 +107,7 @@ public class CourseDAO {
 
 
     public void update(Course c){
+        removeAssist(c);
         connection = Connector.getConnection();
         String sql = "update course set startTime =?,endTime = ?,startDate=?,endDate=?,weekDay=? where cname = ?";
         try {
@@ -127,5 +128,21 @@ public class CourseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void removeAssist(Course c){
+        String sql = "delete from assist_course where cid = ?";
+        int cid = getIdByName(c.getCourseName());
+        connection = Connector.getConnection();
+        PreparedStatement ps = null;
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1,cid);
+            ps.execute();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
