@@ -28,6 +28,7 @@ import javax.swing.JComboBox;
 
 import dao.GradeBreakDownDAO;
 import dao.LabDAO;
+import dao.StudentDAO;
 import entity.*;
 
 public class StudentProfile extends Adjustments {
@@ -199,26 +200,6 @@ public class StudentProfile extends Adjustments {
         cancelButton.setBounds(686, 414, 89, 23);
         frame.getContentPane().add(cancelButton);
 
-        /*********************************** Finish Button **************************************/
-        saveButton = new JButton("Save");
-        saveButton.setEnabled(false);
-        saveButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Save the changes to the table of student's grades
-                // Save the changes to labsection
-                GradeBreakDownDAO gradeBreakDownDAO = new GradeBreakDownDAO();
-                for(int i = 0;i<studentInfoTable.getRowCount();i++){
-                    GradeBreakDown cur = courseworkRow.get(i);
-                    int newPointLost = Integer.valueOf(studentInfoTable.getValueAt(i,1).toString());
-                    cur.setPointLost(newPointLost);
-                    gradeBreakDownDAO.updateScore(cur,curStudent.getSid());
-                }
-                ShowPage();
-                frame.dispose();
-            }
-        });
-        saveButton.setBounds(587, 414, 89, 23);
-        frame.getContentPane().add(saveButton);
 
         /*********************************** Delete Student Button **************************************/
         deleteStudentButton = new JButton("");
@@ -233,6 +214,8 @@ public class StudentProfile extends Adjustments {
                     System.out.println("delete Student");
 //					LabPage labPageReturn = new LabPage();
                     LabPage labPageReturn = new LabPage(curLab);
+                    StudentDAO studentDAO = new StudentDAO();
+                    studentDAO.remove(curLab,curStudent);
 //					System.out.println("LabPage");
                     //LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
                     labPageReturn.ShowPage();
@@ -282,22 +265,7 @@ public class StudentProfile extends Adjustments {
         studentInfoTable = new JTable(model);
         scrollStudentTable.setViewportView(studentInfoTable);
 
-        /************************************ Detects when value is changed in studentInfoTable ****************************************/
-        //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-        // Andy: This can detect where an edit is made, you might want to put this on the buttons or something, not totally sure
-        studentInfoTable.getModel().addTableModelListener(new TableModelListener(){
-            public void tableChanged(TableModelEvent e){
-                try{
-                    int row = e.getFirstRow();
-                    int col = e.getColumn();
-                    int edit = Integer.parseInt((String)studentInfoTable.getValueAt(row, col));
-                    saveButton.setEnabled(true);
-                } catch (NumberFormatException nfe) {
-                    saveButton.setEnabled(false);
-//					JOptionPane.showMessageDialog(null,"not valid edit");
-                }
-            }
-        });
+
         //////////////////////////////////////////////////////////////////////////////////////////////////
 
         /*********************************** Combobox of labsection **************************************/
@@ -314,6 +282,47 @@ public class StudentProfile extends Adjustments {
         System.out.println(curLab.getSection());
         labOptions.setSelectedItem(curLab.getSection());
         ////////////////////////////////////////////////////////////////////////////////////////////////
+        /*********************************** Finish Button **************************************/
+        saveButton = new JButton("Save");
+        saveButton.setEnabled(false);
+        saveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Save the changes to the table of student's grades
+                // Save the changes to labsection
+                GradeBreakDownDAO gradeBreakDownDAO = new GradeBreakDownDAO();
+                for(int i = 0;i<studentInfoTable.getRowCount();i++){
+                    GradeBreakDown cur = courseworkRow.get(i);
+                    int newPointLost = Integer.valueOf(studentInfoTable.getValueAt(i,1).toString());
+                    cur.setPointLost(newPointLost);
+                    gradeBreakDownDAO.updateScore(cur,curStudent.getSid());
+                }
+                String newLab = labOptions.getSelectedItem().toString();
+                StudentDAO studentDAO = new StudentDAO();
+                studentDAO.removeFromLab(curLab,curStudent);
+                studentDAO.assignToLab(curStudent,newLab);
+                ShowPage();
+                frame.dispose();
+            }
+        });
+        saveButton.setBounds(587, 414, 89, 23);
+        frame.getContentPane().add(saveButton);
+
+        /************************************ Detects when value is changed in studentInfoTable ****************************************/
+        //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+        // Andy: This can detect where an edit is made, you might want to put this on the buttons or something, not totally sure
+        studentInfoTable.getModel().addTableModelListener(new TableModelListener(){
+            public void tableChanged(TableModelEvent e){
+                try{
+                    int row = e.getFirstRow();
+                    int col = e.getColumn();
+                    int edit = Integer.parseInt((String)studentInfoTable.getValueAt(row, col));
+                    saveButton.setEnabled(true);
+                } catch (NumberFormatException nfe) {
+                    saveButton.setEnabled(false);
+//					JOptionPane.showMessageDialog(null,"not valid edit");
+                }
+            }
+        });
     }
     private static class __Tmp {
         private static void __tmp() {
