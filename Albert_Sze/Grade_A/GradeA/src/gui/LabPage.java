@@ -221,8 +221,8 @@ public class LabPage {
         editGradesButton = new JButton("Edit Grades");
         editGradesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //EditGrades editGradesPage = new EditGrades(currentLab);
-                //editGradesPage.ShowPage();
+                EditGrades editGradesPage = new EditGrades(currentLab);
+                editGradesPage.ShowPage();
                 frame.dispose();
             }
         });
@@ -265,9 +265,9 @@ public class LabPage {
                             // you might need to change this if you are changing what is StudentProfile needs to run
                             // Take a look at the StudentProfile class first
                             Student tempStudent = allStudents.get(Integer.parseInt(but.getActionCommand()));
-//                            StudentProfile studentProfilePage = new StudentProfile(curLab,Student);
+                            StudentProfile studentProfilePage = new StudentProfile(currentLab,tempStudent);
                             //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-//                            studentProfilePage.ShowPage();
+                            studentProfilePage.ShowPage();
                             frame.dispose();
                         }
                     });
