@@ -158,6 +158,23 @@ public class GradeBreakDownDAO {
         }
     }
 
-    //public void updateSocre()
+
+    public void updateScore(GradeBreakDown g,String sid){
+        connection = Connector.getConnection();
+        String sql = "update gradebreakdown set pointLost = ? where coursename = ? and cwname = ? and sid = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1,g.getPointLost());
+            ps.setString(2,g.getCourseName());
+            ps.setString(3,g.getCwName());
+            ps.setString(4,sid);
+            ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }
