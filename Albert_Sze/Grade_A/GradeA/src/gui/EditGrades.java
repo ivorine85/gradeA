@@ -111,9 +111,15 @@ public class EditGrades extends Adjustments {
             //TODO:The totalPoint is the final grade of current student
             double totalPoint = 0;
             for(GradeBreakDown gbd:gradeOfCurrentStudent){
+                if (i == 0){
+                    header.add(gbd.getCwName() + " Pts Lost");
+                    header.add(gbd.getCwName() + "%");
+                }
                 int total = gbd.getTotalPoint();
                 int lost = gbd.getPointLost();
                 float percentPoint = (total-lost+gbd.getWeight())/total*100;
+                studentData.add(Integer.toString(lost));
+                studentData.add(Float.toString(percentPoint));
                 totalPoint += percentPoint*gbd.getPercentage()*gbd.getTypePercentage();
             }
 
