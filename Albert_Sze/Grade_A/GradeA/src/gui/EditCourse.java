@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -409,12 +410,59 @@ public class EditCourse {
         btnCancel.setBounds(686, 614, 89, 23);
         frame.getContentPane().add(btnCancel);
 
+
         //Finish Button
         JButton btnFinish = new JButton("Finish");
         btnFinish.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(allAssignmentTypes.size());
                 if (CalcSum (table,allAssignmentTypes.size())) {
+                    String cname = curCourse.getCourseName();
+                    Date startDate = getDate(textStartDate.getText());
+                    Date endDate = getDate(textEndDate.getText());
+                    Time startTime = getTime(textFieldStartTime.getText());
+                    Time endTime = getTime(textFieldEndTime.getText());
+                    java.util.List<String> days = new ArrayList<>();
+                    if(radioButtonMon.isSelected()) days.add("Monday");
+                    if(radioButtonTues.isSelected()) days.add("Tuesday");
+                    if(radioButtonWed.isSelected()) days.add("Wednesday");
+                    if(radioButtonThurs.isSelected()) days.add("Thursday");
+                    if(radioButtonFri.isSelected()) days.add("Friday");
+                    String[] day = new String[days.size()];
+                    for(int i = 0;i<day.length;i++) day[i] = days.get(i);
+                    Course c = new Course(cname,startTime,endTime,startDate,endDate,day);
+                    CourseDAO cd = new CourseDAO();
+                    cd.update(c);
+                    AssistantDAO assistantDAO = new AssistantDAO();
+                    String tfName2 = textFieldTF2Name.getText();
+                    String tfEmail2 = textFieldTF2Email.getText();
+                    String tfName1 = textFieldTF1Name.getText();
+                    String tfEmail1 = textFieldTF1Email.getText();
+                    try {
+                        Assistant a1 = new Assistant(tfName1,tfEmail1);
+                        if(!assistantDAO.checkExist(tfEmail1)) assistantDAO.insert(a1);
+                        Assistant a2 = new Assistant(tfName2,tfEmail2);
+                        if(!assistantDAO.checkExist(tfEmail2)) assistantDAO.insert(a2);
+                        assistantDAO.assign(a1,cname);
+                        assistantDAO.assign(a2,cname);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+                    AssignmentDAO assignmentDAO = new AssignmentDAO();
+                    for (int j = 1; j < table.getColumnCount(); j++) {
+                        String cwname = assignmentList.get(j-1).getCwname();
+                        float underPer = Float.valueOf(table.getValueAt(0,j).toString());
+                        float gradPer = Float.valueOf(table.getValueAt(1,j).toString());
+                        int weight = Integer.valueOf(table.getValueAt(2,j).toString());
+                        int total = Integer.valueOf(table.getValueAt(3,j).toString());
+                        assignmentDAO.updatePercentage(curCourse.getCourseName(),cwname,underPer,gradPer,total,weight);
+
+                    }
+                    JOptionPane.showMessageDialog(null, "Data Submitted");
+                    LabInfo labInfoPage = null;
+                    labInfoPage = new LabInfo("LabInfo",cname);
+                    labInfoPage.ShowPage();
+
+                    frame.dispose();
                     ////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
                     //need to add save edits
                     ////////////////////////////////////////////////////////////////////////////////////////////////

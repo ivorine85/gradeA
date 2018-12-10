@@ -144,19 +144,21 @@ public class AssignmentDAO {
         }
     }
 
-    public void updatePercentage(String cname,String cwname,float underPer,float gradPer){
+    public void updatePercentage(String cname,String cwname,float underPer,float gradPer,int total,int weight){
         connection = Connector.getConnection();
         try{
-            String sql = "UPDATE Coursework set gradPercentage = ? , undergradPercentage = ? where courseName = ? and cwname = ?";;
+            String sql = "UPDATE Coursework set gradPercentage = ? , undergradPercentage = ? ,totalpoint = ? , weight = ? where courseName = ? and cwname = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setFloat(1,gradPer);
             ps.setFloat(2,underPer);
-            ps.setString(3,cname);
-            ps.setString(4,cwname);
+            ps.setInt(3,total);
+            ps.setInt(4,weight);;
+            ps.setString(5,cname);
+            ps.setString(6,cwname);
             GradeBreakDownDAO h = new GradeBreakDownDAO();
             ps.execute();
-            h.updateGrad(cname,cwname,gradPer);
-            h.updateUnder(cname,cwname,underPer);
+            h.updateGrad(cname,cwname,gradPer,total,weight);
+            h.updateUnder(cname,cwname,underPer,total,weight);
             ps.close();
             connection.close();
         }
