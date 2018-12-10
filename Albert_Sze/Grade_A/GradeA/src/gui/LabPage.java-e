@@ -1,15 +1,10 @@
 package gui;
 
-import java.awt.Dimension;
-import java.awt.EventQueue;
+import java.awt.*;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +16,7 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.sun.xml.internal.messaging.saaj.soap.JpegDataContentHandler;
 import dao.AssistantDAO;
 import dao.LabDAO;
 import dao.StudentDAO;
@@ -35,7 +31,7 @@ public class LabPage {
     private static Lab currentLab;
 
     //public static void main(String[] args) {
-        public static void ShowPage() {
+    public static void ShowPage() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -174,7 +170,7 @@ public class LabPage {
         homeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
 //                Dashboard dashboardPage = new Dashboard();
-//                dashboardPage.ShowPage();
+                Dashboard.ShowPage();
                 frame.dispose();
             }
         });
@@ -200,7 +196,7 @@ public class LabPage {
 //                    Dashboard dashboardPage = new Dashboard();
                     LabDAO labDAO = new LabDAO();
                     labDAO.deleteLab(currentLab.getSection());
-//                    Dashboard.ShowPage();
+                    Dashboard.ShowPage();
                     frame.dispose();
                 }
                 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -213,8 +209,8 @@ public class LabPage {
         editLabButton = new JButton("Edit Lab");
         editLabButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-//                EditLab editLabPage = new EditLab(currentLab);
-//                editLabPage.ShowPage();
+                EditLab editLabPage = new EditLab(currentLab);
+                editLabPage.ShowPage();
                 frame.dispose();
             }
         });
@@ -233,24 +229,28 @@ public class LabPage {
         editGradesButton.setBounds(570, 415, 109, 23);
         frame.getContentPane().add(editGradesButton);
 
-        /*********************************** Generating Scroll Panel for Student Profiles *************************************/
-        scrollStudentProfiles = new JScrollPane();
-        scrollStudentProfiles.setBounds(20, 69, 630, 300);
-        frame.getContentPane().add(scrollStudentProfiles);
-
         /*********************************** Generating Panel of Student Profiles *************************************/
         studentProfiles = new JPanel();
-        studentProfiles.setLayout(new GridLayout(row,5));
+        studentProfiles.setLayout(new GridBagLayout());
+        GridBagConstraints buttonConstraint = new GridBagConstraints();
+        GridBagConstraints frameConstraint = new GridBagConstraints();
+        buttonConstraint.fill = GridBagConstraints.HORIZONTAL;
+        buttonConstraint.anchor = GridBagConstraints.NORTHWEST;; //bottom of space
+        frameConstraint.weightx = 1;
+        frameConstraint.weighty = 1;
+        buttonConstraint.weighty = 1;
         for (int i = 0; i < row; i++) {
+            buttonConstraint.gridy = i;
+            frameConstraint.gridy = i;
             for (int j = 0; j < 5; j++) {
                 if (i*5+j < allStudents.size()) {
+                    buttonConstraint.gridx = j;
                     JButton button = new JButton(new ImageIcon(profileImg));
                     //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
                     // Andy change allStudents.get(i*5+j).getName() to each individual student name
                     // Change Integer.toString(allStudents.get(i*5+j).getYear()) to the Student's Year
                     button.setText("<html>" + allStudents.get(i*5+j).getName() + "<br/>" + Integer.toString(allStudents.get(i*5+j).getYear()) + "<html>");
                     //////////////////////////////////////////////////////////////////////////////////////////////////
-                    button.setPreferredSize(new Dimension(10, 130));
                     button.setVerticalTextPosition(JButton.BOTTOM);
                     button.setHorizontalTextPosition(JButton.CENTER);
                     button.setActionCommand(Integer.toString(i*5+j));
@@ -265,19 +265,25 @@ public class LabPage {
                             // you might need to change this if you are changing what is StudentProfile needs to run
                             // Take a look at the StudentProfile class first
                             Student tempStudent = allStudents.get(Integer.parseInt(but.getActionCommand()));
-                            //StudentProfile studentProfilePage = new StudentProfile(curLab,Student);
-//                            //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-                            // studentProfilePage.ShowPage();
+//                            StudentProfile studentProfilePage = new StudentProfile(curLab,Student);
+                            //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+//                            studentProfilePage.ShowPage();
                             frame.dispose();
                         }
                     });
-                    studentProfiles.add(button);
+                    studentProfiles.add(button,buttonConstraint);
                 }
                 else {
+
                     break;
                 }
             }
+            studentProfiles.add(new JPanel(), frameConstraint);
         }
-        scrollStudentProfiles.setViewportView(studentProfiles);
+
+        /*********************************** Generating Scroll Panel for Student Profiles *************************************/
+        scrollStudentProfiles = new JScrollPane(studentProfiles);
+        scrollStudentProfiles.setBounds(20, 69, 630, 300);
+        frame.getContentPane().add(scrollStudentProfiles);
     }
 }
