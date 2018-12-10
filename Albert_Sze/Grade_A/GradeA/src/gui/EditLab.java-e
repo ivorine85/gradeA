@@ -258,6 +258,7 @@ public class EditLab {
                     labDAO.update(currentLab);
                     String tfname = comboBoxTF.getSelectedItem().toString();
                     AssistantDAO assistantDAO = new AssistantDAO();
+                    assistantDAO.removeFromLab(currentLab);
                     assistantDAO.assignToLab(tfname,currentLab);
                     LabPage returnLabPage = new LabPage(currentLab);
                     returnLabPage.ShowPage();

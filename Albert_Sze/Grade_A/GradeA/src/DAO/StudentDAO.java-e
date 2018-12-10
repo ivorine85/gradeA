@@ -109,13 +109,13 @@ public class StudentDAO {
         }
     }
 
-    public void assignToLab(Student s, Lab l){
+    public void assignToLab(Student s, String labname){
         connection = Connector.getConnection();
         String sql = "insert into attend_lab (sid,labname) values (?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1,s.getSid());
-            ps.setString(2,l.getSection());
+            ps.setString(2,labname);
             ps.execute();
             ps.close();
             connection.close();
@@ -149,4 +149,45 @@ public class StudentDAO {
         return objs;
     }
 
+    public void remove(Lab lab,Student s){
+        connection = Connector.getConnection();
+        String course = lab.getCourseName();
+        CourseDAO cd = new CourseDAO();
+        int cid = cd.getIdByName(course);
+
+        String sql = "delete from attend_lab where sid = ? and labname = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,s.getSid());
+            ps.setString(2,lab.getSection());
+            ps.execute();
+            sql = "delete from attend_course where sid = ? and cid = ?";
+            ps.setString(1,s.getSid());
+            ps.setInt(2,cid);
+            ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeFromLab(Lab lab,Student s){
+        connection = Connector.getConnection();
+        String course = lab.getCourseName();
+        CourseDAO cd = new CourseDAO();
+        int cid = cd.getIdByName(course);
+
+        String sql = "delete from attend_lab where sid = ? and labname = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,s.getSid());
+            ps.setString(2,lab.getSection());
+            ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

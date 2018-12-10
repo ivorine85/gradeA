@@ -28,6 +28,7 @@ import javax.swing.JComboBox;
 
 import dao.GradeBreakDownDAO;
 import dao.LabDAO;
+import dao.StudentDAO;
 import entity.*;
 
 public class StudentProfile extends Adjustments {
@@ -63,31 +64,6 @@ public class StudentProfile extends Adjustments {
 
     private void initialize() {
 /*********************************** for the purpose of this example ***********************************/
-		/*
-		Course newCourse = new Course ("CS591");												// Generate new course
-		newCourse.getCourseBreakDown().put("HW", new GradeBreakDown("HW", .5, .5, 0, 0,0.0, 1));
-		newCourse.getCourseBreakDown().put("Exam", new GradeBreakDown("Exam", .5, .5, 0, 0,0.0, 1));
-		newCourse.getAssignmentBreakDown().put("hw", new ArrayList<GradeBreakDown>(0));
-		newCourse.getAssignmentBreakDown().put("exam", new ArrayList<GradeBreakDown>(0));
-		newCourse.getAssignmentBreakDown().get("hw").add(new GradeBreakDown("HW", 1.0, 1.0, 0, 103,0.54, 1));
-		newCourse.getAssignmentBreakDown().get("exam").add(new GradeBreakDown("Exam", 1, 1, 0, 100,0.80, 1));
-
-		newCourse.getLabSections().put("A1",new Lab("A1"));										// Create Lab Sections
-		newCourse.getLabSections().put("A2",new Lab("A2"));										// Create Lab Sections
-		newCourse.getLabSections().put("A3",new Lab("A3"));										// Create Lab Sections
-		newCourse.getLabSections().get("A1").getStudents().put("undergrad", new ArrayList<Student>(0));
-		newCourse.getLabSections().get("A1").getStudents().get("undergrad").add(new Student("U1","Albert Sze","undergrad","None","yup@gmail",2018));
-		newCourse.getLabSections().get("A1").getStudents().get("undergrad").get(0).getCourseWork().add(new Assignment ("HW", 3, 103, 0));
-		newCourse.getLabSections().get("A1").getStudents().get("undergrad").get(0).getCourseWork().add(new Assignment ("Exam", 12, 100, 0));
-		newCourse.getLabSections().get("A1").getStudents().get("undergrad").get(0).setGrade(.955);
-		newCourse.getLabSections().get("A2").getStudents().put("grad", new ArrayList<Student>(0));
-		newCourse.getLabSections().get("A2").getStudents().get("grad").add(new Student("U1","Albert Sze","grad","None","yup@gmail",2018));
-		newCourse.getLabSections().get("A2").getStudents().get("grad").get(0).getCourseWork().add(new Assignment ("HW", 10, 103, 0));
-		newCourse.getLabSections().get("A2").getStudents().get("grad").get(0).getCourseWork().add(new Assignment ("Exam", 5, 100, 0));
-		newCourse.getLabSections().get("A2").getStudents().get("grad").get(0).setGrade(.80);
-		Lab labSection =newCourse.getLabSections().get("A2");
-		Student studentProfile = labSection.getStudents().get("grad").get(0);
-		*/
 /*******************************************************************************************************/
         Lab labSection;
         DefaultTableModel model;
@@ -104,7 +80,7 @@ public class StudentProfile extends Adjustments {
         JComboBox labOptions;
         JScrollPane scrollStudentTable;
         ArrayList<String> assignments;
-        HashMap<Integer, String> courseworkRow = new HashMap<Integer, String>(0);
+        HashMap<Integer, GradeBreakDown> courseworkRow = new HashMap<Integer, GradeBreakDown>();
         double sum = 0.0;
         int assignNum;
         String[][] allAssignArray;
@@ -134,45 +110,18 @@ public class StudentProfile extends Adjustments {
         }
         /*********************************** Set Data in table **************************************/
         String[] header = {"Assignment","Points Lost","Extra Points","Total Points Available","Percentage","Class Average"};
-        //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-        // Get the count of number of assignments
-        // example assinCount will know there are 2 HW, 3 Exams, 2 Quizzes
-        // Andy I am not sure if you need this anymore
-
-
-//		for (int i = 0; i < studentProfile.getCourseWork().size();i++) {
-//			assignments = new ArrayList<String>(0);
-//			// assignNum - is the current assignment number example HW1 or HW2 will be converted to string in next step
-//			assignNum = newCourse.getCourseBreakDown().get(studentProfile.getCourseWork().get(i).getType()).getNumAssign()-assignCount.get(studentProfile.getCourseWork().get(i).getType());
-//			// Update assignCount = assignCount-1 for given assignment type
-//			assignCount.put(studentProfile.getCourseWork().get(i).getType(), assignCount.get(studentProfile.getCourseWork().get(i).getType())-1);
-//			// Add assignment to arraylist
-//			assignments.add(studentProfile.getCourseWork().get(i).getType() + " " + Integer.toString(assignNum));
-//			// Add points lost for assignment
-//			assignments.add(Integer.toString(studentProfile.getCourseWork().get(i).getPtsLost()));
-//			// Add assignment percentage not typepercentage
-//			assignments.add(Integer.toString(newCourse.getAssignmentBreakDown().get(studentProfile.getCourseWork().get(i).getType().toLowerCase()).get(assignNum-1).getTotalPoints()));
-//			// Add Student assignment percentage
-//			assignments.add(Double.toString((double)Math.round(studentProfile.getCourseWork().get(i).getPercent()*10000)/100));
-//			// Add class average on assignment
-//			assignments.add(Double.toString((double)Math.round(newCourse.getAssignmentBreakDown().get(studentProfile.getCourseWork().get(i).getType().toLowerCase()).get(assignNum-1).getAverage()*10000)/100));
-//			// Add assignment to all assignment data
-//			allAssignData.add(assignments);
-//		}
-        //////////////////////////////////////////////////////////////////////////////////////////////////
-
         /*********************************** Convert ArrayList to Array **************************************/
         allAssignArray = new String[grades.size()][];
 //        String[] header = {"Assignment","Points Lost","Total Points Available","Percentage","Class Average"};
         for (int i = 0; i < grades.size(); i++) {
-            courseworkRow.put(i,grades.get(i).getCwName());
+            courseworkRow.put(i,grades.get(i));
             ArrayList<String> row = new ArrayList<String>(0);
             row.add(grades.get(i).getCwName());
             row.add(Integer.toString(grades.get(i).getPointLost()));
             row.add(Integer.toString(grades.get(i).getWeight()));
             row.add(Integer.toString(grades.get(i).getTotalPoint()));
             row.add(Float.toString(grades.get(i).getPercentage()));
-            row.add(Double.toString(avg.get(i)));
+            row.add(Double.toString(avg.get(grades.get(i).getCwName())));
             allAssignArray[i] = row.toArray(new String[row.size()]);
         }
 
@@ -251,21 +200,6 @@ public class StudentProfile extends Adjustments {
         cancelButton.setBounds(686, 414, 89, 23);
         frame.getContentPane().add(cancelButton);
 
-        /*********************************** Finish Button **************************************/
-        saveButton = new JButton("Save");
-        saveButton.setEnabled(false);
-        saveButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-                // Save the changes to the table of student's grades
-                // Save the changes to labsection
-                ////////////////////////////////////////////////////////////////////////////////////////////////
-                ShowPage();
-                frame.dispose();
-            }
-        });
-        saveButton.setBounds(587, 414, 89, 23);
-        frame.getContentPane().add(saveButton);
 
         /*********************************** Delete Student Button **************************************/
         deleteStudentButton = new JButton("");
@@ -280,6 +214,8 @@ public class StudentProfile extends Adjustments {
                     System.out.println("delete Student");
 //					LabPage labPageReturn = new LabPage();
                     LabPage labPageReturn = new LabPage(curLab);
+                    StudentDAO studentDAO = new StudentDAO();
+                    studentDAO.remove(curLab,curStudent);
 //					System.out.println("LabPage");
                     //LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
                     labPageReturn.ShowPage();
@@ -329,22 +265,7 @@ public class StudentProfile extends Adjustments {
         studentInfoTable = new JTable(model);
         scrollStudentTable.setViewportView(studentInfoTable);
 
-        /************************************ Detects when value is changed in studentInfoTable ****************************************/
-        //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-        // Andy: This can detect where an edit is made, you might want to put this on the buttons or something, not totally sure
-        studentInfoTable.getModel().addTableModelListener(new TableModelListener(){
-            public void tableChanged(TableModelEvent e){
-                try{
-                    int row = e.getFirstRow();
-                    int col = e.getColumn();
-                    int edit = Integer.parseInt((String)studentInfoTable.getValueAt(row, col));
-                    saveButton.setEnabled(true);
-                } catch (NumberFormatException nfe) {
-                    saveButton.setEnabled(false);
-//					JOptionPane.showMessageDialog(null,"not valid edit");
-                }
-            }
-        });
+
         //////////////////////////////////////////////////////////////////////////////////////////////////
 
         /*********************************** Combobox of labsection **************************************/
@@ -361,6 +282,47 @@ public class StudentProfile extends Adjustments {
         System.out.println(curLab.getSection());
         labOptions.setSelectedItem(curLab.getSection());
         ////////////////////////////////////////////////////////////////////////////////////////////////
+        /*********************************** Finish Button **************************************/
+        saveButton = new JButton("Save");
+        saveButton.setEnabled(false);
+        saveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Save the changes to the table of student's grades
+                // Save the changes to labsection
+                GradeBreakDownDAO gradeBreakDownDAO = new GradeBreakDownDAO();
+                for(int i = 0;i<studentInfoTable.getRowCount();i++){
+                    GradeBreakDown cur = courseworkRow.get(i);
+                    int newPointLost = Integer.valueOf(studentInfoTable.getValueAt(i,1).toString());
+                    cur.setPointLost(newPointLost);
+                    gradeBreakDownDAO.updateScore(cur,curStudent.getSid());
+                }
+                String newLab = labOptions.getSelectedItem().toString();
+                StudentDAO studentDAO = new StudentDAO();
+                studentDAO.removeFromLab(curLab,curStudent);
+                studentDAO.assignToLab(curStudent,newLab);
+                ShowPage();
+                frame.dispose();
+            }
+        });
+        saveButton.setBounds(587, 414, 89, 23);
+        frame.getContentPane().add(saveButton);
+
+        /************************************ Detects when value is changed in studentInfoTable ****************************************/
+        //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+        // Andy: This can detect where an edit is made, you might want to put this on the buttons or something, not totally sure
+        studentInfoTable.getModel().addTableModelListener(new TableModelListener(){
+            public void tableChanged(TableModelEvent e){
+                try{
+                    int row = e.getFirstRow();
+                    int col = e.getColumn();
+                    int edit = Integer.parseInt((String)studentInfoTable.getValueAt(row, col));
+                    saveButton.setEnabled(true);
+                } catch (NumberFormatException nfe) {
+                    saveButton.setEnabled(false);
+//					JOptionPane.showMessageDialog(null,"not valid edit");
+                }
+            }
+        });
     }
     private static class __Tmp {
         private static void __tmp() {
