@@ -140,7 +140,7 @@ public class LabPage {
         teachAssist1.setHorizontalAlignment(SwingConstants.CENTER);
         //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
         // change the text to the teaching Assistant name and email
-        teachAssist1.setText("<html>" + allAssistant.get(0).getName()  + "<br/>"+ allAssistant.get(0).getEmail() +"<html>");
+        if(allAssistant.size()>0) teachAssist1.setText("<html>" + allAssistant.get(0).getName()  + "<br/>"+ allAssistant.get(0).getEmail() +"<html>");
         //////////////////////////////////////////////////////////////////////////////////////////////////
         teachAssist1.setVerticalTextPosition(JLabel.BOTTOM);
         teachAssist1.setHorizontalTextPosition(JLabel.CENTER);

@@ -61,6 +61,7 @@ public class EditLab {
      * Initialize the contents of the frame.
      */
     private void initialize() throws SQLException {
+        System.out.println(currentLab.getCourseName());
         frame = new JFrame();
         frame.setBounds(100, 100, 1000, 489);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -126,8 +127,8 @@ public class EditLab {
         JRadioButton radioButtonFri = new JRadioButton("");
         radioButtonFri.setBounds(200, 185, 30, 23);
         frame.getContentPane().add(radioButtonFri);
-
-        String[] days = currentLab.getWeekday();
+        String[] days = new String[]{};
+        if(currentLab.getWeekday()!=null) days = currentLab.getWeekday();
         for(String str:days){
             if(str.equals("Monday")) radioButtonMon.setSelected(true);
             else if(str.equals("Tuesday")) radioButtonTues.setSelected(true);
@@ -144,7 +145,7 @@ public class EditLab {
 
         frame.getContentPane().add(textFieldStartTime);
         textFieldStartTime.setColumns(10);
-        textFieldStartTime.setText(currentLab.getClasstime()[0].toString());
+        if(currentLab.getClasstime()[0]!=null) textFieldStartTime.setText(currentLab.getClasstime()[0].toString());
 //        JComboBox<String> comboBoxStart = new JComboBox<String>();
 //        comboBoxStart.addItem("AM");
 //        comboBoxStart.addItem("PM");
@@ -163,7 +164,7 @@ public class EditLab {
         textFieldEndTime.setBounds(180, 240, 60, 20);
         frame.getContentPane().add(textFieldEndTime);
         textFieldEndTime.setColumns(10);
-        textFieldEndTime.setText(currentLab.getClasstime()[1].toString());
+        if(currentLab.getClasstime()[0]!=null) textFieldEndTime.setText(currentLab.getClasstime()[1].toString());
 //        JComboBox<String> comboBoxEnd = new JComboBox<String>();
 //        comboBoxEnd.addItem("AM");
 //        comboBoxEnd.addItem("PM");
