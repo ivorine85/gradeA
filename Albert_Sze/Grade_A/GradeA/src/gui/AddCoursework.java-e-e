@@ -138,7 +138,12 @@ public class AddCoursework {
                     JOptionPane.showMessageDialog(null, "Data Submitted");
                     int total = Integer.valueOf(textFieldTotalPoints.getText());
                     String type = comboBoxType.getSelectedItem().toString();
-                    type = type.toLowerCase();
+                    if (type == "Homework"){
+                        type = "hw";
+                    }
+                    else{
+                        type = type.toLowerCase();
+                    }
                     AssignmentDAO assignmentDAO = new AssignmentDAO();
                     assignmentDAO.addAssignmentToCourse(type,currentCourse.getCourseName(),total);
                     CoursePage changePage = new CoursePage(currentCourse);
