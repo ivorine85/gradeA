@@ -96,12 +96,11 @@ public class StudentDAO {
         CourseDAO cd = new CourseDAO();
         int cid = cd.getIdByName(courseName);
         connection = Connector.getConnection();
-        String sql = "insert into attend_course (cid,sid) values (?,?) ON DUPLICATE KEY UPDATE sid = ?";
+        String sql = "insert into attend_course (cid,sid) values (?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1,cid);
             ps.setString(2,s.getSid());
-            ps.setString(3,s.getSid());
             ps.execute();
             ps.close();
             connection.close();
@@ -112,12 +111,11 @@ public class StudentDAO {
 
     public void assignToLab(Student s, String labname){
         connection = Connector.getConnection();
-        String sql = "insert into attend_lab (sid,labname) values (?,?) ON DUPLICATE KEY UPDATE sid = ?";
+        String sql = "insert into attend_lab (sid,labname) values (?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1,s.getSid());
             ps.setString(2,labname);
-            ps.setString(3,s.getSid());
             ps.execute();
             ps.close();
             connection.close();
