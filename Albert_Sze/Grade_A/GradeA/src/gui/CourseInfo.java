@@ -1,5 +1,6 @@
 package gui;
 
+import dao.AssignmentDAO;
 import dao.AssistantDAO;
 import dao.CourseDAO;
 import entity.Assistant;
@@ -389,6 +390,34 @@ public class CourseInfo {
                     String tfEmail2 = textFieldTF2Email.getText();
                     String tfName1 = textFieldTF1Name.getText();
                     String tfEmail1 = textFieldTF1Email.getText();
+                    int hwCount = Integer.valueOf(comboBoxNumHW.getSelectedItem().toString());
+                    int qzCount = Integer.valueOf(comboBoxNumQuiz.getSelectedItem().toString());
+                    int midCount = Integer.valueOf(comboBoxNumMidterm.getSelectedItem().toString());
+                    int proCount = Integer.valueOf(comboBoxNumProject.getSelectedItem().toString());
+                    int finalCount = comboBoxFinal.getSelectedItem().toString().equals("Yes")?1:0;
+                    int totalType = 0;
+                    if(hwCount > 0) totalType++;
+                    if(qzCount > 0) totalType++;
+                    if(midCount > 0) totalType++;
+                    if(proCount > 0) totalType++;
+                    if(finalCount > 0) totalType++;
+                    AssignmentDAO assignmentDAO = new AssignmentDAO();
+                    float typePer = (float)100/totalType;
+                    for(int i = 0;i<hwCount;i++){
+                        assignmentDAO.addAssignmentWithPer("HW",c.getCourseName(),0,typePer,(float)100/hwCount);
+                    }
+                    for(int i = 0;i<qzCount;i++){
+                        assignmentDAO.addAssignmentWithPer("Quiz",c.getCourseName(),0,typePer,(float)100/qzCount);
+                    }
+                    for(int i = 0;i<midCount;i++){
+                        assignmentDAO.addAssignmentWithPer("Midterm",c.getCourseName(),0,typePer,(float)100/midCount);
+                    }
+                    for(int i = 0;i<proCount;i++){
+                        assignmentDAO.addAssignmentWithPer("Project",c.getCourseName(),0,typePer,(float)100/proCount);
+                    }
+                    for(int i = 0;i<finalCount;i++){
+                        assignmentDAO.addAssignmentWithPer("Final",c.getCourseName(),0,typePer,100f);
+                    }
                     try {
                         Assistant a1 = new Assistant(tfName1,tfEmail1);
                         if(!assistantDAO.checkExist(tfEmail1)) assistantDAO.insert(a1);
