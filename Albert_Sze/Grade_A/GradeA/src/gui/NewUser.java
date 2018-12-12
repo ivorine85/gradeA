@@ -162,7 +162,7 @@ public class NewUser {
 
 		/*********************************** Question3 label **************************************/
 		question3Label = new JLabel("Question 3:");
-		question3Label.setBounds(10, 440, 62, 14);
+		question3Label.setBounds(10, 440, 101, 14);
 		frame.getContentPane().add(question3Label);
 
 		/*********************************** Question3 combobox **************************************/

@@ -318,7 +318,7 @@ public class CoursePage {
 		this.frame.getContentPane().add(gradeBreakdownTitle);
 
 		/*********************************** Assignments Statistics Label ***********************************/
-		assignmentStatisticsTitle = new JLabel("Assignment Statistics");
+		assignmentStatisticsTitle = new JLabel("Coursework Statistics");
 		assignmentStatisticsTitle.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		assignmentStatisticsTitle.setBounds(270, 109, 252, 29);
 		this.frame.getContentPane().add(assignmentStatisticsTitle);
