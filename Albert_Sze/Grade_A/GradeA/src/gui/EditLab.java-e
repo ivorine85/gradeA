@@ -135,8 +135,8 @@ public class EditLab {
             else if(str.equals("Thursday")) radioButtonThurs.setSelected(true);
             else if(str.equals("Friday")) radioButtonFri.setSelected(true);
         }
-        JLabel lblStartTime = new JLabel("Start Time");
-        lblStartTime.setBounds(40, 215, 100, 14);
+        JLabel lblStartTime = new JLabel("Start Time (24-hr)");
+        lblStartTime.setBounds(40, 215, 120, 14);
         frame.getContentPane().add(lblStartTime);
 
         textFieldStartTime = new JTextField();
@@ -145,18 +145,18 @@ public class EditLab {
         frame.getContentPane().add(textFieldStartTime);
         textFieldStartTime.setColumns(10);
         textFieldStartTime.setText(currentLab.getClasstime()[0].toString());
-        JComboBox<String> comboBoxStart = new JComboBox<String>();
-        comboBoxStart.addItem("AM");
-        comboBoxStart.addItem("PM");
-        comboBoxStart.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
-        comboBoxStart.setBounds(100, 240, 70, 20);
-        frame.getContentPane().add(comboBoxStart);
+//        JComboBox<String> comboBoxStart = new JComboBox<String>();
+//        comboBoxStart.addItem("AM");
+//        comboBoxStart.addItem("PM");
+//        comboBoxStart.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent arg0) {
+//            }
+//        });
+//        comboBoxStart.setBounds(100, 240, 70, 20);
+//        frame.getContentPane().add(comboBoxStart);
 
-        JLabel lblEndTime = new JLabel("End Time");
-        lblEndTime.setBounds(180, 215, 100, 14);
+        JLabel lblEndTime = new JLabel("End Time (24-hr)");
+        lblEndTime.setBounds(180, 215, 120, 14);
         frame.getContentPane().add(lblEndTime);
 
         textFieldEndTime = new JTextField();
@@ -164,15 +164,15 @@ public class EditLab {
         frame.getContentPane().add(textFieldEndTime);
         textFieldEndTime.setColumns(10);
         textFieldEndTime.setText(currentLab.getClasstime()[1].toString());
-        JComboBox<String> comboBoxEnd = new JComboBox<String>();
-        comboBoxEnd.addItem("AM");
-        comboBoxEnd.addItem("PM");
-        comboBoxEnd.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
-        comboBoxEnd.setBounds(240, 240, 70, 20);
-        frame.getContentPane().add(comboBoxEnd);
+//        JComboBox<String> comboBoxEnd = new JComboBox<String>();
+//        comboBoxEnd.addItem("AM");
+//        comboBoxEnd.addItem("PM");
+//        comboBoxEnd.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent arg0) {
+//            }
+//        });
+//        comboBoxEnd.setBounds(240, 240, 70, 20);
+//        frame.getContentPane().add(comboBoxEnd);
 
         JLabel lblAssignTF = new JLabel("Assign TF");
         lblAssignTF.setBounds(40, 270, 100, 14);
@@ -235,7 +235,7 @@ public class EditLab {
 
         btnNext.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                if(textFieldLabSection.getText().isEmpty()||(textFieldStartTime.getText().isEmpty())||(textFieldEndTime.getText().isEmpty())||(comboBoxStart.getSelectedItem().equals("Select")))
+                if(textFieldLabSection.getText().isEmpty()||(textFieldStartTime.getText().isEmpty())||(textFieldEndTime.getText().isEmpty()))
                     JOptionPane.showMessageDialog(null, "Data Missing");
                 else{
                     JOptionPane.showMessageDialog(null, "Data Submitted");
@@ -282,7 +282,7 @@ public class EditLab {
                 radioButtonWed.setSelected(false);
                 radioButtonThurs.setSelected(false);
                 radioButtonFri.setSelected(false);
-                comboBoxStart.setSelectedItem("Select");
+//                comboBoxStart.setSelectedItem("Select");
 
 
             }

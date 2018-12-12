@@ -2,17 +2,13 @@ package gui;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import java.awt.Font;
-import javax.swing.JTextField;
 
 import Import.*;
 import entity.*;
 
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.nio.file.Files;
@@ -72,6 +68,30 @@ public class ImportPage extends ImportCSV {
 		filePathTextField.setBounds(10, 89, 403, 20);
 		frame.getContentPane().add(filePathTextField);
 		filePathTextField.setColumns(10);
+
+
+		/*********************************** Browse files ***********************************/
+		JLabel lblEndDate = new JLabel("Choose a file");
+		lblEndDate.setBounds(10, 135, 100, 14);
+		frame.getContentPane().add(lblEndDate);
+
+		JTextField textEndDate = new JTextField(20);
+		JButton btnEndDate = new JButton("Browse");
+		JPanel pEndDate = new JPanel();
+		pEndDate.add(textEndDate);
+		pEndDate.add(btnEndDate);
+		pEndDate.setBounds(10, 155, 400, 40);
+		frame.getContentPane().add(pEndDate);
+		btnEndDate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				BrowseFiles browseFilesPage = new BrowseFiles();
+				browseFilesPage.ShowPage();
+				frame.dispose();
+			}
+		});
+
+		BrowseFiles browse = new BrowseFiles();
+		frame.getContentPane().add(browse);
 
 		/*********************************** Create Cancel button ************************************/
 		cancelButton = new JButton("Cancel");
