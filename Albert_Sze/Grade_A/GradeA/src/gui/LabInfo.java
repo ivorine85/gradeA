@@ -3,6 +3,7 @@ package gui;
 import dao.AssistantDAO;
 import dao.LabDAO;
 import entity.Assistant;
+import entity.Course;
 import entity.Lab;
 
 import java.awt.*;
@@ -28,7 +29,7 @@ public class LabInfo {
     private JTextField textFieldEndTime;
     private JLabel lblCourseInfo;
     private static String prevPage;
-    private static String coursename;
+    private static Course curCourse;
     private static String chosedName;
     /**
      * Launch the application.
@@ -38,7 +39,7 @@ public class LabInfo {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    LabInfo window = new LabInfo(prevPage,coursename);
+                    LabInfo window = new LabInfo(prevPage,curCourse);
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -50,9 +51,9 @@ public class LabInfo {
     /**
      * Create the application.
      */
-    public LabInfo(String prevPage,String courseName) {
+    public LabInfo(String prevPage,Course courseName) {
         this.prevPage = prevPage;
-        this.coursename = courseName;
+        this.curCourse = courseName;
         initialize();
     }
 
@@ -186,7 +187,7 @@ public class LabInfo {
 
         JComboBox<String> comboBoxTF = new JComboBox<String>();
         AssistantDAO ad =  new AssistantDAO();
-        java.util.List<Assistant> assistantList = ad.findAssistantByCourse(coursename);
+        java.util.List<Assistant> assistantList = ad.findAssistantByCourse(curCourse.getCourseName());
         for(Assistant a:assistantList) comboBoxTF.addItem(a.getName());
 //        comboBoxTF.addActionListener(new ActionListener() {
 //            public void actionPerformed(ActionEvent arg0) {
@@ -195,6 +196,27 @@ public class LabInfo {
 //        });
         comboBoxTF.setBounds(40, 300, 200, 20);
         frame.getContentPane().add(comboBoxTF);
+
+
+        /*********************************** Create Cancel button ************************************/
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (prevPage.equals("CoursePage")) {
+                    CoursePage changePage = new CoursePage(curCourse);
+                    CoursePage.ShowPage();
+                    frame.dispose();
+                }
+                else if(prevPage.equals("LabInfo")){
+                    Dashboard dashboardPage = new Dashboard();
+                    dashboardPage.ShowPage();
+                    frame.dispose();
+                }
+                frame.dispose();
+            }
+        });
+        cancelButton.setBounds(686, 414, 89, 23);
+        frame.getContentPane().add(cancelButton);
 
 
         JButton btnClear = new JButton("Clear");
@@ -230,7 +252,7 @@ public class LabInfo {
                     String[] day = new String[days.size()];
                     for(int i = 0;i<day.length;i++) day[i] = days.get(i);
                     Lab newlab = new Lab(labname,labstart,labend,day);
-                    newlab.setCourseName(coursename);
+                    newlab.setCourseName(curCourse.getCourseName());
                     LabDAO ld = new LabDAO();
                     ld.insert(newlab);
                     String tfname = comboBoxTF.getSelectedItem().toString();
