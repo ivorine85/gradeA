@@ -87,6 +87,7 @@ public class CourseDAO {
         String sql1 = "delete from course where cname = ?";
         String sql2 = "delete from coursework where coursename = ?";
         String sql3 = "delete from gradebreakdown where coursename = ?";
+        String sql4 = "delete from lab where coursename = ?";
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(sql1);
@@ -97,6 +98,9 @@ public class CourseDAO {
             preparedStatement.execute();
             preparedStatement = connection.prepareStatement(sql3);
             preparedStatement.setString(1, cname);
+            preparedStatement.execute();
+            preparedStatement = connection.prepareStatement(sql4);
+            preparedStatement.setString(1,cname);
             preparedStatement.execute();
             preparedStatement.close();
             connection.close();

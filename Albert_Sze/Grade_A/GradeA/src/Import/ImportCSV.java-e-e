@@ -8,10 +8,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import dao.AssignmentDAO;
-import dao.CourseDAO;
-import dao.GradeBreakDownDAO;
-import dao.StudentDAO;
+import dao.*;
 import entity.*;
 
 public class ImportCSV extends Adjustments {
@@ -115,8 +112,16 @@ public class ImportCSV extends Adjustments {
             sid = tempStudentDetail[2];
             year = tempStudentDetail[3];
             type = tempStudentDetail[4];
+            labSection = tempStudentDetail[5];
+
+            Lab l = new Lab();
+            l.setSection(labSection);
+            l.setCourseName(curCourse.getCourseName());
+            LabDAO labDAO = new LabDAO();
+            labDAO.insertName(l);
             Student s = new Student(sid, studentName, type, null, studentEmail, Integer.valueOf(year));
             studentDAO.insert(s);
+            studentDAO.assignToLab(s,labSection);
             studentDAO.assignToCourse(s,curCourse.getCourseName());
             for(int j = 6;j<tempStudentDetail.length;j+=2){
                 int index = (j-6)/2;
