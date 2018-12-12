@@ -167,7 +167,7 @@ public class AssignmentDAO {
         }
     }
 
-    public void addAssignmentToCourse(String type,String cname,int total){
+    public String addAssignmentToCourse(String type,String cname,int total){
         connection = Connector.getConnection();
         try{
             String sql = "select count(*) from Coursework where type = ? and courseName = ?";
@@ -183,10 +183,12 @@ public class AssignmentDAO {
             String newName = type+"_"+count;
             Assignment assignment = new Assignment(type,newName,total,0,0,0,0,0);
             insert(assignment,cname);
+            return newName;
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return "";
     }
 
 
