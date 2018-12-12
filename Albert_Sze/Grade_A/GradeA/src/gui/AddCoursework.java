@@ -1,8 +1,12 @@
 package gui;
 
 import dao.AssignmentDAO;
+import dao.GradeBreakDownDAO;
+import dao.StudentDAO;
 import entity.Assignment;
 import entity.Course;
+import entity.GradeBreakDown;
+import entity.Student;
 
 import java.awt.*;
 
@@ -145,8 +149,15 @@ public class AddCoursework {
                         type = type.toLowerCase();
                     }
                     AssignmentDAO assignmentDAO = new AssignmentDAO();
-                    assignmentDAO.addAssignmentToCourse(type,currentCourse.getCourseName(),total);
+                    String cwname = assignmentDAO.addAssignmentToCourse(type,currentCourse.getCourseName(),total);
                     CoursePage changePage = new CoursePage(currentCourse);
+                    StudentDAO studentDAO = new StudentDAO();
+                    java.util.List<Student> allStudents = studentDAO.findStudentByCourse(currentCourse.getCourseName());
+                    GradeBreakDownDAO gradeBreakDownDAO = new GradeBreakDownDAO();
+                    for(Student s:allStudents){
+                        GradeBreakDown newGrade = new GradeBreakDown(cwname,currentCourse.getCourseName(),0,0,type,0,0,0);
+                        gradeBreakDownDAO.insert(newGrade,s);
+                    }
                     changePage.ShowPage();
                     frame.dispose();
                 }
