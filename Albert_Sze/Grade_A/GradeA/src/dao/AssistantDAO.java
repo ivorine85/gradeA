@@ -82,15 +82,20 @@ public class AssistantDAO {
     }
 
     public void assign(Assistant a,String courseName){
+        connection = Connector.getConnection();
         CourseDAO cd = new CourseDAO();
         int cid = cd.getIdByName(courseName);
-        connection = Connector.getConnection();
-        String sql = "insert into assist_course (cid,tfname) values (?,?) ON DUPLICATE KEY UPDATE cid = ?";
+        String sql = "insert into assist_course (cid,tfname) values (?,?)";
         try {
+            String sql1 = "select * from assist_course where cid = ? and tfname = ?";
+            PreparedStatement ps1 = connection.prepareStatement(sql1);
+            ps1.setInt(1,cid);
+            ps1.setString(2,a.getName());
+            ResultSet r1 = ps1.executeQuery();
+            if(r1.next()) return;
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1,cid);
             ps.setString(2,a.getName());
-            ps.setInt(3,cid);
             ps.execute();
             ps.close();
             connection.close();
