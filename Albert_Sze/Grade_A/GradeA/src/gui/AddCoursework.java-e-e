@@ -59,7 +59,7 @@ public class AddCoursework {
         // Label of window
         JLabel lblLabInfo = new JLabel("Add Coursework");
         lblLabInfo.setFont(new Font("Tahoma", Font.PLAIN, 36));
-        lblLabInfo.setBounds(30, 20, 212, 44);
+        lblLabInfo.setBounds(30, 20, 300, 44);
         frame.getContentPane().add(lblLabInfo);
 
         JLabel lblStartType = new JLabel("Type");

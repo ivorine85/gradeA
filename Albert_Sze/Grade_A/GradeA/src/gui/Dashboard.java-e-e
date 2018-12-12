@@ -94,7 +94,7 @@ public class Dashboard {
             count++;
             for (Lab lab : getLabsOfCourse.get(c)) {
                 labList.put(count,lab);
-                data[count][0] = lab.getSection();
+                data[count][0] = "      " + lab.getSection();
                 data[count][1] = "Temp";
                 count++;
             }
