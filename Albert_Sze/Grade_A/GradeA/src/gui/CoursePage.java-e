@@ -284,7 +284,7 @@ public class CoursePage {
 		addLabButton = new JButton("Add Lab");
 		addLabButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LabInfo labInfoPage = new LabInfo("CoursePage",currentCourse.getCourseName());
+				LabInfo labInfoPage = new LabInfo("CoursePage",currentCourse);
 				labInfoPage.ShowPage();
 				frame.dispose();
 			}
