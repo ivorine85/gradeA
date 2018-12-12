@@ -71,27 +71,26 @@ public class ImportPage extends ImportCSV {
 
 
 		/*********************************** Browse files ***********************************/
-		JLabel lblEndDate = new JLabel("Choose a file");
-		lblEndDate.setBounds(10, 135, 100, 14);
-		frame.getContentPane().add(lblEndDate);
+		//JLabel lblEndDate = new JLabel("Choose a file");
+		//lblEndDate.setBounds(10, 135, 100, 14);
+		//frame.getContentPane().add(lblEndDate);
 
-		JTextField textEndDate = new JTextField(20);
-		JButton btnEndDate = new JButton("Browse");
-		JPanel pEndDate = new JPanel();
-		pEndDate.add(textEndDate);
-		pEndDate.add(btnEndDate);
-		pEndDate.setBounds(10, 155, 400, 40);
-		frame.getContentPane().add(pEndDate);
-		btnEndDate.addActionListener(new ActionListener() {
+		//JTextField textEndDate = new JTextField(20);
+		JButton btnBrowse = new JButton("Browse");
+		//JPanel pEndDate = new JPanel();
+		//pEndDate.add(textEndDate);
+		//pEndDate.add(btnBrowse);
+		//pEndDate.setBounds(10, 155, 400, 40);
+		//frame.getContentPane().add(pEndDate);
+		btnBrowse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				BrowseFiles browseFilesPage = new BrowseFiles();
 				browseFilesPage.ShowPage();
 				frame.dispose();
 			}
 		});
-
-		BrowseFiles browse = new BrowseFiles();
-		frame.getContentPane().add(browse);
+		btnBrowse.setBounds(320, 60, 89, 23);
+		frame.getContentPane().add(btnBrowse);
 
 		/*********************************** Create Cancel button ************************************/
 		cancelButton = new JButton("Cancel");
@@ -118,19 +117,22 @@ public class ImportPage extends ImportCSV {
 				}
 				else {
 					try {
-	                    //Course newcourse = Import(filePath.toFile());
-	                    //add to profile
-	                    Dashboard dashboardPage = new Dashboard();
-	                    //dashboardPage.ShowPage();
-	                    frame.disable();
-	                }
-	                catch (Exception ex) {
-	                    System.out.println("CSV did not upload.");
-	                }
+						//Course newcourse = Import(filePath.toFile());
+						//add to profile
+						Import(filePathTextField.getText());
+						Dashboard dashboardPage = new Dashboard();
+						dashboardPage.ShowPage();
+						JOptionPane.showMessageDialog(null,"CSV file imported.");
+						frame.dispose();
+					}
+					catch (Exception ex) {
+						JOptionPane.showMessageDialog(null,"CSV did not upload.");
+					}
 				}
 			}
 		});
 		importButton.setBounds(236, 163, 89, 23);
 		frame.getContentPane().add(importButton);
+		frame.getRootPane().setDefaultButton(importButton);
 	}
 }
