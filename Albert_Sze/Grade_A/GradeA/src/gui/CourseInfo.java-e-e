@@ -34,6 +34,7 @@ public class CourseInfo {
     private JTextField textFieldTF2Name;
     private JTextField textFieldTF2Email;
     private JLabel lblCourseInfo;
+    private Course pointer;
 
     /**
      * Launch the application.
@@ -383,6 +384,7 @@ public class CourseInfo {
                     String[] day = new String[days.size()];
                     for(int i = 0;i<day.length;i++) day[i] = days.get(i);
                     Course c = new Course(cname,startTime,endTime,startDate,endDate,day);
+                    pointer = c;
                     CourseDAO cd = new CourseDAO();
                     cd.insert(c);
                     AssistantDAO assistantDAO = new AssistantDAO();
@@ -430,13 +432,13 @@ public class CourseInfo {
                     }
                     JOptionPane.showMessageDialog(null, "Data Submitted");
                     LabInfo labInfoPage = null;
-                    labInfoPage = new LabInfo("LabInfo",cname);
+                    labInfoPage = new LabInfo("LabInfo",pointer);
                     labInfoPage.ShowPage();
 
                     frame.dispose();
                 }
 
-                LabInfo labInfoPage = new LabInfo("LabInfo", textFieldCourseTitle.getText());
+                LabInfo labInfoPage = new LabInfo("LabInfo", pointer);
                 labInfoPage.ShowPage();
                 frame.dispose();
 
