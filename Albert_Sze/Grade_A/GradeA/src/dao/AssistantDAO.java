@@ -67,7 +67,7 @@ public class AssistantDAO {
 
     public boolean insert(Assistant a) throws SQLException {
         connection = Connector.getConnection();
-        String sql = "insert into Teaching_fellow (tfname,email) values (?,?)";
+        String sql = "insert into Teaching_fellow (tfname,email) values (?,?)  ";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1,a.getName());
@@ -85,11 +85,12 @@ public class AssistantDAO {
         CourseDAO cd = new CourseDAO();
         int cid = cd.getIdByName(courseName);
         connection = Connector.getConnection();
-        String sql = "insert into assist_course (cid,tfname) values (?,?)";
+        String sql = "insert into assist_course (cid,tfname) values (?,?) ON DUPLICATE KEY UPDATE cid = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1,cid);
-            ps.setString(2,a.getName());;
+            ps.setString(2,a.getName());
+            ps.setInt(3,cid);
             ps.execute();
             ps.close();
             connection.close();
@@ -97,6 +98,8 @@ public class AssistantDAO {
             e.printStackTrace();
         }
     }
+
+
 
     public void assignToLab(String aname, Lab l){
         connection = Connector.getConnection();

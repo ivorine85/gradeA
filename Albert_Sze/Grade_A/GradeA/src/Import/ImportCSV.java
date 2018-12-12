@@ -14,10 +14,10 @@ import dao.GradeBreakDownDAO;
 import dao.StudentDAO;
 import entity.*;
 
-public abstract class ImportCSV extends Adjustments {
+public class ImportCSV extends Adjustments {
 
-    public static void main(String[] args) throws Exception   {
-    //public Course Import() throws Exception {
+    //public static void main(String[] args) throws Exception   {
+    public void Import(String path) throws Exception {
         HashMap<String, Double> tempStudentGrades = new HashMap();                              // Obtains Student's assignment averages per type, used to calculate student's grades later
         ArrayList<String> csvData = new ArrayList<String>(1);                                    // Obtains csv information by row
         String assignType;                                                                        // Assignment type
@@ -35,7 +35,7 @@ public abstract class ImportCSV extends Adjustments {
         double score;                                                                            // score of assignment
         double percent;                                                                            // percent assignment holds
         //Need to change file directory if you are going to run this code
-        File file = new File("/Users/jing/IdeaProject/gradeA/Albert_Sze/Grade_A/GradeA/bin/production/gradeA/Albert_Sze/Grade_A/GradeA/src/Excel_template_4.csv");
+        File file = new File(path);
         //
 
 /*********************************** for the purpose of this example ***********************************/
