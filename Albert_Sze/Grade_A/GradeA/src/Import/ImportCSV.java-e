@@ -54,6 +54,7 @@ public class ImportCSV extends Adjustments {
         //Course
         //Find days of the class
         String[] weekdayName = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        csvData.set(1,csvData.get(1).replace('/', '-'));
         String[] tempCourseDetails = csvData.get(1).split(",");
         ArrayList<String> tempDates = new ArrayList<String>(0);
         for (int i = 6; i < tempCourseDetails.length; i++) {
