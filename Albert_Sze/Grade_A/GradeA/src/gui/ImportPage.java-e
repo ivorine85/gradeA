@@ -117,19 +117,22 @@ public class ImportPage extends ImportCSV {
 				}
 				else {
 					try {
-	                    //Course newcourse = Import(filePath.toFile());
-	                    //add to profile
-	                    Dashboard dashboardPage = new Dashboard();
-	                    //dashboardPage.ShowPage();
-	                    frame.disable();
-	                }
-	                catch (Exception ex) {
-	                    System.out.println("CSV did not upload.");
-	                }
+						//Course newcourse = Import(filePath.toFile());
+						//add to profile
+						Import(filePathTextField.getText());
+						Dashboard dashboardPage = new Dashboard();
+						dashboardPage.ShowPage();
+						JOptionPane.showMessageDialog(null,"CSV file imported.");
+						frame.dispose();
+					}
+					catch (Exception ex) {
+						JOptionPane.showMessageDialog(null,"CSV did not upload.");
+					}
 				}
 			}
 		});
 		importButton.setBounds(236, 163, 89, 23);
 		frame.getContentPane().add(importButton);
+		frame.getRootPane().setDefaultButton(importButton);
 	}
 }
