@@ -113,12 +113,12 @@ public class NewUser {
 
 		/*********************************** Question1 Combobox **************************************/
 		question1Options = new JComboBox();
-        //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
+		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
 		// Andy Change the questions options
-		question1Options.addItem("Question1 choice A");
-		question1Options.addItem("Question1 choice B");
-		question1Options.addItem("Question1 choice C");
-        //////////////////////////////////////////////////////////////////////////////////////////////////
+		question1Options.addItem("What is the name of the road you grew up on?");
+		question1Options.addItem("What was the first company that you worked for?");
+		question1Options.addItem("What city were you born in?");
+		//////////////////////////////////////////////////////////////////////////////////////////////////
 		question1Options.setBounds(10, 240, 396, 20);
 		frame.getContentPane().add(question1Options);
 
@@ -142,9 +142,9 @@ public class NewUser {
 		question2Options = new JComboBox();
 		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
 		// Andy Change the questions options
-		question2Options.addItem("Question2 choice A");
-		question2Options.addItem("Question2 choice B");
-		question2Options.addItem("Question2 choice C");
+		question2Options.addItem("Where did you go to high school/college?");
+		question2Options.addItem("What was the name of your first/current/favorite pet?");
+		question2Options.addItem("What Is your favorite book?");
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		question2Options.setBounds(10, 355, 396, 20);
 		frame.getContentPane().add(question2Options);
@@ -169,9 +169,9 @@ public class NewUser {
 		question3Options = new JComboBox();
 		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
 		// Andy Change the questions options
-		question3Options.addItem("Question3 choice A");
-		question3Options.addItem("Question3 choice B");
-		question3Options.addItem("Question3 choice C");
+		question3Options.addItem("What was your high school mascot?");
+		question3Options.addItem("What is the name of your first grade teacher?");
+		question3Options.addItem("What was the make of your first car?");
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		question3Options.setBounds(10, 465, 396, 20);
 		frame.getContentPane().add(question3Options);
@@ -231,7 +231,7 @@ public class NewUser {
 	}
 	private static class __Tmp {
 		private static void __tmp() {
-			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
+			javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
 		}
 	}
 }
