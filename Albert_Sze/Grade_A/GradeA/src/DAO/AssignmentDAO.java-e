@@ -190,5 +190,28 @@ public class AssignmentDAO {
     }
 
 
+    public void addAssignmentWithPer(String type,String cname,int total,float typePer,float per){
+        connection = Connector.getConnection();
+        try{
+            String sql = "select count(*) from Coursework where type = ? and courseName = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,type);
+            ps.setString(2,cname);
+            ResultSet rs  = ps.executeQuery();
+            int count = 0;
+            if(rs.next()) count = rs.getInt(1);
+            count++;
+            rs.close();
+            connection.close();
+            String newName = type+"_"+count;
+            Assignment assignment = new Assignment(type,newName,total,per,typePer,per,typePer,0);
+            insert(assignment,cname);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 }
