@@ -303,6 +303,7 @@ public class StudentProfile extends Adjustments {
                 StudentDAO studentDAO = new StudentDAO();
                 studentDAO.removeFromLab(curLab,curStudent);
                 studentDAO.assignToLab(curStudent,newLab);
+                curLab = labDAO.findByName(newLab);
                 ShowPage();
                 frame.dispose();
             }
