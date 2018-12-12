@@ -47,21 +47,23 @@ public class EditCourse {
     private static Course curCourse;
 
 
-    private boolean CalcSum (JTable table,int numTypes) {
-
-        for (int i = 0; i < 2; i++) {
-            double sum  = 0.0;
-            for (int j = 1; j < table.getColumnCount(); j++) {
+    private boolean CalcSum (JTable table,HashMap<String, Double> numTypes, HashMap<Integer, String> assignColHashMap) {
+        for (Map.Entry<String, Double> entry : numTypes.entrySet()){
+            numTypes.put(entry.getKey(),0.0);
+        }
+        for (Map.Entry<Integer, String> entry : assignColHashMap.entrySet()){
+            for (int i = 0; i < 2; i++) {
                 try{
-                    sum += Double.parseDouble((String) table.getModel().getValueAt(i, j));
+                    numTypes.put(entry.getValue(),numTypes.get(entry.getValue()) + Double.parseDouble((String) table.getModel().getValueAt(i, entry.getKey())));
                 }
                 catch(NumberFormatException nfe)
                 {
                     return false;
                 }
-
             }
-            if (sum != 100.00* numTypes) {
+        }
+        for (Map.Entry<String, Double> entry : numTypes.entrySet()){
+            if (entry.getValue() != 200.0){
                 return false;
             }
         }
@@ -100,7 +102,8 @@ public class EditCourse {
         //assistantList is all the TFs
         DateFormat timeFormat = new SimpleDateFormat("HH:mm");
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        ArrayList<String> allAssignmentTypes = new ArrayList<String>(0);
+        HashMap<String, Double> allAssignmentTypes = new HashMap<String, Double>(0);
+        HashMap<Integer,String> assignmentHashMap = new HashMap<Integer,String>(0);
         AssignmentDAO ad = new AssignmentDAO();
         java.util.List<Assignment> assignmentList = ad.findAssignmentByCourse(curCourse.getCourseName());
         AssistantDAO assistantDAO = new AssistantDAO();
@@ -135,7 +138,7 @@ public class EditCourse {
         frame.getContentPane().add(lblMon);
 
         JRadioButton radioButtonMon = new JRadioButton("", Arrays.stream(curCourse.getWeekDay()).anyMatch("Monday"::equals));
-        radioButtonMon.setBounds(43, 185, 109, 23);
+        radioButtonMon.setBounds(43, 185, 30, 23);
         frame.getContentPane().add(radioButtonMon);
 
         JLabel lblTues = new JLabel("Tues");
@@ -143,7 +146,7 @@ public class EditCourse {
         frame.getContentPane().add(lblTues);
 
         JRadioButton radioButtonTues = new JRadioButton("", Arrays.stream(curCourse.getWeekDay()).anyMatch("Tuesday"::equals));
-        radioButtonTues.setBounds(78, 185, 109, 23);
+        radioButtonTues.setBounds(78, 185, 30, 23);
         frame.getContentPane().add(radioButtonTues);
 
         JLabel lblWed = new JLabel("Wed");
@@ -151,7 +154,7 @@ public class EditCourse {
         frame.getContentPane().add(lblWed);
 
         JRadioButton radioButtonWed = new JRadioButton("", Arrays.stream(curCourse.getWeekDay()).anyMatch("Wednesday"::equals));
-        radioButtonWed.setBounds(118, 185, 109, 23);
+        radioButtonWed.setBounds(118, 185, 30, 23);
         frame.getContentPane().add(radioButtonWed);
 
         JLabel lblThurs = new JLabel("Thurs");
@@ -159,7 +162,7 @@ public class EditCourse {
         frame.getContentPane().add(lblThurs);
 
         JRadioButton radioButtonThurs = new JRadioButton("", Arrays.stream(curCourse.getWeekDay()).anyMatch("Thursday"::equals));
-        radioButtonThurs.setBounds(153, 185, 109, 23);
+        radioButtonThurs.setBounds(153, 185, 30, 23);
         frame.getContentPane().add(radioButtonThurs);
 
         JLabel lblFri = new JLabel("Fri");
@@ -167,46 +170,46 @@ public class EditCourse {
         frame.getContentPane().add(lblFri);
 
         JRadioButton radioButtonFri = new JRadioButton("", Arrays.stream(curCourse.getWeekDay()).anyMatch("Friday"::equals));
-        radioButtonFri.setBounds(200, 185, 109, 23);
+        radioButtonFri.setBounds(200, 185, 30, 23);
         frame.getContentPane().add(radioButtonFri);
 
-        JLabel lblStartTime = new JLabel("Start Time");
-        lblStartTime.setBounds(40, 215, 100, 14);
+        JLabel lblStartTime = new JLabel("Start Time (24-hr)");
+        lblStartTime.setBounds(40, 215, 120, 14);
         frame.getContentPane().add(lblStartTime);
 
         textFieldStartTime = new JTextField(timeFormat.format(curCourse.getClassTime()[0].getTime()));
-        textFieldStartTime.setBounds(40, 240, 60, 20);
+        textFieldStartTime.setBounds(40, 240, 100, 20);
         frame.getContentPane().add(textFieldStartTime);
         textFieldStartTime.setColumns(10);
 
-        JComboBox<String> comboBoxStart = new JComboBox<String>();
-        comboBoxStart.addItem("AM");
-        comboBoxStart.addItem("PM");
-        comboBoxStart.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
-        comboBoxStart.setBounds(100, 240, 70, 20);
-        frame.getContentPane().add(comboBoxStart);
+//        JComboBox<String> comboBoxStart = new JComboBox<String>();
+//        comboBoxStart.addItem("AM");
+//        comboBoxStart.addItem("PM");
+//        comboBoxStart.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent arg0) {
+//            }
+//        });
+//        comboBoxStart.setBounds(100, 240, 70, 20);
+//        frame.getContentPane().add(comboBoxStart);
 
-        JLabel lblEndTime = new JLabel("End Time");
-        lblEndTime.setBounds(180, 215, 100, 14);
+        JLabel lblEndTime = new JLabel("End Time (24-hr)");
+        lblEndTime.setBounds(180, 215, 120, 14);
         frame.getContentPane().add(lblEndTime);
 
         textFieldEndTime = new JTextField(timeFormat.format(curCourse.getClassTime()[1].getTime()));
-        textFieldEndTime.setBounds(180, 240, 60, 20);
+        textFieldEndTime.setBounds(180, 240, 100, 20);
         frame.getContentPane().add(textFieldEndTime);
         textFieldEndTime.setColumns(10);
 
-        JComboBox<String> comboBoxEnd = new JComboBox<String>();
-        comboBoxEnd.addItem("AM");
-        comboBoxEnd.addItem("PM");
-        comboBoxEnd.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
-        comboBoxEnd.setBounds(240, 240, 70, 20);
-        frame.getContentPane().add(comboBoxEnd);
+//        JComboBox<String> comboBoxEnd = new JComboBox<String>();
+//        comboBoxEnd.addItem("AM");
+//        comboBoxEnd.addItem("PM");
+//        comboBoxEnd.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent arg0) {
+//            }
+//        });
+//        comboBoxEnd.setBounds(240, 240, 70, 20);
+//        frame.getContentPane().add(comboBoxEnd);
 
 //        JLabel lblPhone = new JLabel("Phone #");
 //        lblPhone.setBounds(65, 88, 46, 14);
@@ -366,9 +369,8 @@ public class EditCourse {
         assignmentWeight.add("Extra Points");
         assignmentTotPTS.add("Total Points");
         for (int i = 0; i < assignmentList.size(); i++) {
-            if (!allAssignmentTypes.contains(assignmentList.get(i).getType())){
-                allAssignmentTypes.add(assignmentList.get(i).getType());
-            }
+            allAssignmentTypes.put(assignmentList.get(i).getType().toLowerCase(),0.0);
+            assignmentHashMap.put(i+1,assignmentList.get(i).getType().toLowerCase());
             header.add(assignmentList.get(i).getCwname());
             assignmentPercentUndergrad.add(Float.toString(assignmentList.get(i).getUndergradPercentage()));
             assignmentPercentGrad.add(Float.toString(assignmentList.get(i).getGradPercentage()));
@@ -415,10 +417,9 @@ public class EditCourse {
 
         //Finish Button
         JButton saveButton = new JButton("Save");
-        saveButton.setEnabled(false);
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (CalcSum (table,allAssignmentTypes.size())) {
+                if (CalcSum (table,allAssignmentTypes,assignmentHashMap)) {
                     String cname = curCourse.getCourseName();
                     Date startDate = getDate(textStartDate.getText());
                     Date endDate = getDate(textEndDate.getText());
@@ -461,11 +462,6 @@ public class EditCourse {
 
                     }
                     JOptionPane.showMessageDialog(null, "Data Submitted");
-                    LabInfo labInfoPage = null;
-                    labInfoPage = new LabInfo("LabInfo",cname);
-                    labInfoPage.ShowPage();
-
-                    frame.dispose();
                     ////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
                     //need to add save edits
                     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -545,7 +541,7 @@ public class EditCourse {
                 radioButtonWed.setSelected(false);
                 radioButtonThurs.setSelected(false);
                 radioButtonFri.setSelected(false);
-                comboBoxStart.setSelectedItem("Select");
+//                comboBoxStart.setSelectedItem("Select");
 
 
             }
