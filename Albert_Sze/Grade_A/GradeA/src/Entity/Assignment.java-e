@@ -1,6 +1,6 @@
 package entity;
 
-public class Assignment {
+public class Assignment implements Comparable<Assignment>{
 	private String type;
 	private String cwname;
 	private int totalPts;
@@ -104,4 +104,8 @@ public class Assignment {
 				" up:"+undergradPercentage+" utp:"+undergradTypePercentage;
 	}
 
+	@Override
+	public int compareTo(Assignment o) {
+		return cwname.compareTo(o.courseName);
+	}
 }
