@@ -13,10 +13,7 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.Desktop.Action;
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import dao.AssignmentDAO;
 import dao.GradeBreakDownDAO;
@@ -68,7 +65,6 @@ public class EditGrades extends Adjustments {
         HashMap<String, GradeBreakDown> tablePointer = new HashMap<String, GradeBreakDown>(0);
         String[][] arrayAllStudentData;
         String key;
-        int assignnum;
         int count  = 0;
         double sum = 0.0;
         DefaultTableModel model;
@@ -90,9 +86,6 @@ public class EditGrades extends Adjustments {
         //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
         // get all undergrad and grad students in allStudents;
 
-        AssignmentDAO assignmentDAO = new AssignmentDAO();
-        allAssignment = assignmentDAO.findAssignmentByCourse(currentLab.getCourseName());
-
         for (int i = 0; i < allStudents.size();i++) {				// for loop of all students in particular lab	            // need this variable to construct a double arraylist to display
             //change allStudents.get(i).genName() to students name on at a time
             studentData = new ArrayList<>();
@@ -100,6 +93,7 @@ public class EditGrades extends Adjustments {
             studentData.add(cur.getName());
             GradeBreakDownDAO gd = new GradeBreakDownDAO();
             List<GradeBreakDown> gradeOfCurrentStudent = gd.getGradeByStudent(cur.getSid(),currentLab.getCourseName());
+            Collections.sort(gradeOfCurrentStudent);
             //TODO:In this loop , cur is the object of current student;
             //TODO:The gradeOfCurrentStudent is a list of grades of current student;
             //TODO:The totalPoint is the final grade of current student
