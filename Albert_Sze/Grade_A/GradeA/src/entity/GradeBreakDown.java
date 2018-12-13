@@ -1,6 +1,6 @@
 package entity;
 
-public class GradeBreakDown {
+public class GradeBreakDown implements Comparable<GradeBreakDown>{
 	String cwName;
 	String courseName;
 	float typePercentage;
@@ -110,5 +110,10 @@ public class GradeBreakDown {
 				", totalPoint=" + totalPoint +
 				", pointLost=" + pointLost +
 				'}';
+	}
+
+	@Override
+	public int compareTo(GradeBreakDown o) {
+		return cwName.compareTo(o.cwName);
 	}
 }
