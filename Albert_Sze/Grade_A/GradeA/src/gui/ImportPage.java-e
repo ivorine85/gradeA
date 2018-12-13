@@ -120,10 +120,10 @@ public class ImportPage extends ImportCSV {
 						//Course newcourse = Import(filePath.toFile());
 						//add to profile
 						Import(filePathTextField.getText());
-						Dashboard dashboardPage = new Dashboard();
-						dashboardPage.ShowPage();
 						JOptionPane.showMessageDialog(null,"CSV file imported.");
 						frame.dispose();
+						Dashboard dashboardPage = new Dashboard();
+						dashboardPage.ShowPage();
 					}
 					catch (Exception ex) {
 						JOptionPane.showMessageDialog(null,"CSV did not upload.");
