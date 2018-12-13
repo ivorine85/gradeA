@@ -93,10 +93,18 @@ public class StudentProfile extends Adjustments {
         /*********************************** Set Data up **************************************/
         //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
         //Load proper lab section
-        //TODO:Grade is all gradeBreakDown of current Student;
-        //TODO:avg is a hashMap of avg class performance , key is the name of coursework , value is the percentage(92% has the value 92)
+        //TODO:finalGrad is the finalGrad of current student.
         GradeBreakDownDAO breakDownDAO = new GradeBreakDownDAO();
+        double finalGrade = 0;
+
         List<GradeBreakDown> grades = breakDownDAO.getGradeByStudent(curStudent.getSid(),curLab.getCourseName());
+        for(GradeBreakDown gbd:grades){
+            int total = gbd.getTotalPoint();
+            int lost = gbd.getPointLost();
+            float percentPoint = ((float)total-lost+gbd.getWeight())/total*100;
+            finalGrade += percentPoint*(gbd.getPercentage()/100)*(gbd.getTypePercentage()/100);
+        }
+        System.out.println(finalGrade);
         LabDAO labDAO  = new LabDAO();
         List<Lab> allLabs = labDAO.findLabOfCourse(curLab.getCourseName());
         Map<String,Double[]> helper = breakDownDAO.getPerformance(curLab.getCourseName());
