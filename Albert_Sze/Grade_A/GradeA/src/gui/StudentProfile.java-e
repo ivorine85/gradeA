@@ -75,7 +75,6 @@ public class StudentProfile extends Adjustments {
         JButton homeButton;
         JButton deleteStudentButton;
         JButton saveButton;
-        JButton cancelButton;
         JButton backButton;
         JComboBox labOptions;
         JScrollPane scrollStudentTable;
@@ -123,8 +122,8 @@ public class StudentProfile extends Adjustments {
             row.add(Integer.toString(lost));
             row.add(Integer.toString(grades.get(i).getWeight()));
             row.add(Integer.toString(total));
-            row.add(Float.toString(percentPoint));
-            row.add(Double.toString(avg.get(grades.get(i).getCwName())));
+            row.add(Float.toString(Math.round(percentPoint*100)/100));
+            row.add(Double.toString(Math.round(avg.get(grades.get(i).getCwName())*100.0)/100));
             allAssignArray[i] = row.toArray(new String[row.size()]);
         }
 
@@ -190,9 +189,9 @@ public class StudentProfile extends Adjustments {
         profileImage.setBounds(25, 11, 109, 113);
         frame.getContentPane().add(profileImage);
 
-        /*********************************** Cancel Button **************************************/
-        cancelButton = new JButton("Cancel");
-        cancelButton.addActionListener(new ActionListener() {
+        /*********************************** Back Button **************************************/
+        backButton = new JButton("Back");
+        backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 LabPage labPageReturn = new LabPage(curLab);
                 //LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
@@ -200,8 +199,8 @@ public class StudentProfile extends Adjustments {
                 frame.dispose();
             }
         });
-        cancelButton.setBounds(686, 414, 89, 23);
-        frame.getContentPane().add(cancelButton);
+        backButton.setBounds(686, 414, 89, 23);
+        frame.getContentPane().add(backButton);
 
 
         /*********************************** Delete Student Button **************************************/
@@ -248,18 +247,6 @@ public class StudentProfile extends Adjustments {
         frame.getContentPane().add(homeButton);
 
         /*********************************** Scroll Panel for Student table **************************************/
-
-        backButton = new JButton("Back");
-        backButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                LabPage labPageReturn = new LabPage(curLab);
-                //LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
-                labPageReturn.ShowPage();
-                frame.dispose();
-            }
-        });
-        backButton.setBounds(488, 414, 89, 23);
-        frame.getContentPane().add(backButton);
         scrollStudentTable = new JScrollPane();
         scrollStudentTable.setBounds(25, 180, 738, 206);
         frame.getContentPane().add(scrollStudentTable);
