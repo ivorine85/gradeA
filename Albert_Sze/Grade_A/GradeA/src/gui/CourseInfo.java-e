@@ -151,8 +151,8 @@ public class CourseInfo {
 //        frame.getContentPane().add(lblPhone);
 //
 
-        JLabel lblStartDate = new JLabel("Start Date");
-        lblStartDate.setBounds(40, 270, 100, 14);
+        JLabel lblStartDate = new JLabel("Start Date 'DD-MM-YYYY'");
+        lblStartDate.setBounds(40, 270, 150, 14);
         frame.getContentPane().add(lblStartDate);
 
         JTextField textStartDate = new JTextField(20);
@@ -168,8 +168,8 @@ public class CourseInfo {
             }
         });
 
-        JLabel lblEndDate = new JLabel("End Date");
-        lblEndDate.setBounds(40, 335, 100, 14);
+        JLabel lblEndDate = new JLabel("End Date 'DD-MM-YYYY'");
+        lblEndDate.setBounds(40, 335, 150, 14);
         frame.getContentPane().add(lblEndDate);
 
         JTextField textEndDate = new JTextField(20);
