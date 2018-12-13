@@ -406,19 +406,19 @@ public class CourseInfo {
                     AssignmentDAO assignmentDAO = new AssignmentDAO();
                     float typePer = (float)100/totalType;
                     for(int i = 0;i<hwCount;i++){
-                        assignmentDAO.addAssignmentWithPer("HW",c.getCourseName(),0,typePer,(float)100/hwCount);
+                        assignmentDAO.addAssignmentWithPer("hw",c.getCourseName(),0,typePer,(float)100/hwCount);
                     }
                     for(int i = 0;i<qzCount;i++){
-                        assignmentDAO.addAssignmentWithPer("Quiz",c.getCourseName(),0,typePer,(float)100/qzCount);
+                        assignmentDAO.addAssignmentWithPer("quiz",c.getCourseName(),0,typePer,(float)100/qzCount);
                     }
                     for(int i = 0;i<midCount;i++){
-                        assignmentDAO.addAssignmentWithPer("Midterm",c.getCourseName(),0,typePer,(float)100/midCount);
+                        assignmentDAO.addAssignmentWithPer("midterm",c.getCourseName(),0,typePer,(float)100/midCount);
                     }
                     for(int i = 0;i<proCount;i++){
-                        assignmentDAO.addAssignmentWithPer("Project",c.getCourseName(),0,typePer,(float)100/proCount);
+                        assignmentDAO.addAssignmentWithPer("project",c.getCourseName(),0,typePer,(float)100/proCount);
                     }
                     for(int i = 0;i<finalCount;i++){
-                        assignmentDAO.addAssignmentWithPer("Final",c.getCourseName(),0,typePer,100f);
+                        assignmentDAO.addAssignmentWithPer("final",c.getCourseName(),0,typePer,100f);
                     }
                     try {
                         Assistant a1 = new Assistant(tfName1,tfEmail1);
