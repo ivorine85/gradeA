@@ -24,9 +24,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.awt.event.ActionEvent;
 
 
@@ -167,10 +165,16 @@ public class CoursePage {
 		arrayList2.add("Averages");
 
 		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-		for (Map.Entry<String, Double> entry: getAvg.entrySet()) {
-			header.add(entry.getKey());
-			arrayList2.add(Double.toString(Math.round(entry.getValue()*100)/100.0));
+		List<String> names = new ArrayList<>(getAvg.keySet());
+		Collections.sort(names);
+		for(String n:names){
+			header.add(n);
+			arrayList2.add(Double.toString(Math.round(getAvg.get(n)*100)/100.0));
 		}
+//		for (Map.Entry<String, Double> entry: getAvg.entrySet()) {
+//			header.add(entry.getKey());
+//			arrayList2.add(Double.toString(Math.round(entry.getValue()*100)/100.0));
+//		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		doubleArrayList.add(arrayList2);
 
