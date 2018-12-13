@@ -259,17 +259,10 @@ public class LabInfo {
                     AssistantDAO assistantDAO = new AssistantDAO();
                     assistantDAO.assignToLab(tfname,newlab);
                     JOptionPane.showMessageDialog(null, "Data Submitted");
-                    //AddStudents addStudentsPage = new AddStudents(prevPage,coursename);
-                    //addStudentsPage.ShowPage();
+                    AddStudents addStudentsPage = new AddStudents(prevPage,curCourse);
+                    addStudentsPage.ShowPage();
                     frame.dispose();
                 }
-
-//                AddStudents addStudentsPage = new AddStudents(prevPage,newlab);
-//                addStudentsPage.ShowPage();
-//                frame.dispose();
-
-
-
             }
         });
 
