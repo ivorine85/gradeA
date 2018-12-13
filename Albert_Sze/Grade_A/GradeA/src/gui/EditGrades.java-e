@@ -116,10 +116,8 @@ public class EditGrades extends Adjustments {
                     header.add(gbd.getCwName() + " Pts Lost");
                     header.add(gbd.getCwName() + "%");
                 }
-                if (count%2 == 1){
-                    key = Integer.toString(i) + "." + Integer.toString(count);
-                    tablePointer.put(key,gbd);
-                }
+                key = Integer.toString(i) + "." + Integer.toString(count*2-1);
+                tablePointer.put(key,gbd);
                 int total = gbd.getTotalPoint();
                 int lost = gbd.getPointLost();
                 float percentPoint = ((float)total-lost+gbd.getWeight())/total*100;
@@ -132,6 +130,7 @@ public class EditGrades extends Adjustments {
             //Add the studentData to all student Data
             allStudentData.add(studentData);
         }
+
         //Add the title final grade to header
         header.add("Final Grade");
 
@@ -197,8 +196,17 @@ public class EditGrades extends Adjustments {
         /****************************************** Add Save Button **************************************************************/
         saveButton = new JButton("Save");
         saveButton.setEnabled(false);
+        GradeBreakDownDAO gradeBreakDownDAO = new GradeBreakDownDAO();
         saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                for(int i = 0;i<tableGrades.getRowCount()-1;i++){
+                    for(int j = 1;j<tableGrades.getColumnCount()-1;j+=2){
+                        String k = i+"."+j;
+                        GradeBreakDown cur = tablePointer.get(k);
+                        cur.setPointLost(Double.valueOf(tableGrades.getValueAt(i,j).toString()).intValue());
+                        gradeBreakDownDAO.updateScore(cur,allStudents.get(i).getSid());
+                    }
+                }
                 //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
                 // Andy: update the data base with edited data
 
@@ -252,5 +260,7 @@ public class EditGrades extends Adjustments {
                 }
             }
         });
+
+
     }
 }
