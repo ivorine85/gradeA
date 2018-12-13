@@ -437,12 +437,6 @@ public class CourseInfo {
 
                     frame.dispose();
                 }
-
-                LabInfo labInfoPage = new LabInfo("LabInfo", pointer);
-                labInfoPage.ShowPage();
-                frame.dispose();
-
-
             }
         });
 
