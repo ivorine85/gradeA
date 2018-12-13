@@ -123,7 +123,7 @@ public class EditGrades extends Adjustments {
                 float percentPoint = ((float)total-lost+gbd.getWeight())/total*100;
                 studentData.add(Integer.toString(lost));
                 studentData.add(Float.toString(percentPoint));
-                totalPoint += percentPoint*gbd.getPercentage()*gbd.getTypePercentage();
+                totalPoint += percentPoint*(gbd.getPercentage()/100)*(gbd.getTypePercentage()/100);
             }
             // Add current Final Grade to StudentData
             studentData.add(Double.toString((double)Math.round(allStudents.get(i).getGrade()*10000)/100));
