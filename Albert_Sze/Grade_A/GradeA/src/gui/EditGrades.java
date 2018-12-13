@@ -78,11 +78,6 @@ public class EditGrades extends Adjustments {
         JScrollPane scrollGrades;
         boolean valid=false;
 
-        /*********************************** Get current lab section ********************************************/
-        //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-        //Need to load lab data here
-        //////////////////////////////////////////////////////////////////////////////////////////////////
-
         /*********************************** Generate frame for Edit Grades Page *******************************/
         frame = new JFrame();
         frame.getContentPane().setForeground(new Color(0, 0, 0));
@@ -98,9 +93,9 @@ public class EditGrades extends Adjustments {
         AssignmentDAO assignmentDAO = new AssignmentDAO();
         allAssignment = assignmentDAO.findAssignmentByCourse(currentLab.getCourseName());
 
-        studentData = new ArrayList<>();
         for (int i = 0; i < allStudents.size();i++) {				// for loop of all students in particular lab	            // need this variable to construct a double arraylist to display
             //change allStudents.get(i).genName() to students name on at a time
+            studentData = new ArrayList<>();
             Student cur = allStudents.get(i);
             studentData.add(cur.getName());
             GradeBreakDownDAO gd = new GradeBreakDownDAO();
@@ -126,7 +121,7 @@ public class EditGrades extends Adjustments {
                 totalPoint += percentPoint*(gbd.getPercentage()/100)*(gbd.getTypePercentage()/100);
             }
             // Add current Final Grade to StudentData
-            studentData.add(Double.toString((double)Math.round(allStudents.get(i).getGrade()*10000)/100));
+            studentData.add(Double.toString(Math.round(totalPoint*100)/100.0));
             //Add the studentData to all student Data
             allStudentData.add(studentData);
         }
@@ -185,7 +180,6 @@ public class EditGrades extends Adjustments {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 LabPage labPageReturn = new LabPage(currentLab);
-                //LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
                 labPageReturn.ShowPage();
                 frame.dispose();
             }
@@ -207,35 +201,13 @@ public class EditGrades extends Adjustments {
                         gradeBreakDownDAO.updateScore(cur,allStudents.get(i).getSid());
                     }
                 }
-                //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-                // Andy: update the data base with edited data
-
-
-                //LabPage labPageReturn = new LabPage();
-                //LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
-                //labPageReturn.ShowPage();
-                //////////////////////////////////////////////////////////////////////////////////////////////////
-
-
+                LabPage labPageReturn = new LabPage(currentLab);
+                labPageReturn.ShowPage();
                 frame.dispose();
-                //ShowPage();
             }
         });
         saveButton.setBounds(587, 414, 89, 23);
         frame.getContentPane().add(saveButton);
-
-        /****************************************** Back Button **************************************************************/
-//        backButton = new JButton("Back");
-//        backButton.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                LabPage labPageReturn = new LabPage(currentLab);
-//                //LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
-//                labPageReturn.ShowPage();
-//                frame.dispose();
-//            }
-//        });
-//        backButton.setBounds(489, 414, 89, 23);
-//        frame.getContentPane().add(backButton);
 
         /************************************ Add Scroll Panel for Grades **********************************************************/
         scrollGrades = new JScrollPane();
@@ -256,7 +228,6 @@ public class EditGrades extends Adjustments {
                     saveButton.setEnabled(true);
                 } catch (NumberFormatException nfe) {
                     saveButton.setEnabled(false);
-                    //JOptionPane.showMessageDialog(null,"not valid edit");
                 }
             }
         });
