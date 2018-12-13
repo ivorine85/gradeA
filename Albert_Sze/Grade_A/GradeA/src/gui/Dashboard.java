@@ -67,7 +67,7 @@ public class Dashboard {
         Map<Course,List<Lab>> getLabsOfCourse = new HashMap<>();
         for(Course c:allCourses){
             List<Lab> labs = labDAO.findLabOfCourse(c.getCourseName());
-            for(Lab l :labs) System.out.println(l.getCourseName());
+//            for(Lab l :labs) System.out.println(l.getCourseName());
             totalCount += 1+labs.size();
             getLabsOfCourse.put(c,labs);
         }
