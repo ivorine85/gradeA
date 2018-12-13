@@ -91,9 +91,7 @@ public class StudentProfile extends Adjustments {
 
 
         /*********************************** Set Data up **************************************/
-        //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
         //Load proper lab section
-        //TODO:finalGrad is the finalGrad of current student.
         GradeBreakDownDAO breakDownDAO = new GradeBreakDownDAO();
         double finalGrade = 0;
 
@@ -104,7 +102,6 @@ public class StudentProfile extends Adjustments {
             float percentPoint = ((float)total-lost+gbd.getWeight())/total*100;
             finalGrade += percentPoint*(gbd.getPercentage()/100)*(gbd.getTypePercentage()/100);
         }
-        System.out.println(finalGrade);
         LabDAO labDAO  = new LabDAO();
         List<Lab> allLabs = labDAO.findLabOfCourse(curLab.getCourseName());
         Map<String,Double[]> helper = breakDownDAO.getPerformance(curLab.getCourseName());
@@ -119,7 +116,6 @@ public class StudentProfile extends Adjustments {
         String[] header = {"Assignment","Points Lost","Extra Points","Total Points Available","Percentage","Class Average"};
         /*********************************** Convert ArrayList to Array **************************************/
         allAssignArray = new String[grades.size()][];
-//        String[] header = {"Assignment","Points Lost","Total Points Available","Percentage","Class Average"};
         for (int i = 0; i < grades.size(); i++) {
             courseworkRow.put(i,grades.get(i));
             ArrayList<String> row = new ArrayList<String>(0);
@@ -157,30 +153,21 @@ public class StudentProfile extends Adjustments {
 
 
         /*********************************** Student Name Title **************************************/
-        //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-        // change studentProfile.getName() to student's name
         studentNameLabel = new JLabel(curStudent.getName());
-        //////////////////////////////////////////////////////////////////////////////////////////////////
         studentNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 36));
         studentNameLabel.setBounds(188, 11, 338, 44);
         frame.getContentPane().add(studentNameLabel);
 
         /*********************************** Grade Label **************************************/
         gradeLabel = new JLabel("grade");
-        ////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-        // Andy change the label to the Student's current grade
-        gradeLabel.setText(Double.toString((double)Math.round(curStudent.getGrade()*10000)/100) + "%");
-        ////////////////////////////////////////////////////////////////////////////////////////////////
+        gradeLabel.setText("Final Grade: " + Double.toString(Math.round(finalGrade*100)/100.0) + "%");
         gradeLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
-        gradeLabel.setBounds(188, 68, 152, 35);
+        gradeLabel.setBounds(188, 68, 250, 35);
         frame.getContentPane().add(gradeLabel);
 
         /*********************************** Graduating Year Label **************************************/
         graduatingYearLabel = new JLabel("Graduating Year");
-        ////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-        // Andy change the text to the graduating year of the student
         graduatingYearLabel.setText("Graduating Year: " + Integer.toString(curStudent.getYear()));
-        ////////////////////////////////////////////////////////////////////////////////////////////////
         graduatingYearLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
         graduatingYearLabel.setBounds(25, 125, 160, 19);
         frame.getContentPane().add(graduatingYearLabel);
@@ -219,17 +206,11 @@ public class StudentProfile extends Adjustments {
                 int dialogButton = JOptionPane.YES_NO_OPTION;
                 int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete this Student?","Warning",dialogButton);
                 if(dialogResult == JOptionPane.YES_OPTION){
-                    ////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
                     //Delete student
-//                    System.out.println("delete Student");
-//					LabPage labPageReturn = new LabPage();
                     LabPage labPageReturn = new LabPage(curLab);
                     StudentDAO studentDAO = new StudentDAO();
                     studentDAO.remove(curLab,curStudent);
-//					System.out.println("LabPage");
-                    //LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
                     labPageReturn.ShowPage();
-                    ////////////////////////////////////////////////////////////////////////////////////////////////
                     frame.dispose();
                 }
             }
@@ -241,10 +222,6 @@ public class StudentProfile extends Adjustments {
         homeButton = new JButton("");
         homeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                ////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-                // Save the changes to the table of student's grades
-                // Save the changes to labsection
-                ////////////////////////////////////////////////////////////////////////////////////////////////
                 Dashboard dashboardPage = new Dashboard();
                 dashboardPage.ShowPage();
                 frame.dispose();
@@ -263,23 +240,16 @@ public class StudentProfile extends Adjustments {
         studentInfoTable = new JTable(model);
         scrollStudentTable.setViewportView(studentInfoTable);
 
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////
-
         /*********************************** Combobox of labsection **************************************/
         labOptions = new JComboBox();
         labOptions.setBounds(60, 155, 74, 23);
         frame.getContentPane().add(labOptions);
-
-        ////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
         for (int i = 0; i<allLabs.size(); i++) {
 //         Set the options of existing labs
             labOptions.addItem(allLabs.get(i).getSection());
         }
-        // Set the item as the current Student's lab
-//        System.out.println(curLab.getSection());
         labOptions.setSelectedItem(curLab.getSection());
-        ////////////////////////////////////////////////////////////////////////////////////////////////
+
         /*********************************** Save Button **************************************/
         saveButton = new JButton("Save");
         saveButton.setEnabled(false);
@@ -307,8 +277,6 @@ public class StudentProfile extends Adjustments {
         frame.getContentPane().add(saveButton);
 
         /************************************ Detects when value is changed in studentInfoTable ****************************************/
-        //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-        // Andy: This can detect where an edit is made, you might want to put this on the buttons or something, not totally sure
         studentInfoTable.getModel().addTableModelListener(new TableModelListener(){
             public void tableChanged(TableModelEvent e){
                 try{
