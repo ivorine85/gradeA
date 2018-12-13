@@ -69,8 +69,7 @@ public class StudentDAO {
         int cid =cd.getIdByName(cname);
         connection = Connector.getConnection();
         List<Student> objs = new ArrayList<>();
-        String sql = "select s.sid,s.sname,s.stype,s.photo,s.email,s.syear from Student s,attend_course ac ,Cousrse c" +
-                "where c.cid = ? AND c.cid = ac.cid AND ac.sid = s.sid";
+        String sql = "select s.sid,s.sname,s.stype,s.photo,s.email,s.syear from Student s,attend_course ac ,Course c where c.cid = ? AND c.cid = ac.cid AND ac.sid = s.sid";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1,cid);
