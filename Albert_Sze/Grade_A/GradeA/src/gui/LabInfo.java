@@ -215,7 +215,7 @@ public class LabInfo {
                 frame.dispose();
             }
         });
-        cancelButton.setBounds(686, 414, 89, 23);
+        cancelButton.setBounds(686, 410, 89, 23);
         frame.getContentPane().add(cancelButton);
 
 
