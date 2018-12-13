@@ -133,26 +133,25 @@ public class Login {
                 String password = String.valueOf(textFieldPassword.getPassword());
                 String username = textFieldUsername.getText();
                 UserDAO userDAO = new UserDAO();
-                String psw = userDAO.getPsw(username);
-                if(psw.equals("No such user!")){
-                    System.out.println("can't find this username!");
-                    JOptionPane.showMessageDialog(null, "User does not exist.");
-                }
-                else if(psw.equals(password)){
-                    System.out.println("Match!");
-                    Dashboard dashboardPage = new Dashboard();
-                    dashboardPage.ShowPage();
-                    frame.dispose();
+                if (!username.isEmpty()) {
+                    String psw = userDAO.getPsw(username);
+                    if (psw.equals("No such user!")) {
+//                        System.out.println("can't find this username!");
+                        JOptionPane.showMessageDialog(null, "User does not exist.");
+                    } else if (psw.equals(password)) {
+//                        System.out.println("Match!");
+                        Dashboard dashboardPage = new Dashboard();
+                        dashboardPage.ShowPage();
+                        frame.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Username or Password incorrect");
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Username or Password incorrect");
-                    System.out.println("Wrong!");
                 }
             }
         });
-
-
-
-
+        frame.getRootPane().setDefaultButton(btnLogin);
     }
 }
