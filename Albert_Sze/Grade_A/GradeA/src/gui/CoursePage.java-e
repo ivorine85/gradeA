@@ -302,7 +302,7 @@ public class CoursePage {
 					float underPer = Float.valueOf((String)tableGradeBreakDown.getModel().getValueAt(0,j));
 					float gradPer = Float.valueOf((String)tableGradeBreakDown.getModel().getValueAt(1,j));
 					String type = getTypeByIndex.get(j-1);
-					assignmentDAO.updateTypePercent(currentCourse.getCourseName(),type,underPer,gradPer);
+					assignmentDAO.updateTypePercent(currentCourse.getCourseName(),type,gradPer,underPer);
 				}
 				saveButton.setEnabled(false);
 				//////////////////////////////////////////////////////////////////////////////////////////////////
