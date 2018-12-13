@@ -106,6 +106,6 @@ public class Assignment implements Comparable<Assignment>{
 
 	@Override
 	public int compareTo(Assignment o) {
-		return cwname.compareTo(o.courseName);
+		return cwname.compareTo(o.cwname);
 	}
 }
