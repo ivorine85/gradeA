@@ -1,0 +1,10 @@
+Course Title,Start Time,End time,Start Date,End Date,,Sun,Mon,Tues,Wed,Thurs,Fri,Sat,,,,,,,
+CourseTest,2:30,3:45,9/4/2018,12/12/2018,,,x,,x,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,Hw_1,,Hw_2,,Quiz_1,,Quiz_2,,Project_1,,Midterm_1,,Final_1,
+,,,,,,TotPts,%,TotPts,%,TotPts,%,TotPts,%,TotPts,%,TotPts,%,TotPts,%
+,,,,,,100,50%,100,50%,100,50%,100,50%,30,100%,100,100%,100,100%
+Student_Name,Email,SID,Year,Type,Lab,PtsLost,%,PtsLost,%,PtsLost,%,PtsLost,%,PtsLost,%,PtsLost,%,PtsLost,%
+Ivorine Do,Test1@bu.edu,u1,2018,Undergrad,A1,16,84%,64,36%,40,60%,99,1%,21,30%,91,9%,16,84%
+Dian Jing,Test2@bu.edu,u2,2019,Grad,A2,47,53%,76,24%,36,64%,60,40%,11,63%,84,16%,78,22%
+Albert Sze,Test3@bu.edu,u3,2018,Grad,A3,90,10%,11,89%,82,18%,30,70%,30,0%,37,63%,89,11%
