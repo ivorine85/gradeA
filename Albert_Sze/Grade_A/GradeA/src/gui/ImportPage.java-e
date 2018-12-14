@@ -69,7 +69,6 @@ public class ImportPage extends ImportCSV {
 		frame.getContentPane().add(filePathTextField);
 		filePathTextField.setColumns(10);
 
-
 		/*********************************** Browse files ***********************************/
 		//JLabel lblEndDate = new JLabel("Choose a file");
 		//lblEndDate.setBounds(10, 135, 100, 14);
@@ -108,6 +107,7 @@ public class ImportPage extends ImportCSV {
 		importButton = new JButton("Import");
 		importButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				Path filePath = Paths.get(filePathTextField.getText());
 				if(Files.notExists(filePath)) {
 					JOptionPane.showMessageDialog(null,"File Path Does not exist.");
