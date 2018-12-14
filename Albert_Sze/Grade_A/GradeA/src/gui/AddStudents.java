@@ -54,18 +54,10 @@ public class AddStudents {
     public AddStudents(String prevPage,Course curCourse) {
         this.prevPage = prevPage;
         this.curCourse = curCourse;
-        //connection = SqlConnection.dbConnector();
         initialize();
     }
 
     private void initialize() {
-/*********************************** for the purpose of this example ***********************************/
-//        Course newCourse = new Course("CS591");												// Generate new course
-//
-//        newCourse.getLabSections().put("A1",new Lab("A1"));										// Create Lab Sections
-//        newCourse.getLabSections().put("A2",new Lab("A2"));										// Create Lab Sections
-//        newCourse.getLabSections().put("A3",new Lab("A3"));										// Create Lab Sections
-/*******************************************************************************************************/
         JComboBox<String> labs = new JComboBox<String>();
         JComboBox<String> studentType = new JComboBox<String>();
         JLabel addStudentsTitle;
@@ -110,9 +102,6 @@ public class AddStudents {
             labList.put(l.getSection(),l);
             labs.addItem(l.getSection());
         }
-//        for (Map.Entry<String, Lab> entry : newCourse.getLabSections().entrySet()) {
-//            labs.addItem(entry.getKey());
-//        }
 
         /*********************************** Create Combo box for type of student ********************/
         studentType.addItem("Select");
@@ -201,8 +190,6 @@ public class AddStudents {
                             GradeBreakDown gradeBreakDown = new GradeBreakDown(a.getCwname(),curCourse.getCourseName(),typePer,per,a.getType(),a.getWeight(),a.getTotalPts(),0);
                             gradeBreakDownDAO.insert(gradeBreakDown,s);
                         }
-                        // bug below//
-
                     }
                     // return to proper frame
                     if (prevPage.equals("CoursePage")) {
