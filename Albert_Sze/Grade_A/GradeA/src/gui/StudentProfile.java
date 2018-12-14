@@ -58,13 +58,10 @@ public class StudentProfile extends Adjustments {
     public StudentProfile(Lab curLab, Student student) {
         this.curLab = curLab;
         this.curStudent = student;
-        //connection = SqlConnection.dbConnector();
         initialize();
     }
 
     private void initialize() {
-/*********************************** for the purpose of this example ***********************************/
-/*******************************************************************************************************/
         Lab labSection;
         DefaultTableModel model;
         JLabel studentNameLabel;
@@ -86,9 +83,6 @@ public class StudentProfile extends Adjustments {
         Image profileImg = new ImageIcon(this.getClass().getResource("default_profile.png")).getImage();
         Image trashImg = new ImageIcon(this.getClass().getResource("trash_icon.png")).getImage();
         Image homeImg = new ImageIcon(this.getClass().getResource("home_icon.png")).getImage();
-
-
-
 
         /*********************************** Set Data up **************************************/
         //Load proper lab section
@@ -112,9 +106,10 @@ public class StudentProfile extends Adjustments {
             double avgPercent = (total-avgLost)/total*100;
             avg.put(key,avgPercent);
         }
+
         /*********************************** Set Data in table **************************************/
         String[] header = {"Assignment","Points Lost","Extra Points","Total Points Available","Percentage","Class Average"};
-        /*********************************** Convert ArrayList to Array **************************************/
+
         allAssignArray = new String[grades.size()][];
         for (int i = 0; i < grades.size(); i++) {
             courseworkRow.put(i,grades.get(i));
@@ -151,7 +146,6 @@ public class StudentProfile extends Adjustments {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
-
         /*********************************** Student Name Title **************************************/
         studentNameLabel = new JLabel(curStudent.getName());
         studentNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 36));
@@ -187,14 +181,12 @@ public class StudentProfile extends Adjustments {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 LabPage labPageReturn = new LabPage(curLab);
-                //LabPage labPageReturn = new LabPage(newCourse, currentLabSection);
                 labPageReturn.ShowPage();
                 frame.dispose();
             }
         });
         backButton.setBounds(686, 414, 89, 23);
         frame.getContentPane().add(backButton);
-
 
         /*********************************** Delete Student Button **************************************/
         deleteStudentButton = new JButton("");
@@ -204,7 +196,6 @@ public class StudentProfile extends Adjustments {
                 int dialogButton = JOptionPane.YES_NO_OPTION;
                 int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete this Student?","Warning",dialogButton);
                 if(dialogResult == JOptionPane.YES_OPTION){
-                    //Delete student
                     LabPage labPageReturn = new LabPage(curLab);
                     StudentDAO studentDAO = new StudentDAO();
                     studentDAO.remove(curLab,curStudent);
@@ -243,7 +234,7 @@ public class StudentProfile extends Adjustments {
         labOptions.setBounds(60, 155, 74, 23);
         frame.getContentPane().add(labOptions);
         for (int i = 0; i<allLabs.size(); i++) {
-//         Set the options of existing labs
+            //Set the options of existing labs
             labOptions.addItem(allLabs.get(i).getSection());
         }
         labOptions.setSelectedItem(curLab.getSection());
@@ -284,7 +275,6 @@ public class StudentProfile extends Adjustments {
                     saveButton.setEnabled(true);
                 } catch (NumberFormatException nfe) {
                     saveButton.setEnabled(false);
-//					JOptionPane.showMessageDialog(null,"not valid edit");
                 }
             }
         });

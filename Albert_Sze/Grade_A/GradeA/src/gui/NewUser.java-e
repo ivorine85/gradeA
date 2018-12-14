@@ -113,12 +113,9 @@ public class NewUser {
 
 		/*********************************** Question1 Combobox **************************************/
 		question1Options = new JComboBox();
-		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-		// Andy Change the questions options
 		question1Options.addItem("What is the name of the road you grew up on?");
 		question1Options.addItem("What was the first company that you worked for?");
 		question1Options.addItem("What city were you born in?");
-		//////////////////////////////////////////////////////////////////////////////////////////////////
 		question1Options.setBounds(10, 240, 396, 20);
 		frame.getContentPane().add(question1Options);
 
@@ -140,12 +137,9 @@ public class NewUser {
 
 		/*********************************** Question2 Combobox **************************************/
 		question2Options = new JComboBox();
-		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-		// Andy Change the questions options
 		question2Options.addItem("Where did you go to high school/college?");
 		question2Options.addItem("What was the name of your first/current/favorite pet?");
 		question2Options.addItem("What Is your favorite book?");
-		//////////////////////////////////////////////////////////////////////////////////////////////////
 		question2Options.setBounds(10, 355, 396, 20);
 		frame.getContentPane().add(question2Options);
 
@@ -167,12 +161,9 @@ public class NewUser {
 
 		/*********************************** Question3 combobox **************************************/
 		question3Options = new JComboBox();
-		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-		// Andy Change the questions options
 		question3Options.addItem("What was your high school mascot?");
 		question3Options.addItem("What is the name of your first grade teacher?");
 		question3Options.addItem("What was the make of your first car?");
-		//////////////////////////////////////////////////////////////////////////////////////////////////
 		question3Options.setBounds(10, 465, 396, 20);
 		frame.getContentPane().add(question3Options);
 
@@ -206,9 +197,6 @@ public class NewUser {
 					JOptionPane.showMessageDialog(null, "Not all components are filled in.");
 				}
 				else {
-					//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-					// Add New User information into database
-					//////////////////////////////////////////////////////////////////////////////////////////////////
 					String q1 = question1Options.getSelectedItem().toString();
 					String q2 = question2Options.getSelectedItem().toString();
 					String q3 = question3Options.getSelectedItem().toString();
