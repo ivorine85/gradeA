@@ -1,10 +1,16 @@
 package gui;
 
+import com.sun.tools.internal.ws.wsdl.document.Import;
+
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.swing.*;
 import javax.swing.SwingUtilities;
+import Import.*;
 
 /*
  * BrowseFiles.java uses these files:
@@ -14,9 +20,11 @@ import javax.swing.SwingUtilities;
 public class BrowseFiles extends JPanel
         implements ActionListener {
     static private final String newline = "\n";
+    private static JFrame frame = new JFrame("Browse Files");
     JButton openButton, saveButton;
     JTextArea log;
     JFileChooser fc;
+
 
     public BrowseFiles() {
         super(new BorderLayout());
@@ -30,16 +38,6 @@ public class BrowseFiles extends JPanel
 
         //Create a file chooser
         fc = new JFileChooser();
-
-        //Uncomment one of the following lines to try a different
-        //file selection mode.  The first allows just directories
-        //to be selected (and, at least in the Java look and feel,
-        //shown).  The second allows both files and directories
-        //to be selected.  If you leave these lines commented out,
-        //then the default mode (FILES_ONLY) will be used.
-        //
-        //fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        //fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 
         //Create the open button.  We use the image from the JLF
         //Graphics Repository (but we extracted it from the jar).
@@ -63,6 +61,17 @@ public class BrowseFiles extends JPanel
         add(logScrollPane, BorderLayout.CENTER);
     }
 
+    public String getPath(){
+        int returnVal = fc.showOpenDialog(BrowseFiles.this);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            return file.getAbsolutePath();
+        } else {
+            return null;
+        }
+    }
+
     public void actionPerformed(ActionEvent e) {
 
         //Handle open button action.
@@ -71,8 +80,7 @@ public class BrowseFiles extends JPanel
 
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
-                //This is where a real application would open the file.
-                log.append("Opening: " + file.getName() + "." + newline);
+                log.append("File Path: "+ file.getAbsolutePath());
             } else {
                 log.append("Open command cancelled by user." + newline);
             }
@@ -80,15 +88,30 @@ public class BrowseFiles extends JPanel
 
             //Handle save button action.
         } else if (e.getSource() == saveButton) {
-            int returnVal = fc.showSaveDialog(BrowseFiles.this);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                File file = fc.getSelectedFile();
-                //This is where a real application would save the file.
-                log.append("Saving: " + file.getName() + "." + newline);
-            } else {
-                log.append("Save command cancelled by user." + newline);
+            File file = fc.getSelectedFile();
+            String filePath = file.getAbsolutePath();
+            if(Files.notExists(Paths.get(filePath))) {
+                JOptionPane.showMessageDialog(null,"File Path Does not exist.");
             }
-            log.setCaretPosition(log.getDocument().getLength());
+            else if (filePath.length()<5 || !filePath.substring(filePath.length()-3).equals("csv")) {
+                JOptionPane.showMessageDialog(null,"File is not a csv");
+            }
+            else {
+                try {
+                    //Course newcourse = Import(filePath.toFile());
+                    //add to profile
+                    Path path = Paths.get(filePath);
+                    ImportCSV csv = new ImportCSV();
+                    csv.Import(filePath);
+                    JOptionPane.showMessageDialog(null,"CSV file imported.");
+                    frame.dispose();
+                    Dashboard dashboardPage = new Dashboard();
+                    dashboardPage.ShowPage();
+                }
+                catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null,"CSV did not upload.");
+                }
+            }
         }
     }
 
@@ -110,7 +133,6 @@ public class BrowseFiles extends JPanel
      */
     private static void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("Browse Files");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Add content to the window.
