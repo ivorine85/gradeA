@@ -41,7 +41,6 @@ public class CoursePage {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//CoursePage window = new CoursePage(currentCourse);
 					CoursePage window = new CoursePage(currentCourse);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -87,10 +86,6 @@ public class CoursePage {
 	}
 
 	private void initialize() {
-		////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-		//Load course information here
-		//Course courseProfile = profile.getCourses().get(0);
-		//////////////////////////////////////////////////////////////////////////////////////////////////
 		ArrayList<String> header = new ArrayList<String>(0);
 		ArrayList<String> arrayList1 = new ArrayList<String>(0);
 		ArrayList<String> arrayList2 = new ArrayList<String>(0);
@@ -112,26 +107,24 @@ public class CoursePage {
 		JLabel assignmentStatisticsTitle;
 		Map<String,Double> getAvg = new HashMap<>();
 		GradeBreakDownDAO gd = new GradeBreakDownDAO();
-		//The getAvg score of each assignment
-		//key : the name of assignment , value: the avgPoint;
+
+		/*********************************** Retrieve Data from database ***********************************/
+		// Calculate the Avg score of each assignment
 		Map<String,Double[]> avgScore = gd.getPerformance(currentCourse.getCourseName());
 		for(String key:avgScore.keySet()){
 			Double[] points = avgScore.get(key);
-			getAvg.put(key,points[0]/points[1]*100);
-
+			getAvg.put(key,(points[1]-points[0])/points[1]*100);
 		}
 
-
 		AssignmentDAO assignmentDAO = new AssignmentDAO();
-		//The percentage of each hw1
-		//key : the name of assignment
-		//value: Float[] arr ,  arr[0] is the percent in gradPer , arr[1] is the percent in undergrad
 		Map<String,Float[]> getPercentage = assignmentDAO.getPercentage(currentCourse.getCourseName());
 		Map<String,Float[]> typePercentage = assignmentDAO.getTypePercentage(currentCourse.getCourseName());
+
 		/*********************************** Generate Type Percentage tables ***********************************/
 		header.add("");
 		arrayList1.add("Undergraduate");
 		arrayList2.add("Graduate");
+
 		int index = 0;
 		Map<Integer,String> getTypeByIndex = new HashMap<>();
 		for (Map.Entry<String, Float[]> entry: typePercentage.entrySet()) {
@@ -140,14 +133,12 @@ public class CoursePage {
 			arrayList2.add(Double.toString(entry.getValue()[0]));
 			getTypeByIndex.put(index++,entry.getKey());
 		}
-
 		doubleArrayList.add(arrayList1);
 		doubleArrayList.add(arrayList2);
 
 		model = new DefaultTableModel (doubleALtoA(doubleArrayList),header.toArray()) {
 			public boolean isCellEditable(int row, int col)
 			{
-				//If you didn't want the first column to be editable
 				if(col == 0) {
 					return false;
 				}
@@ -163,19 +154,12 @@ public class CoursePage {
 		doubleArrayList = new ArrayList<ArrayList<String>>(0);
 		header.add("");
 		arrayList2.add("Averages");
-
-		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
 		List<String> names = new ArrayList<>(getAvg.keySet());
 		Collections.sort(names);
 		for(String n:names){
 			header.add(n);
 			arrayList2.add(Double.toString(Math.round(getAvg.get(n)*100)/100.0));
 		}
-//		for (Map.Entry<String, Double> entry: getAvg.entrySet()) {
-//			header.add(entry.getKey());
-//			arrayList2.add(Double.toString(Math.round(entry.getValue()*100)/100.0));
-//		}
-		//////////////////////////////////////////////////////////////////////////////////////////////////
 		doubleArrayList.add(arrayList2);
 
 		assignStats = new DefaultTableModel (doubleALtoA(doubleArrayList),header.toArray()) {
@@ -192,11 +176,7 @@ public class CoursePage {
 		this.frame.getContentPane().setLayout(null);
 
 		/*********************************** Add Course Title ***********************************/
-		//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-		// Change courseProfile.getCourseName() to the current course name
 		courseTitle = new JLabel(currentCourse.getCourseName() + " Information");
-		//////////////////////////////////////////////////////////////////////////////////////////////////
-		//lblCourseTitle.setText(courseProfile.getCourseName() + " Grades");
 		courseTitle.setFont(new Font("Tahoma", Font.PLAIN, 34));
 		courseTitle.setBounds(10, 11, 349, 47);
 		this.frame.getContentPane().add(courseTitle);
@@ -228,11 +208,8 @@ public class CoursePage {
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int dialogButton = JOptionPane.YES_NO_OPTION;
-				//////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-				// change courseProfile.getCourseName() to current cousrse name
 				int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete this " + currentCourse.getCourseName() + "?","Warning",dialogButton);
 				if(dialogResult == JOptionPane.YES_OPTION){
-					// Need to add deleting of course here
 					JOptionPane.showMessageDialog(null,"Course Delete");
 					CourseDAO cd = new CourseDAO();
 					cd.deleteCourse(currentCourse.getCourseName());
@@ -240,7 +217,6 @@ public class CoursePage {
 					dashboardPage.ShowPage();
 					frame.dispose();
 				}
-				//////////////////////////////////////////////////////////////////////////////////////////////////
 			}
 		});
 		Image trashImg = new ImageIcon(this.getClass().getResource("trash_icon.png")).getImage();
@@ -309,7 +285,6 @@ public class CoursePage {
 					assignmentDAO.updateTypePercent(currentCourse.getCourseName(),type,gradPer,underPer);
 				}
 				saveButton.setEnabled(false);
-				//////////////////////////////////////////////////////////////////////////////////////////////////
 			}
 		});
 		saveButton.setBounds(238, 414, 89, 23);
@@ -349,7 +324,6 @@ public class CoursePage {
 				} catch (NumberFormatException nfe) {
 					saveButton.setEnabled(false);
 					nfe.printStackTrace();
-					//JOptionPane.showMessageDialog(null,"not valid edit");
 				}
 			}
 		});
