@@ -159,15 +159,13 @@ public class StudentProfile extends Adjustments {
         frame.getContentPane().add(studentNameLabel);
 
         /*********************************** Grade Label **************************************/
-        gradeLabel = new JLabel("grade");
-        gradeLabel.setText("Final Grade: " + Double.toString(Math.round(finalGrade*100)/100.0) + "%");
+        gradeLabel = new JLabel("<html>Student Type: " + curStudent.getStudentType() + "<br/>Final Grade: " + Double.toString(Math.round(finalGrade*100)/100.0) + "%" + "<html>");
         gradeLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
-        gradeLabel.setBounds(188, 68, 250, 35);
+        gradeLabel.setBounds(188, 68, 300, 50);
         frame.getContentPane().add(gradeLabel);
 
         /*********************************** Graduating Year Label **************************************/
-        graduatingYearLabel = new JLabel("Graduating Year");
-        graduatingYearLabel.setText("Graduating Year: " + Integer.toString(curStudent.getYear()));
+        graduatingYearLabel = new JLabel("Graduating Year: " + Integer.toString(curStudent.getYear()));
         graduatingYearLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
         graduatingYearLabel.setBounds(25, 125, 160, 19);
         frame.getContentPane().add(graduatingYearLabel);
