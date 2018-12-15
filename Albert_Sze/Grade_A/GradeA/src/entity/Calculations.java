@@ -1,6 +1,6 @@
 package entity;
 
-abstract class Calculations {
+public abstract class Calculations {
 	protected static double Calcaverage(double average, double assignment, int numitems) {
 		return (((average*numitems)+assignment)/(double)(numitems+1));
 	}
