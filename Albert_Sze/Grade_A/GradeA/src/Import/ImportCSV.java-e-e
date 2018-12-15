@@ -11,7 +11,7 @@ import java.util.Map;
 import dao.*;
 import entity.*;
 
-public class ImportCSV extends Adjustments {
+public class ImportCSV {
 
     //public static void main(String[] args) throws Exception   {
     public void Import(String path) throws Exception {
