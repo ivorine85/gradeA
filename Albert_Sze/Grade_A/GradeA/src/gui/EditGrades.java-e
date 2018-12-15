@@ -28,6 +28,7 @@ public class EditGrades extends Adjustments {
     private JFrame frame;
     private JTable tableGrades;
     private static Lab currentLab;
+
     //    public static void main(String[] args) {
     public static void ShowPage(){
         EventQueue.invokeLater(new Runnable() {
@@ -42,19 +43,14 @@ public class EditGrades extends Adjustments {
         });
     }
 
-
     // Create connection to sql database
     // Connection connection = null;
-    //public EditGrades(Course newCourse, String currentLabSection) {
     public EditGrades(Lab lab) {
         currentLab = lab;
         LabDAO lb = new LabDAO();
-//        currentLab = lb.findLabOfCourse("cs591").get(0);
         initialize();
-        //initialize(newCourse, currentLabSection);
     }
 
-    //private void initialize(Course newCourse, String currentLabSection) {
     private void initialize() {
         StudentDAO studentDAO = new StudentDAO();
         List<Student> allStudents = studentDAO.findStudentByLab(currentLab.getSection());
@@ -83,20 +79,13 @@ public class EditGrades extends Adjustments {
 
         /******************************* Generate table of student grades **************************************/
         header.add("Student Name");
-        //////////////////////////////////ANDY CHANGE HERE////////////////////////////////////////////////
-        // get all undergrad and grad students in allStudents;
-
         for (int i = 0; i < allStudents.size();i++) {				// for loop of all students in particular lab	            // need this variable to construct a double arraylist to display
-            //change allStudents.get(i).genName() to students name on at a time
             studentData = new ArrayList<>();
             Student cur = allStudents.get(i);
             studentData.add(cur.getName());
             GradeBreakDownDAO gd = new GradeBreakDownDAO();
             List<GradeBreakDown> gradeOfCurrentStudent = gd.getGradeByStudent(cur.getSid(),currentLab.getCourseName());
             Collections.sort(gradeOfCurrentStudent);
-            //TODO:In this loop , cur is the object of current student;
-            //TODO:The gradeOfCurrentStudent is a list of grades of current student;
-            //TODO:The totalPoint is the final grade of current student
             double totalPoint = 0;
             count  = 0;
             for(GradeBreakDown gbd:gradeOfCurrentStudent){
@@ -147,9 +136,7 @@ public class EditGrades extends Adjustments {
             ArrayList<String> row = allStudentData.get(i);
             arrayAllStudentData[i] = row.toArray(new String[row.size()]);
         }
-        //////////////////////////////////////////////////////////////////////////////////////////////////
 
-        //String [][] data={{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"},{"","","","","","Select","Select"}};
         model = new DefaultTableModel (arrayAllStudentData,header.toArray()) {
             public boolean isCellEditable(int row, int col)
             {
