@@ -23,7 +23,7 @@ import entity.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-public class EditGrades extends Calculations {
+public class EditGrades extends Adjustments {
 
     private JFrame frame;
     private JTable tableGrades;

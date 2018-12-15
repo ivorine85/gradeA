@@ -31,7 +31,7 @@ import dao.LabDAO;
 import dao.StudentDAO;
 import entity.*;
 
-public class StudentProfile {
+public class StudentProfile extends Adjustments {
 
     private JFrame frame;
     private JTable studentInfoTable;
