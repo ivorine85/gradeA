@@ -21,7 +21,7 @@ public class BrowseFiles extends JPanel
         implements ActionListener {
     static private final String newline = "\n";
     private static JFrame frame = new JFrame("Browse Files");
-    JButton openButton, saveButton;
+    JButton openButton, importButton;
     JTextArea log;
     JFileChooser fc;
 
@@ -47,14 +47,25 @@ public class BrowseFiles extends JPanel
 
         //Create the save button.  We use the image from the JLF
         //Graphics Repository (but we extracted it from the jar).
-        saveButton = new JButton("Save a File");
+        importButton = new JButton("Import File");
                 //createImageIcon("images/Save16.gif"));
-        saveButton.addActionListener(this);
+        importButton.addActionListener(this);
+
+        //Back Button
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ImportPage importPagePage = new ImportPage();
+                importPagePage.ShowPage();
+                frame.dispose();
+            }
+        });
 
         //For layout purposes, put the buttons in a separate panel
         JPanel buttonPanel = new JPanel(); //use FlowLayout
         buttonPanel.add(openButton);
-        buttonPanel.add(saveButton);
+        buttonPanel.add(importButton);
+        buttonPanel.add(backButton);
 
         //Add the buttons and the log to this panel.
         add(buttonPanel, BorderLayout.PAGE_START);
@@ -87,7 +98,7 @@ public class BrowseFiles extends JPanel
             log.setCaretPosition(log.getDocument().getLength());
 
             //Handle save button action.
-        } else if (e.getSource() == saveButton) {
+        } else if (e.getSource() == importButton) {
             File file = fc.getSelectedFile();
             String filePath = file.getAbsolutePath();
             if(Files.notExists(Paths.get(filePath))) {
