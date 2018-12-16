@@ -152,7 +152,7 @@ public class CourseInfo {
 //
 
         JLabel lblStartDate = new JLabel("Start Date 'DD-MM-YYYY'");
-        lblStartDate.setBounds(40, 270, 150, 14);
+        lblStartDate.setBounds(40, 270, 200, 14);
         frame.getContentPane().add(lblStartDate);
 
         JTextField textStartDate = new JTextField(20);

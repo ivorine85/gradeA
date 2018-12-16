@@ -48,7 +48,7 @@ public class ImportPage extends ImportCSV {
 		JButton importButton;
 
 		/*********************************** Generate frame for Import File Page *******************************/
-		frame.setBounds(100, 100, 450, 235);
+		frame.setBounds(100, 100, 1000, 489);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 

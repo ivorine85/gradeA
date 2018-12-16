@@ -171,7 +171,7 @@ public class CoursePage {
 
 		/*********************************** Generate Frame  ***********************************/
 		this.frame = new JFrame();
-		this.frame.setBounds(100, 100, 801, 487);
+		this.frame.setBounds(100, 100, 1000, 489);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.getContentPane().setLayout(null);
 

@@ -142,7 +142,7 @@ public class StudentProfile {
         /*********************************** Set Frame up **************************************/
         frame = new JFrame();
         frame.getContentPane().setForeground(new Color(0, 0, 0));
-        frame.setBounds(100, 100, 801, 487);
+        frame.setBounds(100, 100, 1000, 489);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 

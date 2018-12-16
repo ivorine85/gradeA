@@ -75,7 +75,7 @@ public class LabPage {
         }
 
         /*********************************** Generate frame for Lab page ***************************************/
-        frame.setBounds(100, 100, 801, 487);
+        frame.setBounds(100, 100, 1000, 489);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
