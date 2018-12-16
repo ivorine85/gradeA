@@ -8,6 +8,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class Login {
 
@@ -42,6 +43,8 @@ public class Login {
         JLabel passwordLabel;
         JButton loginButton;
         JButton createUserButton;
+        JButton logoButton;
+        Image logoImg;
 
         frame.setBounds(100, 100, 1000, 489);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,6 +55,23 @@ public class Login {
         loginLabel.setFont(new Font("Tahoma", Font.PLAIN, 36));
         loginLabel.setBounds(30, 20, 212, 44);
         frame.getContentPane().add(loginLabel);
+
+        /*********************************** Add logo/home button ***********************************/
+        logoButton = new JButton("");
+        logoButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+//                Dashboard dashboardPage = new Dashboard();
+//                dashboardPage.ShowPage();
+//                frame.dispose();
+            }
+        });
+        logoImg = new ImageIcon(this.getClass().getResource("gradeA_logo.png")).getImage();
+        logoButton.setIcon(new ImageIcon(logoImg));
+        logoButton.setBounds(875, 30, 70, 70);
+        logoButton.setOpaque(true);
+        logoButton.setBackground(Color.black);
+        logoButton.setForeground(Color.black);
+        this.frame.getContentPane().add(logoButton);
 
         usernameLabel = new JLabel("Username");
         usernameLabel.setBounds(150, 150, 100, 14);
