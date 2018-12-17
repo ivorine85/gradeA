@@ -126,8 +126,9 @@ public class NewUser {
 		reenterTextField.setColumns(10);
 
 		/*********************************** Question1 label **************************************/
-		question1Label = new JLabel("Question 1:");
-		question1Label.setBounds(10, 215, 86, 14);
+		question1Label = new JLabel("Question 1");
+		question1Label.setBounds(250, 265, 86, 14);
+        question1Label.setFont(new Font("Futura", Font.PLAIN, 16));
 		frame.getContentPane().add(question1Label);
 
 		/*********************************** Question1 Combobox **************************************/
@@ -135,23 +136,25 @@ public class NewUser {
 		question1Options.addItem("What is the name of the road you grew up on?");
 		question1Options.addItem("What was the first company that you worked for?");
 		question1Options.addItem("What city were you born in?");
-		question1Options.setBounds(10, 240, 396, 20);
+		question1Options.setBounds(400, 265, 396, 20);
 		frame.getContentPane().add(question1Options);
 
 		/*********************************** Answer1 label **************************************/
-		answer1Label = new JLabel("Answer:");
-		answer1Label.setBounds(10, 271, 71, 14);
+		answer1Label = new JLabel("Answer");
+		answer1Label.setBounds(250, 300, 71, 14);
+        answer1Label.setFont(new Font("Futura", Font.PLAIN, 16));
 		frame.getContentPane().add(answer1Label);
 
 		/*********************************** Answer1 textfield **************************************/
 		answer1 = new JTextField();
-		answer1.setBounds(10, 296, 396, 20);
+		answer1.setBounds(400, 300, 200, 20);
 		frame.getContentPane().add(answer1);
 		answer1.setColumns(10);
 
 		/*********************************** Question2 label **************************************/
-		question2Label = new JLabel("Question 2:");
-		question2Label.setBounds(10, 330, 101, 14);
+		question2Label = new JLabel("Question 2");
+		question2Label.setBounds(250, 335, 101, 14);
+        question2Label.setFont(new Font("Futura", Font.PLAIN, 16));
 		frame.getContentPane().add(question2Label);
 
 		/*********************************** Question2 Combobox **************************************/
@@ -159,23 +162,25 @@ public class NewUser {
 		question2Options.addItem("Where did you go to high school/college?");
 		question2Options.addItem("What was the name of your first/current/favorite pet?");
 		question2Options.addItem("What Is your favorite book?");
-		question2Options.setBounds(10, 355, 396, 20);
+		question2Options.setBounds(400, 335, 396, 20);
 		frame.getContentPane().add(question2Options);
 
 		/*********************************** Answer2 label **************************************/
 		answer2Label = new JLabel("Answer:");
-		answer2Label.setBounds(10, 386, 80, 14);
+		answer2Label.setBounds(250, 370, 80, 14);
+        answer2Label.setFont(new Font("Futura", Font.PLAIN, 16));
 		frame.getContentPane().add(answer2Label);
 
 		/*********************************** Answer2 textfield **************************************/
 		answer2 = new JTextField();
-		answer2.setBounds(10, 405, 396, 20);
+		answer2.setBounds(400, 370, 396, 20);
 		frame.getContentPane().add(answer2);
 		answer2.setColumns(10);
 
 		/*********************************** Question3 label **************************************/
 		question3Label = new JLabel("Question 3:");
-		question3Label.setBounds(10, 440, 101, 14);
+		question3Label.setBounds(250, 405, 101, 14);
+        question3Label.setFont(new Font("Futura", Font.PLAIN, 16));
 		frame.getContentPane().add(question3Label);
 
 		/*********************************** Question3 combobox **************************************/
@@ -183,17 +188,18 @@ public class NewUser {
 		question3Options.addItem("What was your high school mascot?");
 		question3Options.addItem("What is the name of your first grade teacher?");
 		question3Options.addItem("What was the make of your first car?");
-		question3Options.setBounds(10, 465, 396, 20);
+		question3Options.setBounds(400, 405, 396, 20);
 		frame.getContentPane().add(question3Options);
 
 		/*********************************** Answer3 label **************************************/
 		answer3Label = new JLabel("Answer:");
-		answer3Label.setBounds(10, 496, 101, 14);
+		answer3Label.setBounds(250, 440, 101, 14);
+        answer3Label.setFont(new Font("Futura", Font.PLAIN, 16));
 		frame.getContentPane().add(answer3Label);
 
 		/*********************************** Answer3 textfield **************************************/
 		answer3 = new JTextField();
-		answer3.setBounds(10, 521, 396, 20);
+		answer3.setBounds(400, 440, 396, 20);
 		frame.getContentPane().add(answer3);
 		answer3.setColumns(10);
 
@@ -205,7 +211,8 @@ public class NewUser {
 				frame.dispose();
 			}
 		});
-		cancelButton.setBounds(317, 567, 89, 23);
+        cancelButton.setBounds(820, 610, 120, 23);
+        cancelButton.setFont(new Font("Futura", Font.PLAIN, 16));
 		frame.getContentPane().add(cancelButton);
 
 		/*********************************** Finish Button **************************************/
@@ -232,8 +239,8 @@ public class NewUser {
 				}
 			}
 		});
-
-		finishButton.setBounds(218, 567, 89, 23);
+        finishButton.setBounds(720, 610, 89, 23);
+        finishButton.setFont(new Font("Futura", Font.PLAIN, 16));
 		frame.getContentPane().add(finishButton);
 	}
 	private static class __Tmp {
