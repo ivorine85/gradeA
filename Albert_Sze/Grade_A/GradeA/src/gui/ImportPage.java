@@ -1,10 +1,9 @@
 package gui;
 
-import java.awt.EventQueue;
+import java.awt.*;
 
 import javax.swing.*;
-
-import java.awt.Font;
+import javax.swing.border.LineBorder;
 
 import Import.*;
 import entity.*;
@@ -47,25 +46,48 @@ public class ImportPage extends ImportCSV {
 		JButton cancelButton;
 		JButton importButton;
 
+        JButton logoButton;
+        Image logoImg;
+
+        /*********************************** Add logo/home button ***********************************/
+        logoButton = new JButton("");
+        logoButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                Dashboard dashboardPage = new Dashboard();
+                dashboardPage.ShowPage();
+                frame.dispose();
+            }
+        });
+        logoImg = new ImageIcon(this.getClass().getResource("gradeA_logo.png")).getImage();
+        logoButton.setIcon(new ImageIcon(logoImg));
+        logoButton.setBounds(875, 30, 70, 70);
+        logoButton.setOpaque(true);
+        logoButton.setBackground(Color.white);
+        logoButton.setForeground(Color.white);
+        logoButton.setBorder(new LineBorder(Color.black));
+        this.frame.getContentPane().add(logoButton);
+
 		/*********************************** Generate frame for Import File Page *******************************/
-		frame.setBounds(100, 100, 1000, 489);
+		frame.setBounds(100, 100, 1000, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.getContentPane().setBackground(Color.white);
 
 		/*********************************** Import File Title **************************************/
-		importFileTitle = new JLabel("Import File");
-		importFileTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		importFileTitle.setBounds(10, 11, 120, 31);
+		importFileTitle = new JLabel("IMPORT FILE");
+		importFileTitle.setFont(new Font("Futura", Font.PLAIN, 36));
+		importFileTitle.setBounds(70, 50, 400, 50);
 		frame.getContentPane().add(importFileTitle);
 
 		/*********************************** File path label ***********************************/
-		filePathTitle = new JLabel("File Path:");
-		filePathTitle.setBounds(10, 64, 65, 14);
+		filePathTitle = new JLabel("File Path");
+		filePathTitle.setBounds(250, 200, 100, 14);
+        filePathTitle.setFont(new Font("Futura", Font.PLAIN, 16));
 		frame.getContentPane().add(filePathTitle);
 
 		/*********************************** File path text field ***********************************/
 		filePathTextField = new JTextField();
-		filePathTextField.setBounds(10, 89, 403, 20);
+		filePathTextField.setBounds(300, 260, 403, 20);
 		frame.getContentPane().add(filePathTextField);
 		filePathTextField.setColumns(10);
 
@@ -88,7 +110,8 @@ public class ImportPage extends ImportCSV {
 				frame.dispose();
 			}
 		});
-		btnBrowse.setBounds(320, 60, 89, 23);
+		btnBrowse.setBounds(720, 190, 89, 23);
+        btnBrowse.setFont(new Font("Futura", Font.PLAIN, 16));
 		frame.getContentPane().add(btnBrowse);
 
 		/*********************************** Create Cancel button ************************************/
@@ -100,7 +123,8 @@ public class ImportPage extends ImportCSV {
 				frame.dispose();
 			}
 		});
-		cancelButton.setBounds(335, 163, 89, 23);
+		cancelButton.setBounds(700, 400, 89, 23);
+        cancelButton.setFont(new Font("Futura", Font.PLAIN, 16));
 		frame.getContentPane().add(cancelButton);
 
 		/*********************************** Create Import button ************************************/
@@ -131,7 +155,8 @@ public class ImportPage extends ImportCSV {
 				}
 			}
 		});
-		importButton.setBounds(236, 163, 89, 23);
+		importButton.setBounds(600, 400, 89, 23);
+        importButton.setFont(new Font("Futura", Font.PLAIN, 16));
 		frame.getContentPane().add(importButton);
 		frame.getRootPane().setDefaultButton(importButton);
 	}
