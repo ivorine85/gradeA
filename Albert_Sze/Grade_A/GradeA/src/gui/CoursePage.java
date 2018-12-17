@@ -1,15 +1,13 @@
 package gui;
 
-import java.awt.EventQueue;
+import java.awt.*;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import java.awt.Font;
-import java.awt.Image;
-
 import javax.swing.JTable;
+import javax.swing.border.LineBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +24,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.*;
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 
 public class CoursePage {
@@ -171,37 +170,58 @@ public class CoursePage {
 
 		/*********************************** Generate Frame  ***********************************/
 		this.frame = new JFrame();
-		this.frame.setBounds(100, 100, 1000, 489);
+		this.frame.setBounds(100, 100, 1000, 800);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.getContentPane().setLayout(null);
+		this.frame.getContentPane().setBackground(Color.white);
+		JButton logoButton;
+		Image logoImg;
 
-		/*********************************** Add Course Title ***********************************/
-		courseTitle = new JLabel(currentCourse.getCourseName() + " Information");
-		courseTitle.setFont(new Font("Tahoma", Font.PLAIN, 34));
-		courseTitle.setBounds(10, 11, 349, 47);
-		this.frame.getContentPane().add(courseTitle);
-
-		/*********************************** Add Scroll Panel ***********************************/
-		scrollGradeBreakDown = new JScrollPane();
-		scrollGradeBreakDown.setBounds(125, 270, 543, 55);
-		this.frame.getContentPane().add(scrollGradeBreakDown);
-
-		tableGradeBreakDown = new JTable(model);
-		scrollGradeBreakDown.setViewportView(tableGradeBreakDown);
-
-		/*********************************** Add home button ***********************************/
-		homeButton = new JButton("");
-		homeButton.addActionListener(new ActionListener() {
+		/*********************************** Add logo/home button ***********************************/
+		logoButton = new JButton("");
+		logoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Dashboard dashboardPage = new Dashboard();
 				dashboardPage.ShowPage();
 				frame.dispose();
 			}
 		});
-		homeImg = new ImageIcon(this.getClass().getResource("home_icon.png")).getImage();
-		homeButton.setIcon(new ImageIcon(homeImg));
-		homeButton.setBounds(10, 383, 55, 54);
-		this.frame.getContentPane().add(homeButton);
+		logoImg = new ImageIcon(this.getClass().getResource("gradeA_logo.png")).getImage();
+		logoButton.setIcon(new ImageIcon(logoImg));
+		logoButton.setBounds(875, 30, 70, 70);
+		logoButton.setOpaque(true);
+		logoButton.setBackground(Color.white);
+		logoButton.setForeground(Color.white);
+		logoButton.setBorder(new LineBorder(Color.black));
+		this.frame.getContentPane().add(logoButton);
+
+		/*********************************** Add Course Title ***********************************/
+		courseTitle = new JLabel(currentCourse.getCourseName().toUpperCase() + " INFORMATION");
+		courseTitle.setFont(new Font("Futura", Font.PLAIN, 36));
+		courseTitle.setBounds(70, 50, 500, 50);
+		this.frame.getContentPane().add(courseTitle);
+
+		/*********************************** Add Scroll Panel ***********************************/
+		scrollGradeBreakDown = new JScrollPane();
+		scrollGradeBreakDown.setBounds(180, 285, 543, 55);
+		this.frame.getContentPane().add(scrollGradeBreakDown);
+
+		tableGradeBreakDown = new JTable(model);
+		scrollGradeBreakDown.setViewportView(tableGradeBreakDown);
+
+//		/*********************************** Add home button ***********************************/
+//		homeButton = new JButton("");
+//		homeButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				Dashboard dashboardPage = new Dashboard();
+//				dashboardPage.ShowPage();
+//				frame.dispose();
+//			}
+//		});
+//		homeImg = new ImageIcon(this.getClass().getResource("home_icon.png")).getImage();
+//		homeButton.setIcon(new ImageIcon(homeImg));
+//		homeButton.setBounds(10, 383, 55, 54);
+//		this.frame.getContentPane().add(homeButton);
 
 		/*********************************** Add delete button ***********************************/
 		deleteButton = new JButton("");
@@ -221,7 +241,7 @@ public class CoursePage {
 		});
 		Image trashImg = new ImageIcon(this.getClass().getResource("trash_icon.png")).getImage();
 		deleteButton.setIcon(new ImageIcon(trashImg));
-		deleteButton.setBounds(71, 383, 55, 54);
+        deleteButton.setBounds(70, 575, 55, 54);
 		this.frame.getContentPane().add(deleteButton);
 
 		/*********************************** Add edit button ***********************************/
@@ -233,7 +253,8 @@ public class CoursePage {
 				frame.dispose();
 			}
 		});
-		editCourseButton.setBounds(672, 414, 103, 23);
+		editCourseButton.setBounds(820, 610, 120, 23);
+        editCourseButton.setFont(new Font("Futura", Font.PLAIN, 16));
 		this.frame.getContentPane().add(editCourseButton);
 
 		/*********************************** Add edit button ***********************************/
@@ -245,7 +266,8 @@ public class CoursePage {
 				frame.dispose();
 			}
 		});
-		addStudentButton.setBounds(424, 414, 103, 23);
+		addStudentButton.setBounds(560, 610, 120, 23);
+        addStudentButton.setFont(new Font("Futura", Font.PLAIN, 16));
 		this.frame.getContentPane().add(addStudentButton);
 
 		/*********************************** Add Coursework button ***********************************/
@@ -257,7 +279,8 @@ public class CoursePage {
 				frame.dispose();
 			}
 		});
-		addCourseworkButton.setBounds(531, 414, 137, 23);
+		addCourseworkButton.setBounds(675, 610, 150, 23);
+        addCourseworkButton.setFont(new Font("Futura", Font.PLAIN, 16));
 		this.frame.getContentPane().add(addCourseworkButton);
 
 		/*********************************** Add Lab button ***********************************/
@@ -269,7 +292,8 @@ public class CoursePage {
 				frame.dispose();
 			}
 		});
-		addLabButton.setBounds(332, 414, 89, 23);
+		addLabButton.setBounds(445, 610, 120, 23);
+        addLabButton.setFont(new Font("Futura", Font.PLAIN, 16));
 		this.frame.getContentPane().add(addLabButton);
 
 		/***********************************  Update button ***********************************/
@@ -287,24 +311,25 @@ public class CoursePage {
 				saveButton.setEnabled(false);
 			}
 		});
-		saveButton.setBounds(238, 414, 89, 23);
+		saveButton.setBounds(360, 610, 89, 23);
+        saveButton.setFont(new Font("Futura", Font.PLAIN, 16));
 		frame.getContentPane().add(saveButton);
 
 		/*********************************** Grade Breakdown Label ***********************************/
 		gradeBreakdownTitle = new JLabel("Grade Breakdown %");
-		gradeBreakdownTitle.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		gradeBreakdownTitle.setBounds(270, 230, 252, 29);
+		gradeBreakdownTitle.setFont(new Font("Futura", Font.PLAIN, 24));
+		gradeBreakdownTitle.setBounds(335, 250, 252, 29);
 		this.frame.getContentPane().add(gradeBreakdownTitle);
 
 		/*********************************** Assignments Statistics Label ***********************************/
 		assignmentStatisticsTitle = new JLabel("Coursework Statistics");
-		assignmentStatisticsTitle.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		assignmentStatisticsTitle.setBounds(270, 109, 252, 29);
+		assignmentStatisticsTitle.setFont(new Font("Futura", Font.PLAIN, 24));
+		assignmentStatisticsTitle.setBounds(335, 145, 252, 29);
 		this.frame.getContentPane().add(assignmentStatisticsTitle);
 
 		/*********************************** Add scroll panel for assignment stats table ***********************************/
 		scrollAssignStat = new JScrollPane();
-		scrollAssignStat.setBounds(125, 139, 549, 39);
+		scrollAssignStat.setBounds(180, 180, 549, 39);
 		this.frame.getContentPane().add(scrollAssignStat);
 
 		tableStats = new JTable(assignStats);

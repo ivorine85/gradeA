@@ -1,16 +1,15 @@
 package gui;
-import java.awt.EventQueue;
+import java.awt.*;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.LineBorder;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
-import java.awt.Font;
-import java.awt.Color;
 import java.awt.Desktop.Action;
 import java.sql.Time;
 import java.util.*;
@@ -22,6 +21,7 @@ import dao.StudentDAO;
 import entity.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.List;
 
 public class EditGrades extends Calculations{
 
@@ -73,9 +73,30 @@ public class EditGrades extends Calculations{
         /*********************************** Generate frame for Edit Grades Page *******************************/
         frame = new JFrame();
         frame.getContentPane().setForeground(new Color(0, 0, 0));
-        frame.setBounds(100, 100, 1000, 489);
+        frame.setBounds(100, 100, 1000, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
+        this.frame.getContentPane().setBackground(Color.white);
+        JButton logoButton;
+        Image logoImg;
+
+        /*********************************** Add logo/home button ***********************************/
+        logoButton = new JButton("");
+        logoButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                Dashboard dashboardPage = new Dashboard();
+                dashboardPage.ShowPage();
+                frame.dispose();
+            }
+        });
+        logoImg = new ImageIcon(this.getClass().getResource("gradeA_logo.png")).getImage();
+        logoButton.setIcon(new ImageIcon(logoImg));
+        logoButton.setBounds(875, 30, 70, 70);
+        logoButton.setOpaque(true);
+        logoButton.setBackground(Color.white);
+        logoButton.setForeground(Color.white);
+        logoButton.setBorder(new LineBorder(Color.black));
+        this.frame.getContentPane().add(logoButton);
 
         /******************************* Generate table of student grades **************************************/
         header.add("Student Name");
@@ -151,9 +172,9 @@ public class EditGrades extends Calculations{
         };
 
         /********************************************** Edit Grades Title **********************************************************/
-        editGradesTitle = new JLabel("Edit Grades");
-        editGradesTitle.setFont(new Font("Tahoma", Font.PLAIN, 36));
-        editGradesTitle.setBounds(10, 11, 212, 44);
+        editGradesTitle = new JLabel("EDIT GRADES");
+        editGradesTitle.setFont(new Font("Futura", Font.PLAIN, 36));
+        editGradesTitle.setBounds(70, 50, 500, 50);
         frame.getContentPane().add(editGradesTitle);
 
         /****************************************** Add Back Button **************************************************************/
@@ -165,7 +186,9 @@ public class EditGrades extends Calculations{
                 frame.dispose();
             }
         });
-        backButton.setBounds(686, 414, 89, 23);
+
+        backButton.setBounds(820, 610, 89, 23);
+        backButton.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(backButton);
 
         /****************************************** Add Save Button **************************************************************/
@@ -187,12 +210,13 @@ public class EditGrades extends Calculations{
                 frame.dispose();
             }
         });
-        saveButton.setBounds(587, 414, 89, 23);
+        saveButton.setBounds(720, 610, 89, 23);
+        saveButton.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(saveButton);
 
         /************************************ Add Scroll Panel for Grades **********************************************************/
         scrollGrades = new JScrollPane();
-        scrollGrades.setBounds(25, 78, 738, 325);
+        scrollGrades.setBounds(120, 170, 738, 325);
         frame.getContentPane().add(scrollGrades);
 
         /************************************ Add table of Grades **********************************************************/

@@ -24,6 +24,7 @@ import entity.*;
 
 import javax.swing.JScrollPane;
 import javax.swing.Icon;
+import javax.swing.border.LineBorder;
 
 public class LabPage {
 
@@ -75,22 +76,43 @@ public class LabPage {
         }
 
         /*********************************** Generate frame for Lab page ***************************************/
-        frame.setBounds(100, 100, 1000, 489);
+        frame.setBounds(100, 100, 1000, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
+        JButton logoButton;
+        Image logoImg;
+
+        /*********************************** Add logo/home button ***********************************/
+        logoButton = new JButton("");
+        logoButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                Dashboard dashboardPage = new Dashboard();
+                dashboardPage.ShowPage();
+                frame.dispose();
+            }
+        });
+        logoImg = new ImageIcon(this.getClass().getResource("gradeA_logo.png")).getImage();
+        logoButton.setIcon(new ImageIcon(logoImg));
+        logoButton.setBounds(875, 30, 70, 70);
+        logoButton.setOpaque(true);
+        logoButton.setBackground(Color.white);
+        logoButton.setForeground(Color.white);
+        logoButton.setBorder(new LineBorder(Color.black));
+        this.frame.getContentPane().add(logoButton);
 
         /*********************************** Course Title **************************************/
-        labTitle = new JLabel(currentLab.getCourseName() + " Lab " + currentLab.getSection());
-        labTitle.setFont(new Font("Tahoma", Font.PLAIN, 34));
-        labTitle.setBounds(10, 11, 349, 47);
+        labTitle = new JLabel(currentLab.getCourseName().toUpperCase() + " LAB " + currentLab.getSection());
+        labTitle.setFont(new Font("Futura", Font.PLAIN, 34));
+        labTitle.setBounds(70, 50, 500, 50);
         frame.getContentPane().add(labTitle);
         Image homeImg = new ImageIcon(this.getClass().getResource("home_icon.png")).getImage();
         Image trashImg = new ImageIcon(this.getClass().getResource("trash_icon.png")).getImage();
 
         /*********************************** TFs & TAs Title **************************************/
         teachAssistTitle = new JLabel("TFs & TAs");
-        teachAssistTitle.setFont(new Font("Tahoma", Font.PLAIN, 17));
-        teachAssistTitle.setBounds(682, 69, 88, 22);
+        teachAssistTitle.setFont(new Font("Futura", Font.PLAIN, 17));
+        teachAssistTitle.setBounds(780, 150, 88, 22);
         frame.getContentPane().add(teachAssistTitle);
 
         /*********************************** Get TFs & TAs information Title **************************************/
@@ -103,7 +125,7 @@ public class LabPage {
         if(allAssistant.size()>0) teachAssist1.setText("<html>" + allAssistant.get(0).getName()  + "<br/>"+ allAssistant.get(0).getEmail() +"<html>");
         teachAssist1.setVerticalTextPosition(JLabel.BOTTOM);
         teachAssist1.setHorizontalTextPosition(JLabel.CENTER);
-        teachAssist1.setBounds(677, 116, 98, 125);
+        teachAssist1.setBounds(780, 185, 98, 125);
         frame.getContentPane().add(teachAssist1);
 
         // if there is a second teaching assistant
@@ -114,22 +136,22 @@ public class LabPage {
             teachAssist1.setText("<html>" + allAssistant.get(1).getName()  + "<br/>"+ allAssistant.get(1).getEmail() +"<html>");
             teachAssist2.setHorizontalTextPosition(SwingConstants.CENTER);
             teachAssist2.setHorizontalAlignment(SwingConstants.CENTER);
-            teachAssist2.setBounds(677, 252, 98, 125);
+            teachAssist2.setBounds(780, 215, 98, 125);
             frame.getContentPane().add(teachAssist2);
         }
 
-        /*********************************** Generating Home button ***********************************************/
-        homeButton = new JButton("");
-        homeButton.setIcon(new ImageIcon(homeImg));
-        homeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                Dashboard dashboardPage = new Dashboard();
-                dashboardPage.ShowPage();
-                frame.dispose();
-            }
-        });
-        homeButton.setBounds(10, 384, 55, 54);
-        frame.getContentPane().add(homeButton);
+//        /*********************************** Generating Home button ***********************************************/
+//        homeButton = new JButton("");
+//        homeButton.setIcon(new ImageIcon(homeImg));
+//        homeButton.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent arg0) {
+//                Dashboard dashboardPage = new Dashboard();
+//                dashboardPage.ShowPage();
+//                frame.dispose();
+//            }
+//        });
+//        homeButton.setBounds(10, 384, 55, 54);
+//        frame.getContentPane().add(homeButton);
 
         /*********************************** Generating Delete button ***********************************************/
         deleteButton = new JButton("");
@@ -153,8 +175,9 @@ public class LabPage {
                 }
             }
         });
-        deleteButton.setBounds(729, 11, 46, 54);
-        frame.getContentPane().add(deleteButton);
+        deleteButton.setIcon(new ImageIcon(trashImg));
+        deleteButton.setBounds(70, 575, 55, 54);
+        this.frame.getContentPane().add(deleteButton);
 
         /*********************************** Generating Edit Lab button ***********************************************/
         editLabButton = new JButton("Edit Lab");
@@ -165,7 +188,8 @@ public class LabPage {
                 frame.dispose();
             }
         });
-        editLabButton.setBounds(686, 415, 89, 23);
+        editLabButton.setBounds(820, 610, 120, 23);
+        editLabButton.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(editLabButton);
 
         /*********************************** Generating Edit Grades button ***********************************************/
@@ -177,7 +201,8 @@ public class LabPage {
                 frame.dispose();
             }
         });
-        editGradesButton.setBounds(570, 415, 109, 23);
+        editGradesButton.setBounds(675, 610, 150, 23);
+        editGradesButton.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(editGradesButton);
 
         /*********************************** Generating Panel of Student Profiles *************************************/
@@ -223,7 +248,7 @@ public class LabPage {
 
         /*********************************** Generating Scroll Panel for Student Profiles *************************************/
         scrollStudentProfiles = new JScrollPane(studentProfiles);
-        scrollStudentProfiles.setBounds(20, 69, 630, 300);
+        scrollStudentProfiles.setBounds(120, 120, 630, 300);
         frame.getContentPane().add(scrollStudentProfiles);
     }
 }

@@ -10,14 +10,10 @@ import entity.Student;
 
 import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JButton;
+import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
 
 public class AddCoursework {
 
@@ -56,18 +52,40 @@ public class AddCoursework {
      */
     private void initialize() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 1000, 489);
+        frame.setBounds(100, 100, 1000, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
+        JButton logoButton;
+        Image logoImg;
+
+        /*********************************** Add logo/home button ***********************************/
+        logoButton = new JButton("");
+        logoButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                Dashboard dashboardPage = new Dashboard();
+                dashboardPage.ShowPage();
+                frame.dispose();
+            }
+        });
+        logoImg = new ImageIcon(this.getClass().getResource("gradeA_logo.png")).getImage();
+        logoButton.setIcon(new ImageIcon(logoImg));
+        logoButton.setBounds(875, 30, 70, 70);
+        logoButton.setOpaque(true);
+        logoButton.setBackground(Color.white);
+        logoButton.setForeground(Color.white);
+        logoButton.setBorder(new LineBorder(Color.black));
+        this.frame.getContentPane().add(logoButton);
 
         // Label of window
-        JLabel lblLabInfo = new JLabel("Add Coursework");
-        lblLabInfo.setFont(new Font("Tahoma", Font.PLAIN, 36));
-        lblLabInfo.setBounds(30, 20, 300, 44);
+        JLabel lblLabInfo = new JLabel("ADD COURSEWORK");
+        lblLabInfo.setFont(new Font("Futura", Font.PLAIN, 36));
+        lblLabInfo.setBounds(70, 50, 500, 50);
         frame.getContentPane().add(lblLabInfo);
 
         JLabel lblStartType = new JLabel("Type");
-        lblStartType.setBounds(150, 150, 100, 14);
+        lblStartType.setBounds(250, 200, 100, 20);
+        lblStartType.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(lblStartType);
 
         JComboBox<String> comboBoxType = new JComboBox<String>();
@@ -80,16 +98,16 @@ public class AddCoursework {
             public void actionPerformed(ActionEvent arg0) {
             }
         });
-        comboBoxType.setBounds(150, 180, 175, 20);
+        comboBoxType.setBounds(400, 200, 200, 20);
         frame.getContentPane().add(comboBoxType);
 
-
         JLabel lblTotalPoints = new JLabel("Total Points");
-        lblTotalPoints.setBounds(375, 150, 100, 14);
+        lblTotalPoints.setBounds(250, 300, 100, 20);
+        lblTotalPoints.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(lblTotalPoints);
 
         textFieldTotalPoints = new JTextField();
-        textFieldTotalPoints.setBounds(375, 180, 50, 20);
+        textFieldTotalPoints.setBounds(400, 300, 200, 20);
         frame.getContentPane().add(textFieldTotalPoints);
         textFieldTotalPoints.setColumns(10);
 
@@ -122,7 +140,8 @@ public class AddCoursework {
 
         JButton btnCancel = new JButton("Cancel");
 
-        btnCancel.setBounds(800, 410, 89, 23);
+        btnCancel.setBounds(720, 610, 89, 23);
+        btnCancel.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(btnCancel);
 
 
@@ -130,7 +149,8 @@ public class AddCoursework {
 
 //        btnCreate.setBackground(Color.BLUE);
 //        btnCreate.setForeground(Color.MAGENTA);
-        btnAdd.setBounds(900, 410, 89, 23);
+        btnAdd.setBounds(820, 610, 120, 23);
+        btnAdd.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(btnAdd);
 
 

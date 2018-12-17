@@ -107,7 +107,7 @@ public class EditCourse {
         AssistantDAO assistantDAO = new AssistantDAO();
         java.util.List<Assistant> assistantList = assistantDAO.findAssistantByCourse(curCourse.getCourseName());
         frame = new JFrame();
-        frame.setBounds(100, 100, 1000, 489);
+        frame.setBounds(100, 100, 1000, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
