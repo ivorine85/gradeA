@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
+import javax.swing.border.LineBorder;
 
 public class CourseInfo {
 
@@ -65,84 +66,105 @@ public class CourseInfo {
      */
     private void initialize() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 1000, 489);
+        frame.setBounds(100, 100, 1000, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
+        JButton logoButton;
+        Image logoImg;
+
+        /*********************************** Add logo/home button ***********************************/
+        logoButton = new JButton("");
+        logoButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                Dashboard dashboardPage = new Dashboard();
+                dashboardPage.ShowPage();
+                frame.dispose();
+            }
+        });
+        logoImg = new ImageIcon(this.getClass().getResource("gradeA_logo.png")).getImage();
+        logoButton.setIcon(new ImageIcon(logoImg));
+        logoButton.setBounds(875, 30, 70, 70);
+        logoButton.setOpaque(true);
+        logoButton.setBackground(Color.white);
+        logoButton.setForeground(Color.white);
+        logoButton.setBorder(new LineBorder(Color.black));
+        this.frame.getContentPane().add(logoButton);
 
         // Label of window
-        JLabel lblCourseInfo = new JLabel("Course Info");
-        lblCourseInfo.setFont(new Font("Tahoma", Font.PLAIN, 36));
-        lblCourseInfo.setBounds(30, 20, 212, 44);
+        JLabel lblCourseInfo = new JLabel("COURSE INFO");
+        lblCourseInfo.setFont(new Font("Futura", Font.PLAIN, 36));
+        lblCourseInfo.setBounds(70, 50, 400, 50);
         frame.getContentPane().add(lblCourseInfo);
 
         JLabel lblCourseTitle = new JLabel("Course Title");
-        lblCourseTitle.setBounds(40, 85, 100, 14);
+        lblCourseTitle.setBounds(85, 120, 100, 14);
         frame.getContentPane().add(lblCourseTitle);
 
         textFieldCourseTitle = new JTextField();
-        textFieldCourseTitle.setBounds(40, 110, 150, 20);
+        textFieldCourseTitle.setBounds(85, 145, 200, 20);
         frame.getContentPane().add(textFieldCourseTitle);
         textFieldCourseTitle.setColumns(10);
 
         JLabel lblDate = new JLabel("Choose Date(s)");
-        lblDate.setBounds(40, 145, 100, 14);
+        lblDate.setBounds(85, 180, 100, 14);
         frame.getContentPane().add(lblDate);
 
         JLabel lblMon = new JLabel("Mon");
-        lblMon.setBounds(40, 170, 46, 14);
+        lblMon.setBounds(85, 205, 46, 14);
         frame.getContentPane().add(lblMon);
 
         JRadioButton radioButtonMon = new JRadioButton("");
-        radioButtonMon.setBounds(43, 185, 30, 23);
+        radioButtonMon.setBounds(88, 220, 30, 23);
         frame.getContentPane().add(radioButtonMon);
 
         JLabel lblTues = new JLabel("Tues");
-        lblTues.setBounds(75, 170, 46, 14);
+        lblTues.setBounds(125, 205, 46, 14);
         frame.getContentPane().add(lblTues);
 
         JRadioButton radioButtonTues = new JRadioButton("");
-        radioButtonTues.setBounds(78, 185, 30, 23);
+        radioButtonTues.setBounds(128, 220, 30, 23);
         frame.getContentPane().add(radioButtonTues);
 
         JLabel lblWed = new JLabel("Wed");
-        lblWed.setBounds(115, 170, 46, 14);
+        lblWed.setBounds(165, 205, 46, 14);
         frame.getContentPane().add(lblWed);
 
         JRadioButton radioButtonWed = new JRadioButton("");
-        radioButtonWed.setBounds(118, 185, 30, 23);
+        radioButtonWed.setBounds(168, 220, 30, 23);
         frame.getContentPane().add(radioButtonWed);
 
         JLabel lblThurs = new JLabel("Thurs");
-        lblThurs.setBounds(150, 170, 46, 14);
+        lblThurs.setBounds(205, 205, 46, 14);
         frame.getContentPane().add(lblThurs);
 
         JRadioButton radioButtonThurs = new JRadioButton("");
-        radioButtonThurs.setBounds(153, 185, 30, 23);
+        radioButtonThurs.setBounds(208, 220, 30, 23);
         frame.getContentPane().add(radioButtonThurs);
 
         JLabel lblFri = new JLabel("Fri");
-        lblFri.setBounds(200, 170, 46, 14);
+        lblFri.setBounds(245, 205, 46, 14);
         frame.getContentPane().add(lblFri);
 
         JRadioButton radioButtonFri = new JRadioButton("");
-        radioButtonFri.setBounds(200, 185, 30, 23);
+        radioButtonFri.setBounds(248, 220, 30, 23);
         frame.getContentPane().add(radioButtonFri);
 
         JLabel lblStartTime = new JLabel("Start Time (24-hr)");
-        lblStartTime.setBounds(40, 215, 120, 14);
+        lblStartTime.setBounds(85, 255, 120, 14);
         frame.getContentPane().add(lblStartTime);
 
         textFieldStartTime = new JTextField();
-        textFieldStartTime.setBounds(40, 240, 100, 20);
+        textFieldStartTime.setBounds(85, 280, 100, 20);
         frame.getContentPane().add(textFieldStartTime);
         textFieldStartTime.setColumns(10);
 
         JLabel lblEndTime = new JLabel("End Time (24-hr)");
-        lblEndTime.setBounds(180, 215, 120, 14);
+        lblEndTime.setBounds(220, 255, 120, 14);
         frame.getContentPane().add(lblEndTime);
 
         textFieldEndTime = new JTextField();
-        textFieldEndTime.setBounds(180, 240, 100, 20);
+        textFieldEndTime.setBounds(220, 280, 100, 20);
         frame.getContentPane().add(textFieldEndTime);
         textFieldEndTime.setColumns(10);
 
@@ -152,7 +174,7 @@ public class CourseInfo {
 //
 
         JLabel lblStartDate = new JLabel("Start Date 'DD-MM-YYYY'");
-        lblStartDate.setBounds(40, 270, 200, 14);
+        lblStartDate.setBounds(85, 315, 200, 20);
         frame.getContentPane().add(lblStartDate);
 
         JTextField textStartDate = new JTextField(20);
@@ -160,7 +182,8 @@ public class CourseInfo {
         JPanel pStartDate = new JPanel();
         pStartDate.add(textStartDate);
         pStartDate.add(b);
-        pStartDate.setBounds(15, 290, 400, 40);
+        pStartDate.setBounds(55, 340, 400, 40);
+        pStartDate.setBackground(Color.white);
         frame.getContentPane().add(pStartDate);
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
@@ -169,7 +192,7 @@ public class CourseInfo {
         });
 
         JLabel lblEndDate = new JLabel("End Date 'DD-MM-YYYY'");
-        lblEndDate.setBounds(40, 335, 150, 14);
+        lblEndDate.setBounds(85, 400, 200, 20);
         frame.getContentPane().add(lblEndDate);
 
         JTextField textEndDate = new JTextField(20);
@@ -177,7 +200,8 @@ public class CourseInfo {
         JPanel pEndDate = new JPanel();
         pEndDate.add(textEndDate);
         pEndDate.add(btnEndDate);
-        pEndDate.setBounds(15, 355, 400, 40);
+        pEndDate.setBounds(55, 425, 400, 40);
+        pEndDate.setBackground(Color.white);
         frame.getContentPane().add(pEndDate);
         btnEndDate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
@@ -186,38 +210,38 @@ public class CourseInfo {
         });
 
         JLabel lblTF1Name = new JLabel("TF #1 Name");
-        lblTF1Name.setBounds(410, 85, 100, 14);
+        lblTF1Name.setBounds(460, 120, 100, 14);
         frame.getContentPane().add(lblTF1Name);
 
         textFieldTF1Name = new JTextField();
-        textFieldTF1Name.setBounds(410, 110, 150, 20);
+        textFieldTF1Name.setBounds(450, 145, 150, 20);
         frame.getContentPane().add(textFieldTF1Name);
         textFieldTF1Name.setColumns(10);
 
         JLabel lblTF1Email = new JLabel("TF #1 Email");
-        lblTF1Email.setBounds(410, 145, 100, 14);
+        lblTF1Email.setBounds(460, 180, 100, 14);
         frame.getContentPane().add(lblTF1Email);
 
         textFieldTF1Email = new JTextField();
-        textFieldTF1Email.setBounds(410, 170, 150, 20);
+        textFieldTF1Email.setBounds(460, 205, 150, 20);
         frame.getContentPane().add(textFieldTF1Email);
         textFieldTF1Email.setColumns(10);
 
         JLabel lblTA2Name = new JLabel("TF #2 Name");
-        lblTA2Name.setBounds(410, 205, 100, 14);
+        lblTA2Name.setBounds(460, 240, 100, 14);
         frame.getContentPane().add(lblTA2Name);
 
         textFieldTF2Name = new JTextField();
-        textFieldTF2Name.setBounds(410, 230, 150, 20);
+        textFieldTF2Name.setBounds(460, 265, 150, 20);
         frame.getContentPane().add(textFieldTF2Name);
         textFieldTF2Name.setColumns(10);
 
         JLabel lblTA2Email = new JLabel("TF #2 Email");
-        lblTA2Email.setBounds(410, 265, 100, 14);
+        lblTA2Email.setBounds(460, 300, 100, 14);
         frame.getContentPane().add(lblTA2Email);
 
         textFieldTF2Email = new JTextField();
-        textFieldTF2Email.setBounds(410, 290, 150, 20);
+        textFieldTF2Email.setBounds(460, 325, 150, 20);
         frame.getContentPane().add(textFieldTF2Email);
         textFieldTF2Email.setColumns(10);
 
@@ -240,7 +264,7 @@ public class CourseInfo {
 //        frame.getContentPane().add(comboBoxNumLabs);
 
         JLabel lblNumHW = new JLabel("Number of HWs");
-        lblNumHW.setBounds(610, 145, 155, 14);
+        lblNumHW.setBounds(670, 120, 155, 14);
         frame.getContentPane().add(lblNumHW);
 
         JComboBox<String> comboBoxNumHW = new JComboBox<String>();
@@ -257,11 +281,11 @@ public class CourseInfo {
             public void actionPerformed(ActionEvent arg0) {
             }
         });
-        comboBoxNumHW.setBounds(610, 172, 70, 20);
+        comboBoxNumHW.setBounds(670, 145, 70, 20);
         frame.getContentPane().add(comboBoxNumHW);
 
         JLabel lblNumQuiz = new JLabel("Number of Quizzes");
-        lblNumQuiz.setBounds(610, 205, 155, 14);
+        lblNumQuiz.setBounds(670, 180, 155, 14);
         frame.getContentPane().add(lblNumQuiz);
 
         JComboBox<String> comboBoxNumQuiz = new JComboBox<String>();
@@ -273,11 +297,11 @@ public class CourseInfo {
             public void actionPerformed(ActionEvent arg0) {
             }
         });
-        comboBoxNumQuiz.setBounds(610, 232, 70, 20);
+        comboBoxNumQuiz.setBounds(670, 205, 70, 20);
         frame.getContentPane().add(comboBoxNumQuiz);
 
         JLabel lblNumMidterm = new JLabel("Number of Midterms");
-        lblNumMidterm.setBounds(610, 265, 155, 14);
+        lblNumMidterm.setBounds(670, 240, 155, 14);
         frame.getContentPane().add(lblNumMidterm);
 
         JComboBox<String> comboBoxNumMidterm = new JComboBox<String>();
@@ -289,11 +313,11 @@ public class CourseInfo {
             public void actionPerformed(ActionEvent arg0) {
             }
         });
-        comboBoxNumMidterm.setBounds(610, 292, 70, 20);
+        comboBoxNumMidterm.setBounds(670, 265, 70, 20);
         frame.getContentPane().add(comboBoxNumMidterm);
 
         JLabel lblNumProject = new JLabel("Number of Projects");
-        lblNumProject.setBounds(610, 325, 155, 14);
+        lblNumProject.setBounds(670, 300, 155, 14);
         frame.getContentPane().add(lblNumProject);
 
         JComboBox<String> comboBoxNumProject = new JComboBox<String>();
@@ -306,11 +330,11 @@ public class CourseInfo {
             public void actionPerformed(ActionEvent arg0) {
             }
         });
-        comboBoxNumProject.setBounds(610, 352, 70, 20);
+        comboBoxNumProject.setBounds(670, 325, 70, 20);
         frame.getContentPane().add(comboBoxNumProject);
 
         JLabel lblFinal = new JLabel("Will there be a final?");
-        lblFinal.setBounds(610, 385, 200, 14);
+        lblFinal.setBounds(670, 355, 200, 14);
         frame.getContentPane().add(lblFinal);
 
         JComboBox<String> comboBoxFinal = new JComboBox<String>();
@@ -320,7 +344,7 @@ public class CourseInfo {
             public void actionPerformed(ActionEvent arg0) {
             }
         });
-        comboBoxFinal.setBounds(610, 412, 80, 20);
+        comboBoxFinal.setBounds(670, 380, 80, 20);
         frame.getContentPane().add(comboBoxFinal);
 
 //        JLabel lblPhone = new JLabel("Phone #");
@@ -353,7 +377,8 @@ public class CourseInfo {
 
         JButton btnClear = new JButton("Clear");
 
-        btnClear.setBounds(800, 410, 89, 23);
+        btnClear.setBounds(720, 610, 89, 23);
+        btnClear.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(btnClear);
 
 
@@ -361,7 +386,8 @@ public class CourseInfo {
 
 //        btnCreate.setBackground(Color.BLUE);
 //        btnCreate.setForeground(Color.MAGENTA);
-        btnCreate.setBounds(900, 410, 89, 23);
+        btnCreate.setBounds(820, 610, 89, 23);
+        btnCreate.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(btnCreate);
 
 
@@ -449,7 +475,8 @@ public class CourseInfo {
                 frame.dispose();
             }
         });
-        btnBack.setBounds(30, 400, 89, 23);
+        btnBack.setBounds(70, 610, 89, 23);
+        btnBack.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(btnBack);
 
         btnClear.addActionListener(new ActionListener() {

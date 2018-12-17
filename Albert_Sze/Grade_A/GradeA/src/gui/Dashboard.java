@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.event.MouseAdapter;
@@ -78,9 +79,12 @@ public class Dashboard {
 /*******************************************************************************************************/
         frame = new JFrame();
         frame.getContentPane().setForeground(new Color(0, 0, 0));
-        frame.setBounds(100, 100, 1000, 489);
+        frame.setBounds(100, 100, 1000, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
+        JButton logoButton;
+        Image logoImg;
 
 
         //Create Dashboard
@@ -102,6 +106,24 @@ public class Dashboard {
             }
         }
 
+        /*********************************** Add logo/home button ***********************************/
+        logoButton = new JButton("");
+        logoButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+//                Dashboard dashboardPage = new Dashboard();
+//                dashboardPage.ShowPage();
+//                frame.dispose();
+            }
+        });
+        logoImg = new ImageIcon(this.getClass().getResource("gradeA_logo.png")).getImage();
+        logoButton.setIcon(new ImageIcon(logoImg));
+        logoButton.setBounds(875, 30, 70, 70);
+        logoButton.setOpaque(true);
+        logoButton.setBackground(Color.white);
+        logoButton.setForeground(Color.white);
+        logoButton.setBorder(new LineBorder(Color.black));
+        this.frame.getContentPane().add(logoButton);
+
 
         //Create Student
 //        String [] header={"Last Name","First Name","Student ID","Email","Year","Lab","Student Type"};
@@ -113,11 +135,10 @@ public class Dashboard {
             }
         };
 
-
         // Label of window
-        JLabel lblDashboard = new JLabel("Dashboard");
-        lblDashboard.setFont(new Font("Tahoma", Font.PLAIN, 36));
-        lblDashboard.setBounds(10, 11, 212, 44);
+        JLabel lblDashboard = new JLabel("DASHBOARD");
+        lblDashboard.setFont(new Font("Futura", Font.PLAIN, 36));
+        lblDashboard.setBounds(70, 50, 400, 50);
         frame.getContentPane().add(lblDashboard);
 
         //Add Student button
@@ -132,12 +153,13 @@ public class Dashboard {
             }
         });
         //457, 414, 120, 23
-        btnAddCourse.setBounds(625, 414, 120, 23);
+        btnAddCourse.setBounds(750, 700, 120, 23);
+        btnAddCourse.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(btnAddCourse);
 
         //Add ScrollPanel for table
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(25, 78, 738, 325);
+        scrollPane.setBounds(120, 170, 800, 400);
         frame.getContentPane().add(scrollPane);
 
         table = new JTable(model);

@@ -3,16 +3,11 @@ package gui;
 import dao.UserDAO;
 import entity.User;
 
-import java.awt.EventQueue;
+import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import javax.swing.border.LineBorder;
 
-import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -63,46 +58,70 @@ public class NewUser {
 
 		/*********************************** Generate frame for New User page ***************************************/
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1000, 489);
+		frame.setBounds(100, 100, 1000, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.getContentPane().setBackground(Color.white);
+		JButton logoButton;
+		Image logoImg;
+
+		/*********************************** Add logo/home button ***********************************/
+		logoButton = new JButton("");
+		logoButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Dashboard dashboardPage = new Dashboard();
+				dashboardPage.ShowPage();
+				frame.dispose();
+			}
+		});
+		logoImg = new ImageIcon(this.getClass().getResource("gradeA_logo.png")).getImage();
+		logoButton.setIcon(new ImageIcon(logoImg));
+		logoButton.setBounds(875, 30, 70, 70);
+		logoButton.setOpaque(true);
+		logoButton.setBackground(Color.white);
+		logoButton.setForeground(Color.white);
+		logoButton.setBorder(new LineBorder(Color.black));
+		this.frame.getContentPane().add(logoButton);
 
 		/*********************************** New User Title **************************************/
-		NewUserLabel = new JLabel("New User");
-		NewUserLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		NewUserLabel.setBounds(10, 11, 101, 25);
+		NewUserLabel = new JLabel("CREATE USER");
+		NewUserLabel.setFont(new Font("Futura", Font.PLAIN, 36));
+		NewUserLabel.setBounds(70, 50, 400, 50);
 		frame.getContentPane().add(NewUserLabel);
 
 		/*********************************** Username label **************************************/
 		usernameLabel = new JLabel("Username");
-		usernameLabel.setBounds(10, 47, 62, 14);
+		usernameLabel.setBounds(250, 150, 100, 14);
+        usernameLabel.setFont(new Font("Futura", Font.PLAIN, 16));
 		frame.getContentPane().add(usernameLabel);
 
 		/*********************************** Username textfield **************************************/
 		usernameTextField = new JTextField();
-		usernameTextField.setBounds(10, 72, 86, 20);
+		usernameTextField.setBounds(400, 150, 200, 20);
 		frame.getContentPane().add(usernameTextField);
 		usernameTextField.setColumns(10);
 
 		/*********************************** Password label **************************************/
 		passwordLabel = new JLabel("Password");
-		passwordLabel.setBounds(10, 103, 62, 14);
+		passwordLabel.setBounds(250, 185, 100, 14);
+        passwordLabel.setFont(new Font("Futura", Font.PLAIN, 16));
 		frame.getContentPane().add(passwordLabel);
 
 		/*********************************** Password textfield **************************************/
 		passwordTextField = new JTextField();
-		passwordTextField.setBounds(10, 128, 86, 20);
+		passwordTextField.setBounds(400, 185, 200, 20);
 		frame.getContentPane().add(passwordTextField);
 		passwordTextField.setColumns(10);
 
-		/*********************************** Reenter Password label **************************************/
-		reenterLabel = new JLabel("Reenter Password");
-		reenterLabel.setBounds(10, 159, 115, 14);
+		/*********************************** Confirm Password label **************************************/
+		reenterLabel = new JLabel("Confirm Password");
+		reenterLabel.setBounds(250, 220, 150, 14);
+        reenterLabel.setFont(new Font("Futura", Font.PLAIN, 16));
 		frame.getContentPane().add(reenterLabel);
 
 		/*********************************** Reenter Password textfield **************************************/
 		reenterTextField = new JTextField();
-		reenterTextField.setBounds(10, 184, 86, 20);
+		reenterTextField.setBounds(400, 220, 200, 20);
 		frame.getContentPane().add(reenterTextField);
 		reenterTextField.setColumns(10);
 

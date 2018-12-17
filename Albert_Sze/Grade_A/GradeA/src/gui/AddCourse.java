@@ -6,6 +6,7 @@ import entity.Course;
 import java.awt.*;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -45,19 +46,41 @@ public class AddCourse {
      */
     private void initialize() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 1000, 489);
+        frame.setBounds(100, 100, 1000, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
+        JButton logoButton;
+        Image logoImg;
+
+        /*********************************** Add logo/home button ***********************************/
+        logoButton = new JButton("");
+        logoButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                Dashboard dashboardPage = new Dashboard();
+                dashboardPage.ShowPage();
+                frame.dispose();
+            }
+        });
+        logoImg = new ImageIcon(this.getClass().getResource("gradeA_logo.png")).getImage();
+        logoButton.setIcon(new ImageIcon(logoImg));
+        logoButton.setBounds(875, 30, 70, 70);
+        logoButton.setOpaque(true);
+        logoButton.setBackground(Color.white);
+        logoButton.setForeground(Color.white);
+        logoButton.setBorder(new LineBorder(Color.black));
+        this.frame.getContentPane().add(logoButton);
 
         // Label of window
-        JLabel lblAddCourse = new JLabel("Add Course");
-        lblAddCourse.setFont(new Font("Tahoma", Font.PLAIN, 36));
-        lblAddCourse.setBounds(30, 20, 212, 44);
+        JLabel lblAddCourse = new JLabel("ADD COURSE");
+        lblAddCourse.setFont(new Font("Futura", Font.PLAIN, 36));
+        lblAddCourse.setBounds(70, 50, 400, 50);
         frame.getContentPane().add(lblAddCourse);
 
         JButton btnUpload = new JButton("Upload CSV File");
 
-        btnUpload.setBounds(330, 150, 200, 23);
+        btnUpload.setBounds(400, 300, 200, 23);
+        btnUpload.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(btnUpload);
 
 
@@ -65,7 +88,8 @@ public class AddCourse {
 
 //        btnCreate.setBackground(Color.BLUE);
 //        btnCreate.setForeground(Color.MAGENTA);
-        btnCreate.setBounds(330, 200, 200, 23);
+        btnCreate.setBounds(400, 400, 200, 23);
+        btnCreate.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(btnCreate);
 
 
@@ -101,7 +125,8 @@ public class AddCourse {
                 frame.dispose();
             }
         });
-        btnBack.setBounds(30, 400, 89, 23);
+        btnBack.setBounds(70, 610, 89, 23);
+        btnBack.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(btnBack);
 
 
