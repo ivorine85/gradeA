@@ -1,26 +1,17 @@
 package gui;
 
-import java.awt.EventQueue;
+import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTable;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Color;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.swing.JComboBox;
 
 import dao.*;
 import entity.*;
@@ -73,13 +64,34 @@ public class AddStudents {
         /*********************************** Generate Frame ***********************************/
         frame = new JFrame();
         frame.getContentPane().setForeground(new Color(0, 0, 0));
-        frame.setBounds(100, 100, 1000, 489);
+        frame.setBounds(100, 100, 1000, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
+        JButton logoButton;
+        Image logoImg;
+
+        /*********************************** Add logo/home button ***********************************/
+        logoButton = new JButton("");
+        logoButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                Dashboard dashboardPage = new Dashboard();
+                dashboardPage.ShowPage();
+                frame.dispose();
+            }
+        });
+        logoImg = new ImageIcon(this.getClass().getResource("gradeA_logo.png")).getImage();
+        logoButton.setIcon(new ImageIcon(logoImg));
+        logoButton.setBounds(875, 30, 70, 70);
+        logoButton.setOpaque(true);
+        logoButton.setBackground(Color.white);
+        logoButton.setForeground(Color.white);
+        logoButton.setBorder(new LineBorder(Color.black));
+        this.frame.getContentPane().add(logoButton);
 
         /*********************************** Add Scroll Panel and Table Student button ************************************/
         scrollStudents = new JScrollPane();
-        scrollStudents.setBounds(25, 78, 738, 325);
+        scrollStudents.setBounds(120, 170, 738, 325);
         frame.getContentPane().add(scrollStudents);
 
         /*********************************** Generate Student Information tables ***********************************/
@@ -109,9 +121,9 @@ public class AddStudents {
         studentType.addItem("Grad");
 
         /*********************************** Generate Student Label **********************************/
-        addStudentsTitle = new JLabel("Add Students");
-        addStudentsTitle.setFont(new Font("Tahoma", Font.PLAIN, 36));
-        addStudentsTitle.setBounds(10, 11, 212, 44);
+        addStudentsTitle = new JLabel("ADD STUDENTS");
+        addStudentsTitle.setFont(new Font("Futura", Font.PLAIN, 36));
+        addStudentsTitle.setBounds(70, 50, 400, 50);
         frame.getContentPane().add(addStudentsTitle);
 
         /*********************************** Create Cancel button ************************************/
@@ -131,7 +143,8 @@ public class AddStudents {
                 frame.dispose();
             }
         });
-        cancelButton.setBounds(686, 414, 89, 23);
+        cancelButton.setBounds(820, 610, 89, 23);
+        cancelButton.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(cancelButton);
 
         /*********************************** Create Finish button ************************************/
@@ -205,7 +218,8 @@ public class AddStudents {
                 }
             }
         });
-        finishButton.setBounds(587, 414, 89, 23);
+        finishButton.setBounds(720, 610, 89, 23);
+        finishButton.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(finishButton);
 
         /*********************************** Create Add row button ************************************/
@@ -216,7 +230,8 @@ public class AddStudents {
                 model.addRow(temp);
             }
         });
-        addRowButton.setBounds(457, 414, 120, 23);
+        addRowButton.setBounds(70, 610, 120, 23);
+        addRowButton.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(addRowButton);
     }
 }

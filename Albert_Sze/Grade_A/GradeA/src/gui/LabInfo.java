@@ -8,18 +8,14 @@ import entity.Lab;
 
 import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JRadioButton;
-import javax.swing.JComboBox;
+import javax.swing.border.LineBorder;
+
 
 public class LabInfo {
 
@@ -62,127 +58,110 @@ public class LabInfo {
      */
     private void initialize(){
         frame = new JFrame();
-        frame.setBounds(100, 100, 1000, 489);
+        frame.setBounds(100, 100, 1000, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
+        JButton logoButton;
+        Image logoImg;
+
+        /*********************************** Add logo/home button ***********************************/
+        logoButton = new JButton("");
+        logoButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                Dashboard dashboardPage = new Dashboard();
+                dashboardPage.ShowPage();
+                frame.dispose();
+            }
+        });
+        logoImg = new ImageIcon(this.getClass().getResource("gradeA_logo.png")).getImage();
+        logoButton.setIcon(new ImageIcon(logoImg));
+        logoButton.setBounds(875, 30, 70, 70);
+        logoButton.setOpaque(true);
+        logoButton.setBackground(Color.white);
+        logoButton.setForeground(Color.white);
+        logoButton.setBorder(new LineBorder(Color.black));
+        this.frame.getContentPane().add(logoButton);
 
         // Label of window
-        JLabel lblLabInfo = new JLabel("Lab Info");
-        lblLabInfo.setFont(new Font("Tahoma", Font.PLAIN, 36));
-        lblLabInfo.setBounds(30, 20, 212, 44);
+        JLabel lblLabInfo = new JLabel("LAB INFO");
+        lblLabInfo.setFont(new Font("Futura", Font.PLAIN, 36));
+        lblLabInfo.setBounds(70, 50, 400, 50);
         frame.getContentPane().add(lblLabInfo);
 
         JLabel lblLabSection = new JLabel("Lab Section");
-        lblLabSection.setBounds(40, 85, 100, 14);
+        lblLabSection.setBounds(85, 120, 100, 14);
         frame.getContentPane().add(lblLabSection);
 
         textFieldLabSection = new JTextField();
-        textFieldLabSection.setBounds(40, 110, 50, 20);
+        textFieldLabSection.setBounds(85, 145, 200, 20);
         frame.getContentPane().add(textFieldLabSection);
         textFieldLabSection.setColumns(10);
 
         JLabel lblDate = new JLabel("Choose Date");
-        lblDate.setBounds(40, 145, 100, 14);
+        lblDate.setBounds(85, 180, 100, 14);
         frame.getContentPane().add(lblDate);
 
         JLabel lblMon = new JLabel("Mon");
-        lblMon.setBounds(40, 170, 46, 14);
+        lblMon.setBounds(85, 205, 46, 14);
         frame.getContentPane().add(lblMon);
 
         JRadioButton radioButtonMon = new JRadioButton("");
-        radioButtonMon.setBounds(43, 185, 30, 23);
+        radioButtonMon.setBounds(88, 220, 30, 23);
         frame.getContentPane().add(radioButtonMon);
 
         JLabel lblTues = new JLabel("Tues");
-        lblTues.setBounds(75, 170, 46, 14);
+        lblTues.setBounds(125, 205, 46, 14);
         frame.getContentPane().add(lblTues);
 
         JRadioButton radioButtonTues = new JRadioButton("");
-        radioButtonTues.setBounds(78, 185, 30, 23);
+        radioButtonTues.setBounds(128, 220, 30, 23);
         frame.getContentPane().add(radioButtonTues);
 
         JLabel lblWed = new JLabel("Wed");
-        lblWed.setBounds(115, 170, 46, 14);
+        lblWed.setBounds(165, 205, 46, 14);
         frame.getContentPane().add(lblWed);
 
         JRadioButton radioButtonWed = new JRadioButton("");
-        radioButtonWed.setBounds(118, 185, 30, 23);
+        radioButtonWed.setBounds(168, 220, 30, 23);
         frame.getContentPane().add(radioButtonWed);
 
         JLabel lblThurs = new JLabel("Thurs");
-        lblThurs.setBounds(150, 170, 46, 14);
+        lblThurs.setBounds(205, 205, 46, 14);
         frame.getContentPane().add(lblThurs);
 
         JRadioButton radioButtonThurs = new JRadioButton("");
-        radioButtonThurs.setBounds(153, 185, 30, 23);
+        radioButtonThurs.setBounds(208, 220, 30, 23);
         frame.getContentPane().add(radioButtonThurs);
 
         JLabel lblFri = new JLabel("Fri");
-        lblFri.setBounds(200, 170, 46, 14);
+        lblFri.setBounds(245, 205, 46, 14);
         frame.getContentPane().add(lblFri);
 
         JRadioButton radioButtonFri = new JRadioButton("");
-        radioButtonFri.setBounds(200, 185, 30, 23);
+        radioButtonFri.setBounds(248, 220, 30, 23);
         frame.getContentPane().add(radioButtonFri);
-//
-//        JLabel lblStartTime = new JLabel("Start Time");
-//        lblStartTime.setBounds(40, 215, 100, 14);
-//        frame.getContentPane().add(lblStartTime);
-//
-//        textFieldStartTime = new JTextField();
-//        textFieldStartTime.setBounds(40, 240, 60, 20);
-//        frame.getContentPane().add(textFieldStartTime);
-//        textFieldStartTime.setColumns(10);
-//
-//        JComboBox<String> comboBoxStart = new JComboBox<String>();
-//        comboBoxStart.addItem("AM");
-//        comboBoxStart.addItem("PM");
-//        comboBoxStart.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent arg0) {
-//            }
-//        });
-//        comboBoxStart.setBounds(100, 240, 70, 20);
-//        frame.getContentPane().add(comboBoxStart);
-//
-//        JLabel lblEndTime = new JLabel("End Time");
-//        lblEndTime.setBounds(180, 215, 100, 14);
-//        frame.getContentPane().add(lblEndTime);
-//
-//        textFieldEndTime = new JTextField();
-//        textFieldEndTime.setBounds(180, 240, 60, 20);
-//        frame.getContentPane().add(textFieldEndTime);
-//        textFieldEndTime.setColumns(10);
-//
-//        JComboBox<String> comboBoxEnd = new JComboBox<String>();
-//        comboBoxEnd.addItem("AM");
-//        comboBoxEnd.addItem("PM");
-//        comboBoxEnd.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent arg0) {
-//            }
-//        });
-//        comboBoxEnd.setBounds(240, 240, 70, 20);
-//        frame.getContentPane().add(comboBoxEnd);
 
         JLabel lblStartTime = new JLabel("Start Time (24-hr)");
-        lblStartTime.setBounds(40, 215, 120, 14);
+        lblStartTime.setBounds(85, 255, 120, 14);
         frame.getContentPane().add(lblStartTime);
 
         textFieldStartTime = new JTextField();
-        textFieldStartTime.setBounds(40, 240, 100, 20);
+        textFieldStartTime.setBounds(85, 280, 100, 20);
         frame.getContentPane().add(textFieldStartTime);
         textFieldStartTime.setColumns(10);
 
         JLabel lblEndTime = new JLabel("End Time (24-hr)");
-        lblEndTime.setBounds(180, 215, 120, 14);
+        lblEndTime.setBounds(220, 255, 120, 14);
         frame.getContentPane().add(lblEndTime);
 
         textFieldEndTime = new JTextField();
-        textFieldEndTime.setBounds(180, 240, 100, 20);
+        textFieldEndTime.setBounds(220, 280, 100, 20);
         frame.getContentPane().add(textFieldEndTime);
         textFieldEndTime.setColumns(10);
 
         JLabel lblAssignTF = new JLabel("Assign TF");
-        lblAssignTF.setBounds(40, 270, 100, 14);
+        lblAssignTF.setBounds(85, 315, 200, 20);
         frame.getContentPane().add(lblAssignTF);
 
         JComboBox<String> comboBoxTF = new JComboBox<String>();
@@ -194,7 +173,7 @@ public class LabInfo {
 //
 //            }
 //        });
-        comboBoxTF.setBounds(40, 300, 200, 20);
+        comboBoxTF.setBounds(85, 340, 400, 40);
         frame.getContentPane().add(comboBoxTF);
 
 
@@ -215,13 +194,15 @@ public class LabInfo {
                 frame.dispose();
             }
         });
-        cancelButton.setBounds(700, 410, 89, 23);
+        cancelButton.setBounds(70, 610, 89, 23);
+        cancelButton.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(cancelButton);
 
 
         JButton btnClear = new JButton("Clear");
 
-        btnClear.setBounds(800, 410, 89, 23);
+        btnClear.setBounds(820, 610, 89, 23);
+        btnClear.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(btnClear);
 
 
@@ -229,7 +210,8 @@ public class LabInfo {
 
 //        btnCreate.setBackground(Color.BLUE);
 //        btnCreate.setForeground(Color.MAGENTA);
-        btnNext.setBounds(900, 410, 89, 23);
+        btnNext.setBounds(720, 610, 89, 23);
+        btnNext.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(btnNext);
 
 

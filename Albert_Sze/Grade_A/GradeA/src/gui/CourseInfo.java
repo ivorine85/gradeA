@@ -214,7 +214,7 @@ public class CourseInfo {
         frame.getContentPane().add(lblTF1Name);
 
         textFieldTF1Name = new JTextField();
-        textFieldTF1Name.setBounds(450, 145, 150, 20);
+        textFieldTF1Name.setBounds(460, 145, 150, 20);
         frame.getContentPane().add(textFieldTF1Name);
         textFieldTF1Name.setColumns(10);
 
