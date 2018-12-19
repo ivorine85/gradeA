@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
+import javax.swing.border.LineBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -108,7 +109,7 @@ public class StudentProfile {
         }
 
         /*********************************** Set Data in table **************************************/
-        String[] header = {"Assignment","Points Lost","Extra Points","Total Points Available","Percentage","Class Average"};
+        String[] header = {"Assignment","Points Lost","Extra Points","Total Points","Percentage","Class Average"};
 
         allAssignArray = new String[grades.size()][];
         for (int i = 0; i < grades.size(); i++) {
@@ -142,38 +143,59 @@ public class StudentProfile {
         /*********************************** Set Frame up **************************************/
         frame = new JFrame();
         frame.getContentPane().setForeground(new Color(0, 0, 0));
-        frame.setBounds(100, 100, 1000, 489);
+        frame.setBounds(100, 100, 1000, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
+        JButton logoButton;
+        Image logoImg;
+
+        /*********************************** Add logo/home button ***********************************/
+        logoButton = new JButton("");
+        logoButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                Dashboard dashboardPage = new Dashboard();
+                dashboardPage.ShowPage();
+                frame.dispose();
+            }
+        });
+        logoImg = new ImageIcon(this.getClass().getResource("gradeA_logo.png")).getImage();
+        logoButton.setIcon(new ImageIcon(logoImg));
+        logoButton.setBounds(875, 30, 70, 70);
+        logoButton.setOpaque(true);
+        logoButton.setBackground(Color.white);
+        logoButton.setForeground(Color.white);
+        logoButton.setBorder(new LineBorder(Color.black));
+        this.frame.getContentPane().add(logoButton);
 
         /*********************************** Student Name Title **************************************/
         studentNameLabel = new JLabel(curStudent.getName());
-        studentNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 36));
-        studentNameLabel.setBounds(188, 11, 338, 44);
+        studentNameLabel.setFont(new Font("Futura", Font.PLAIN, 36));
+        studentNameLabel.setBounds(188, 50, 500, 50);
         frame.getContentPane().add(studentNameLabel);
 
         /*********************************** Grade Label **************************************/
         gradeLabel = new JLabel("<html>Student Type: " + curStudent.getStudentType() + "<br/>Final Grade: " + Double.toString(Math.round(finalGrade*100)/100.0) + "%" + "<html>");
-        gradeLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
-        gradeLabel.setBounds(188, 68, 300, 50);
+        gradeLabel.setFont(new Font("Futura", Font.PLAIN, 24));
+        gradeLabel.setBounds(188, 110, 600, 55);
         frame.getContentPane().add(gradeLabel);
 
         /*********************************** Graduating Year Label **************************************/
         graduatingYearLabel = new JLabel("Graduating Year: " + Integer.toString(curStudent.getYear()));
-        graduatingYearLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        graduatingYearLabel.setBounds(25, 125, 160, 19);
+        graduatingYearLabel.setFont(new Font("Futura", Font.PLAIN, 14));
+        graduatingYearLabel.setBounds(70, 190, 160, 19);
         frame.getContentPane().add(graduatingYearLabel);
 
         /*********************************** Lab Label **************************************/
         labLabel = new JLabel("Lab: ");
-        labLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        labLabel.setBounds(25, 155, 46, 14);
+        labLabel.setFont(new Font("Futura", Font.PLAIN, 14));
+        labLabel.setBounds(70, 215, 46, 14);
         frame.getContentPane().add(labLabel);
 
         /*********************************** Student's Image **************************************/
         profileImage = new JLabel("");
         profileImage.setIcon(new ImageIcon(profileImg));
-        profileImage.setBounds(25, 11, 109, 113);
+        profileImage.setBounds(70, 50, 109, 113);
         frame.getContentPane().add(profileImage);
 
         /*********************************** Back Button **************************************/
@@ -185,7 +207,8 @@ public class StudentProfile {
                 frame.dispose();
             }
         });
-        backButton.setBounds(686, 414, 89, 23);
+        backButton.setBounds(720, 610, 89, 23);
+        backButton.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(backButton);
 
         /*********************************** Delete Student Button **************************************/
@@ -204,25 +227,25 @@ public class StudentProfile {
                 }
             }
         });
-        deleteStudentButton.setBounds(729, 11, 46, 54);
+        deleteStudentButton.setBounds(70, 575, 55, 54);
         frame.getContentPane().add(deleteStudentButton);
-
-        /*********************************** Home Button **************************************/
-        homeButton = new JButton("");
-        homeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                Dashboard dashboardPage = new Dashboard();
-                dashboardPage.ShowPage();
-                frame.dispose();
-            }
-        });
-        homeButton.setIcon(new ImageIcon(homeImg));
-        homeButton.setBounds(10, 391, 55, 54);
-        frame.getContentPane().add(homeButton);
+//
+//        /*********************************** Home Button **************************************/
+//        homeButton = new JButton("");
+//        homeButton.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent arg0) {
+//                Dashboard dashboardPage = new Dashboard();
+//                dashboardPage.ShowPage();
+//                frame.dispose();
+//            }
+//        });
+//        homeButton.setIcon(new ImageIcon(homeImg));
+//        homeButton.setBounds(10, 391, 55, 54);
+//        frame.getContentPane().add(homeButton);
 
         /*********************************** Scroll Panel for Student table **************************************/
         scrollStudentTable = new JScrollPane();
-        scrollStudentTable.setBounds(25, 180, 738, 206);
+        scrollStudentTable.setBounds(70, 250, 738, 206);
         frame.getContentPane().add(scrollStudentTable);
 
         /*********************************** Load Student Table **************************************/
@@ -231,7 +254,7 @@ public class StudentProfile {
 
         /*********************************** Combobox of labsection **************************************/
         labOptions = new JComboBox();
-        labOptions.setBounds(60, 155, 74, 23);
+        labOptions.setBounds(110, 215, 150, 23);
         frame.getContentPane().add(labOptions);
         for (int i = 0; i<allLabs.size(); i++) {
             //Set the options of existing labs
@@ -262,7 +285,8 @@ public class StudentProfile {
                 frame.dispose();
             }
         });
-        saveButton.setBounds(587, 414, 89, 23);
+        saveButton.setBounds(820, 610, 89, 23);
+        saveButton.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(saveButton);
 
         /************************************ Detects when value is changed in studentInfoTable ****************************************/

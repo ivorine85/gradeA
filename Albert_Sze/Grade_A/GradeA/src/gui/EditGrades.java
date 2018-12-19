@@ -73,7 +73,7 @@ public class EditGrades extends Calculations{
         /*********************************** Generate frame for Edit Grades Page *******************************/
         frame = new JFrame();
         frame.getContentPane().setForeground(new Color(0, 0, 0));
-        frame.setBounds(100, 100, 1000, 800);
+        frame.setBounds(100, 100, 1350, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
         this.frame.getContentPane().setBackground(Color.white);
@@ -91,7 +91,7 @@ public class EditGrades extends Calculations{
         });
         logoImg = new ImageIcon(this.getClass().getResource("gradeA_logo.png")).getImage();
         logoButton.setIcon(new ImageIcon(logoImg));
-        logoButton.setBounds(875, 30, 70, 70);
+        logoButton.setBounds(1100, 30, 70, 70);
         logoButton.setOpaque(true);
         logoButton.setBackground(Color.white);
         logoButton.setForeground(Color.white);
@@ -99,7 +99,7 @@ public class EditGrades extends Calculations{
         this.frame.getContentPane().add(logoButton);
 
         /******************************* Generate table of student grades **************************************/
-        header.add("Student Name");
+        header.add("Student");
         for (int i = 0; i < allStudents.size();i++) {				// for loop of all students in particular lab	            // need this variable to construct a double arraylist to display
             studentData = new ArrayList<>();
             Student cur = allStudents.get(i);
@@ -112,7 +112,7 @@ public class EditGrades extends Calculations{
             for(GradeBreakDown gbd:gradeOfCurrentStudent){
                 count++;
                 if (i == 0){
-                    header.add(gbd.getCwName() + " Pts Lost");
+                    header.add(gbd.getCwName() + " Lost");
                     header.add(gbd.getCwName() + "%");
                 }
                 key = Integer.toString(i) + "." + Integer.toString(count*2-1);
@@ -187,7 +187,7 @@ public class EditGrades extends Calculations{
             }
         });
 
-        backButton.setBounds(820, 610, 89, 23);
+        backButton.setBounds(1120, 610, 89, 23);
         backButton.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(backButton);
 
@@ -210,13 +210,13 @@ public class EditGrades extends Calculations{
                 frame.dispose();
             }
         });
-        saveButton.setBounds(720, 610, 89, 23);
+        saveButton.setBounds(1020, 610, 89, 23);
         saveButton.setFont(new Font("Futura", Font.PLAIN, 16));
         frame.getContentPane().add(saveButton);
 
         /************************************ Add Scroll Panel for Grades **********************************************************/
         scrollGrades = new JScrollPane();
-        scrollGrades.setBounds(120, 170, 738, 325);
+        scrollGrades.setBounds(70, 170, 1200, 325);
         frame.getContentPane().add(scrollGrades);
 
         /************************************ Add table of Grades **********************************************************/

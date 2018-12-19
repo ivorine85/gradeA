@@ -168,11 +168,6 @@ public class CourseInfo {
         frame.getContentPane().add(textFieldEndTime);
         textFieldEndTime.setColumns(10);
 
-//        JLabel lblPhone = new JLabel("Phone #");
-//        lblPhone.setBounds(65, 88, 46, 14);
-//        frame.getContentPane().add(lblPhone);
-//
-
         JLabel lblStartDate = new JLabel("Start Date 'DD-MM-YYYY'");
         lblStartDate.setBounds(85, 315, 200, 20);
         frame.getContentPane().add(lblStartDate);

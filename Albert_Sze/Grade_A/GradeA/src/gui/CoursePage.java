@@ -203,7 +203,7 @@ public class CoursePage {
 
 		/*********************************** Add Scroll Panel ***********************************/
 		scrollGradeBreakDown = new JScrollPane();
-		scrollGradeBreakDown.setBounds(180, 285, 543, 55);
+		scrollGradeBreakDown.setBounds(180, 350, 650, 55);
 		this.frame.getContentPane().add(scrollGradeBreakDown);
 
 		tableGradeBreakDown = new JTable(model);
@@ -318,18 +318,18 @@ public class CoursePage {
 		/*********************************** Grade Breakdown Label ***********************************/
 		gradeBreakdownTitle = new JLabel("Grade Breakdown %");
 		gradeBreakdownTitle.setFont(new Font("Futura", Font.PLAIN, 24));
-		gradeBreakdownTitle.setBounds(335, 250, 252, 29);
+		gradeBreakdownTitle.setBounds(375, 300, 252, 29);
 		this.frame.getContentPane().add(gradeBreakdownTitle);
 
 		/*********************************** Assignments Statistics Label ***********************************/
 		assignmentStatisticsTitle = new JLabel("Coursework Statistics");
 		assignmentStatisticsTitle.setFont(new Font("Futura", Font.PLAIN, 24));
-		assignmentStatisticsTitle.setBounds(335, 145, 252, 29);
+		assignmentStatisticsTitle.setBounds(375, 160, 252, 29);
 		this.frame.getContentPane().add(assignmentStatisticsTitle);
 
 		/*********************************** Add scroll panel for assignment stats table ***********************************/
 		scrollAssignStat = new JScrollPane();
-		scrollAssignStat.setBounds(180, 180, 549, 39);
+		scrollAssignStat.setBounds(180, 210, 650, 39);
 		this.frame.getContentPane().add(scrollAssignStat);
 
 		tableStats = new JTable(assignStats);
